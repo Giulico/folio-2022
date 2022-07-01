@@ -1,0 +1,7 @@
+[[headers]]
+  for = "/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
+
+# [[context.production.plugins]]
+#   package = "./build/plugins/netlify-bump-version"

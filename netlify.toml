@@ -3,5 +3,11 @@
     [headers.values]
     Access-Control-Allow-Origin = "*"
 
+[build]
+  base = "."
+  command = "yarn build"
+  publish = "dist"
+  # functions = "./functions"
+
 # [[context.production.plugins]]
 #   package = "./build/plugins/netlify-bump-version"

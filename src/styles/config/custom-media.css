@@ -1,0 +1,40 @@
+/* SCREEN SIZE VALUES
+For responsive font-sizes */
+:root {
+  /* MOBILE */
+  --xsm: 480px;
+  --sm: 600px;
+  /* TABLET */
+  --md-p: 768px;
+  --md: 840px;
+  --under-md-l: 1023px;
+  --md-l: 1024px;
+  /* DESKTOP */
+  --lg: 1280px;
+  --xl: 1440px;
+  --xl2: 1680px;
+}
+
+/* SCREEN SIZE MEDIA QUERIES */
+@custom-media --xsm (min-width: 480px);
+@custom-media --sm (min-width: 600px);
+@custom-media --md-p (min-width: 768px);
+@custom-media --md (min-width: 840px);
+@custom-media --under-md-l (max-device-width: 1023px);
+@custom-media --md-l (min-width: 1024px);
+@custom-media --lg (min-width: 1280px);
+@custom-media --xl (min-width: 1440px);
+@custom-media --xl2 (min-width: 1680px);
+
+/* ORIENTATION MEDIA QUERIES */
+@custom-media --landscape (orientation: landscape);
+
+/* DISABLE ALL TRANSITIONS with an OS-level setting */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,27 @@
+:root {
+  /* Colour Primary */
+  --color-primary: #ff2f00;
+
+  /* Colour Secondary */
+  --color-secondary: hsl(199, 100%, 14%);
+
+  /* Neutral Scale — Add other tint shades if necessary */
+  --color-blackRGB: 0, 0, 0; /* for RGBA values */
+  --color-black: hsl(0, 0%, 0%);
+  --color-gray-900: hsl(200, 0%, 30%);
+  --color-gray-700: hsl(200, 0%, 50%);
+  --color-gray-600: hsl(200, 0%, 70%);
+  --color-gray-500: hsl(200, 0%, 80%);
+  --color-gray-300: hsl(200, 0%, 85%);
+  --color-gray-250: hsl(200, 0%, 90%);
+  --color-gray-100: hsl(200, 0%, 95%);
+  --color-white: hsl(0, 0%, 100%);
+  --color-whiteRGB: 255, 255, 255; /* for RGBA values */
+
+  /* Status, maybe not necessary */
+  --color-error: var(--color-primary);
+  --color-warning: hsl(42, 88%, 52%);
+  --color-success: hsl(155, 89%, 45%);
+
+  --opacity-hover: 0.5;
+}

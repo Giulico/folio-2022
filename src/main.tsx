@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 
 // Global styles
-import "styles/global/index.css";
+import "styles/index.css";
 
 // Store
 import store from "store";

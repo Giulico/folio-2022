@@ -1,0 +1,17 @@
+@font-face {
+  font-family: "NOVU M";
+  src: url("/fonts/novum/NOVUM.woff2") format("woff2"),
+    url("/fonts/novum/NOVUM.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Freight";
+  src: url("/fonts/freightsans/Freight-SansLight.woff2") format("woff2"),
+    url("/fonts/freightsans/Freight-SansLight.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}

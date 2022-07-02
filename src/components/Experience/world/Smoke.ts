@@ -108,7 +108,7 @@ export default class Smoke {
   update() {
     for (let i = 0; i < this.particles.length; i++) {
       const smokeElement = this.particles[i];
-      smokeElement.rotation.z += this.time.delta * 0.0005;
+      smokeElement.rotation.z += this.time.delta * 0.0001;
     }
   }
 }

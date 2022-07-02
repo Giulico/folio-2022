@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import type { RootState } from "store";
 
 import ExperienceComponent from "components/Experience";
-import Section from "components/Section";
+import Hero from "partials/Hero";
 
 window.cursor = {
   x: 0,
@@ -16,11 +16,20 @@ function App() {
   const sizes = useSelector((state: RootState) => state.sizes);
 
   useEffect(() => {
+    const appHeight = () => {
+      document.documentElement.style.setProperty(
+        "--app-height",
+        `${window.innerHeight}px`
+      );
+    };
+    appHeight();
+
     window.addEventListener("resize", (event) => {
       dispatch.sizes.update({
         width: window.innerWidth,
         height: window.innerHeight,
       });
+      appHeight();
     });
 
     window.addEventListener("mousemove", (event) => {
@@ -32,11 +41,7 @@ function App() {
   return (
     <>
       <ExperienceComponent />
-      <div className="container">
-        <Section>Titolo</Section>
-        <Section>About</Section>
-        <Section>Portfolio</Section>
-      </div>
+      <Hero />
     </>
   );
 }

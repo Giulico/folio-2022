@@ -38,7 +38,7 @@ function Section({ children, updateSection }: Props) {
 
   return (
     <div ref={ref} className={`section ${isVisible ? "section-visible" : ""}`}>
-      <h1>{children}</h1>
+      <p>{children}</p>
     </div>
   );
 }

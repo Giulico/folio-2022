@@ -1,46 +1,57 @@
-import type { RootState, Dispatch } from "store";
+// Types
+import { ReactNode } from "react";
 
-import { connect } from "react-redux";
+// Hooks
+import { useDispatch } from "react-redux";
 import { useEffect, useRef } from "react";
 import { useInView } from "react-hook-inview";
 
-const mapState = (state: RootState) => ({
-  section: state.section,
-});
+type Props = {
+  children: ReactNode;
+  name: string;
+  threshold?: number;
+  tag?: "section";
+  className?: string;
+  onEnter?: (entry: IntersectionObserverEntry | null) => void;
+  onResize?: (entry: IntersectionObserverEntry | null) => void;
+};
 
-const mapDispatch = (dispatch: Dispatch) => ({
-  updateSection: dispatch.section.update,
-});
-
-type StateProps = ReturnType<typeof mapState>;
-type DispatchProps = ReturnType<typeof mapDispatch>;
-type Props = StateProps &
-  DispatchProps & {
-    children: string;
-  };
-
-function Section({ children, updateSection }: Props) {
-  const isActive = useRef<boolean>(false);
-
-  const [ref, isVisible] = useInView({
-    threshold: 0.7,
+function Section({
+  children,
+  name,
+  threshold = 0.5,
+  tag = "section",
+  className,
+  onEnter,
+  onResize,
+}: Props) {
+  const dispatch = useDispatch();
+  const [ref, isVisible, entry] = useInView({
+    threshold,
   });
+  const appReady = useRef(false);
 
   useEffect(() => {
-    if (isVisible && !isActive.current) {
-      updateSection(children.toLowerCase());
-      isActive.current = true;
+    setTimeout(() => {
+      appReady.current = true;
+    }, 500);
+  }, []);
+
+  useEffect(() => {
+    // TODO: Waiting for all content being loaded to avoid fuoc
+    if (isVisible && appReady.current) {
+      dispatch.section.update(name);
+      onEnter?.(entry);
     }
-    if (!isVisible && isActive.current) {
-      isActive.current = false;
-    }
-  }, [isVisible]);
+  }, [isVisible, dispatch]);
+
+  const Tag = tag;
 
   return (
-    <div ref={ref} className={`section ${isVisible ? "section-visible" : ""}`}>
-      <p>{children}</p>
-    </div>
+    <Tag ref={ref} className={className}>
+      {children}
+    </Tag>
   );
 }
 
-export default connect(mapState, mapDispatch)(Section);
+export default Section;

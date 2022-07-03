@@ -8,7 +8,7 @@
 
   /* SIZES */
   --fs-display-1: 140px;
-  --fs-display-2: 50px;
+  --fs-display-2: 100px;
   --fs-display-3: 50px;
   --fs-display-4: 20px;
 
@@ -19,8 +19,16 @@
 @media (--md-p) {
   :root {
     --fs-display-1: 300px;
+    --fs-display-2: 150px;
     --fs-display-3: 100px;
 
+    --ls-display-1: -24px;
+  }
+}
+
+@media (--md-l) {
+  :root {
+    --fs-display-1: 200px;
     --ls-display-1: -24px;
   }
 }

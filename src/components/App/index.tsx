@@ -1,3 +1,4 @@
+import { cursorPosition } from "utils/events";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
@@ -5,6 +6,8 @@ import type { RootState } from "store";
 
 import ExperienceComponent from "components/Experience";
 import Hero from "partials/Hero";
+import Portfolio from "partials/Portfolio";
+import About from "partials/About";
 
 window.cursor = {
   x: 0,
@@ -32,16 +35,23 @@ function App() {
       appHeight();
     });
 
-    window.addEventListener("mousemove", (event) => {
-      window.cursor.x = event.clientX / sizes.width - 0.5;
-      window.cursor.y = event.clientY / sizes.width - 0.5;
-    });
+    const savePointerPosition = (e: TouchEvent | MouseEvent) => {
+      const { x, y } = cursorPosition(e);
+      window.cursor.x = x / sizes.width - 0.5;
+      window.cursor.y = y / sizes.height - 0.5;
+    };
+
+    window.addEventListener("touchstart", savePointerPosition);
+    window.addEventListener("touchmove", savePointerPosition);
+    window.addEventListener("mousemove", savePointerPosition);
   }, []);
 
   return (
     <>
       <ExperienceComponent />
       <Hero />
+      <Portfolio />
+      <About />
     </>
   );
 }

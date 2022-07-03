@@ -1,3 +1,5 @@
+import "intersection-observer"; // polyfills the native IntersectionObserver (i.e. Safari 12)
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";

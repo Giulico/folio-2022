@@ -2,6 +2,7 @@ import Experience from "../Experience";
 import Environment from "./Environment";
 import Man from "./Man";
 import Smoke from "./Smoke";
+import Portfolio from "./Portfolio";
 
 export default class World {
   experience: Experience;
@@ -10,6 +11,7 @@ export default class World {
   man: Man | undefined;
   smoke: Smoke | undefined;
   environment: Environment | undefined;
+  portfolio: Portfolio | undefined;
 
   constructor() {
     this.experience = new Experience();
@@ -22,6 +24,7 @@ export default class World {
       this.man = new Man();
       this.smoke = new Smoke();
       this.environment = new Environment();
+      this.portfolio = new Portfolio();
     });
   }
 
@@ -32,5 +35,6 @@ export default class World {
   update() {
     this.man?.update?.();
     this.smoke?.update?.();
+    this.portfolio?.update?.();
   }
 }

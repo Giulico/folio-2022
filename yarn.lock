@@ -612,6 +612,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@masatomakino/raf-ticker@npm:^0.2.9":
+  version: 0.2.9
+  resolution: "@masatomakino/raf-ticker@npm:0.2.9"
+  dependencies:
+    eventemitter3: ^4.0.7
+  checksum: d6ffeef854f5770e7f9cc6a9027318c883acbd418722472813fae07e4134f8107a7c1ecbfd0b4293033f1537fdb5c2a9752e7173e29e1f6fc4c37ebbc8132464
+  languageName: node
+  linkType: hard
+
+"@masatomakino/threejs-interactive-object@npm:^0.13.2":
+  version: 0.13.2
+  resolution: "@masatomakino/threejs-interactive-object@npm:0.13.2"
+  dependencies:
+    "@masatomakino/raf-ticker": ^0.2.9
+  peerDependencies:
+    three: ">=0.126.0 <1.0.0"
+  checksum: 9605a8bd01aea52d8f676dd1c165c51c9c0e4f89aecfc02f653b377b1cf816929c2be7655277921d18aa42c42b82dd64d3a36bb9872eeb405edd4e149cac47b4
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -2639,6 +2659,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eventemitter3@npm:^4.0.7":
+  version: 4.0.7
+  resolution: "eventemitter3@npm:4.0.7"
+  checksum: 1875311c42fcfe9c707b2712c32664a245629b42bb0a5a84439762dd0fd637fc54d078155ea83c2af9e0323c9ac13687e03cfba79b03af9f40c89b4960099374
+  languageName: node
+  linkType: hard
+
 "execa@npm:^5.0.0":
   version: 5.1.1
   resolution: "execa@npm:5.1.1"
@@ -2809,6 +2836,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "folio-2022@workspace:."
   dependencies:
+    "@masatomakino/threejs-interactive-object": ^0.13.2
     "@rematch/core": ^2.2.0
     "@semantic-release/changelog": ^6.0.1
     "@semantic-release/git": ^10.0.1
@@ -2821,6 +2849,8 @@ __metadata:
     classnames: ^2.3.1
     commitizen: ^4.2.4
     cz-customizable: ^6.7.0
+    gsap: ^3.10.4
+    intersection-observer: ^0.12.2
     lil-gui: ^0.16.1
     postcss: ^8.4.14
     postcss-flexbugs-fixes: ^5.0.2
@@ -3100,6 +3130,13 @@ __metadata:
   version: 4.2.10
   resolution: "graceful-fs@npm:4.2.10"
   checksum: 3f109d70ae123951905d85032ebeae3c2a5a7a997430df00ea30df0e3a6c60cf6689b109654d6fdacd28810a053348c4d14642da1d075049e6be1ba5216218da
+  languageName: node
+  linkType: hard
+
+"gsap@npm:^3.10.4":
+  version: 3.10.4
+  resolution: "gsap@npm:3.10.4"
+  checksum: 0c965c6e46a02198ba1662e338eb48123d65b49f41263223cfcd326abf734a5fbdeddcaf877ded610735408cd1e8e599da79ab954823daf7fe2f6b53d3807009
   languageName: node
   linkType: hard
 
@@ -3404,6 +3441,13 @@ __metadata:
     strip-ansi: ^5.1.0
     through: ^2.3.6
   checksum: 175ad4cd1ebed493b231b240185f1da5afeace5f4e8811dfa83cf55dcae59c3255eaed990aa71871b0fd31aa9dc212f43c44c50ed04fb529364405e72f484d28
+  languageName: node
+  linkType: hard
+
+"intersection-observer@npm:^0.12.2":
+  version: 0.12.2
+  resolution: "intersection-observer@npm:0.12.2"
+  checksum: d1fa9ebbb1e0baafe88ad95545bbb93f92bdcb8789912a2bd11b2463ab177ef185052c9c79c26187833d633f404acb077d4b1249353c5f6e2ca5cd64f50e216b
   languageName: node
   linkType: hard
 

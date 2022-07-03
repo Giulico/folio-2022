@@ -7,7 +7,8 @@
       "partials/*": ["./src/partials/*"],
       "store": ["./src/store/store.ts"],
       "styles/*": ["./src/styles/*"],
-      "utils/*": ["./src/utils/*"]
+      "utils/*": ["./src/utils/*"],
+      "gsap/*": ["./src/vendor/gsap/*"]
     },
     "target": "ESNext",
     "useDefineForClassFields": true,

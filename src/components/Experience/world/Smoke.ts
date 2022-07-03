@@ -36,7 +36,7 @@ export default class Smoke {
     this.debug = this.experience.debug;
 
     if (this.debug.active && this.debug.ui) {
-      this.debugFolder = this.debug.ui.addFolder("Smoke");
+      this.debugFolder = this.debug.ui.addFolder("Smoke").close();
     }
 
     this.debugObject = {

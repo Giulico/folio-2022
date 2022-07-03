@@ -10,8 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@masatomakino/threejs-interactive-object": "^0.13.2",
     "@rematch/core": "^2.2.0",
     "classnames": "^2.3.1",
+    "gsap": "^3.10.4",
+    "intersection-observer": "^0.12.2",
     "lil-gui": "^0.16.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

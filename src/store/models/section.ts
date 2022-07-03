@@ -2,7 +2,7 @@ import { createModel } from "@rematch/core";
 import type { RootModel } from "../models";
 
 export const section = createModel<RootModel>()({
-  state: "titolo",
+  state: "hero",
   reducers: {
     update(state, payload) {
       return payload;

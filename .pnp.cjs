@@ -33,6 +33,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
+            ["@masatomakino/threejs-interactive-object", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:0.13.2"],\
             ["@rematch/core", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:2.2.0"],\
             ["@semantic-release/changelog", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:6.0.1"],\
             ["@semantic-release/git", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:10.0.1"],\
@@ -45,6 +46,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["classnames", "npm:2.3.1"],\
             ["commitizen", "npm:4.2.4"],\
             ["cz-customizable", "npm:6.7.0"],\
+            ["gsap", "npm:3.10.4"],\
+            ["intersection-observer", "npm:0.12.2"],\
             ["lil-gui", "npm:0.16.1"],\
             ["postcss", "npm:8.4.14"],\
             ["postcss-flexbugs-fixes", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:5.0.2"],\
@@ -949,6 +952,39 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@jridgewell/trace-mapping", "npm:0.3.9"],\
             ["@jridgewell/resolve-uri", "npm:3.0.8"],\
             ["@jridgewell/sourcemap-codec", "npm:1.4.14"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@masatomakino/raf-ticker", [\
+        ["npm:0.2.9", {\
+          "packageLocation": "./.yarn/cache/@masatomakino-raf-ticker-npm-0.2.9-1812b7a228-d6ffeef854.zip/node_modules/@masatomakino/raf-ticker/",\
+          "packageDependencies": [\
+            ["@masatomakino/raf-ticker", "npm:0.2.9"],\
+            ["eventemitter3", "npm:4.0.7"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@masatomakino/threejs-interactive-object", [\
+        ["npm:0.13.2", {\
+          "packageLocation": "./.yarn/cache/@masatomakino-threejs-interactive-object-npm-0.13.2-c3579c77b7-9605a8bd01.zip/node_modules/@masatomakino/threejs-interactive-object/",\
+          "packageDependencies": [\
+            ["@masatomakino/threejs-interactive-object", "npm:0.13.2"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:0.13.2", {\
+          "packageLocation": "./.yarn/__virtual__/@masatomakino-threejs-interactive-object-virtual-88bc2c372a/0/cache/@masatomakino-threejs-interactive-object-npm-0.13.2-c3579c77b7-9605a8bd01.zip/node_modules/@masatomakino/threejs-interactive-object/",\
+          "packageDependencies": [\
+            ["@masatomakino/threejs-interactive-object", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:0.13.2"],\
+            ["@masatomakino/raf-ticker", "npm:0.2.9"],\
+            ["@types/three", "npm:0.141.0"],\
+            ["three", "npm:0.142.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/three",\
+            "three"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -3363,6 +3399,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["eventemitter3", [\
+        ["npm:4.0.7", {\
+          "packageLocation": "./.yarn/cache/eventemitter3-npm-4.0.7-7afcdd74ae-1875311c42.zip/node_modules/eventemitter3/",\
+          "packageDependencies": [\
+            ["eventemitter3", "npm:4.0.7"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["execa", [\
         ["npm:5.1.1", {\
           "packageLocation": "./.yarn/cache/execa-npm-5.1.1-191347acf5-fba9022c8c.zip/node_modules/execa/",\
@@ -3550,6 +3595,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["folio-2022", "workspace:."],\
+            ["@masatomakino/threejs-interactive-object", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:0.13.2"],\
             ["@rematch/core", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:2.2.0"],\
             ["@semantic-release/changelog", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:6.0.1"],\
             ["@semantic-release/git", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:10.0.1"],\
@@ -3562,6 +3608,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["classnames", "npm:2.3.1"],\
             ["commitizen", "npm:4.2.4"],\
             ["cz-customizable", "npm:6.7.0"],\
+            ["gsap", "npm:3.10.4"],\
+            ["intersection-observer", "npm:0.12.2"],\
             ["lil-gui", "npm:0.16.1"],\
             ["postcss", "npm:8.4.14"],\
             ["postcss-flexbugs-fixes", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:5.0.2"],\
@@ -3857,6 +3905,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/graceful-fs-npm-4.2.10-79c70989ca-3f109d70ae.zip/node_modules/graceful-fs/",\
           "packageDependencies": [\
             ["graceful-fs", "npm:4.2.10"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["gsap", [\
+        ["npm:3.10.4", {\
+          "packageLocation": "./.yarn/cache/gsap-npm-3.10.4-f56e6163df-0c965c6e46.zip/node_modules/gsap/",\
+          "packageDependencies": [\
+            ["gsap", "npm:3.10.4"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4195,6 +4252,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["string-width", "npm:2.1.1"],\
             ["strip-ansi", "npm:5.2.0"],\
             ["through", "npm:2.3.8"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["intersection-observer", [\
+        ["npm:0.12.2", {\
+          "packageLocation": "./.yarn/cache/intersection-observer-npm-0.12.2-2ad6771d14-d1fa9ebbb1.zip/node_modules/intersection-observer/",\
+          "packageDependencies": [\
+            ["intersection-observer", "npm:0.12.2"]\
           ],\
           "linkType": "HARD"\
         }]\

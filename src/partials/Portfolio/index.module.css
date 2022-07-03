@@ -1,0 +1,17 @@
+.root {
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  color: var(--color-white);
+  margin-top: calc(var(--app-height) / 2);
+  pointer-events: none;
+}
+
+.header {
+  width: 80%;
+  margin: auto;
+}
+
+.title {
+  @mixin display-2;
+}

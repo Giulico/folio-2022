@@ -1,9 +1,12 @@
 // Style
 import style from "./index.module.css";
 
+// Components
+import Section from "components/Section";
+
 export default function Hero() {
   return (
-    <section className={style.root}>
+    <Section name="hero" className={style.root}>
       <header>
         <h1>
           <span className={style.titlePre}>Creative</span>
@@ -19,6 +22,6 @@ export default function Hero() {
           to see some works
         </p>
       </div>
-    </section>
+    </Section>
   );
 }

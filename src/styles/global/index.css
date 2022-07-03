@@ -12,6 +12,7 @@ h2,
 h3 {
   font-family: var(--font-family-heading);
   font-weight: 500;
+  text-transform: uppercase;
 }
 
 code {

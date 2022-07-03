@@ -107,7 +107,7 @@ export default class Man {
 
   setMaterial() {
     this.controllers = {
-      roughness: 0.2,
+      roughness: 0.5,
       multipliers: {
         A: 0.03,
         B: 0.38,
@@ -118,9 +118,9 @@ export default class Man {
       },
     };
     this.uniforms = {
-      iterations: { value: 59 },
+      iterations: { value: 8 },
       depth: { value: 1.9 },
-      smoothing: { value: 0.8 },
+      smoothing: { value: 0.2 },
       colorA: {
         value: new THREE.Color(this.controllers.colors.A).multiplyScalar(
           this.controllers.multipliers.A
@@ -133,7 +133,7 @@ export default class Man {
       },
       heightMap: { value: this.resources.items.manSkin },
       displacementMap: { value: this.resources.items.manSkinDisplacement },
-      displacement: { value: 2.06 },
+      displacement: { value: 3.0 },
       time: { value: this.time.delta },
     };
 

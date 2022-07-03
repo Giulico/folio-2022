@@ -12,6 +12,7 @@ export default defineConfig({
       { find: "store", replacement: "/src/store/store.ts" },
       { find: "styles", replacement: "/src/styles" },
       { find: "utils", replacement: "/src/utils" },
+      { find: "gsap", replacement: "/src/vendor/gsap" },
     ],
   },
 });

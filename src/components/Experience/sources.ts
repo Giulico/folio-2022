@@ -13,6 +13,16 @@ const sources: Sources = [
   //   path: "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/empty_warehouse_01_1k.hdr",
   // },
   {
+    name: "manMetallic",
+    type: "texture",
+    path: "/textures/man/metallic.jpeg",
+  },
+  {
+    name: "manRoughness",
+    type: "texture",
+    path: "/textures/man/roughness.jpeg",
+  },
+  {
     name: "smoke",
     type: "texture",
     path: "/textures/Smoke/smoke.png",

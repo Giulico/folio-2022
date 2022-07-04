@@ -11,7 +11,9 @@ export default class Environment {
   resources: Experience["resources"];
   debug: Experience["debug"];
   debugFolder: GUI | undefined;
-  sunLight!: THREE.DirectionalLight;
+  sunLightRight!: THREE.DirectionalLight;
+  sunLightLeft!: THREE.DirectionalLight;
+  ambientLight!: THREE.AmbientLight;
   environmentMap!: {
     intensity: number;
     texture: THREE.CubeTexture;
@@ -30,41 +32,82 @@ export default class Environment {
       this.debugFolder = this.debug.ui?.addFolder("Environment").close();
     }
 
+    this.setAmbientLight();
     this.setSunLight();
     this.setEnvironmentMap();
   }
 
-  setSunLight() {
-    this.sunLight = new THREE.DirectionalLight("#ffffff", 1.5);
-    // this.sunLight.castShadow = true;
-    this.sunLight.shadow.camera.far = 15;
-    this.sunLight.shadow.mapSize.set(1024, 1024);
-    this.sunLight.shadow.normalBias = 0.05;
-    this.sunLight.position.set(-0.9, -1.76, 1.2);
-
-    this.scene.add(this.sunLight);
+  setAmbientLight() {
+    this.ambientLight = new THREE.AmbientLight(0x91908e, 1.6); // soft white light
+    this.scene.add(this.ambientLight);
 
     if (this.debug.active && this.debugFolder) {
       this.debugFolder
-        .add(this.sunLight, "intensity")
+        .add(this.ambientLight, "intensity")
         .min(0)
         .max(10)
-        .name("sunLightIntensity");
+        .name("ambientLightIntensity");
+    }
+  }
+
+  setSunLight() {
+    this.sunLightLeft = new THREE.DirectionalLight("#ffffff", 1.5);
+    // this.sunLightLeft.castShadow = true;
+    this.sunLightLeft.shadow.camera.far = 15;
+    this.sunLightLeft.shadow.mapSize.set(1024, 1024);
+    this.sunLightLeft.shadow.normalBias = 0.05;
+    this.sunLightLeft.position.set(-0.1, -4, 5);
+
+    this.sunLightRight = new THREE.DirectionalLight("#f1cf98", 1.5);
+    // this.sunLight.castShadow = true;
+    this.sunLightRight.shadow.camera.far = 15;
+    this.sunLightRight.shadow.mapSize.set(1024, 1024);
+    this.sunLightRight.shadow.normalBias = 0.05;
+    this.sunLightRight.position.set(-2, 1, -4);
+
+    this.scene.add(this.sunLightLeft, this.sunLightRight);
+
+    if (this.debug.active && this.debugFolder) {
       this.debugFolder
-        .add(this.sunLight.position, "x")
-        .min(-5)
-        .max(5)
-        .name("sunLightX");
+        .add(this.sunLightLeft, "intensity")
+        .min(0)
+        .max(10)
+        .name("sunLight R Intensity");
       this.debugFolder
-        .add(this.sunLight.position, "y")
-        .min(-5)
-        .max(5)
-        .name("sunLightY");
+        .add(this.sunLightLeft.position, "x")
+        .min(-20)
+        .max(20)
+        .name("sunLightX R");
       this.debugFolder
-        .add(this.sunLight.position, "z")
-        .min(-5)
-        .max(5)
-        .name("sunLightZ");
+        .add(this.sunLightLeft.position, "y")
+        .min(-20)
+        .max(20)
+        .name("sunLightY R");
+      this.debugFolder
+        .add(this.sunLightLeft.position, "z")
+        .min(-20)
+        .max(20)
+        .name("sunLightZ R");
+      this.debugFolder
+        .add(this.sunLightRight, "intensity")
+        .min(0)
+        .max(10)
+        .name("sunLight L Intensity");
+      this.debugFolder
+        .add(this.sunLightRight.position, "x")
+        .min(-20)
+        .max(20)
+        .name("sunLightX L");
+      this.debugFolder
+        .add(this.sunLightRight.position, "y")
+        .min(-20)
+        .max(20)
+        .name("sunLightY L");
+      this.debugFolder
+        .add(this.sunLightRight.position, "z")
+        .min(-20)
+        .max(20)
+        .name("sunLightZ L");
     }
   }
 

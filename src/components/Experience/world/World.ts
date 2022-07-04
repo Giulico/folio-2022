@@ -21,9 +21,9 @@ export default class World {
     // Listeners
     this.resources.on("ready", () => {
       // Setup
+      this.environment = new Environment();
       this.man = new Man();
       this.smoke = new Smoke();
-      this.environment = new Environment();
       this.portfolio = new Portfolio();
     });
   }

@@ -42,7 +42,7 @@ export default class Experience {
     this.time = new Time();
 
     this.scene = new THREE.Scene();
-    this.scene.fog = new THREE.Fog(0x000000, 3, 10);
+    // this.scene.fog = new THREE.Fog(0x000000, 3, 10);
     this.renderer = new Renderer();
     this.resources = new Resources(sources, this.renderer.instance);
     this.world = new World();
@@ -52,7 +52,8 @@ export default class Experience {
     this.time.on("tick", this.update.bind(this));
 
     this.resources.on("ready", () => {
-      // this.renderer.setComposer(this.resources);
+      this.renderer.setComposer(this.resources);
+      this.renderer.setOrbitControls(this.resources);
     });
   }
 

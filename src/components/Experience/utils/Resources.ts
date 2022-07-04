@@ -29,11 +29,11 @@ export default class Resources extends EventEmitter {
   toLoad: number;
   loaded: number;
   loaders: {
-    dracoLoader: DRACOLoader;
-    gltfLoader: GLTFLoader;
-    textureLoader: THREE.TextureLoader;
-    cubeTextureLoader: THREE.CubeTextureLoader;
-    hdrLoader: RGBELoader;
+    dracoLoader?: DRACOLoader;
+    gltfLoader?: GLTFLoader;
+    textureLoader?: THREE.TextureLoader;
+    cubeTextureLoader?: THREE.CubeTextureLoader;
+    hdrLoader?: RGBELoader;
   };
 
   constructor(sources: Sources, renderer: Renderer["instance"]) {
@@ -68,19 +68,19 @@ export default class Resources extends EventEmitter {
     for (const source of this.sources) {
       switch (source.type) {
         case "gltfModel":
-          this.loaders.gltfLoader.load(source.path as string, (file) => {
+          this.loaders.gltfLoader?.load(source.path as string, (file) => {
             this.sourceLoaded(source, file as LoadResult);
           });
           break;
 
         case "texture":
-          this.loaders.textureLoader.load(source.path as string, (file) => {
+          this.loaders.textureLoader?.load(source.path as string, (file) => {
             this.sourceLoaded(source, file);
           });
           break;
 
         case "cubeTexture":
-          this.loaders.cubeTextureLoader.load(
+          this.loaders.cubeTextureLoader?.load(
             source.path as string[],
             (file) => {
               this.sourceLoaded(source, file);
@@ -90,7 +90,7 @@ export default class Resources extends EventEmitter {
 
         case "hdr":
           const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
-          this.loaders.hdrLoader.load(source.path as string, (file) => {
+          this.loaders.hdrLoader?.load(source.path as string, (file) => {
             const envMap = pmremGenerator.fromEquirectangular(file).texture;
             file.dispose();
             pmremGenerator.dispose();

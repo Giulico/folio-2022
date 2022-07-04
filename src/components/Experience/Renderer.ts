@@ -4,12 +4,14 @@ import type { GUI } from "lil-gui";
 
 // Components
 import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
 import { BloomPass } from "three/examples/jsm/postprocessing/BloomPass";
 import { FilmPass } from "three/examples/jsm/postprocessing/FilmPass";
 
 import Experience from "./Experience";
+import { PerspectiveCamera } from "three";
 
 type DebugObject = {
   strength: number;
@@ -17,6 +19,7 @@ type DebugObject = {
   grayscale: number;
   nIntensity: number;
   sIntensity: number;
+  orbitControls: boolean;
 };
 
 export default class Renderer {
@@ -31,6 +34,8 @@ export default class Renderer {
   composer!: EffectComposer;
   debugFolder: GUI | undefined;
   debugObject: DebugObject;
+  controls: OrbitControls | undefined;
+  controlsCamera: PerspectiveCamera | undefined;
 
   constructor() {
     this.experience = new Experience();
@@ -46,18 +51,44 @@ export default class Renderer {
     }
 
     this.debugObject = {
-      strength: 3.5,
-      sCount: 648,
+      strength: 0.9,
+      sCount: 115,
       grayscale: 0,
-      nIntensity: 0.09,
-      sIntensity: 0.2,
+      nIntensity: 0.15,
+      sIntensity: 0.18,
+      orbitControls: true,
     };
 
     this.setInstance();
   }
 
+  setOrbitControls(resources: Resources) {
+    if (this.debugObject.orbitControls && resources.items.manModel?.cameras) {
+      const { width, height } = this.sizes;
+      this.controlsCamera = new THREE.PerspectiveCamera(
+        45,
+        width / height,
+        0.1,
+        10
+      );
+      this.controls = new OrbitControls(this.controlsCamera, this.canvas);
+      this.controlsCamera.position.set(0, 2.5, 3);
+      this.controls.target.set(0, 2.5, 0);
+      this.controls.enableDamping = true;
+      this.controls.update();
+
+      // Add pointer-events: none to all DOM sections
+      // In order to allow the OrbitControls from stealing the mouse events
+      const domSections = document.querySelectorAll("section");
+      domSections.forEach((section) => {
+        section.style.pointerEvents = "none";
+      });
+    }
+  }
+
   setComposer(resources: Resources) {
-    if (!resources.items.manModel.cameras) return;
+    if (!resources.items.manModel.cameras || this.debugObject.orbitControls)
+      return;
 
     const camera = resources.items.manModel.cameras[0];
     this.composer = new EffectComposer(this.instance);
@@ -127,6 +158,7 @@ export default class Renderer {
         .onChange((v: DebugObject["sIntensity"]): void => {
           if (filmPass.uniforms) filmPass.uniforms.sIntensity.value = v;
         });
+      this.debugFolder.add(this.debugObject, "orbitControls");
     }
   }
 
@@ -154,9 +186,18 @@ export default class Renderer {
 
   update() {
     if (this.experience.resources.items.manModel?.cameras) {
-      const camera = this.experience.resources.items.manModel.cameras[0];
+      const camera =
+        this.debugObject.orbitControls && this.controlsCamera
+          ? this.controlsCamera
+          : this.experience.resources.items.manModel.cameras[0];
+
       this.instance.render(this.scene, camera);
     }
+
+    if (this.controls) {
+      this.controls.update();
+    }
+
     if (this.composer) {
       this.composer.setSize(this.sizes.width, this.sizes.height);
       this.composer.render(this.time.delta);

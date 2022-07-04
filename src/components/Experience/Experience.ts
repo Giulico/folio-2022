@@ -52,7 +52,7 @@ export default class Experience {
     this.time.on("tick", this.update.bind(this));
 
     this.resources.on("ready", () => {
-      this.renderer.setComposer(this.resources);
+      // this.renderer.setComposer(this.resources);
     });
   }
 

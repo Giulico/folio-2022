@@ -49,8 +49,8 @@ export default class Renderer {
       strength: 3.5,
       sCount: 648,
       grayscale: 0,
-      nIntensity: 0.35,
-      sIntensity: 0.025,
+      nIntensity: 0.09,
+      sIntensity: 0.2,
     };
 
     this.setInstance();

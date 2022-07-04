@@ -10,6 +10,7 @@ import Experience from "../Experience";
 type DebugObject = {
   positionZ: number;
   positionY: number;
+  color: THREE.Color;
 };
 
 export default class Smoke {
@@ -42,6 +43,7 @@ export default class Smoke {
     this.debugObject = {
       positionZ: -1,
       positionY: 0,
+      color: new THREE.Color(0x0000ff),
     };
 
     this.createGeometry();
@@ -54,7 +56,7 @@ export default class Smoke {
 
   createMaterial() {
     this.material = new THREE.MeshLambertMaterial({
-      color: 0x0000ff,
+      color: this.debugObject.color,
       map: this.resource as THREE.Texture,
       emissive: 0x222222,
       opacity: 0.15,
@@ -99,6 +101,11 @@ export default class Smoke {
             const smokeElement = this.particles[i];
             smokeElement.position.y = v;
           }
+        });
+      this.debugFolder
+        .addColor(this.debugObject, "color")
+        .onChange((v: DebugObject["color"]) => {
+          this.material.color = new THREE.Color(v);
         });
     }
   }

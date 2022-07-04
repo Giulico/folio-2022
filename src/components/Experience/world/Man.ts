@@ -80,8 +80,8 @@ export default class Man {
 
     this.setModel();
     this.setCamera();
-    this.setMaterial();
-    this.setAnimation();
+    // this.setMaterial();
+    // this.setAnimation();
   }
 
   setModel() {

@@ -30,7 +30,7 @@ const sources: Sources = [
   {
     name: "manModel",
     type: "gltfModel",
-    path: "/models/Man/SuperHero.glb",
+    path: "/models/Man/Man4.glb",
   },
 ];
 

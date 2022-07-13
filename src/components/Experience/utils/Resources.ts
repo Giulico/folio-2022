@@ -2,8 +2,8 @@
 import type { Source, Sources } from "../sources";
 import type Renderer from "../Renderer";
 
+import EventEmitter from "utils/EventEmitter";
 import * as THREE from "three";
-import EventEmitter from "./EventEmitter";
 import { GLTFLoader, GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
@@ -26,8 +26,6 @@ export default class Resources extends EventEmitter {
   items: { [key: string]: LoadResult };
   sources: Sources;
   renderer: Renderer["instance"];
-  toLoad: number;
-  loaded: number;
   loaders: {
     dracoLoader?: DRACOLoader;
     gltfLoader?: GLTFLoader;
@@ -35,6 +33,7 @@ export default class Resources extends EventEmitter {
     cubeTextureLoader?: THREE.CubeTextureLoader;
     hdrLoader?: RGBELoader;
   };
+  manager: THREE.LoadingManager;
 
   constructor(sources: Sources, renderer: Renderer["instance"]) {
     super();
@@ -44,24 +43,35 @@ export default class Resources extends EventEmitter {
     this.renderer = renderer;
 
     this.items = {};
-    this.toLoad = this.sources.length;
-    this.loaded = 0;
+
+    this.manager = new THREE.LoadingManager(
+      this.onResourceLoad.bind(this),
+      this.onResourceProgress.bind(this)
+    );
 
     this.loaders = {};
     this.loaders.dracoLoader = new DRACOLoader();
     this.loaders.dracoLoader.setDecoderPath("draco/");
 
-    this.loaders.gltfLoader = new GLTFLoader();
+    this.loaders.gltfLoader = new GLTFLoader(this.manager);
     this.loaders.gltfLoader.setDRACOLoader(this.loaders.dracoLoader);
 
     this.loaders = {
       ...this.loaders,
-      textureLoader: new THREE.TextureLoader(),
-      cubeTextureLoader: new THREE.CubeTextureLoader(),
-      hdrLoader: new RGBELoader(),
+      textureLoader: new THREE.TextureLoader(this.manager),
+      cubeTextureLoader: new THREE.CubeTextureLoader(this.manager),
+      hdrLoader: new RGBELoader(this.manager),
     };
 
     this.startLoading();
+  }
+
+  onResourceLoad() {
+    this.trigger("ready");
+  }
+
+  onResourceProgress(url: string, loaded: number, total: number) {
+    this.trigger("progress", [url, loaded, total]);
   }
 
   startLoading() {
@@ -69,13 +79,13 @@ export default class Resources extends EventEmitter {
       switch (source.type) {
         case "gltfModel":
           this.loaders.gltfLoader?.load(source.path as string, (file) => {
-            this.sourceLoaded(source, file as LoadResult);
+            this.items[source.name] = file as LoadResult;
           });
           break;
 
         case "texture":
           this.loaders.textureLoader?.load(source.path as string, (file) => {
-            this.sourceLoaded(source, file);
+            this.items[source.name] = file;
           });
           break;
 
@@ -83,7 +93,7 @@ export default class Resources extends EventEmitter {
           this.loaders.cubeTextureLoader?.load(
             source.path as string[],
             (file) => {
-              this.sourceLoaded(source, file);
+              this.items[source.name] = file;
             }
           );
           break;
@@ -94,23 +104,13 @@ export default class Resources extends EventEmitter {
             const envMap = pmremGenerator.fromEquirectangular(file).texture;
             file.dispose();
             pmremGenerator.dispose();
-            this.sourceLoaded(source, envMap);
+            this.items[source.name] = envMap;
           });
           break;
 
         default:
           break;
       }
-    }
-  }
-
-  sourceLoaded(source: Source, file: LoadResult) {
-    this.items[source.name] = file;
-
-    this.loaded++;
-
-    if (this.loaded === this.toLoad) {
-      this.trigger("ready");
     }
   }
 }

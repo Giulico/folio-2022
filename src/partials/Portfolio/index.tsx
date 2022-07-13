@@ -16,23 +16,26 @@ function Portfolio() {
   const isActive = useRef<boolean>(false);
   const elementYPosition = useRef<number>();
 
-  const section = useSelector((state: RootState) => state.section);
+  const { current: currentSection } = useSelector(
+    (state: RootState) => state.section
+  );
 
-  const saveElementPosition = (entry: IntersectionObserverEntry | null) => {
+  const saveElementPosition = (
+    boundary: RootState["section"]["boundaries"][0]
+  ) => {
     const world = window.experience.world;
 
-    if (!entry?.rootBounds || !world?.portfolio) return;
+    elementYPosition.current = boundary.start;
 
-    const target = entry.target as HTMLElement;
-    elementYPosition.current = target.offsetTop;
-
-    world.portfolio.initialScrollPosition = elementYPosition.current;
+    if (world.portfolio) {
+      world.portfolio.initialScrollPosition = elementYPosition.current;
+    }
   };
 
   useEffect(() => {
     const world = window.experience.world;
 
-    if (section === "portfolio") {
+    if (currentSection === "portfolio") {
       isActive.current = true;
 
       // Entering
@@ -49,7 +52,7 @@ function Portfolio() {
       world.portfolio.isVisible = false;
       world.portfolio.leaveAnimation();
     }
-  }, [section]);
+  }, [currentSection]);
 
   return (
     <Section

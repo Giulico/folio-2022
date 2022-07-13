@@ -30,5 +30,6 @@ code {
   top: 0;
   left: 0;
   outline: none;
+  z-index: -1;
   background: radial-gradient(#000000, #111111);
 }

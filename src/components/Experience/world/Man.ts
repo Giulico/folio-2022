@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { gsap } from "gsap";
 
 // Types
 import type { GUI } from "lil-gui";
@@ -53,17 +54,17 @@ export default class Man {
   animation!: {
     mixer: THREE.AnimationMixer;
     actions?: {
-      [key: string]: AnimationAction[];
+      [key: string]: any;
     };
     play?: (name: string) => void;
   };
 
   constructor() {
     this.experience = new Experience();
-    this.sizes = this.experience.sizes;
-    this.scene = this.experience.scene;
     this.resources = this.experience.resources;
     this.resource = this.resources.items.manModel;
+    this.sizes = this.experience.sizes;
+    this.scene = this.experience.scene;
     this.time = this.experience.time;
     this.renderer = this.experience.renderer.instance;
 
@@ -81,7 +82,8 @@ export default class Man {
     this.setModel();
     this.setCamera();
     this.setMaterial();
-    // this.setAnimation();
+
+    gsap.delayedCall(0.5, this.startAnimations.bind(this));
   }
 
   setModel() {
@@ -116,7 +118,6 @@ export default class Man {
     );
     if (!manArmature) throw new Error("Man's Armature mesh not found");
 
-    console.log(manArmature.children);
     this.mesh = manArmature.children.find(
       (child) => child instanceof THREE.Mesh
     ) as THREE.Mesh;
@@ -384,7 +385,7 @@ export default class Man {
   //   this.mesh.material = this.material;
   // }
 
-  setAnimation() {
+  startAnimations() {
     if (!this.resource.animations?.length) {
       return;
     }
@@ -400,68 +401,51 @@ export default class Man {
     this.animation = {
       mixer: new THREE.AnimationMixer(this.model),
     };
+
+    // I.  The name "hero", "portfolio", ecc must be the same of the store.section
+    // II. The first clipAction must be the Armature, the second the Camera
     this.animation.actions = {
-      initClip: [this.animation.mixer.clipAction(findAnimation("Camera.00"))],
-      action01: [
-        this.animation.mixer.clipAction(findAnimation("Camera.01")),
-        this.animation.mixer.clipAction(findAnimation("Armature.01")),
-      ],
-      action02: [
-        this.animation.mixer.clipAction(findAnimation("Camera.02")),
-        this.animation.mixer.clipAction(findAnimation("Armature.02")),
-      ],
+      intro: {
+        enter: [
+          this.animation.mixer.clipAction(findAnimation("Armature.Intro")),
+          this.animation.mixer.clipAction(findAnimation("Camera.Intro")),
+        ],
+      },
+      hero: {
+        enter: [
+          this.animation.mixer.clipAction(findAnimation("Armature.Hero")),
+          this.animation.mixer.clipAction(findAnimation("Camera.Hero")),
+        ],
+        loop: [
+          this.animation.mixer.clipAction(findAnimation("Armature.Hero.Loop")),
+          this.animation.mixer.clipAction(findAnimation("Camera.Hero.Loop")),
+        ],
+      },
+      portfolio: {
+        enter: [
+          this.animation.mixer.clipAction(findAnimation("Armature.Portfolio")),
+          this.animation.mixer.clipAction(findAnimation("Camera.Portfolio")),
+        ],
+      },
+      // action02: [
+      //   this.animation.mixer.clipAction(findAnimation("Camera.02")),
+      //   this.animation.mixer.clipAction(findAnimation("Armature.02")),
+      // ],
     };
 
-    // Start initial animation
-    this.animation.actions.initClip[0].clampWhenFinished = true;
-    this.animation.actions.initClip[0].loop = THREE.LoopOnce;
-    this.animation.actions.initClip[0].play();
+    this.playAnimation("intro").then(() => {
+      // Enable page scroll
+      window.store.dispatch.scroll.canScroll();
+      // Play hero animation
+      this.playAnimation("hero");
+    });
 
-    // Set current
-    this.animation.actions.current = this.animation.actions.action01;
+    window.store.subscribe(() => {
+      const { section } = window.store.getState();
+      this.changeAnimation(section.current);
+    });
 
-    this.animation.play = (name) => {
-      if (!this.animation.actions?.[name]) return;
-
-      const newAction = this.animation.actions[name];
-      const oldAction = this.animation.actions.current;
-
-      const newCamera = newAction.find((a) =>
-        a._clip?.name.startsWith("Camera")
-      );
-      const newArmature = newAction.find((a) =>
-        a._clip?.name.startsWith("Armature")
-      );
-
-      const oldCamera = oldAction.find((a) =>
-        a._clip?.name.startsWith("Camera")
-      );
-      const oldArmature = oldAction.find((a) =>
-        a._clip?.name.startsWith("Armature")
-      );
-
-      if (!newCamera || !newArmature || !oldCamera || !oldArmature) {
-        new Error(`newCamera nor newArmature not found`);
-        return;
-      }
-
-      newCamera.reset();
-      newCamera.clampWhenFinished = true;
-      newCamera.loop = THREE.LoopOnce;
-      newCamera.play();
-      newCamera.crossFadeFrom(oldCamera, 1, true);
-
-      newArmature.reset();
-      newArmature.clampWhenFinished = true;
-      newArmature.loop = THREE.LoopOnce;
-      newArmature.play();
-      newArmature.crossFadeFrom(oldArmature, 1, true);
-
-      this.animation.actions.current = newAction;
-    };
-
-    // this.animation.play("action01", { paused: true, first: true });
-
+    /*
     if (this.debug.active && this.debugFolder) {
       const debugObject = {
         action01: () => {
@@ -475,6 +459,66 @@ export default class Man {
       this.debugFolder.add(debugObject, "action01");
       this.debugFolder.add(debugObject, "action02");
     }
+    */
+  }
+
+  changeAnimation(name: string) {
+    if (!this.animation?.actions?.[name]?.enter) return;
+
+    const newAction = this.animation.actions[name].enter;
+    const oldAction = this.animation.actions.current;
+
+    for (let i = 0; i < newAction.length; i++) {
+      const animation = newAction[i];
+      animation.reset();
+      // animation.clampWhenFinished = true;
+      animation.loop = THREE.LoopOnce;
+      animation.play();
+      animation.crossFadeFrom(oldAction[i], 0.3, true);
+    }
+
+    this.animation.actions.current = newAction;
+  }
+
+  playAnimation(name: string): Promise<void> {
+    return new Promise((resolve) => {
+      if (!this.animation?.actions) {
+        resolve();
+        return;
+      }
+
+      // Set current
+      this.animation.actions.current = this.animation.actions[name].enter;
+      const clipName = this.animation.actions.current[0]._clip?.name;
+
+      // Start initial animation
+      for (const animation of this.animation.actions[name].enter) {
+        animation.reset();
+        // animation.clampWhenFinished = true;
+        animation.setLoop(THREE.LoopOnce);
+        animation.play();
+      }
+
+      // Event listener
+      this.animation.mixer.addEventListener("finished", (event) => {
+        const finishedClipName = event.action._clip.name;
+        if (finishedClipName === clipName) {
+          resolve();
+          setTimeout(() => {
+            if (!this.animation?.actions?.[name]?.loop) return;
+
+            this.animation.actions.current = this.animation.actions[name].loop;
+
+            for (const animation of this.animation.actions[name].loop) {
+              animation.reset();
+              animation.clampWhenFinished = true;
+              animation.setLoop(THREE.LoopOnce);
+              animation.play().reset();
+            }
+          }, 1000);
+        }
+      });
+    });
   }
 
   resize() {

@@ -11,7 +11,9 @@ import { useEffect, useRef } from "react";
 import Experience from "./Experience";
 
 function ExperienceComponent() {
-  const section = useSelector((state: RootState) => state.section);
+  const { current: currentSection } = useSelector(
+    (state: RootState) => state.section
+  );
   const experience = useRef<Experience>();
 
   useEffect(() => {
@@ -26,7 +28,7 @@ function ExperienceComponent() {
 
   useEffect(() => {
     if (experience.current) {
-      switch (section) {
+      switch (currentSection) {
         case "about":
           experience.current.world.man?.animation?.play?.("action01");
           break;
@@ -37,7 +39,7 @@ function ExperienceComponent() {
           break;
       }
     }
-  }, [section]);
+  }, [currentSection]);
 
   return <canvas className="webgl" />;
 }

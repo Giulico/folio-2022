@@ -3,6 +3,7 @@ import Environment from "./Environment";
 import Man from "./Man";
 import Smoke from "./Smoke";
 import Portfolio from "./Portfolio";
+import Loader from "./Loader";
 
 export default class World {
   experience: Experience;
@@ -12,19 +13,22 @@ export default class World {
   smoke: Smoke | undefined;
   environment: Environment | undefined;
   portfolio: Portfolio | undefined;
+  loader: Loader;
 
   constructor() {
     this.experience = new Experience();
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
 
+    this.loader = new Loader();
+
     // Listeners
     this.resources.on("ready", () => {
       // Setup
       this.environment = new Environment();
       this.man = new Man();
-      this.smoke = new Smoke();
-      this.portfolio = new Portfolio();
+      // this.smoke = new Smoke();
+      // this.portfolio = new Portfolio();
     });
   }
 

@@ -40,6 +40,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:18.0.0"],\
             ["@types/react", "npm:18.0.14"],\
             ["@types/react-dom", "npm:18.0.5"],\
+            ["@types/scroll-lock", "npm:2.1.0"],\
             ["@types/three", "npm:0.141.0"],\
             ["@vitejs/plugin-react", "npm:1.3.2"],\
             ["autoprefixer", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:10.4.7"],\
@@ -61,6 +62,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-hook-inview", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:4.5.0"],\
             ["react-redux", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:8.0.2"],\
             ["redux", "npm:4.2.0"],\
+            ["scroll-lock", "npm:2.1.5"],\
             ["semantic-release", "npm:19.0.3"],\
             ["three", "npm:0.142.0"],\
             ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353"],\
@@ -1782,6 +1784,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-scheduler-npm-0.16.2-ba3a7d8c68-b6b4dcfeae.zip/node_modules/@types/scheduler/",\
           "packageDependencies": [\
             ["@types/scheduler", "npm:0.16.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/scroll-lock", [\
+        ["npm:2.1.0", {\
+          "packageLocation": "./.yarn/cache/@types-scroll-lock-npm-2.1.0-1d3a8ed527-01d8c295a3.zip/node_modules/@types/scroll-lock/",\
+          "packageDependencies": [\
+            ["@types/scroll-lock", "npm:2.1.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -3602,6 +3613,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:18.0.0"],\
             ["@types/react", "npm:18.0.14"],\
             ["@types/react-dom", "npm:18.0.5"],\
+            ["@types/scroll-lock", "npm:2.1.0"],\
             ["@types/three", "npm:0.141.0"],\
             ["@vitejs/plugin-react", "npm:1.3.2"],\
             ["autoprefixer", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:10.4.7"],\
@@ -3623,6 +3635,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-hook-inview", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:4.5.0"],\
             ["react-redux", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:8.0.2"],\
             ["redux", "npm:4.2.0"],\
+            ["scroll-lock", "npm:2.1.5"],\
             ["semantic-release", "npm:19.0.3"],\
             ["three", "npm:0.142.0"],\
             ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353"],\
@@ -7520,6 +7533,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["scheduler", "npm:0.23.0"],\
             ["loose-envify", "npm:1.4.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["scroll-lock", [\
+        ["npm:2.1.5", {\
+          "packageLocation": "./.yarn/cache/scroll-lock-npm-2.1.5-ccc634b4fc-f18e9b9308.zip/node_modules/scroll-lock/",\
+          "packageDependencies": [\
+            ["scroll-lock", "npm:2.1.5"]\
           ],\
           "linkType": "HARD"\
         }]\

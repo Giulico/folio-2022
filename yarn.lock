@@ -1249,6 +1249,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/scroll-lock@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@types/scroll-lock@npm:2.1.0"
+  checksum: 01d8c295a3d11158b665255acfe96259d5b28566ae07f26011c47ba2b8eb0211386a9c5f752f82d3bf1d0153d08e8a51f641307cd808b1eda9f26418a62fa2d1
+  languageName: node
+  linkType: hard
+
 "@types/three@npm:^0.141.0":
   version: 0.141.0
   resolution: "@types/three@npm:0.141.0"
@@ -2843,6 +2850,7 @@ __metadata:
     "@types/node": ^18.0.0
     "@types/react": ^18.0.14
     "@types/react-dom": ^18.0.5
+    "@types/scroll-lock": ^2.1.0
     "@types/three": ^0.141.0
     "@vitejs/plugin-react": ^1.3.2
     autoprefixer: ^10.4.7
@@ -2864,6 +2872,7 @@ __metadata:
     react-hook-inview: ^4.5.0
     react-redux: ^8.0.2
     redux: ^4.2.0
+    scroll-lock: ^2.1.5
     semantic-release: ^19.0.3
     three: ^0.142.0
     typescript: ^4.7.4
@@ -6011,6 +6020,13 @@ __metadata:
   dependencies:
     loose-envify: ^1.1.0
   checksum: d79192eeaa12abef860c195ea45d37cbf2bbf5f66e3c4dcd16f54a7da53b17788a70d109ee3d3dde1a0fd50e6a8fc171f4300356c5aee4fc0171de526bf35f8a
+  languageName: node
+  linkType: hard
+
+"scroll-lock@npm:^2.1.5":
+  version: 2.1.5
+  resolution: "scroll-lock@npm:2.1.5"
+  checksum: f18e9b93084bde8c8f56f749a49ad5d2b4ca8aadbfcb640c025bb273ca041c465a08b79fa07eb378d3d4d69c95c5fed5d6881f8af0dc3ee03b60ed7012e61b2b
   languageName: node
   linkType: hard
 

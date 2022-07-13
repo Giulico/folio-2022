@@ -12,6 +12,7 @@ declare global {
   interface Window {
     cursor: Cursor;
     experience: Experience;
+    store: any;
   }
 
   interface BloomPassExtended extends BloomPass {

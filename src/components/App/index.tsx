@@ -1,13 +1,21 @@
+// Types
+import type { RootState } from "store";
+
+// Utils
 import { cursorPosition } from "utils/events";
+import { disablePageScroll, enablePageScroll } from "scroll-lock";
+
+// Hooks
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
-import type { RootState } from "store";
-
+// Components
 import ExperienceComponent from "components/Experience";
+import LoadProgress from "components/LoadProgress";
 import Hero from "partials/Hero";
 import Portfolio from "partials/Portfolio";
 import About from "partials/About";
+import Contact from "partials/Contact";
 
 window.cursor = {
   x: 0,
@@ -16,7 +24,11 @@ window.cursor = {
 
 function App() {
   const dispatch = useDispatch();
-  const sizes = useSelector((state: RootState) => state.sizes);
+  const { app, scroll, sizes } = useSelector((state: RootState) => ({
+    app: state.app,
+    scroll: state.scroll,
+    sizes: state.sizes,
+  }));
 
   useEffect(() => {
     const appHeight = () => {
@@ -46,12 +58,22 @@ function App() {
     window.addEventListener("mousemove", savePointerPosition);
   }, []);
 
+  useEffect(() => {
+    if (scroll) {
+      enablePageScroll();
+    } else {
+      disablePageScroll();
+    }
+  }, [scroll]);
+
   return (
     <>
       <ExperienceComponent />
       <Hero />
       <Portfolio />
       <About />
+      <Contact />
+      <LoadProgress />
     </>
   );
 }

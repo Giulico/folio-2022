@@ -56,7 +56,7 @@ export default class Renderer {
       grayscale: 0,
       nIntensity: 0.15,
       sIntensity: 0.18,
-      orbitControls: true,
+      orbitControls: false,
     };
 
     this.setInstance();
@@ -87,6 +87,8 @@ export default class Renderer {
   }
 
   setComposer(resources: Resources) {
+    return;
+    /*
     if (!resources.items.manModel.cameras || this.debugObject.orbitControls)
       return;
 
@@ -160,6 +162,7 @@ export default class Renderer {
         });
       this.debugFolder.add(this.debugObject, "orbitControls");
     }
+    */
   }
 
   setInstance() {

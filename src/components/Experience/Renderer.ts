@@ -36,6 +36,7 @@ export default class Renderer {
   debugObject: DebugObject;
   controls: OrbitControls | undefined;
   controlsCamera: PerspectiveCamera | undefined;
+  cameraHelper!: THREE.CameraHelper;
 
   constructor() {
     this.experience = new Experience();
@@ -68,8 +69,8 @@ export default class Renderer {
       this.controlsCamera = new THREE.PerspectiveCamera(
         45,
         width / height,
-        0.1,
-        10
+        0.01,
+        1000
       );
       this.controls = new OrbitControls(this.controlsCamera, this.canvas);
       this.controlsCamera.position.set(0, 2.5, 3);
@@ -83,6 +84,14 @@ export default class Renderer {
       domSections.forEach((section) => {
         section.style.pointerEvents = "none";
       });
+
+      // this.cameraHelper = new THREE.CameraHelper(
+      //   resources.items.manModel.cameras[0]
+      // );
+      // this.scene.add(this.cameraHelper);
+
+      const axesHelper = new THREE.AxesHelper(5);
+      this.scene.add(axesHelper);
     }
   }
 
@@ -188,17 +197,27 @@ export default class Renderer {
   }
 
   update() {
-    if (this.experience.resources.items.manModel?.cameras) {
+    if (
+      this.experience.resources.items.manModel?.cameras &&
+      this.experience.world?.cameraOnPath?.camera
+    ) {
+      // const camera =
+      //   this.debugObject.orbitControls && this.controlsCamera
+      //     ? this.controlsCamera
+      //     : this.experience.resources.items.manModel.cameras[0];
       const camera =
         this.debugObject.orbitControls && this.controlsCamera
           ? this.controlsCamera
-          : this.experience.resources.items.manModel.cameras[0];
+          : this.experience.world.cameraOnPath.camera;
 
-      this.instance.render(this.scene, camera);
+      if (camera) {
+        this.instance.render(this.scene, camera);
+      }
     }
 
     if (this.controls) {
       this.controls.update();
+      // this.cameraHelper.update();
     }
 
     if (this.composer) {

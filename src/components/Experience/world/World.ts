@@ -3,6 +3,7 @@ import Environment from "./Environment";
 import Man from "./Man";
 import Smoke from "./Smoke";
 import Portfolio from "./Portfolio";
+import CameraOnPath from "./CameraOnPath";
 import Loader from "./Loader";
 
 export default class World {
@@ -13,6 +14,7 @@ export default class World {
   smoke: Smoke | undefined;
   environment: Environment | undefined;
   portfolio: Portfolio | undefined;
+  cameraOnPath: CameraOnPath | undefined;
   loader: Loader;
 
   constructor() {
@@ -21,6 +23,7 @@ export default class World {
     this.resources = this.experience.resources;
 
     this.loader = new Loader();
+    this.cameraOnPath = new CameraOnPath();
 
     // Listeners
     this.resources.on("ready", () => {
@@ -34,11 +37,13 @@ export default class World {
 
   resize() {
     this.man?.resize?.();
+    this.cameraOnPath?.resize?.();
   }
 
   update() {
     this.man?.update?.();
     this.smoke?.update?.();
     this.portfolio?.update?.();
+    this.cameraOnPath?.update?.();
   }
 }

@@ -1,3 +1,4 @@
+// Scroll top on page load
 import "intersection-observer"; // polyfills the native IntersectionObserver (i.e. Safari 12)
 
 import React from "react";

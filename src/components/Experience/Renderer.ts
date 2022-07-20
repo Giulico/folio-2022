@@ -202,9 +202,9 @@ export default class Renderer {
       this.experience.world?.cameraOnPath?.camera
     ) {
       // const camera =
-      //   this.debugObject.orbitControls && this.controlsCamera
-      //     ? this.controlsCamera
-      //     : this.experience.resources.items.manModel.cameras[0];
+      // this.debugObject.orbitControls && this.controlsCamera
+      //   ? this.controlsCamera
+      //   : this.experience.resources.items.manModel.cameras[0];
       const camera =
         this.debugObject.orbitControls && this.controlsCamera
           ? this.controlsCamera

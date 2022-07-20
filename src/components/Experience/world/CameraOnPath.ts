@@ -1,6 +1,7 @@
 // Utils
 import * as THREE from "three";
 import { gsap } from "gsap";
+import lerp from "utils/lerp";
 
 // Components
 import Experience from "../Experience";
@@ -103,7 +104,7 @@ export default class CameraOnPath {
     const material = new THREE.MeshBasicMaterial({
       wireframe: true,
       transparent: true,
-      opacity: 0.5,
+      opacity: 0.0,
     });
 
     const tube = new THREE.Mesh(geometry, material);
@@ -141,9 +142,21 @@ export default class CameraOnPath {
     this.percentage = 1 - window.scrollY / this.bodyHeight;
     const p1 = this.curvePath.getPointAt(this.percentage);
 
-    this.camera.position.x = p1.x;
-    this.camera.position.y = p1.y;
+    // this.camera.position.x = p1.x;
+    // this.camera.position.y = p1.y;
+
+    this.camera.position.x = lerp(
+      this.camera.position.x,
+      p1.x + window.cursor.x * 0.2,
+      0.1
+    );
+    this.camera.position.y = lerp(
+      this.camera.position.y,
+      p1.y + window.cursor.y * 0.2,
+      0.1
+    );
     this.camera.position.z = p1.z;
+
     this.camera.lookAt(this.lookAt.body);
 
     if (this.renderer.debugObject.orbitControls) {

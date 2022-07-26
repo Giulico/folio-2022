@@ -1,25 +1,25 @@
-import type Experience from "components/Experience/Experience";
-import type { BloomPass } from "three/examples/jsm/postprocessing/BloomPass";
-import type { FilmPass } from "three/examples/jsm/postprocessing/FilmPass";
-export {};
+import type Experience from 'components/Experience/Experience'
+import type { BloomPass } from 'three/examples/jsm/postprocessing/BloomPass'
+import type { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass'
+export {}
 
 type Cursor = {
-  x: number;
-  y: number;
-};
+  x: number
+  y: number
+}
 
 declare global {
   interface Window {
-    cursor: Cursor;
-    experience: Experience;
-    store: any;
+    cursor: Cursor
+    experience: Experience
+    store: any
   }
 
   interface BloomPassExtended extends BloomPass {
-    combineUniforms?: { [key: string]: { value: any } };
+    combineUniforms?: { [key: string]: { value: any } }
   }
 
   interface FilmPassExtended extends FilmPass {
-    uniforms?: { [key: string]: { value: any } };
+    uniforms?: { [key: string]: { value: any } }
   }
 }

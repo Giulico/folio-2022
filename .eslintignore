@@ -1,0 +1,8 @@
+node_modules
+dist
+src/vendor
+public
+.git
+.vim
+.yarn
+.vscode

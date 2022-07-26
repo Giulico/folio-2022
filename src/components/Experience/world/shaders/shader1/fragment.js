@@ -16,6 +16,6 @@ const fragment = /* glsl */ `
     
     gl_FragColor = vec4(r, g, b, 1.0);
   }
-`;
+`
 
-export default fragment;
+export default fragment

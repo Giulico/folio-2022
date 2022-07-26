@@ -1,150 +1,150 @@
 // Types
-import type { GUI } from "lil-gui";
+import type { GUI } from 'lil-gui'
 
 // Components
-import * as THREE from "three";
-import Experience from "../Experience";
+import * as THREE from 'three'
+import Experience from '../Experience'
 
 export default class Environment {
-  experience: Experience;
-  scene: Experience["scene"];
-  resources: Experience["resources"];
-  debug: Experience["debug"];
-  debugFolder: GUI | undefined;
-  sunLightRight!: THREE.DirectionalLight;
-  sunLightLeft!: THREE.DirectionalLight;
-  ambientLight!: THREE.AmbientLight;
+  experience: Experience
+  scene: Experience['scene']
+  resources: Experience['resources']
+  debug: Experience['debug']
+  debugFolder: GUI | undefined
+  sunLightRight!: THREE.DirectionalLight
+  sunLightLeft!: THREE.DirectionalLight
+  ambientLight!: THREE.AmbientLight
   environmentMap!: {
-    intensity: number;
-    texture: THREE.CubeTexture;
-    encoding: THREE.TextureEncoding;
-    updateMaterial?: () => void;
-  };
+    intensity: number
+    texture: THREE.CubeTexture
+    encoding: THREE.TextureEncoding
+    updateMaterial?: () => void
+  }
 
   constructor() {
-    this.experience = new Experience();
-    this.scene = this.experience.scene;
-    this.resources = this.experience.resources;
+    this.experience = new Experience()
+    this.scene = this.experience.scene
+    this.resources = this.experience.resources
 
-    this.debug = this.experience.debug;
+    this.debug = this.experience.debug
 
     if (this.debug.active) {
-      this.debugFolder = this.debug.ui?.addFolder("Environment").close();
+      this.debugFolder = this.debug.ui?.addFolder('Environment').close()
     }
 
-    this.setAmbientLight();
-    this.setSunLight();
-    this.setEnvironmentMap();
+    this.setAmbientLight()
+    this.setSunLight()
+    this.setEnvironmentMap()
   }
 
   setAmbientLight() {
-    this.ambientLight = new THREE.AmbientLight(0x91908e, 1.6); // soft white light
-    this.scene.add(this.ambientLight);
+    this.ambientLight = new THREE.AmbientLight(0x91908e, 1.6) // soft white light
+    this.scene.add(this.ambientLight)
 
     if (this.debug.active && this.debugFolder) {
       this.debugFolder
-        .add(this.ambientLight, "intensity")
+        .add(this.ambientLight, 'intensity')
         .min(0)
         .max(10)
-        .name("ambientLightIntensity");
+        .name('ambientLightIntensity')
     }
   }
 
   setSunLight() {
-    this.sunLightLeft = new THREE.DirectionalLight("#ffffff", 1.5);
+    this.sunLightLeft = new THREE.DirectionalLight('#ffffff', 1.5)
     // this.sunLightLeft.castShadow = true;
-    this.sunLightLeft.shadow.camera.far = 15;
-    this.sunLightLeft.shadow.mapSize.set(1024, 1024);
-    this.sunLightLeft.shadow.normalBias = 0.05;
-    this.sunLightLeft.position.set(-0.1, -4, 5);
+    this.sunLightLeft.shadow.camera.far = 15
+    this.sunLightLeft.shadow.mapSize.set(1024, 1024)
+    this.sunLightLeft.shadow.normalBias = 0.05
+    this.sunLightLeft.position.set(-0.1, -4, 5)
 
-    this.sunLightRight = new THREE.DirectionalLight("#f1cf98", 1.5);
+    this.sunLightRight = new THREE.DirectionalLight('#f1cf98', 1.5)
     // this.sunLight.castShadow = true;
-    this.sunLightRight.shadow.camera.far = 15;
-    this.sunLightRight.shadow.mapSize.set(1024, 1024);
-    this.sunLightRight.shadow.normalBias = 0.05;
-    this.sunLightRight.position.set(-2, 1, -4);
+    this.sunLightRight.shadow.camera.far = 15
+    this.sunLightRight.shadow.mapSize.set(1024, 1024)
+    this.sunLightRight.shadow.normalBias = 0.05
+    this.sunLightRight.position.set(-2, 1, -4)
 
-    this.scene.add(this.sunLightLeft, this.sunLightRight);
+    this.scene.add(this.sunLightLeft, this.sunLightRight)
 
     if (this.debug.active && this.debugFolder) {
       this.debugFolder
-        .add(this.sunLightLeft, "intensity")
+        .add(this.sunLightLeft, 'intensity')
         .min(0)
         .max(10)
-        .name("sunLight R Intensity");
+        .name('sunLight R Intensity')
       this.debugFolder
-        .add(this.sunLightLeft.position, "x")
+        .add(this.sunLightLeft.position, 'x')
         .min(-20)
         .max(20)
-        .name("sunLightX R");
+        .name('sunLightX R')
       this.debugFolder
-        .add(this.sunLightLeft.position, "y")
+        .add(this.sunLightLeft.position, 'y')
         .min(-20)
         .max(20)
-        .name("sunLightY R");
+        .name('sunLightY R')
       this.debugFolder
-        .add(this.sunLightLeft.position, "z")
+        .add(this.sunLightLeft.position, 'z')
         .min(-20)
         .max(20)
-        .name("sunLightZ R");
+        .name('sunLightZ R')
       this.debugFolder
-        .add(this.sunLightRight, "intensity")
+        .add(this.sunLightRight, 'intensity')
         .min(0)
         .max(10)
-        .name("sunLight L Intensity");
+        .name('sunLight L Intensity')
       this.debugFolder
-        .add(this.sunLightRight.position, "x")
+        .add(this.sunLightRight.position, 'x')
         .min(-20)
         .max(20)
-        .name("sunLightX L");
+        .name('sunLightX L')
       this.debugFolder
-        .add(this.sunLightRight.position, "y")
+        .add(this.sunLightRight.position, 'y')
         .min(-20)
         .max(20)
-        .name("sunLightY L");
+        .name('sunLightY L')
       this.debugFolder
-        .add(this.sunLightRight.position, "z")
+        .add(this.sunLightRight.position, 'z')
         .min(-20)
         .max(20)
-        .name("sunLightZ L");
+        .name('sunLightZ L')
     }
   }
 
   setEnvironmentMap() {
     if (!this.resources.items.environmentMapTexture) {
-      return;
+      return
     }
 
     this.environmentMap = {
       intensity: 0.4,
       texture: this.resources.items.environmentMapTexture as THREE.CubeTexture,
-      encoding: THREE.sRGBEncoding,
-    };
+      encoding: THREE.sRGBEncoding
+    }
     this.environmentMap.updateMaterial = () => {
       this.scene.traverse((child) => {
         if (
           child instanceof THREE.Mesh &&
           child.material instanceof THREE.MeshStandardMaterial
         ) {
-          child.material.envMap = this.environmentMap.texture;
-          child.material.envMapIntensity = this.environmentMap.intensity;
-          child.material.needsUpdate = true;
+          child.material.envMap = this.environmentMap.texture
+          child.material.envMapIntensity = this.environmentMap.intensity
+          child.material.needsUpdate = true
         }
-      });
-    };
-    this.environmentMap.updateMaterial();
+      })
+    }
+    this.environmentMap.updateMaterial()
 
-    this.scene.environment = this.environmentMap.texture;
+    this.scene.environment = this.environmentMap.texture
 
     // Debug
     if (this.debug.active && this.debugFolder) {
       this.debugFolder
-        .add(this.environmentMap, "intensity")
+        .add(this.environmentMap, 'intensity')
         .min(0)
         .max(4)
-        .name("mapIntensity")
-        .onChange(this.environmentMap.updateMaterial);
+        .name('mapIntensity')
+        .onChange(this.environmentMap.updateMaterial)
     }
   }
 }

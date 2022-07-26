@@ -39,10 +39,35 @@
   --spc-15: calc(var(--spc-unit) * 15);
   /* Equivalent to 128px  */
   --spc-16: calc(var(--spc-unit) * 16);
+  /* Equivalent to 136px  */
+  --spc-17: calc(var(--spc-unit) * 17);
   /* Equivalent to 160px  */
   --spc-20: calc(var(--spc-unit) * 20);
   /* Equivalent to 200px  */
   --spc-25: calc(var(--spc-unit) * 25);
   /* Equivalent to 240px  */
   --spc-30: calc(var(--spc-unit) * 30);
+
+  /* SIDEBAR */
+  --container-margins: var(--spc-3);
+  --text-margin-right: var(--spc-14);
+}
+
+@media (--md-p) {
+  :root {
+    --text-margin-right: var(--spc-16);
+  }
+}
+
+@media (--md-l) {
+  :root {
+    --text-margin-right: var(--spc-25);
+  }
+}
+
+@media (--lg) {
+  :root {
+    --container-margins: var(--spc-6);
+    --text-margin-right: var(--spc-30);
+  }
 }

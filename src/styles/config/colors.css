@@ -10,7 +10,7 @@
   --color-black: hsl(0, 0%, 0%);
   --color-gray-900: hsl(200, 0%, 30%);
   --color-gray-700: hsl(200, 0%, 50%);
-  --color-gray-600: hsl(200, 0%, 70%);
+  --color-gray-600: hsl(200, 0%, 60%);
   --color-gray-500: hsl(200, 0%, 80%);
   --color-gray-300: hsl(200, 0%, 85%);
   --color-gray-250: hsl(200, 0%, 90%);
@@ -22,6 +22,10 @@
   --color-error: var(--color-primary);
   --color-warning: hsl(42, 88%, 52%);
   --color-success: hsl(155, 89%, 45%);
+
+  --color-red: #ff0000;
+  --color-green: #00ff00;
+  --color-blue: #0000ff;
 
   --opacity-hover: 0.5;
 }

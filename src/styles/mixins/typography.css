@@ -1,24 +1,70 @@
 @define-mixin display-1 {
   font-size: var(--fs-display-1);
-  letter-spacing: var(--ls-display-1);
 }
+
 @define-mixin display-2 {
   font-size: var(--fs-display-2);
 }
-@define-mixin display-3 {
-  font-size: var(--fs-display-3);
-}
-@define-mixin display-4 {
-  font-size: var(--fs-display-4);
+
+@define-mixin body-1 {
+  font-size: var(--fs-body-1);
 }
 
-@define-mixin text-outline-white {
+@define-mixin body-2 {
+  font-size: var(--fs-body-2);
+}
+
+@define-mixin label {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-bold);
+}
+
+@define-mixin desc {
+  font-size: var(--fs-desc);
+  font-weight: var(--fw-light);
+}
+
+@define-mixin text-outline-white $alpha: 1 {
   color: var(--color-black);
-  text-shadow: 1px 1px var(--color-white), -1px -1px var(--color-white);
+  text-shadow: 1px 1px rgba(var(--color-whiteRGB), $alpha),
+    -1px -1px rgba(var(--color-whiteRGB), $alpha);
 
   @supports (-webkit-text-stroke: 1px black) {
     color: transparent;
-    -webkit-text-stroke: 1px var(--color-white);
+    -webkit-text-stroke: 1px rgba(var(--color-whiteRGB), $alpha);
+    text-shadow: none;
+  }
+}
+
+@define-mixin text-outline-red {
+  color: var(--color-black);
+  text-shadow: 1px 1px var(--color-red), -1px -1px var(--color-red);
+
+  @supports (-webkit-text-stroke: 1px black) {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--color-red);
+    text-shadow: none;
+  }
+}
+
+@define-mixin text-outline-green {
+  color: var(--color-black);
+  text-shadow: 1px 1px var(--color-green), -1px -1px var(--color-green);
+
+  @supports (-webkit-text-stroke: 1px black) {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--color-green);
+    text-shadow: none;
+  }
+}
+
+@define-mixin text-outline-blue {
+  color: var(--color-black);
+  text-shadow: 1px 1px var(--color-blue), -1px -1px var(--color-blue);
+
+  @supports (-webkit-text-stroke: 1px black) {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--color-blue);
     text-shadow: none;
   }
 }

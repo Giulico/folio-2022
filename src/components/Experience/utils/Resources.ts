@@ -1,12 +1,12 @@
 // Types
-import type { Source, Sources } from "../sources";
-import type Renderer from "../Renderer";
+import type { Sources } from '../sources'
+import type Renderer from '../Renderer'
 
-import EventEmitter from "utils/EventEmitter";
-import * as THREE from "three";
-import { GLTFLoader, GLTF } from "three/examples/jsm/loaders/GLTFLoader";
-import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
-import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
+import EventEmitter from 'utils/EventEmitter'
+import * as THREE from 'three'
+import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
+import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
 
 export type LoadResult = (
   | THREE.Texture
@@ -14,102 +14,103 @@ export type LoadResult = (
   | THREE.DataTexture
   | GLTF
 ) & {
-  cameras?: THREE.PerspectiveCamera[];
-  animations?: THREE.AnimationClip[];
-  scene?: THREE.Scene;
-  wrapS?: number;
-  wrapT?: number;
-  minFilter?: number;
-};
+  cameras?: THREE.PerspectiveCamera[]
+  animations?: THREE.AnimationClip[]
+  scene?: THREE.Scene
+  wrapS?: number
+  wrapT?: number
+  minFilter?: number
+}
 
 export default class Resources extends EventEmitter {
-  items: { [key: string]: LoadResult };
-  sources: Sources;
-  renderer: Renderer["instance"];
+  items: { [key: string]: LoadResult }
+  sources: Sources
+  renderer: Renderer['instance']
   loaders: {
-    dracoLoader?: DRACOLoader;
-    gltfLoader?: GLTFLoader;
-    textureLoader?: THREE.TextureLoader;
-    cubeTextureLoader?: THREE.CubeTextureLoader;
-    hdrLoader?: RGBELoader;
-  };
-  manager: THREE.LoadingManager;
+    dracoLoader?: DRACOLoader
+    gltfLoader?: GLTFLoader
+    textureLoader?: THREE.TextureLoader
+    cubeTextureLoader?: THREE.CubeTextureLoader
+    hdrLoader?: RGBELoader
+  }
+  manager: THREE.LoadingManager
 
-  constructor(sources: Sources, renderer: Renderer["instance"]) {
-    super();
+  constructor(sources: Sources, renderer: Renderer['instance']) {
+    super()
 
     // Options
-    this.sources = sources;
-    this.renderer = renderer;
+    this.sources = sources
+    this.renderer = renderer
 
-    this.items = {};
+    this.items = {}
 
     this.manager = new THREE.LoadingManager(
       this.onResourceLoad.bind(this),
       this.onResourceProgress.bind(this)
-    );
+    )
 
-    this.loaders = {};
-    this.loaders.dracoLoader = new DRACOLoader();
-    this.loaders.dracoLoader.setDecoderPath("draco/");
+    this.loaders = {}
+    this.loaders.dracoLoader = new DRACOLoader()
+    this.loaders.dracoLoader.setDecoderPath('draco/')
 
-    this.loaders.gltfLoader = new GLTFLoader(this.manager);
-    this.loaders.gltfLoader.setDRACOLoader(this.loaders.dracoLoader);
+    this.loaders.gltfLoader = new GLTFLoader(this.manager)
+    this.loaders.gltfLoader.setDRACOLoader(this.loaders.dracoLoader)
 
     this.loaders = {
       ...this.loaders,
       textureLoader: new THREE.TextureLoader(this.manager),
       cubeTextureLoader: new THREE.CubeTextureLoader(this.manager),
-      hdrLoader: new RGBELoader(this.manager),
-    };
+      hdrLoader: new RGBELoader(this.manager)
+    }
 
-    this.startLoading();
+    this.startLoading()
   }
 
   onResourceLoad() {
-    this.trigger("ready");
+    this.trigger('ready')
   }
 
   onResourceProgress(url: string, loaded: number, total: number) {
-    this.trigger("progress", [url, loaded, total]);
+    this.trigger('progress', [url, loaded, total])
   }
 
   startLoading() {
     for (const source of this.sources) {
       switch (source.type) {
-        case "gltfModel":
+        case 'gltfModel':
           this.loaders.gltfLoader?.load(source.path as string, (file) => {
-            this.items[source.name] = file as LoadResult;
-          });
-          break;
+            this.items[source.name] = file as LoadResult
+          })
+          break
 
-        case "texture":
+        case 'texture':
           this.loaders.textureLoader?.load(source.path as string, (file) => {
-            this.items[source.name] = file;
-          });
-          break;
+            this.items[source.name] = file
+          })
+          break
 
-        case "cubeTexture":
+        case 'cubeTexture':
           this.loaders.cubeTextureLoader?.load(
             source.path as string[],
             (file) => {
-              this.items[source.name] = file;
+              this.items[source.name] = file
             }
-          );
-          break;
+          )
+          break
 
-        case "hdr":
-          const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
+        case 'hdr': {
+          const pmremGenerator = new THREE.PMREMGenerator(this.renderer)
           this.loaders.hdrLoader?.load(source.path as string, (file) => {
-            const envMap = pmremGenerator.fromEquirectangular(file).texture;
-            file.dispose();
-            pmremGenerator.dispose();
-            this.items[source.name] = envMap;
-          });
-          break;
+            const envMap = pmremGenerator.fromEquirectangular(file).texture
+            file.dispose()
+            pmremGenerator.dispose()
+            this.items[source.name] = envMap
+          })
+          break
+        }
 
         default:
-          break;
+          break
       }
     }
   }

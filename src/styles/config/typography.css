@@ -1,41 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@300;500;600;700&display=swap");
+
 :root {
-  --font-family-base: "Freight", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-    "Helvetica Neue", sans-serif;
+  --font-family-base: "Saira Semi Condensed", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   --font-family-heading: "NOVU M", -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
     "Helveootica Neue", sans-serif;
 
   /* SIZES */
-  --fs-display-1: 140px;
-  --fs-display-2: 100px;
-  --fs-display-3: 50px;
-  --fs-display-4: 20px;
+  --fs-display-1: 60px;
+  --fs-display-2: 36px;
+  --fs-body-1: 21px;
+  --fs-body-2: 18px;
+  --fs-label: 16px;
+  --fs-desc: 14px;
 
-  --ls-display-1: -10px;
+  /* WEIGHTS */
+  --fw-light: 300;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
 }
 
 /* AKA 768px */
 @media (--md-p) {
   :root {
-    --fs-display-1: 300px;
-    --fs-display-2: 150px;
-    --fs-display-3: 100px;
-
-    --ls-display-1: -24px;
-  }
-}
-
-@media (--md-l) {
-  :root {
     --fs-display-1: 200px;
-    --ls-display-1: -24px;
-  }
-}
-
-@media (--lg) {
-  :root {
-    --fs-display-1: 300px;
-    --ls-display-1: -24px;
+    --fs-display-2: 92px;
+    --fs-body-1: 24px;
+    --fs-body-2: 21px;
+    --fs-label: 16px;
+    --fs-desc: 16px;
   }
 }

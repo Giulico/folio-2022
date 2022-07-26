@@ -1,0 +1,19 @@
+.root {
+  @mixin label;
+
+  font-family: var(--font-family-base);
+  margin-top: var(--spc-4);
+  margin-left: var(--container-margins);
+  background-color: transparent;
+  border: none;
+  color: var(--color-white);
+  user-select: none;
+
+  @media (--md-l) {
+    margin-left: var(--spc-15);
+  }
+
+  @media (--lg) {
+    margin-left: var(--spc-17);
+  }
+}

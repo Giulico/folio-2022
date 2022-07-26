@@ -1,15 +1,14 @@
-import style from "./index.module.css";
+import style from './index.module.css'
 
 // Components
-import Section from "components/Section";
+import Section from 'components/Section'
+import MenuItem from 'components/MenuItem'
 
 function About() {
   return (
     <Section name="about" className={style.root}>
-      <header className={style.header}>
-        <h2 className={style.title}>About</h2>
-      </header>
+      <MenuItem name="About" />
     </Section>
-  );
+  )
 }
-export default About;
+export default About

@@ -1,54 +1,54 @@
 // Types
-import type Resources from "./utils/Resources";
-import type { GUI } from "lil-gui";
+import type Resources from './utils/Resources'
+import type { GUI } from 'lil-gui'
 
 // Components
-import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
-import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
-import { BloomPass } from "three/examples/jsm/postprocessing/BloomPass";
-import { FilmPass } from "three/examples/jsm/postprocessing/FilmPass";
+import * as THREE from 'three'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
+import { BloomPass } from 'three/examples/jsm/postprocessing/BloomPass'
+import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass'
 
-import Experience from "./Experience";
-import { PerspectiveCamera } from "three";
+import Experience from './Experience'
+import { PerspectiveCamera } from 'three'
 
 type DebugObject = {
-  strength: number;
-  sCount: number;
-  grayscale: number;
-  nIntensity: number;
-  sIntensity: number;
-  orbitControls: boolean;
-};
+  strength: number
+  sCount: number
+  grayscale: number
+  nIntensity: number
+  sIntensity: number
+  orbitControls: boolean
+}
 
 export default class Renderer {
-  experience: Experience;
-  canvas: Experience["canvas"];
-  debug!: Experience["debug"];
-  sizes!: Experience["sizes"];
-  time!: Experience["time"];
-  scene!: Experience["scene"];
-  world!: Experience["world"];
-  instance!: THREE.WebGLRenderer;
-  composer!: EffectComposer;
-  debugFolder: GUI | undefined;
-  debugObject: DebugObject;
-  controls: OrbitControls | undefined;
-  controlsCamera: PerspectiveCamera | undefined;
-  cameraHelper!: THREE.CameraHelper;
+  experience: Experience
+  canvas: Experience['canvas']
+  debug!: Experience['debug']
+  sizes!: Experience['sizes']
+  time!: Experience['time']
+  scene!: Experience['scene']
+  world!: Experience['world']
+  instance!: THREE.WebGLRenderer
+  composer!: EffectComposer
+  debugFolder: GUI | undefined
+  debugObject: DebugObject
+  controls: OrbitControls | undefined
+  controlsCamera: PerspectiveCamera | undefined
+  cameraHelper!: THREE.CameraHelper
 
   constructor() {
-    this.experience = new Experience();
-    this.canvas = this.experience.canvas;
-    this.sizes = this.experience.sizes;
-    this.scene = this.experience.scene;
-    this.world = this.experience.world;
-    this.time = this.experience.time;
-    this.debug = this.experience.debug;
+    this.experience = new Experience()
+    this.canvas = this.experience.canvas
+    this.sizes = this.experience.sizes
+    this.scene = this.experience.scene
+    this.world = this.experience.world
+    this.time = this.experience.time
+    this.debug = this.experience.debug
 
     if (this.debug.active) {
-      this.debugFolder = this.debug.ui?.addFolder("Postprocessing").close();
+      this.debugFolder = this.debug.ui?.addFolder('Postprocessing').close()
     }
 
     this.debugObject = {
@@ -57,46 +57,46 @@ export default class Renderer {
       grayscale: 0,
       nIntensity: 0.15,
       sIntensity: 0.18,
-      orbitControls: false,
-    };
+      orbitControls: false
+    }
 
-    this.setInstance();
+    this.setInstance()
   }
 
   setOrbitControls(resources: Resources) {
     if (this.debugObject.orbitControls && resources.items.manModel?.cameras) {
-      const { width, height } = this.sizes;
+      const { width, height } = this.sizes
       this.controlsCamera = new THREE.PerspectiveCamera(
         45,
         width / height,
         0.01,
         1000
-      );
-      this.controls = new OrbitControls(this.controlsCamera, this.canvas);
-      this.controlsCamera.position.set(0, 2.5, 3);
-      this.controls.target.set(0, 2.5, 0);
-      this.controls.enableDamping = true;
-      this.controls.update();
+      )
+      this.controls = new OrbitControls(this.controlsCamera, this.canvas)
+      this.controlsCamera.position.set(0, 2.5, 3)
+      this.controls.target.set(0, 2.5, 0)
+      this.controls.enableDamping = true
+      this.controls.update()
 
       // Add pointer-events: none to all DOM sections
       // In order to allow the OrbitControls from stealing the mouse events
-      const domSections = document.querySelectorAll("section");
+      const domSections = document.querySelectorAll('section')
       domSections.forEach((section) => {
-        section.style.pointerEvents = "none";
-      });
+        section.style.pointerEvents = 'none'
+      })
 
       // this.cameraHelper = new THREE.CameraHelper(
       //   resources.items.manModel.cameras[0]
       // );
       // this.scene.add(this.cameraHelper);
 
-      const axesHelper = new THREE.AxesHelper(5);
-      this.scene.add(axesHelper);
+      const axesHelper = new THREE.AxesHelper(5)
+      this.scene.add(axesHelper)
     }
   }
 
   setComposer(resources: Resources) {
-    return;
+    return
     /*
     if (!resources.items.manModel.cameras || this.debugObject.orbitControls)
       return;
@@ -178,22 +178,22 @@ export default class Renderer {
     this.instance = new THREE.WebGLRenderer({
       canvas: this.canvas,
       antialias: true,
-      alpha: true,
-    });
-    this.instance.physicallyCorrectLights = true;
-    this.instance.outputEncoding = THREE.sRGBEncoding;
-    this.instance.toneMapping = THREE.CineonToneMapping;
-    this.instance.toneMappingExposure = 1.75;
-    this.instance.shadowMap.enabled = true;
-    this.instance.shadowMap.type = THREE.PCFSoftShadowMap;
+      alpha: true
+    })
+    this.instance.physicallyCorrectLights = true
+    this.instance.outputEncoding = THREE.sRGBEncoding
+    this.instance.toneMapping = THREE.CineonToneMapping
+    this.instance.toneMappingExposure = 1.75
+    this.instance.shadowMap.enabled = true
+    this.instance.shadowMap.type = THREE.PCFSoftShadowMap
     // this.instance.setClearColor("#211d20");
-    this.instance.setSize(this.sizes.width, this.sizes.height);
-    this.instance.setPixelRatio(this.sizes.pixelRatio);
+    this.instance.setSize(this.sizes.width, this.sizes.height)
+    this.instance.setPixelRatio(this.sizes.pixelRatio)
   }
 
   resize() {
-    this.instance.setSize(this.sizes.width, this.sizes.height);
-    this.instance.setPixelRatio(this.sizes.pixelRatio);
+    this.instance.setSize(this.sizes.width, this.sizes.height)
+    this.instance.setPixelRatio(this.sizes.pixelRatio)
   }
 
   update() {
@@ -208,21 +208,21 @@ export default class Renderer {
       const camera =
         this.debugObject.orbitControls && this.controlsCamera
           ? this.controlsCamera
-          : this.experience.world.cameraOnPath.camera;
+          : this.experience.world.cameraOnPath.camera
 
       if (camera) {
-        this.instance.render(this.scene, camera);
+        this.instance.render(this.scene, camera)
       }
     }
 
     if (this.controls) {
-      this.controls.update();
+      this.controls.update()
       // this.cameraHelper.update();
     }
 
     if (this.composer) {
-      this.composer.setSize(this.sizes.width, this.sizes.height);
-      this.composer.render(this.time.delta);
+      this.composer.setSize(this.sizes.width, this.sizes.height)
+      this.composer.render(this.time.delta)
     }
   }
 }

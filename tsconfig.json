@@ -8,6 +8,7 @@
       "store": ["./src/store/store.ts"],
       "styles/*": ["./src/styles/*"],
       "utils/*": ["./src/utils/*"],
+      "hooks/*": ["./src/hooks/*"],
       "gsap/*": ["./src/vendor/gsap/*"]
     },
     "target": "ESNext",

@@ -1,58 +1,58 @@
 // Types
-import { RootState } from "store";
+import { RootState } from 'store'
 
 // Style
-import style from "./index.module.css";
+import style from './index.module.css'
 
 // Hooks
-import { useRef } from "react";
-import { useSelector } from "react-redux";
+import { useRef } from 'react'
+import { useSelector } from 'react-redux'
 
 // Components
-import Section from "components/Section";
-import { useEffect } from "react";
+import Section from 'components/Section'
+import MenuItem from 'components/MenuItem'
+import { useEffect } from 'react'
 
 function Portfolio() {
-  const isActive = useRef<boolean>(false);
-  const elementYPosition = useRef<number>();
+  const isActive = useRef<boolean>(false)
+  const elementYPosition = useRef<number>()
 
   const { current: currentSection } = useSelector(
     (state: RootState) => state.section
-  );
+  )
 
   const saveElementPosition = (
-    boundary: RootState["section"]["boundaries"][0]
+    boundary: RootState['section']['boundaries'][0]
   ) => {
-    const world = window.experience.world;
-
-    elementYPosition.current = boundary.start;
+    const world = window.experience.world
+    elementYPosition.current = boundary.start
 
     if (world.portfolio) {
-      world.portfolio.initialScrollPosition = elementYPosition.current;
+      world.portfolio.initialScrollPosition = elementYPosition.current
     }
-  };
+  }
 
   useEffect(() => {
-    const world = window.experience.world;
+    const world = window.experience.world
 
-    if (currentSection === "portfolio") {
-      isActive.current = true;
+    if (currentSection === 'portfolio') {
+      isActive.current = true
 
       // Entering
-      if (!world.portfolio) return;
+      if (!world.portfolio) return
       world.portfolio.enterAnimation().then(() => {
-        if (!world.portfolio) return;
-        world.portfolio.isVisible = true;
-      });
+        if (!world.portfolio) return
+        world.portfolio.isVisible = true
+      })
     } else if (isActive.current) {
-      isActive.current = false;
+      isActive.current = false
 
       // Leaving
-      if (!world.portfolio) return;
-      world.portfolio.isVisible = false;
-      world.portfolio.leaveAnimation();
+      if (!world.portfolio) return
+      world.portfolio.isVisible = false
+      world.portfolio.leaveAnimation()
     }
-  }, [currentSection]);
+  }, [currentSection])
 
   return (
     <Section
@@ -60,10 +60,8 @@ function Portfolio() {
       className={style.root}
       onEnter={saveElementPosition}
     >
-      <header className={style.header}>
-        <h2 className={style.title}>Portfolio</h2>
-      </header>
+      <MenuItem name="Portfolio" />
     </Section>
-  );
+  )
 }
-export default Portfolio;
+export default Portfolio

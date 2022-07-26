@@ -218,6 +218,6 @@ const vertex = /* glsl */ `
     gl_PointSize = (pointscale);
     // gl_ClipDistance[0];
   }
-`;
+`
 
-export default vertex;
+export default vertex

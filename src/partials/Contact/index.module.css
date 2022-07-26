@@ -5,12 +5,3 @@
   color: var(--color-white);
   margin-top: calc(var(--app-height) / 2);
 }
-
-.header {
-  width: 80%;
-  margin: auto;
-}
-
-.title {
-  @mixin display-2;
-}

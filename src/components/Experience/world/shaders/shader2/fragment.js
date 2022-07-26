@@ -76,6 +76,6 @@ vec3 mix1 = mix(color1, color2, mix_interpolate);
 
 gl_FragColor = vec4(mix1, 1.0);
 }
-`;
+`
 
-export default fragment;
+export default fragment

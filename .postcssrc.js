@@ -5,6 +5,7 @@ module.exports = {
     require("autoprefixer"),
     require("postcss-flexbugs-fixes"),
     require("postcss-for"),
+    require("postcss-hexrgba"),
     require("postcss-mixins")({
       mixinsDir: path.resolve(__dirname, "src/styles/mixins"),
     }),

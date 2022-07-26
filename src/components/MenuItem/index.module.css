@@ -1,0 +1,24 @@
+.root {
+  @mixin display-1;
+  line-height: 1.1;
+
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  width: 70%;
+  opacity: 1;
+  overflow: hidden;
+}
+
+.clipped {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--color-white);
+
+  clip-path: ellipse(100% 0% at 50% 50%);
+}
+
+.outlined {
+  @mixin text-outline-white 0.2;
+}

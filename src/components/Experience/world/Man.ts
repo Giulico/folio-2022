@@ -1,120 +1,122 @@
-import * as THREE from "three";
-import { gsap } from "gsap";
+import * as THREE from 'three'
+import { gsap } from 'gsap'
 
 // Shaders
-import vertexShader from "./shaders/shader2/vertex";
-import fragmentShader from "./shaders/shader2/fragment";
+import vertexShader from './shaders/shader2/vertex'
+import fragmentShader from './shaders/shader2/fragment'
 
 // Types
-import type { GUI } from "lil-gui";
-import type { LoadResult } from "../utils/Resources";
+import type { GUI } from 'lil-gui'
+import type { LoadResult } from '../utils/Resources'
 
 // Components
-import Experience from "../Experience";
+import Experience from '../Experience'
 
 type Uniforms = {
-  colorA: THREE.Color;
-  colorB: THREE.Color;
-  depth: number;
-  displacement: number;
-  displacementMap: LoadResult;
-  heightMap: LoadResult;
-  iterations: number;
-  smoothing: number;
-  time: number;
-};
+  colorA: THREE.Color
+  colorB: THREE.Color
+  depth: number
+  displacement: number
+  displacementMap: LoadResult
+  heightMap: LoadResult
+  iterations: number
+  smoothing: number
+  time: number
+}
 type UniformsValue = {
-  [P in keyof Uniforms]: { value: Uniforms[P] };
-};
+  [P in keyof Uniforms]: { value: Uniforms[P] }
+}
 
 type DebugObject = {
-  roughness: number;
-  metalness: number;
-};
+  roughness: number
+  metalness: number
+}
 
 interface AnimationAction extends THREE.AnimationAction {
-  _clip?: THREE.AnimationClip;
+  _clip?: THREE.AnimationClip
 }
 
 type AnimationProps = {
-  a: AnimationAction;
-  delay?: number;
-};
+  a: AnimationAction
+  delay?: number
+}
 
 type AnimationConfig = {
-  enter: AnimationProps;
-  loop?: AnimationProps;
-};
+  enter: AnimationProps
+  loop?: AnimationProps
+}
 
-type Sections = "intro" | "hero" | "portfolio";
+type Sections = 'intro' | 'hero' | 'portfolio' | 'about' | 'contact'
 
 type AnimationConfigTypes = {
-  current?: AnimationAction;
-  intro: AnimationConfig;
-  hero: AnimationConfig;
-  portfolio: AnimationConfig;
-};
+  current?: AnimationAction
+  intro: AnimationConfig
+  hero: AnimationConfig
+  portfolio: AnimationConfig
+  about: AnimationConfig
+  contact: AnimationConfig
+}
 
 export default class Man {
-  experience: Experience;
-  scene: Experience["scene"];
-  resources: Experience["resources"];
-  debug: Experience["debug"];
-  showLogs: boolean;
-  sizes: Experience["sizes"];
-  time: Experience["time"];
-  resource: LoadResult;
-  renderer: Experience["renderer"]["instance"];
-  debugFolder: GUI | undefined;
-  model!: THREE.Scene;
-  camera!: THREE.PerspectiveCamera;
-  material!: THREE.MeshStandardMaterial;
-  mesh!: THREE.Mesh;
-  debugObject!: DebugObject;
-  uniforms!: UniformsValue;
+  experience: Experience
+  scene: Experience['scene']
+  resources: Experience['resources']
+  debug: Experience['debug']
+  showLogs: boolean
+  sizes: Experience['sizes']
+  time: Experience['time']
+  resource: LoadResult
+  renderer: Experience['renderer']['instance']
+  debugFolder: GUI | undefined
+  model!: THREE.Scene
+  camera!: THREE.PerspectiveCamera
+  material!: THREE.MeshStandardMaterial
+  mesh!: THREE.Mesh
+  debugObject!: DebugObject
+  uniforms!: UniformsValue
   animation!: {
-    mixer: THREE.AnimationMixer;
-    actions: AnimationConfigTypes;
-  };
-  finishedAnimations: AnimationAction[];
-  scroll: boolean;
+    mixer: THREE.AnimationMixer
+    actions: AnimationConfigTypes
+  }
+  finishedAnimations: AnimationAction[]
+  scroll: boolean
 
   constructor() {
-    this.experience = new Experience();
-    this.resources = this.experience.resources;
-    this.resource = this.resources.items.manModel;
-    this.sizes = this.experience.sizes;
-    this.scene = this.experience.scene;
-    this.time = this.experience.time;
-    this.renderer = this.experience.renderer.instance;
+    this.experience = new Experience()
+    this.resources = this.experience.resources
+    this.resource = this.resources.items.manModel
+    this.sizes = this.experience.sizes
+    this.scene = this.experience.scene
+    this.time = this.experience.time
+    this.renderer = this.experience.renderer.instance
 
-    this.scroll = false;
-    this.finishedAnimations = [];
+    this.scroll = false
+    this.finishedAnimations = []
 
-    this.debug = this.experience.debug;
-    this.showLogs = false;
+    this.debug = this.experience.debug
+    this.showLogs = false
 
     if (this.debug.active) {
-      this.debugFolder = this.debug.ui?.addFolder("Man");
+      this.debugFolder = this.debug.ui?.addFolder('Man')
     }
 
     this.debugObject = {
-      roughness: 1,
-      metalness: 0.7,
-    };
+      roughness: 0.5,
+      metalness: 1
+    }
 
-    this.setModel();
-    this.setMaterial();
-    this.setStoreEvents();
+    this.setModel()
+    this.setMaterial()
+    this.setStoreEvents()
 
-    gsap.delayedCall(0.5, this.startAnimations.bind(this));
+    gsap.delayedCall(0.5, this.startAnimations.bind(this))
   }
 
   setModel() {
-    if (!this.resource.scene) return;
+    if (!this.resource.scene) return
 
-    this.model = this.resource.scene;
-    this.scene.add(this.model);
+    this.model = this.resource.scene
+    this.scene.add(this.model)
   }
 
   setMaterial() {
@@ -122,85 +124,78 @@ export default class Man {
       color: 0xedd1ff,
       metalness: this.debugObject.metalness,
       roughness: this.debugObject.roughness,
-      roughnessMap: this.resources.items.manRoughness as THREE.Texture,
+      roughnessMap: this.resources.items.manRoughness as THREE.Texture
       // map: this.resources.items.manColor,
       // aoMap: this.resources.items.manAO,
       // normalMap: this.resources.items.manNormal,
       // metalnessMap: this.resources.items.manMetallic,
-    });
+    })
 
     const manArmature = this.model.children.find(
-      (child) => child.userData.name === "Armature"
-    );
-    if (!manArmature) throw new Error("Man's Armature mesh not found");
+      (child) => child.userData.name === 'Armature'
+    )
+    if (!manArmature) throw new Error("Man's Armature mesh not found")
 
     this.mesh = manArmature.children.find(
       (child) => child instanceof THREE.Mesh
-    ) as THREE.Mesh;
+    ) as THREE.Mesh
 
     if (this.debug.active && this.debugFolder) {
       this.debugFolder
-        .add(this.debugObject, "roughness")
+        .add(this.debugObject, 'roughness')
         .min(0.01)
         .max(5)
         .step(0.01)
         .onChange(
-          (v: DebugObject["roughness"]) => (this.material.roughness = v)
-        );
+          (v: DebugObject['roughness']) => (this.material.roughness = v)
+        )
       this.debugFolder
-        .add(this.debugObject, "metalness")
+        .add(this.debugObject, 'metalness')
         .min(0.01)
         .max(1)
         .step(0.01)
         .onChange(
-          (v: DebugObject["metalness"]) => (this.material.metalness = v)
-        );
+          (v: DebugObject['metalness']) => (this.material.metalness = v)
+        )
     }
 
-    this.mesh.material = this.material;
+    this.mesh.material = this.material
   }
 
   setStoreEvents() {
-    const store = window.store;
-    let prevSection = store.getState().section.current;
+    const store = window.store
+    let prevSection = store.getState().section.current
 
     store.subscribe(() => {
-      const currentSection = store.getState().section.current as Sections;
+      const currentSection = store.getState().section.current as Sections
       if (currentSection !== prevSection) {
         if (!this.animation?.actions) {
-          throw new Error(
-            "this.animation.actions not found in section handler"
-          );
+          throw new Error('this.animation.actions not found in section handler')
         }
 
-        const nextAnimation = this.animation.actions[currentSection]?.enter.a;
-        const prevAnimation = this.animation.actions.current;
+        const nextAnimation = this.animation.actions[currentSection]?.enter.a
+        const prevAnimation = this.animation.actions.current
 
         if (prevAnimation?.isRunning()) {
-          this.action("fade", nextAnimation, prevAnimation);
+          this.action('fade', nextAnimation, prevAnimation)
         } else {
-          this.action("play", nextAnimation);
+          this.action('play', nextAnimation)
         }
 
-        prevSection = currentSection;
+        prevSection = currentSection
       }
-    });
+    })
   }
 
   startAnimations() {
     if (!this.resource.animations?.length) {
-      return;
+      return
     }
 
-    const findAnimation = (name: string): THREE.AnimationClip => {
-      const a = this.resource.animations?.find(
-        (a) => a.name === name
-      ) as THREE.AnimationClip;
-      if (!a) new Error(`Animation ${name} not found`);
-      return a;
-    };
-
-    const mixer = new THREE.AnimationMixer(this.model);
+    const mixer = new THREE.AnimationMixer(this.model)
+    const globalAction = mixer.clipAction(this.resource.animations[0])
+    const globalClip = globalAction.getClip()
+    const subClip = THREE.AnimationUtils.subclip
 
     // Constrains
     // I.  The name "hero", "portfolio", ecc must be the same of the store.section
@@ -210,199 +205,214 @@ export default class Man {
       actions: {
         intro: {
           enter: {
-            a: mixer.clipAction(findAnimation("Armature.Intro")),
-            delay: 5,
-          },
+            a: mixer.clipAction(subClip(globalClip, 'intro', 0, 80)),
+            delay: 5
+          }
         },
         hero: {
           enter: {
-            a: mixer.clipAction(findAnimation("Armature.Hero")),
+            a: mixer.clipAction(subClip(globalClip, 'hero', 80, 160))
           },
           loop: {
-            a: mixer.clipAction(findAnimation("Armature.Hero.Loop")),
-          },
+            a: mixer.clipAction(subClip(globalClip, 'hero.loop', 160, 240))
+          }
         },
         portfolio: {
           enter: {
-            a: mixer.clipAction(findAnimation("Armature.Portfolio")),
+            a: mixer.clipAction(subClip(globalClip, 'portfolio', 240, 320))
           },
           loop: {
-            a: mixer.clipAction(findAnimation("Armature.Portfolio.Loop")),
-          },
+            a: mixer.clipAction(subClip(globalClip, 'portfolio.loop', 320, 400))
+          }
         },
-      },
-    };
+        about: {
+          enter: {
+            a: mixer.clipAction(subClip(globalClip, 'about', 400, 450))
+          },
+          loop: {
+            a: mixer.clipAction(subClip(globalClip, 'about.loop', 450, 500))
+          }
+        },
+        contact: {
+          enter: {
+            a: mixer.clipAction(subClip(globalClip, 'contact', 500, 540))
+          },
+          loop: {
+            a: mixer.clipAction(subClip(globalClip, 'contact.loop', 540, 640))
+          }
+        }
+      }
+    }
 
     this.animation.mixer.addEventListener(
-      "finished",
+      'finished',
       this.handleAnimationFinish.bind(this)
-    );
+    )
 
     // Start Intro animation
-    this.action("play", this.animation.actions.intro.enter.a);
+    this.action('play', this.animation.actions.intro.enter.a)
 
     // Debug
     if (this.debug.active && this.debugFolder) {
-      const play = (name: Sections, type: "enter" | "loop" = "enter") => {
+      const play = (name: Sections, type: 'enter' | 'loop' = 'enter') => {
         const animation = this.animation.actions[name]?.[type]?.a as
           | AnimationAction
-          | undefined;
+          | undefined
         if (animation) {
-          this.action("play", animation);
+          this.action('play', animation)
         }
-      };
+      }
       const debugObject = {
-        playIntro: () => play("intro"),
-        playHero: () => play("hero"),
-        playHeroLoop: () => play("hero", "loop"),
-        playPortfolio: () => play("portfolio"),
-      };
+        playIntro: () => play('intro'),
+        playHero: () => play('hero'),
+        playHeroLoop: () => play('hero', 'loop'),
+        playPortfolio: () => play('portfolio')
+      }
 
-      this.debugFolder.add(debugObject, "playIntro");
-      this.debugFolder.add(debugObject, "playHero");
-      this.debugFolder.add(debugObject, "playHeroLoop");
-      this.debugFolder.add(debugObject, "playPortfolio");
+      this.debugFolder.add(debugObject, 'playIntro')
+      this.debugFolder.add(debugObject, 'playHero')
+      this.debugFolder.add(debugObject, 'playHeroLoop')
+      this.debugFolder.add(debugObject, 'playPortfolio')
     }
   }
 
   handleAnimationFinish(event: THREE.Event) {
-    const finishedAction = event.action;
-    const finishedClip = finishedAction.getClip();
-    const finishedClipName = finishedClip.name;
-    const finishedName = this._getAnimationName(finishedClipName);
-    const finishedType = this._getAnimationType(finishedClipName);
+    const finishedAction = event.action
+    const finishedClip = finishedAction.getClip()
+    const finishedClipName = finishedClip.name
+    const finishedName = this._getAnimationName(finishedClipName)
+    const finishedType = this._getAnimationType(finishedClipName)
 
     // Always stop finished animation
     // But in order to avoid jumps to the first frame when the animation is stale,
     // Animations are pushed into an array and stopped on the next action()
-    this.finishedAnimations.push(finishedAction);
+    this.finishedAnimations.push(finishedAction)
 
-    const heroAnimation = this.animation.actions.hero.enter
-      .a as AnimationAction;
+    const heroAnimation = this.animation.actions.hero.enter.a as AnimationAction
     const loopAnimation = this.animation.actions[finishedName]?.loop?.a as
       | AnimationAction
-      | undefined;
+      | undefined
 
     // Handle intro animation
-    if (finishedName === "intro") {
-      this.action("play", heroAnimation);
-    } else if (finishedType === "enter" && loopAnimation) {
+    if (finishedName === 'intro') {
+      this.action('play', heroAnimation)
+    } else if (finishedType === 'enter' && loopAnimation) {
       // Handle loop animations
-      this.action("play", loopAnimation);
+      this.action('play', loopAnimation)
     }
 
     // Handle scroll
-    this.scroll = window.store.getState().scroll;
-    if (!this.scroll && finishedClipName === "Armature.Intro") {
+    this.scroll = window.store.getState().scroll
+    if (!this.scroll && finishedClipName === 'intro') {
       // Enable page scroll
-      window.store.dispatch.scroll.canScroll();
+      window.store.dispatch.scroll.canScroll()
     }
   }
 
   _getAnimationName(clipName: string): Sections {
     if (!this.animation.actions)
-      throw new Error("No this.animation.actions found _getAnimationName()");
+      throw new Error('No this.animation.actions found _getAnimationName()')
 
     for (const [name, animationGroup] of Object.entries(
       this.animation.actions
     )) {
-      if (name === "current") continue;
+      if (name === 'current') continue
       // name: intro
       // animationGroup: { enter: {...}, loop: {...} }
       for (const [status, animation] of Object.entries(animationGroup)) {
         // status: enter
         // animation: { a: <animation>, delay: 0.5, ... }
-        const aniAction = animation.a as AnimationAction;
+        const aniAction = animation.a as AnimationAction
         if (aniAction.getClip().name === clipName) {
-          return name as Sections;
+          return name as Sections
         }
       }
     }
 
-    throw new Error(`_getAnimationName cannot find name of ${clipName} clip`);
+    throw new Error(`_getAnimationName cannot find name of ${clipName} clip`)
   }
 
   _getAnimationType(clipName: string): string {
     if (!this.animation.actions)
-      throw new Error("No this.animation.actions found _getAnimationType()");
+      throw new Error('No this.animation.actions found _getAnimationType()')
 
     for (const [name, animationGroup] of Object.entries(
       this.animation.actions
     )) {
-      if (name === "current") continue;
+      if (name === 'current') continue
       // name: intro
       // animationGroup: { enter: {...}, loop: {...} }
       for (const [status, animation] of Object.entries(animationGroup)) {
         // status: enter
         // animation: { a: <animation>, delay: 0.5, ... }
         // Both Armature and Camera animations are in the group
-        const aniAction = animation.a as AnimationAction;
+        const aniAction = animation.a as AnimationAction
         if (aniAction.getClip().name === clipName) {
-          return status;
+          return status
         }
       }
     }
 
-    throw new Error(`_getAnimationType cannot find type of ${clipName} clip`);
+    throw new Error(`_getAnimationType cannot find type of ${clipName} clip`)
   }
 
   action(
-    type: string = "fade",
+    type = 'fade',
     animation: AnimationAction,
     prevAnimation?: AnimationAction
   ) {
-    const thisClipName = animation.getClip().name;
-    const thisAnimationName = this._getAnimationName(thisClipName) as Sections;
+    const thisClipName = animation.getClip().name
+    const thisAnimationName = this._getAnimationName(thisClipName) as Sections
     const thisAnimationType = this._getAnimationType(thisClipName) as
-      | "enter"
-      | "loop";
+      | 'enter'
+      | 'loop'
 
     if (!thisAnimationName || !thisAnimationType) {
       throw new Error(
-        "action() is not able to identify the animation name or type"
-      );
+        'action() is not able to identify the animation name or type'
+      )
     }
 
-    animation.reset();
+    animation.reset()
 
-    if (!thisClipName.includes("Loop")) {
-      animation.clampWhenFinished = true;
-      animation.setLoop(THREE.LoopOnce, 1);
+    if (!thisClipName.includes('loop')) {
+      animation.clampWhenFinished = true
+      animation.setLoop(THREE.LoopOnce, 1)
     }
 
-    if (type === "play") {
-      if (this.showLogs) console.log(`${thisClipName} play()`);
+    if (type === 'play') {
+      if (this.showLogs) console.log(`${thisClipName} play()`)
 
-      animation.play();
-    } else if (type === "fade" && prevAnimation) {
+      animation.play()
+    } else if (type === 'fade' && prevAnimation) {
       if (this.showLogs)
         console.log(
           `${thisClipName} crossFadeFrom(${prevAnimation.getClip().name})`
-        );
+        )
 
-      animation.crossFadeFrom(prevAnimation, 1, true).play();
+      animation.crossFadeFrom(prevAnimation, 1, true).play()
     }
 
     // Stop finished animation
     for (const finishedAnimation of this.finishedAnimations) {
       requestAnimationFrame(() => {
         if (this.showLogs)
-          console.log(`${finishedAnimation.getClip().name} stop()`);
-        finishedAnimation.stop();
-      });
+          console.log(`${finishedAnimation.getClip().name} stop()`)
+        finishedAnimation.stop()
+      })
     }
-    this.finishedAnimations = [];
+    this.finishedAnimations = []
 
     // Set Current Animation
     if (!this.animation?.actions)
-      throw new Error("No this.animation.actions found in action()");
+      throw new Error('No this.animation.actions found in action()')
 
-    this.animation.actions.current = animation;
+    this.animation.actions.current = animation
   }
 
   update() {
-    const delta = this.time.delta * 0.001;
-    this.animation?.mixer?.update?.(delta);
+    const delta = this.time.delta * 0.001
+    this.animation?.mixer?.update?.(delta)
 
     // if (this.uniforms) {
     //   this.uniforms.u_time.value += delta * 0.05;

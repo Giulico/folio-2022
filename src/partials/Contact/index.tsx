@@ -1,15 +1,14 @@
-import style from "./index.module.css";
+import style from './index.module.css'
 
 // Components
-import Section from "components/Section";
+import Section from 'components/Section'
+import MenuItem from 'components/MenuItem'
 
 function Contact() {
   return (
     <Section name="contact" className={style.root}>
-      <header className={style.header}>
-        <h2 className={style.title}>Contact</h2>
-      </header>
+      <MenuItem name="Contact" />
     </Section>
-  );
+  )
 }
-export default Contact;
+export default Contact

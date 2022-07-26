@@ -1,44 +1,44 @@
 // Types
-import type { ReactNode } from "react";
-import type { RootState } from "store";
+import type { ReactNode } from 'react'
+import type { RootState } from 'store'
 
 // Hooks
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useRef, useCallback } from "react";
-import { useInView } from "react-hook-inview";
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useRef, useCallback } from 'react'
+import { useInView } from 'react-hook-inview'
 
 type Props = {
-  children: ReactNode;
-  name: string;
-  className?: string;
-  onEnter?: (boundary: RootState["section"]["boundaries"][0]) => void;
-  onResize?: (boundary: RootState["section"]["boundaries"][0]) => void;
-};
+  children: ReactNode
+  name: string
+  className?: string
+  onEnter?: (boundary: RootState['section']['boundaries'][0]) => void
+  onResize?: (boundary: RootState['section']['boundaries'][0]) => void
+}
 
 function Section({ children, name, className, onEnter, onResize }: Props) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const { scroll, section, sizes } = useSelector((state: RootState) => ({
     scroll: state.scroll,
     section: state.section,
-    sizes: state.sizes,
-  }));
+    sizes: state.sizes
+  }))
 
-  const prevSizes = useRef(sizes);
-  const ref = useRef<HTMLElement>(null);
+  const prevSizes = useRef(sizes)
+  const ref = useRef<HTMLElement>(null)
 
   const setBoundary = useCallback(() => {
     if (scroll && ref.current) {
       dispatch.section.setBoundary({
         name,
         start: ref.current.offsetTop,
-        end: ref.current.offsetTop + ref.current.offsetHeight,
-      });
+        end: ref.current.offsetTop + ref.current.offsetHeight
+      })
     }
-  }, [dispatch, name, scroll]);
+  }, [dispatch, name, scroll])
 
   // Initial boundary
-  useEffect(setBoundary, [scroll]);
+  useEffect(setBoundary, [scroll])
 
   // Resize
   useEffect(() => {
@@ -46,40 +46,40 @@ function Section({ children, name, className, onEnter, onResize }: Props) {
       sizes.width !== prevSizes.current.width ||
       sizes.height !== prevSizes.current.height
     ) {
-      setBoundary();
-      const currentBoundary = section.boundaries.find((b) => b.name === name);
+      setBoundary()
+      const currentBoundary = section.boundaries.find((b) => b.name === name)
       if (currentBoundary) {
-        onResize?.(currentBoundary);
+        onResize?.(currentBoundary)
       }
     }
-  }, [sizes]);
+  }, [sizes])
 
   const checkBoundary = useCallback(() => {
-    const trigger = window.scrollY + sizes.height / 2;
-    const currentBoundary = section.boundaries.find((b) => b.name === name);
+    const trigger = window.scrollY + sizes.height / 2
+    const currentBoundary = section.boundaries.find((b) => b.name === name)
     if (
       section.current !== name && // change only if different
       currentBoundary && // typescript check
       trigger >= currentBoundary.start &&
       trigger < currentBoundary.end
     ) {
-      dispatch.section.update(name);
-      onEnter?.(currentBoundary);
+      dispatch.section.update(name)
+      onEnter?.(currentBoundary)
     }
-  }, [sizes, section, dispatch]);
+  }, [sizes, section, dispatch])
 
   useEffect(() => {
-    window.addEventListener("scroll", checkBoundary);
+    window.addEventListener('scroll', checkBoundary)
     return () => {
-      window.removeEventListener("scroll", checkBoundary);
-    };
-  }, [sizes, section, dispatch]);
+      window.removeEventListener('scroll', checkBoundary)
+    }
+  }, [sizes, section, dispatch])
 
   return (
     <section ref={ref} className={className}>
       {children}
     </section>
-  );
+  )
 }
 
-export default Section;
+export default Section

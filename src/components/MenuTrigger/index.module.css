@@ -1,6 +1,11 @@
 .root {
+  --offset-top: 150px;
+  --vertical-margin: var(--offset-top) * 2;
+  --size: 50px;
+
   @mixin label;
 
+  position: relative;
   font-family: var(--font-family-base);
   margin-top: var(--spc-4);
   margin-left: var(--container-margins);
@@ -14,6 +19,80 @@
   }
 
   @media (--lg) {
+    --offset-top: 200px;
+
     margin-left: var(--spc-17);
+  }
+
+  /* &::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    background-color: var(--color-gray-700);
+    content: '';
+    transform: translate3d(-50%, -50%, 0);
+  } */
+}
+
+.start,
+.line,
+.end {
+  position: absolute;
+  left: 50%;
+}
+
+.line {
+  top: 50%;
+  left: 50%;
+  width: 1px;
+  height: calc(100vh - var(--vertical-margin));
+  background-color: transparent;
+  border: none;
+  border-left: 1px dashed var(--color-gray-900);
+  transform: translate3d(-50%, calc(var(--size) / 2), 0) scaleY(0);
+  transform-origin: top;
+  transition: transform 0.5s ease-out;
+
+  .open & {
+    transform: translate3d(-50%, calc(var(--size) / 2), 0) scaleY(1);
+  }
+}
+
+.start,
+.end {
+  border: 1px dashed var(--color-gray-900);
+  border-radius: 50%;
+  width: var(--size);
+  height: var(--size);
+}
+
+.start {
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0) scale(0);
+  transform-origin: center;
+  transition: transform 0.5s ease-out 0.4s;
+
+  .open & {
+    transform: translate3d(-50%, -50%, 0) scale(1);
+    transition: transform 0.1s;
+  }
+}
+
+.end {
+  --end-top-start: calc(50% + var(--size) / 2);
+  --end-height: calc(100vh - var(--vertical-margin));
+  --end-top: calc(var(--end-top-start) + var(--end-height));
+
+  top: var(--end-top);
+  transform: translate3d(-50%, 0, 0) scale(0);
+
+  .open & {
+    transform: translate3d(-50%, 0, 0) scale(1);
+    transition: transform 0.3s ease-out 0.4s;
   }
 }

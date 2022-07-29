@@ -1,7 +1,3 @@
-// Scroll top on page load
-import 'intersection-observer' // polyfills the native IntersectionObserver (i.e. Safari 12)
-
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 
@@ -12,7 +8,8 @@ import 'styles/index.css'
 import store from 'store'
 
 // Components
-import App from 'components/App'
+import CustomRouter from 'components/CustomRouter'
+import Router from 'components/Router'
 
 const rootElement = document.getElementById('root')
 
@@ -21,8 +18,10 @@ if (!rootElement) throw new Error('Failed to find the root element')
 const root = ReactDOM.createRoot(rootElement)
 root.render(
   // <React.StrictMode>
-  <Provider store={store}>
-    <App />
-  </Provider>
+  <CustomRouter>
+    <Provider store={store}>
+      <Router />
+    </Provider>
+  </CustomRouter>
   // </React.StrictMode>
 )

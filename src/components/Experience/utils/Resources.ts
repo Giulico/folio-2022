@@ -13,6 +13,8 @@ export type LoadResult = (
   | THREE.CubeTexture
   | THREE.DataTexture
   | GLTF
+  | string
+  | ArrayBuffer
 ) & {
   cameras?: THREE.PerspectiveCamera[]
   animations?: THREE.AnimationClip[]
@@ -32,11 +34,15 @@ export default class Resources extends EventEmitter {
     textureLoader?: THREE.TextureLoader
     cubeTextureLoader?: THREE.CubeTextureLoader
     hdrLoader?: RGBELoader
+    fileLoader?: THREE.FileLoader
   }
   manager: THREE.LoadingManager
 
   constructor(sources: Sources, renderer: Renderer['instance']) {
     super()
+
+    // https://threejs.org/docs/#api/en/loaders/FileLoader
+    THREE.Cache.enabled = true
 
     // Options
     this.sources = sources
@@ -60,7 +66,8 @@ export default class Resources extends EventEmitter {
       ...this.loaders,
       textureLoader: new THREE.TextureLoader(this.manager),
       cubeTextureLoader: new THREE.CubeTextureLoader(this.manager),
-      hdrLoader: new RGBELoader(this.manager)
+      hdrLoader: new RGBELoader(this.manager),
+      fileLoader: new THREE.FileLoader(this.manager)
     }
 
     this.startLoading()
@@ -90,12 +97,9 @@ export default class Resources extends EventEmitter {
           break
 
         case 'cubeTexture':
-          this.loaders.cubeTextureLoader?.load(
-            source.path as string[],
-            (file) => {
-              this.items[source.name] = file
-            }
-          )
+          this.loaders.cubeTextureLoader?.load(source.path as string[], (file) => {
+            this.items[source.name] = file
+          })
           break
 
         case 'hdr': {
@@ -105,6 +109,13 @@ export default class Resources extends EventEmitter {
             file.dispose()
             pmremGenerator.dispose()
             this.items[source.name] = envMap
+          })
+          break
+        }
+
+        case 'file': {
+          this.loaders.fileLoader?.load(source.path as string, (file) => {
+            this.items[source.name] = file
           })
           break
         }

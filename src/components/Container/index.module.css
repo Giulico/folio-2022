@@ -1,0 +1,10 @@
+.root {
+  --max-width: var(--spc-2);
+
+  @media (--md-l) {
+    --max-width: 70%;
+  }
+
+  max-width: var(--max-width);
+  margin: 0 auto;
+}

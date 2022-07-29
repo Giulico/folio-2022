@@ -2,6 +2,6 @@
   position: relative;
   z-index: 1;
   height: 100vh;
+  margin-top: var(--app-height);
   color: var(--color-white);
-  margin-top: calc(var(--app-height) / 2);
 }

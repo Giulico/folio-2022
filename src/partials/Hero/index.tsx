@@ -5,6 +5,7 @@ import style from './index.module.css'
 
 // Utils
 import cn from 'classnames'
+import { rootNavigate } from 'components/CustomRouter'
 
 // Hooks
 import useScrollOffset from 'hooks/useScrollOffset'
@@ -51,18 +52,28 @@ export default function Hero() {
           <p className={style.desc}>Switzerland, Lugano</p>
           <hr className={style.separator} />
           <MenuTrigger />
+          <br />
+          <br />
+          <br />
+          <button
+            onClick={() => {
+              rootNavigate('/aquest')
+            }}
+          >
+            Open modal
+          </button>
         </div>
       </header>
       <Section name="hero" className={style.root}>
-        <MenuItem name="TheyCallMeGiulio" />
+        <MenuItem index={0} name="TheyCallMeGiulio" />
         <div className={style.middle}>
           <span className={style.line} />
           <div className={scrambleClasses}>
             <TextScramble
               texts={scrambleTexts}
               dudClassName={style.dud}
-              letterSpeed={50}
-              nextLetterSpeed={200}
+              letterSpeed={40}
+              nextLetterSpeed={100}
               pauseTime={2500}
               lineDelay={1000}
               loop={false}

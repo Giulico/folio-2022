@@ -21,6 +21,7 @@ export default class CameraOnPath {
   lookAt: {
     head: THREE.Vector3
     body: THREE.Vector3
+    behind: THREE.Vector3
   }
 
   constructor() {
@@ -33,16 +34,17 @@ export default class CameraOnPath {
     // filename = "/Users/giulio/Desktop/Personal data/Portfolio 2022/Blender script/export_curve_points.py"
     // exec(compile(open(filename).read(), filename, 'exec'))
     this.points = [
-      [1.7021034955978394, -1.5984344482421875, 5.462369441986084],
-      [6.072937965393066, 4.494833946228027, 5.463857173919678],
-      [-1.9652289152145386, 5.223184585571289, 5.032614231109619],
-      [-2.809330940246582, -1.5732879638671875, 3.585028648376465],
-      [0.23759925365447998, -2.4275574684143066, 4.409247875213623]
+      [0.5025559663772583, -1.5984344482421875, 5.737941265106201],
+      [3.818394660949707, -1.221340537071228, 4.4710516929626465],
+      [1.7216765880584717, -0.9693382382392883, 3.541285514831543],
+      [0.26383399963378906, -1.5732879638671875, 3.6863417625427246],
+      [1.4388929605484009, -2.4275574684143066, 4.476415634155273]
     ]
     this.vertices = []
     this.lookAt = {
       head: new THREE.Vector3(0, 3.4, 0),
-      body: new THREE.Vector3(0, 3, 0)
+      body: new THREE.Vector3(0, 3, 0),
+      behind: new THREE.Vector3(0, 4, -20)
     }
     this.percentage = 0
 
@@ -79,27 +81,21 @@ export default class CameraOnPath {
   }
 
   setPath() {
-    const scale = 1
+    const scale = 2
 
     // Convert the array of points into vertices
     // (in Blender the z axis is UP so we swap the z and y)
     for (let i = 0; i < this.points.length; i++) {
-      const x = this.points[i][0] * scale
+      const x = this.points[i][0] * scale - 5
       const y = this.points[i][1] * scale
-      const z = this.points[i][2] * scale - 1.5
+      const z = this.points[i][2] * scale - 5
       this.vertices[i] = new THREE.Vector3(x, z, -y)
     }
 
     // Create a path from the points
     this.curvePath = new THREE.CatmullRomCurve3(this.vertices)
     const radius = 0.25
-    const geometry = new THREE.TubeGeometry(
-      this.curvePath,
-      50,
-      radius,
-      10,
-      false
-    )
+    const geometry = new THREE.TubeGeometry(this.curvePath, 50, radius, 10, false)
 
     const material = new THREE.MeshBasicMaterial({
       wireframe: true,
@@ -145,19 +141,12 @@ export default class CameraOnPath {
     // this.camera.position.x = p1.x;
     // this.camera.position.y = p1.y;
 
-    this.camera.position.x = lerp(
-      this.camera.position.x,
-      p1.x + window.cursor.x * 0.2,
-      0.1
-    )
-    this.camera.position.y = lerp(
-      this.camera.position.y,
-      p1.y + window.cursor.y * 0.2,
-      0.1
-    )
+    this.camera.position.x = lerp(this.camera.position.x, p1.x + window.cursor.x * 0.2, 0.1)
+    this.camera.position.y = lerp(this.camera.position.y, p1.y + window.cursor.y * 0.2, 0.1)
     this.camera.position.z = p1.z
 
-    this.camera.lookAt(this.lookAt.body)
+    // this.camera.lookAt(this.lookAt.body)
+    this.camera.lookAt(this.lookAt.behind)
 
     if (this.renderer.debugObject.orbitControls) {
       this.cameraHelper.update()

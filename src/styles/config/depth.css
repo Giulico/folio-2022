@@ -1,0 +1,8 @@
+:root {
+  --z-neg: -1;
+  --z-behind: 0;
+  --z-above: 1;
+  --z-modals: 10;
+  --z-burger: 20;
+  --z-cover: 30;
+}

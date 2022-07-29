@@ -10,6 +10,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useCallback, useEffect } from 'react'
 
 // Components
+import ProjectDetail from 'partials/ProjectDetail'
+import { Route, Routes } from 'react-router-dom'
+import Modal from 'components/Modal'
 import ExperienceComponent from 'components/Experience'
 import LoadProgress from 'components/LoadProgress'
 import Hero from 'partials/Hero'
@@ -37,10 +40,7 @@ function App() {
     })
 
     // Save CSS Variable --app-height
-    document.documentElement.style.setProperty(
-      '--app-height',
-      `${window.innerHeight}px`
-    )
+    document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`)
   }, [dispatch.sizes])
 
   const updatePointerPosition = useCallback(
@@ -66,13 +66,7 @@ function App() {
       window.removeEventListener('touchmove', updatePointerPosition)
       window.removeEventListener('mousemove', updatePointerPosition)
     }
-  }, [
-    dispatch.sizes,
-    sizes.height,
-    sizes.width,
-    updateAppHeight,
-    updatePointerPosition
-  ])
+  }, [dispatch.sizes, sizes.height, sizes.width, updateAppHeight, updatePointerPosition])
 
   useEffect(() => {
     if (scroll) {
@@ -86,6 +80,17 @@ function App() {
     <>
       <ExperienceComponent />
       <Hero />
+
+      <Modal>
+        {(displayLocation) => {
+          return (
+            <Routes location={displayLocation}>
+              <Route path=":project" element={<ProjectDetail />} />
+            </Routes>
+          )
+        }}
+      </Modal>
+
       <Portfolio />
       <About />
       <Contact />

@@ -66,12 +66,7 @@ export default class Renderer {
   setOrbitControls(resources: Resources) {
     if (this.debugObject.orbitControls && resources.items.manModel?.cameras) {
       const { width, height } = this.sizes
-      this.controlsCamera = new THREE.PerspectiveCamera(
-        45,
-        width / height,
-        0.01,
-        1000
-      )
+      this.controlsCamera = new THREE.PerspectiveCamera(45, width / height, 0.01, 1000)
       this.controls = new OrbitControls(this.controlsCamera, this.canvas)
       this.controlsCamera.position.set(0, 2.5, 3)
       this.controls.target.set(0, 2.5, 0)

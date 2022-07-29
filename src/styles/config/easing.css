@@ -1,0 +1,13 @@
+:root {
+  /* EASING */
+  --expo-ease-in: cubic-bezier(0.92, 0.02, 0.83, 0.21);
+  --expo-ease-out: cubic-bezier(0.15, 0.94, 0.21, 0.98);
+  --expo-ease-in-out: cubic-bezier(0.86, 0.01, 0.14, 1);
+  --power3-ease-in: cubic-bezier(0.74, 0, 0.77, 0.25);
+  --power3-ease-out: cubic-bezier(0.23, 1, 0.38, 1);
+  --power3-ease-in-out: cubic-bezier(0.69, 0, 0.27, 1);
+  --cubic-ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+  /* Used in BIP Website */
+  --ease-smooth: cubic-bezier(0, 0.72, 0.26, 0.99);
+}

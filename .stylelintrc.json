@@ -1,0 +1,17 @@
+{
+  "plugins": ["stylelint-order"],
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-prettier",
+    "stylelint-config-idiomatic-order"
+  ],
+  "rules": {
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": ["/^mixin/"]
+      }
+    ],
+    "selector-class-pattern": null
+  }
+}

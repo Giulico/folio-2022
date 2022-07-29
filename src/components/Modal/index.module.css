@@ -1,0 +1,139 @@
+ .root {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(0);
+  pointer-events: none;
+
+  &::after,
+  &::before {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    background-color: var(--color-white);
+    content: '';
+    transition: transform 1s var(--expo-ease-out) 1s;
+  }
+
+  &::before {
+    top: -50%;
+  }
+
+  &::after {
+    top: 100%;
+  }
+
+  &.open {
+    &::after,
+    &::before {
+      transition: transform 1s var(--expo-ease-in) 0s;
+    }
+
+    &::after {
+      transform: translate3d(0, -100%, 0);
+    }
+
+    &::before {
+      transform: translate3d(0, 100%, 0);
+    }
+  }
+ }
+
+.open {
+  animation: 1s open forwards;
+  pointer-events: auto;
+}
+
+.close {
+  animation: 1s close forwards;
+}
+
+.hero {
+  position: relative;
+  z-index: var(--z-above);
+  width: calc(100% - var(--spc-20));
+  height: 50vh;
+  margin: var(--spc-10) auto;
+  transition: visibility 0s var(--expo-ease-out) 1s;
+  visibility: hidden;
+  
+  .open & {
+    visibility: visible;
+  }
+  
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-white);
+    content: '';
+    transform-origin: bottom;
+    transition: transform 1s var(--expo-ease-in) 0s;
+
+    .open & {
+      transform: scale(1, 0);
+      transform-origin: top;
+      transition: transform 1s var(--expo-ease-out) 1s;
+    }
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  margin-left: var(--spc-4);
+  background-color: transparent;
+  cursor: pointer;  
+
+  img {
+    margin-right: var(--spc-2)
+  }
+}
+
+.contentContainer {
+  position: relative;
+  z-index: var(--z-above);
+  min-height: 100vh;
+  padding-top: var(--spc-6);
+  margin-top: var(--margin-top);
+  background-color: var(--color-white);
+  visibility: hidden;
+
+  .open & {
+    transition: visibility 0s 1s;
+    visibility: visible;
+  }
+}
+
+@keyframes open {
+  from {
+    backdrop-filter: blur(0);
+  }
+
+  to {
+    backdrop-filter: blur(50px);
+  }
+}
+
+@keyframes close {
+  from {
+    backdrop-filter: blur(50px);
+  }
+
+  to {
+    backdrop-filter: blur(0);
+  }
+}

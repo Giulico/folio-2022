@@ -4,9 +4,11 @@ import type { RootModel } from '../models'
 const initialState: {
   open: boolean
   refs: HTMLDivElement[]
+  index: number
 } = {
   open: false,
-  refs: []
+  refs: [],
+  index: -1
 }
 
 export const menu = createModel<RootModel>()({
@@ -22,6 +24,12 @@ export const menu = createModel<RootModel>()({
       return {
         ...state,
         refs: [...state.refs, payload]
+      }
+    },
+    setIndex(state, payload: number) {
+      return {
+        ...state,
+        index: payload
       }
     }
   }

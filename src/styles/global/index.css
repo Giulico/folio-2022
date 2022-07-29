@@ -22,16 +22,17 @@ code {
 }
 
 * {
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
 .webgl {
   position: fixed;
+  z-index: var(--z-behind);
+
+  /* z-index: 10; */
   top: 0;
   left: 0;
+  background: radial-gradient(#000, #111);
   outline: none;
-  z-index: -1;
-  /* z-index: 10; */
-  background: radial-gradient(#000000, #111111);
 }

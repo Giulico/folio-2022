@@ -8,6 +8,7 @@
 
 .head {
   position: fixed;
+  z-index: var(--z-burger);
 
   @media (--md-l) {
     display: flex;
@@ -104,7 +105,7 @@
   transform-origin: 50% 100%;
 
   &:before {
-    content: "";
+    content: '';
     width: 1px;
     height: 50%;
     top: 0;
@@ -123,6 +124,8 @@
 
 .scramble {
   @mixin body-1;
+
+  margin-top: var(--spc-15);
 
   text-transform: uppercase;
   line-height: 1;

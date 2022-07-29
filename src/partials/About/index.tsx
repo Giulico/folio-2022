@@ -7,7 +7,7 @@ import MenuItem from 'components/MenuItem'
 function About() {
   return (
     <Section name="about" className={style.root}>
-      <MenuItem name="About" />
+      <MenuItem index={2} name="About" />
     </Section>
   )
 }

@@ -1,8 +1,17 @@
 .root {
   position: relative;
   z-index: 1;
-  height: 100vh;
-  color: var(--color-white);
+  height: 300vh;
   margin-top: calc(var(--app-height) / 2);
+  color: var(--color-white);
   pointer-events: none;
+}
+
+.titleContainer {
+  position: sticky;
+  top: 0;
+}
+
+.video {
+  display: none;
 }

@@ -131,14 +131,10 @@ export default class Man {
       // metalnessMap: this.resources.items.manMetallic,
     })
 
-    const manArmature = this.model.children.find(
-      (child) => child.userData.name === 'Armature'
-    )
+    const manArmature = this.model.children.find((child) => child.userData.name === 'Armature')
     if (!manArmature) throw new Error("Man's Armature mesh not found")
 
-    this.mesh = manArmature.children.find(
-      (child) => child instanceof THREE.Mesh
-    ) as THREE.Mesh
+    this.mesh = manArmature.children.find((child) => child instanceof THREE.Mesh) as THREE.Mesh
 
     if (this.debug.active && this.debugFolder) {
       this.debugFolder
@@ -146,17 +142,13 @@ export default class Man {
         .min(0.01)
         .max(5)
         .step(0.01)
-        .onChange(
-          (v: DebugObject['roughness']) => (this.material.roughness = v)
-        )
+        .onChange((v: DebugObject['roughness']) => (this.material.roughness = v))
       this.debugFolder
         .add(this.debugObject, 'metalness')
         .min(0.01)
         .max(1)
         .step(0.01)
-        .onChange(
-          (v: DebugObject['metalness']) => (this.material.metalness = v)
-        )
+        .onChange((v: DebugObject['metalness']) => (this.material.metalness = v))
     }
 
     this.mesh.material = this.material
@@ -244,10 +236,7 @@ export default class Man {
       }
     }
 
-    this.animation.mixer.addEventListener(
-      'finished',
-      this.handleAnimationFinish.bind(this)
-    )
+    this.animation.mixer.addEventListener('finished', this.handleAnimationFinish.bind(this))
 
     // Start Intro animation
     this.action('play', this.animation.actions.intro.enter.a)
@@ -255,9 +244,7 @@ export default class Man {
     // Debug
     if (this.debug.active && this.debugFolder) {
       const play = (name: Sections, type: 'enter' | 'loop' = 'enter') => {
-        const animation = this.animation.actions[name]?.[type]?.a as
-          | AnimationAction
-          | undefined
+        const animation = this.animation.actions[name]?.[type]?.a as AnimationAction | undefined
         if (animation) {
           this.action('play', animation)
         }
@@ -313,9 +300,7 @@ export default class Man {
     if (!this.animation.actions)
       throw new Error('No this.animation.actions found _getAnimationName()')
 
-    for (const [name, animationGroup] of Object.entries(
-      this.animation.actions
-    )) {
+    for (const [name, animationGroup] of Object.entries(this.animation.actions)) {
       if (name === 'current') continue
       // name: intro
       // animationGroup: { enter: {...}, loop: {...} }
@@ -336,9 +321,7 @@ export default class Man {
     if (!this.animation.actions)
       throw new Error('No this.animation.actions found _getAnimationType()')
 
-    for (const [name, animationGroup] of Object.entries(
-      this.animation.actions
-    )) {
+    for (const [name, animationGroup] of Object.entries(this.animation.actions)) {
       if (name === 'current') continue
       // name: intro
       // animationGroup: { enter: {...}, loop: {...} }
@@ -356,21 +339,13 @@ export default class Man {
     throw new Error(`_getAnimationType cannot find type of ${clipName} clip`)
   }
 
-  action(
-    type = 'fade',
-    animation: AnimationAction,
-    prevAnimation?: AnimationAction
-  ) {
+  action(type = 'fade', animation: AnimationAction, prevAnimation?: AnimationAction) {
     const thisClipName = animation.getClip().name
     const thisAnimationName = this._getAnimationName(thisClipName) as Sections
-    const thisAnimationType = this._getAnimationType(thisClipName) as
-      | 'enter'
-      | 'loop'
+    const thisAnimationType = this._getAnimationType(thisClipName) as 'enter' | 'loop'
 
     if (!thisAnimationName || !thisAnimationType) {
-      throw new Error(
-        'action() is not able to identify the animation name or type'
-      )
+      throw new Error('action() is not able to identify the animation name or type')
     }
 
     animation.reset()
@@ -386,9 +361,7 @@ export default class Man {
       animation.play()
     } else if (type === 'fade' && prevAnimation) {
       if (this.showLogs)
-        console.log(
-          `${thisClipName} crossFadeFrom(${prevAnimation.getClip().name})`
-        )
+        console.log(`${thisClipName} crossFadeFrom(${prevAnimation.getClip().name})`)
 
       animation.crossFadeFrom(prevAnimation, 1, true).play()
     }
@@ -396,16 +369,14 @@ export default class Man {
     // Stop finished animation
     for (const finishedAnimation of this.finishedAnimations) {
       requestAnimationFrame(() => {
-        if (this.showLogs)
-          console.log(`${finishedAnimation.getClip().name} stop()`)
+        if (this.showLogs) console.log(`${finishedAnimation.getClip().name} stop()`)
         finishedAnimation.stop()
       })
     }
     this.finishedAnimations = []
 
     // Set Current Animation
-    if (!this.animation?.actions)
-      throw new Error('No this.animation.actions found in action()')
+    if (!this.animation?.actions) throw new Error('No this.animation.actions found in action()')
 
     this.animation.actions.current = animation
   }

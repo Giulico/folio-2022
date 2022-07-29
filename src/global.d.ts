@@ -13,6 +13,8 @@ declare global {
     cursor: Cursor
     experience: Experience
     store: any
+    comingLocation: any
+    currentLocation: any
   }
 
   interface BloomPassExtended extends BloomPass {

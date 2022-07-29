@@ -7,23 +7,19 @@ import style from './index.module.css'
 // Hooks
 import { useRef } from 'react'
 import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
 
 // Components
 import Section from 'components/Section'
 import MenuItem from 'components/MenuItem'
-import { useEffect } from 'react'
 
 function Portfolio() {
   const isActive = useRef<boolean>(false)
   const elementYPosition = useRef<number>()
 
-  const { current: currentSection } = useSelector(
-    (state: RootState) => state.section
-  )
+  const { current: currentSection } = useSelector((state: RootState) => state.section)
 
-  const saveElementPosition = (
-    boundary: RootState['section']['boundaries'][0]
-  ) => {
+  const saveElementPosition = (boundary: RootState['section']['boundaries'][0]) => {
     const world = window.experience.world
     elementYPosition.current = boundary.start
 
@@ -55,12 +51,13 @@ function Portfolio() {
   }, [currentSection])
 
   return (
-    <Section
-      name="portfolio"
-      className={style.root}
-      onEnter={saveElementPosition}
-    >
-      <MenuItem name="Portfolio" />
+    <Section name="portfolio" className={style.root} onEnter={saveElementPosition}>
+      <div className={style.titleContainer}>
+        <MenuItem index={1} name="Portfolio" />
+      </div>
+      <video id="aqReel" autoPlay muted loop playsInline className={style.video}>
+        <source src="/textures/projects/aq/reel-aq.mp4" type="video/mp4" />
+      </video>
     </Section>
   )
 }

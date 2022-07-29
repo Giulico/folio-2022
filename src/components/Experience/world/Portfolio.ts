@@ -1,19 +1,19 @@
-// Utils
-import * as THREE from 'three'
-import { gsap } from 'gsap'
-import { cursorPosition } from 'utils/events'
-import {
-  ClickableMesh,
-  StateMaterialSet,
-  StateMaterial,
-  MouseEventManager,
-  ThreeMouseEvent,
-  ThreeMouseEventType
-} from '@masatomakino/threejs-interactive-object'
-
 // Types
 import type { GUI } from 'lil-gui'
 import type { LoadResult } from '../utils/Resources'
+
+// Utils
+import * as THREE from 'three'
+import { gsap } from 'gsap'
+import { disablePageScroll, enablePageScroll } from 'scroll-lock'
+import { rootNavigate } from 'components/CustomRouter'
+import {
+  ClickableMesh,
+  StateMaterialSet,
+  MouseEventManager,
+  ThreeMouseEventType
+} from '@masatomakino/threejs-interactive-object'
+
 // Components
 import Experience from '../Experience'
 
@@ -21,8 +21,12 @@ type DebugObject = {
   offsetX: number
   offsetY: number
   offsetZ: number
-  offsetZOut: number
   pageHeightFactor: number
+}
+
+type Project = {
+  name: string
+  video: HTMLVideoElement
 }
 
 export default class Portfolio {
@@ -39,14 +43,15 @@ export default class Portfolio {
   group!: THREE.Group
   items!: THREE.Mesh[]
   debugObject: DebugObject
-  material!: THREE.MeshStandardMaterial
-  camera: THREE.PerspectiveCamera | undefined
+  material!: StateMaterialSet
+  camera: THREE.PerspectiveCamera
   isVisible = false
   isDragging = false
   initialDragPosition = 0
   initialScrollPosition = 0
   manager: MouseEventManager | undefined
   itemsXPosition: number[] = []
+  projects: Project[]
 
   constructor() {
     this.experience = new Experience()
@@ -59,14 +64,29 @@ export default class Portfolio {
     this.time = this.experience.time
     this.renderer = this.experience.renderer.instance
 
-    this.camera = this.resource.cameras?.[0]
+    this.camera = this.experience.world.cameraOnPath.camera
     if (this.camera && this.experience.renderer.canvas) {
-      this.manager = new MouseEventManager(
-        this.scene,
-        this.camera,
-        this.experience.renderer.canvas
-      )
+      this.manager = new MouseEventManager(this.scene, this.camera, this.experience.renderer.canvas)
     }
+
+    this.projects = [
+      {
+        name: 'sketchin',
+        video: document.getElementById('aqReel') as HTMLVideoElement
+      },
+      {
+        name: 'aquest',
+        video: document.getElementById('aqReel') as HTMLVideoElement
+      },
+      {
+        name: 'fastweb',
+        video: document.getElementById('aqReel') as HTMLVideoElement
+      },
+      {
+        name: 'nexi',
+        video: document.getElementById('aqReel') as HTMLVideoElement
+      }
+    ]
 
     this.debug = this.experience.debug
 
@@ -76,57 +96,63 @@ export default class Portfolio {
 
     this.debugObject = {
       offsetX: 0.3,
-      offsetY: 2.75,
-      offsetZ: 4,
-      offsetZOut: 0.3,
+      offsetY: 2.0,
+      offsetZ: 0.8,
       pageHeightFactor: 2.1
     }
 
     this.setItems()
-    this.setEvents()
   }
 
   setItems() {
-    const ITEMS = 5
     this.group = new THREE.Group()
     this.group.name = 'portfolio'
 
-    // Material
-    this.material = new THREE.MeshStandardMaterial({ color: 0x00ff00 })
+    const videoAQ = document.getElementById('aqReel') as HTMLVideoElement
+    videoAQ.play()
+
     this.items = []
 
-    const { offsetX, offsetY, offsetZOut } = this.debugObject
+    const { offsetX, offsetY, offsetZ } = this.debugObject
 
-    // Geometry
-    for (let i = 0; i < ITEMS; i++) {
+    for (let i = 0; i < this.projects.length; i++) {
+      // Geometry
       const geometry = new THREE.PlaneGeometry(1, 0.7, 24, 24)
+
+      // Play video
+      const { video, name } = this.projects[i]
+      video.play()
+
+      // Material
+      const material = new StateMaterialSet({
+        normal: new THREE.MeshBasicMaterial({
+          color: 0x333333,
+          map: new THREE.VideoTexture(video)
+        })
+      })
 
       const clickablMesh = new ClickableMesh({
         geo: geometry,
-        material: new StateMaterialSet({
-          normal: this.material
-        })
+        material
       })
-      clickablMesh.name = `project.${i}`
-      clickablMesh.position.set(i * 1.3 + offsetX, offsetY, offsetZOut)
+      clickablMesh.name = name
+      clickablMesh.position.set(i * 1.3 + offsetX, offsetY, offsetZ)
 
       clickablMesh.addEventListener(ThreeMouseEventType.CLICK, (e) => {
-        console.log('CLICKED!', e)
+        rootNavigate(e.model.view.name)
       })
 
       this.group.add(clickablMesh)
       this.items[i] = clickablMesh
     }
 
+    this.group.position.x = -3
+    this.group.rotation.z = Math.PI / 15
     this.scene.add(this.group)
 
     // Debug
     if (this.debug.active && this.debugFolder) {
-      this.debugFolder
-        .add(this.debugObject, 'offsetX')
-        .min(-10)
-        .max(3)
-        .step(0.1)
+      this.debugFolder.add(this.debugObject, 'offsetX').min(-10).max(3).step(0.1)
       // .onChange((v: number) => {
       //   for (let i = 0; i < this.items.length; i++) {
       //     this.items[i].position.x = i * 2 + v;
@@ -152,52 +178,8 @@ export default class Portfolio {
             this.items[i].position.z = v
           }
         })
-      this.debugFolder
-        .add(this.debugObject, 'pageHeightFactor')
-        .min(0)
-        .max(5)
-        .step(0.1)
+      this.debugFolder.add(this.debugObject, 'pageHeightFactor').min(0).max(5).step(0.1)
     }
-  }
-
-  setEvents() {
-    if (!this.experience.renderer.canvas) return
-
-    const onStartDragging = (e: MouseEvent | TouchEvent) => {
-      const { x } = cursorPosition(e)
-
-      // Normaliza pointer position between -0.5 and 0.5
-      this.initialDragPosition = x / this.sizes.width - 0.5
-
-      // Start moving
-      this.isDragging = true
-
-      // Save the initial (of current drag) positions
-      for (let i = 0; i < this.items.length; i++) {
-        this.itemsXPosition[i] = this.items[i].position.x
-      }
-    }
-
-    const onFinishDragging = () => {
-      this.isDragging = false
-    }
-
-    this.experience.renderer.canvas.addEventListener(
-      'mousedown',
-      onStartDragging
-    )
-    this.experience.renderer.canvas.addEventListener(
-      'touchstart',
-      onStartDragging
-    )
-    this.experience.renderer.canvas.addEventListener(
-      'mouseup',
-      onFinishDragging
-    )
-    this.experience.renderer.canvas.addEventListener(
-      'touchend',
-      onFinishDragging
-    )
   }
 
   enterAnimation(): Promise<void[]> {
@@ -206,17 +188,8 @@ export default class Portfolio {
       item.visible = true
       promises.push(
         new Promise<void>((resolve) => {
-          gsap.fromTo(
-            item.position,
-            {
-              z: this.debugObject.offsetZOut
-            },
-            {
-              z: this.debugObject.offsetZ,
-              duration: 0.3,
-              onComplete: resolve
-            }
-          )
+          console.log('Portfolio enterAnimation')
+          resolve()
         })
       )
     }
@@ -224,60 +197,106 @@ export default class Portfolio {
   }
 
   leaveAnimation() {
-    const { offsetX, offsetY, offsetZOut } = this.debugObject
+    console.log('leave animation')
+    // const { offsetX, offsetY, offsetZ } = this.debugObject
     for (let i = 0; i < this.items.length; i++) {
       const item = this.items[i]
-      item.position.set(i * 1.3 + offsetX, offsetY, offsetZOut)
+      //   item.position.set(i * 1.3 + offsetX, offsetY, offsetZ)
       item.visible = false
     }
   }
 
+  openProjectAnimation() {
+    const location = window.comingLocation
+    const projectName = location.pathname.split('/')[1]
+
+    const item = this.items.find((item) => item.name === projectName)
+    if (!item) throw new Error('Project not found')
+
+    // Disable scroll
+    disablePageScroll()
+
+    // move object to scene without changing it's world orientation
+    // restored in closeProjectAnimation
+    this.scene.attach(item)
+
+    this.camera.updateMatrixWorld()
+
+    const distanceFromCamera = 0.8
+    const target = new THREE.Vector3(0, 0, -distanceFromCamera)
+    target.applyMatrix4(this.camera.matrixWorld)
+
+    // Position
+    gsap.to(item.position, {
+      x: target.x,
+      y: target.y,
+      z: target.z,
+      duration: 0.5
+    })
+
+    // Transition
+    gsap.to(item.rotation, {
+      x: this.camera.rotation.x,
+      y: this.camera.rotation.y,
+      z: this.camera.rotation.z,
+      duration: 0.5
+    })
+  }
+
+  closeProjectAnimation() {
+    const name = window.currentLocation.pathname.split('/')[1]
+
+    const index = this.items.findIndex((item) => item.name === name)
+    const item = this.items[index]
+    if (!item) throw new Error('Project not found')
+
+    // move object to parent without changing it's world orientation
+    this.group.attach(item)
+
+    this.camera.updateMatrixWorld()
+
+    // Position
+    const { offsetX, offsetY, offsetZ } = this.debugObject
+    gsap.to(item.position, {
+      x: index * 1.3 + offsetX,
+      y: offsetY,
+      z: offsetZ,
+      duration: 0.5
+    })
+
+    // Transition
+    gsap.to(item.rotation, {
+      x: 0,
+      y: 0,
+      z: 0,
+      duration: 0.5,
+      onComplete: () => {
+        // Enable scroll
+        enablePageScroll()
+      }
+    })
+  }
+
   update() {
-    if (this.isVisible && this.world.man) {
-      const camera = this.world.man.camera
-      const cameraZ = camera.position.z + this.debugObject.offsetZ
-      const cameraY = camera.position.y
-
-      // Y
-      // start 3 end 6
-      const deltaYPx =
-        window.scrollY + this.sizes.height - this.initialScrollPosition
-      const deltaY =
-        (this.debugObject.pageHeightFactor / this.sizes.height) * deltaYPx
-
-      let delay = 0
-      for (const item of this.items) {
-        gsap.to(item.position, {
-          z: cameraZ,
-          y: this.debugObject.offsetY + deltaY,
-          delay,
-          duration: 0.3
-        })
-        delay += 0.01
-      }
-    }
-
-    if (this.isVisible && this.world.man && this.isDragging) {
-      // Find the amount of movement done
-      // when Click it should be 0
-      const deltaX = (this.initialDragPosition - window.cursor.x) * -3
-
-      for (let i = 0; i < this.items.length; i++) {
-        const item = this.items[i]
-        let x = this.itemsXPosition[i] + deltaX
-
-        // Set limits
-        const marginLeft = 0.4
-        const leftLimit = i * 1.3 - 1.3 * (this.items.length - 1) + marginLeft
-        const rightLimit = i * 1.3 + marginLeft
-        x = x < leftLimit ? leftLimit : x
-        x = x > rightLimit ? rightLimit : x
-
-        gsap.to(item.position, {
-          x,
-          duration: 0.3
-        })
-      }
-    }
+    // if (this.isVisible) {
+    //   console.log('Portfolio cards are visible')
+    //   if (this.enteringItem) {
+    //     console.log('zooming')
+    //     this.camera.updateMatrixWorld()
+    //     const distanceFromCamera = 1 // 3 units
+    //     const target = new THREE.Vector3(0, 0, -distanceFromCamera)
+    //     target.applyMatrix4(this.camera.matrixWorld)
+    //     const moveSpeed = 0.001 // units per second
+    //     const distance = this.enteringItem.position.distanceTo(target)
+    //     if (distance > 0) {
+    //       const amount = Math.min(moveSpeed * this.time.delta, distance) / distance
+    //       console.log(target)
+    //       this.enteringItem.position.lerp(target, amount)
+    //     } else {
+    //       this.group.attach(this.enteringItem)
+    //       this.enteringItem = null
+    //     }
+    //   }
+    // }
   }
 }

@@ -10,7 +10,7 @@ function useScrollOffset({ offset = 100 }) {
     if (window.scrollY < offset && gone) {
       setGone(false)
     }
-  }, [gone, setGone])
+  }, [gone, offset])
 
   useEffect(() => {
     window.addEventListener('scroll', scrollHandler, false)
@@ -18,7 +18,7 @@ function useScrollOffset({ offset = 100 }) {
     return () => {
       window.removeEventListener('scroll', scrollHandler)
     }
-  }, [gone])
+  }, [gone, scrollHandler])
 
   return {
     gone

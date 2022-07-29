@@ -5,91 +5,65 @@ import type { RootState } from 'store'
 import style from './index.module.css'
 
 // Utils
-import { gsap } from 'gsap'
+import cn from 'classnames'
+import breakpoints from 'utils/breakpoints'
 
 // Hooks
-import React, { useMemo, useCallback } from 'react'
+import useMainMenu from 'hooks/useMainMenu'
+import React, { useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useMediaQuery } from 'react-responsive'
 
 const MenuTrigger = () => {
   const dispatch = useDispatch()
-  const { menu, sizes } = useSelector((state: RootState) => ({
+
+  const { menu } = useSelector((state: RootState) => ({
     menu: state.menu,
     sizes: state.sizes
   }))
 
-  const minWidth = useMemo(
-    () =>
-      parseInt(
-        getComputedStyle(document.documentElement).getPropertyValue('--lg'),
-        10
-      ),
-    []
+  // Main Menu Effects
+  useMainMenu()
+
+  const isDesktop = useMediaQuery({ minWidth: breakpoints.lg })
+
+  const closeMenu = useCallback(
+    (event: MouseEvent | TouchEvent) => {
+      window.removeEventListener('mouseup', closeMenu)
+      window.removeEventListener('touchend', closeMenu)
+
+      const eventType = isDesktop ? 'mouseup' : 'touchend'
+      if (event.type !== eventType) return
+
+      dispatch.menu.open(false)
+    },
+    [dispatch.menu, isDesktop]
   )
-  const isDesktop = useMediaQuery({ minWidth })
 
   const openMenu = useCallback(
-    (
-      event:
-        | React.MouseEvent<Element, MouseEvent>
-        | React.TouchEvent<HTMLButtonElement>
-    ) => {
+    (event: React.MouseEvent<Element, MouseEvent> | React.TouchEvent<HTMLButtonElement>) => {
       const eventType = isDesktop ? 'mousedown' : 'touchstart'
       if (event.type !== eventType) return
 
       dispatch.menu.open(true)
 
-      const bounding = menu.refs.map((e) => e.getBoundingClientRect().top)
-
-      const snap = sizes.height / menu.refs.length
-      for (let i = 0; i < menu.refs.length; i++) {
-        const menuItem = menu.refs[i]
-        gsap.to(menuItem, {
-          y: `${snap * i - bounding[i]}px`,
-          duration: 1,
-          ease: 'power3.out'
-        })
-      }
+      window.addEventListener('mouseup', closeMenu)
+      window.addEventListener('touchend', closeMenu)
     },
-    [menu, sizes]
+    [closeMenu, dispatch.menu, isDesktop]
   )
 
-  const closeMenu = useCallback(
-    (
-      event:
-        | React.MouseEvent<Element, MouseEvent>
-        | React.TouchEvent<HTMLButtonElement>
-    ) => {
-      const eventType = isDesktop ? 'mouseup' : 'touchend'
-      if (event.type !== eventType) return
-
-      dispatch.menu.open(false)
-
-      for (let i = 0; i < menu.refs.length; i++) {
-        const menuItem = menu.refs[i]
-        gsap.to(menuItem, {
-          y: `0px`,
-          onComplete: () => {
-            gsap.set(menuItem, { clearProps: 'all' })
-          },
-          duration: 1,
-          ease: 'power3.out'
-        })
-      }
-    },
-    [menu]
-  )
+  const classes = cn(style.root, {
+    [style.open]: menu.open
+  })
 
   return (
-    <button
-      className={style.root}
-      onMouseDown={openMenu}
-      onMouseUp={closeMenu}
-      onTouchStart={openMenu}
-      onTouchEnd={closeMenu}
-    >
-      Menu
+    <button className={classes} onMouseDown={openMenu} onTouchStart={openMenu}>
+      {menu.open ? 'Close' : 'Menu'}
+
+      <div className={style.start}></div>
+      <div className={style.line} />
+      <div className={style.end}></div>
     </button>
   )
 }

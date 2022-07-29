@@ -10,11 +10,11 @@ export default class World {
   experience: Experience
   scene: Experience['scene']
   resources: Experience['resources']
+  cameraOnPath: CameraOnPath
   man: Man | undefined
   smoke: Smoke | undefined
   environment: Environment | undefined
   portfolio: Portfolio | undefined
-  cameraOnPath: CameraOnPath | undefined
   loader: Loader
 
   constructor() {
@@ -31,7 +31,7 @@ export default class World {
       this.environment = new Environment()
       this.man = new Man()
       // this.smoke = new Smoke();
-      // this.portfolio = new Portfolio();
+      this.portfolio = new Portfolio()
     })
   }
 

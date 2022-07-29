@@ -1,5 +1,7 @@
 /* VARIABLES */
-@import "./colors.css";
-@import "./typography.css";
-@import "./spacing.css";
-@import "./custom-media.css";
+@import './colors.css';
+@import './custom-media.css';
+@import './depth.css';
+@import './easing.css';
+@import './spacing.css';
+@import './typography.css';

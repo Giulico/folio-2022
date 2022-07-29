@@ -1,50 +1,73 @@
 :root {
   /* unit: px value */
   --spc-unit: 8px;
+
   /* Equivalent to 0px  */
   --spc-0: 0;
+
   /* Equivalent to 4px  */
   --spc-_5: calc(var(--spc-unit) * 0.5);
+
   /* Equivalent to 8px  */
   --spc-1: var(--spc-unit);
+
   /* Equivalent to 12px  */
   --spc-1_5: calc(var(--spc-unit) * 1.5);
+
   /* Equivalent to 16px  */
   --spc-2: calc(var(--spc-unit) * 2);
+
   /* Equivalent to 20px  */
   --spc-2_5: calc(var(--spc-unit) * 2.5);
+
   /* Equivalent to 24px  */
   --spc-3: calc(var(--spc-unit) * 3);
+
   /* Equivalent to 32px  */
   --spc-4: calc(var(--spc-unit) * 4);
+
   /* Equivalent to 40px  */
   --spc-5: calc(var(--spc-unit) * 5);
+
   /* Equivalent to 40px  */
   --spc-5_5: calc(var(--spc-unit) * 5.5);
+
   /* Equivalent to 48px  */
   --spc-6: calc(var(--spc-unit) * 6);
+
   /* Equivalent to 56px  */
   --spc-7: calc(var(--spc-unit) * 7);
+
   /* Equivalent to 64px  */
   --spc-8: calc(var(--spc-unit) * 8);
+
   /* Equivalent to 72px  */
   --spc-9: calc(var(--spc-unit) * 9);
+
   /* Equivalent to 80px  */
   --spc-10: calc(var(--spc-unit) * 10);
+
   /* Equivalent to 96px  */
   --spc-12: calc(var(--spc-unit) * 12);
+
   /* Equivalent to 112px  */
   --spc-14: calc(var(--spc-unit) * 14);
+
   /* Equivalent to 120px  */
   --spc-15: calc(var(--spc-unit) * 15);
+
   /* Equivalent to 128px  */
   --spc-16: calc(var(--spc-unit) * 16);
+
   /* Equivalent to 136px  */
   --spc-17: calc(var(--spc-unit) * 17);
+
   /* Equivalent to 160px  */
   --spc-20: calc(var(--spc-unit) * 20);
+
   /* Equivalent to 200px  */
   --spc-25: calc(var(--spc-unit) * 25);
+
   /* Equivalent to 240px  */
   --spc-30: calc(var(--spc-unit) * 30);
 

@@ -3,6 +3,7 @@ import Sizes from './utils/Sizes'
 import Time from './utils/Time'
 import Renderer from './Renderer'
 import World from './world/World'
+import StoreWatcher from './utils/StoreWatcher'
 import Resources from './utils/Resources'
 import sources from './sources'
 
@@ -34,6 +35,8 @@ export default class Experience {
 
     // Global access
     window.experience = this
+
+    new StoreWatcher()
 
     this.canvas = config.targetElement
 

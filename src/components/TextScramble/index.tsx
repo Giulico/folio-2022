@@ -1,10 +1,5 @@
-import type { ReactElement } from 'react'
 import { useState, useEffect, useRef, useCallback } from 'react'
-import {
-  setInterval,
-  setTimeout,
-  clearInterval
-} from 'requestanimationframe-timer'
+import { setInterval, setTimeout, clearInterval } from 'requestanimationframe-timer'
 
 import { randomItem, nextItem } from 'utils/arrays'
 
@@ -51,8 +46,7 @@ function TextScramble({
     .fill(0)
     .map(() => randomItem(symbols)) as string[]
 
-  const [displayedText, setDisplayedText] =
-    useState<(string | JSX.Element)[]>(initSymbols)
+  const [displayedText, setDisplayedText] = useState<(string | JSX.Element)[]>(initSymbols)
 
   const leftIndexes: number[][] = []
 
@@ -76,24 +70,22 @@ function TextScramble({
 
         for (let index = 0; index < currentText.length; index++) {
           // Handle chars
-          innerChars[index] = currentText[index]
-            .split('')
-            .map((char: string, i: number) => {
-              if (!leftIndexes[index].includes(i)) {
-                return char
-              }
-              return (
-                <span key={i} className={dudClassName}>
-                  {randomItem(symbols)}
-                </span>
-              )
-            })
+          innerChars[index] = currentText[index].split('').map((char: string, i: number) => {
+            if (!leftIndexes[index].includes(i)) {
+              return char
+            }
+            return (
+              <span key={i} className={dudClassName}>
+                {randomItem(symbols)}
+              </span>
+            )
+          })
 
           // Wrap the line
           const line: JSX.Element = (
-            <p key={index} className={lineClassName}>
+            <div key={index} className={lineClassName}>
               {innerChars[index]}
-            </p>
+            </div>
           )
 
           updatedText[index] = line
@@ -102,7 +94,7 @@ function TextScramble({
         setDisplayedText(updatedText)
       }
     }, letterSpeed)
-  }, [paused, currentText, letterSpeed, leftIndexes])
+  }, [letterSpeed, paused, currentText, lineClassName, leftIndexes, dudClassName])
 
   const bakeText = useCallback(() => {
     setDefaultLeftIndexes()
@@ -110,16 +102,11 @@ function TextScramble({
 
     bakeTextInterval.current = setInterval(() => {
       if (!paused) {
-        const leftIndexesLength = leftIndexes.reduce(
-          (prev, curr) => prev + curr.length,
-          0
-        )
+        const leftIndexesLength = leftIndexes.reduce((prev, curr) => prev + curr.length, 0)
 
         if (leftIndexesLength === 0) {
-          bakeLetterInterval.current !== null &&
-            clearInterval(bakeLetterInterval.current)
-          bakeTextInterval.current !== null &&
-            clearInterval(bakeTextInterval.current)
+          bakeLetterInterval.current !== null && clearInterval(bakeLetterInterval.current)
+          bakeTextInterval.current !== null && clearInterval(bakeTextInterval.current)
 
           setTimeout(() => {
             setCurrentText(nextItem(texts, currentText))
@@ -136,9 +123,7 @@ function TextScramble({
           }
         } else {
           // Sequential mode
-          const currentIndex = leftIndexes.findIndex(
-            (indexes) => indexes.length > 0
-          )
+          const currentIndex = leftIndexes.findIndex((indexes) => indexes.length > 0)
           if (currentIndex > -1) {
             leftIndexes[currentIndex].shift()
           }

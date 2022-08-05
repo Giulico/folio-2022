@@ -1,16 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@300;500;600;700&display=swap");
+@import "https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@300;500;600;700&display=swap";
 
 :root {
-  --font-family-base: "Saira Semi Condensed", -apple-system, BlinkMacSystemFont,
+  --font-family-base: "Saira Semi Condensed", -apple-system, blinkmacsystemfont,
     "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
-  --font-family-heading: "NOVU M", -apple-system, BlinkMacSystemFont, "Segoe UI",
+  --font-family-heading: "NOVU M", -apple-system, blinkmacsystemfont, "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
     "Helveootica Neue", sans-serif;
 
   /* SIZES */
   --fs-display-1: 60px;
   --fs-display-2: 36px;
+  --fs-highlight: 28px;
   --fs-body-1: 21px;
   --fs-body-2: 18px;
   --fs-label: 16px;
@@ -26,11 +27,19 @@
 /* AKA 768px */
 @media (--md-p) {
   :root {
-    --fs-display-1: 200px;
+    --fs-display-1: 100px;
     --fs-display-2: 92px;
+    --fs-highlight: 36px;
     --fs-body-1: 24px;
     --fs-body-2: 21px;
     --fs-label: 16px;
     --fs-desc: 16px;
+  }
+}
+
+/* AKA 1280px */
+@media (--lg) {
+  :root {
+    --fs-display-1: 200px;
   }
 }

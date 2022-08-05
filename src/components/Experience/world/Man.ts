@@ -8,9 +8,11 @@ import fragmentShader from './shaders/shader2/fragment'
 // Types
 import type { GUI } from 'lil-gui'
 import type { LoadResult } from '../utils/Resources'
+import type { RootState } from 'store'
 
 // Components
 import Experience from '../Experience'
+import StoreWatcher from '../utils/StoreWatcher'
 
 type Uniforms = {
   colorA: THREE.Color
@@ -45,8 +47,6 @@ type AnimationConfig = {
   enter: AnimationProps
   loop?: AnimationProps
 }
-
-type Sections = 'intro' | 'hero' | 'portfolio' | 'about' | 'contact'
 
 type AnimationConfigTypes = {
   current?: AnimationAction
@@ -107,7 +107,9 @@ export default class Man {
 
     this.setModel()
     this.setMaterial()
-    this.setStoreEvents()
+
+    const storeWatcher = new StoreWatcher()
+    storeWatcher.addListener(this.stateChangeHandler.bind(this))
 
     gsap.delayedCall(0.5, this.startAnimations.bind(this))
   }
@@ -154,29 +156,24 @@ export default class Man {
     this.mesh.material = this.material
   }
 
-  setStoreEvents() {
-    const store = window.store
-    let prevSection = store.getState().section.current
+  stateChangeHandler(state: RootState, prevState: RootState) {
+    const prevSection = prevState.section.current
 
-    store.subscribe(() => {
-      const currentSection = store.getState().section.current as Sections
-      if (currentSection !== prevSection) {
-        if (!this.animation?.actions) {
-          throw new Error('this.animation.actions not found in section handler')
-        }
-
-        const nextAnimation = this.animation.actions[currentSection]?.enter.a
-        const prevAnimation = this.animation.actions.current
-
-        if (prevAnimation?.isRunning()) {
-          this.action('fade', nextAnimation, prevAnimation)
-        } else {
-          this.action('play', nextAnimation)
-        }
-
-        prevSection = currentSection
+    const currentSection = state.section.current as Sections
+    if (currentSection !== prevSection) {
+      if (!this.animation?.actions) {
+        throw new Error('this.animation.actions not found in section handler')
       }
-    })
+
+      const nextAnimation = this.animation.actions[currentSection]?.enter.a
+      const prevAnimation = this.animation.actions.current
+
+      if (prevAnimation?.isRunning()) {
+        this.action('fade', nextAnimation, prevAnimation)
+      } else {
+        this.action('play', nextAnimation)
+      }
+    }
   }
 
   startAnimations() {

@@ -25,6 +25,7 @@
     "react-hook-inview": "^4.5.0",
     "react-redux": "^8.0.2",
     "react-responsive": "^9.0.0-beta.10",
+    "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "redux": "^4.2.0",
     "requestanimationframe-timer": "^3.0.3",

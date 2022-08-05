@@ -1,9 +1,9 @@
 .root {
-  height: 100vh;
-  margin-left: var(--text-margin-right);
-  color: var(--color-white);
+  position: relative;
   display: flex;
+  height: 100vh;
   flex-direction: column;
+  color: var(--color-white);
 }
 
 .head {
@@ -16,71 +16,36 @@
 }
 
 .logoContainer {
-  margin-top: var(--container-margins);
-  margin-left: var(--container-margins);
-  margin-bottom: var(--container-margins);
-}
-
-.desc {
-  @mixin desc;
-  display: none;
-  color: var(--color-white);
-  margin-left: var(--spc-15);
-
-  &:nth-child(1) {
-    margin-top: var(--container-margins);
-  }
-
-  @media (--md-l) {
-    display: block;
-  }
-
-  @media (--lg) {
-    margin-left: var(--spc-17);
-  }
-}
-
-.separator {
-  width: 60px;
-  height: 1px;
-  margin-left: var(--container-margins);
-  border-bottom: 0;
-  border-left: 0;
-  border-right: 0;
-  border-color: var(--color-white);
-
-  @media (--md-l) {
-    width: 120px;
-    margin-top: var(--spc-4);
-    margin-left: var(--spc-15);
-  }
-
-  @media (--lg) {
-    margin-left: var(--spc-17);
-  }
+  margin-top: var(--frame-margin);
+  margin-bottom: var(--frame-margin);
+  margin-left: var(--frame-margin);
 }
 
 .middle {
-  flex: 1 1 auto;
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
   justify-content: center;
+  margin-left: var(--text-margin-right);
 }
 
 .scroll {
   @mixin desc;
-  margin-bottom: var(--spc-3);
+
   display: flex;
-  align-items: flex-end;
   width: 130px;
+  align-items: flex-end;
+  margin-right: var(--frame-margin);
+  margin-bottom: var(--frame-margin);
+  margin-left: var(--text-margin-right);
 
   @media (--md-l) {
     width: 170px;
   }
 
   .scrollText {
+    display: block;
     margin-left: var(--spc-2);
-
     transition: opacity 0.5s ease-in-out;
 
     @media (--md-l) {
@@ -96,21 +61,20 @@
 }
 
 .scrollIndicator {
+  display: block;
   width: 1px;
   height: 100px;
   background-color: #ccc;
-  display: block;
-
-  transition: transform 0.5s ease-in-out;
   transform-origin: 50% 100%;
+  transition: transform 0.5s ease-in-out;
 
-  &:before {
-    content: '';
+  &::before {
+    top: 0;
+    display: block;
     width: 1px;
     height: 50%;
-    top: 0;
     background-color: #333;
-    display: block;
+    content: '';
 
     :global {
       animation: downWipe 2s ease-in-out infinite;
@@ -126,11 +90,9 @@
   @mixin body-1;
 
   margin-top: var(--spc-15);
-
-  text-transform: uppercase;
-  line-height: 1;
   letter-spacing: 3px;
-
+  line-height: 1;
+  text-transform: uppercase;
   transition: opacity 0.3s ease-in-out;
 
   &.gone {
@@ -141,9 +103,9 @@
 .footer {
   position: fixed;
   top: auto;
+  right: var(--frame-margin);
+  bottom: var(--frame-margin);
   left: auto;
-  bottom: var(--container-margins);
-  right: var(--container-margins);
 }
 
 .dud {

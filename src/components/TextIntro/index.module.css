@@ -1,0 +1,5 @@
+.root {
+  @mixin highlight;
+
+  margin-bottom: var(--module-margin-bottom);
+}

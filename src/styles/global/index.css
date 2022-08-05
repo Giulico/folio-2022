@@ -6,19 +6,16 @@ body {
   font-family: var(--font-family-base);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-h1,
-h2,
-h3 {
-  font-family: var(--font-family-heading);
-  font-weight: 500;
-  text-transform: uppercase;
+  font-weight: var(--fw-light);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+p:not(:first-child) {
+  margin-top: 1.5em;
 }
 
 * {

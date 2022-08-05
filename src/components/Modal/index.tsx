@@ -1,5 +1,5 @@
 // Types
-import { ReactElement, useCallback } from 'react'
+import type { ReactElement } from 'react'
 import type { Location } from 'history'
 
 // Styles
@@ -7,21 +7,37 @@ import style from './index.module.css'
 
 // Utils
 import cn from 'classnames'
+import { createContext } from 'react'
 import { rootNavigate } from 'components/CustomRouter'
 
 // Hooks
-import { useLocation, useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
+import { useEffect, useState, useCallback } from 'react'
+
+type ChildrenProps = {
+  displayLocation: Location
+  transitionStage: 'open' | 'close'
+}
 
 type Props = {
-  children: (displayLocation: Location) => ReactElement
+  children: ReactElement // (props: ChildrenProps) => ReactElement
 }
+
+export const ModalContext = createContext<ChildrenProps>({
+  transitionStage: 'close',
+  displayLocation: {
+    pathname: '/',
+    search: '',
+    hash: '',
+    state: null,
+    key: 'default'
+  }
+})
 
 const Modal = ({ children }: Props) => {
   const location = useLocation()
-  const { project } = useParams()
-  const [displayLocation, setDisplayLocation] = useState(location)
-  const [transitionStage, setTransitionStage] = useState('close')
+  const [displayLocation, setDisplayLocation] = useState<Location>(location)
+  const [transitionStage, setTransitionStage] = useState<'open' | 'close'>('close')
 
   const updateDisplayLocation = useCallback(() => {
     setDisplayLocation(location)
@@ -60,14 +76,15 @@ const Modal = ({ children }: Props) => {
 
   return (
     <div className={classes} onAnimationEnd={updateDisplayLocation}>
-      <figure className={style.hero}>
-        <img src="/projects/aq/hero.jpg" alt={project} />
-      </figure>
-      <div className={style.contentContainer}>
-        <button className={style.backButton} onClick={() => rootNavigate('/')}>
-          <img src="/icons/arrow-left.svg" /> Back
-        </button>
-        <div className={style.content}>{children(displayLocation)}</div>
+      <button className={style.backButton} onClick={() => rootNavigate('/')}>
+        <img src="/icons/arrow-left.svg" /> Back
+      </button>
+      <div data-scroll-lock-scrollable className={style.contentContainer}>
+        <div>
+          <ModalContext.Provider value={{ displayLocation, transitionStage }}>
+            {children}
+          </ModalContext.Provider>
+        </div>
       </div>
     </div>
   )

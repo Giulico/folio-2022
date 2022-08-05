@@ -2,16 +2,26 @@
   "plugins": ["stylelint-order"],
   "extends": [
     "stylelint-config-standard",
-    "stylelint-config-prettier",
-    "stylelint-config-idiomatic-order"
+    "stylelint-config-idiomatic-order",
+    "stylelint-config-prettier"
   ],
   "rules": {
+    "indentation": 2,
+    "no-eol-whitespace": true,
+    "linebreaks": "unix",
     "at-rule-no-unknown": [
       true,
       {
-        "ignoreAtRules": ["/^mixin/"]
+        "ignoreAtRules": ["/^mixin/", "/^define-mixin/"]
       }
     ],
-    "selector-class-pattern": null
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global"]
+      }
+    ],
+    "selector-class-pattern": null,
+    "custom-property-pattern": null
   }
 }

@@ -1,7 +1,14 @@
 .root {
+  @mixin body-2;
+
   position: relative;
   z-index: 1;
   height: 100vh;
+  padding-top: calc(15vh + var(--fs-display-1) + var(--spc-10));
   margin-top: var(--app-height);
   color: var(--color-white);
+}
+
+.awardsTitle {
+  margin-top: var(--spc-10);
 }

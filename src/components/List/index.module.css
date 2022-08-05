@@ -1,0 +1,9 @@
+.item {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spc-2) 0;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid rgb(var(--color-whiteRGB) / 40%);
+  }
+}

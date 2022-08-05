@@ -5,7 +5,6 @@ import style from './index.module.css'
 
 // Utils
 import cn from 'classnames'
-import { rootNavigate } from 'components/CustomRouter'
 
 // Hooks
 import useScrollOffset from 'hooks/useScrollOffset'
@@ -16,7 +15,7 @@ import Logo from 'components/Logo'
 import Section from 'components/Section'
 import AudioWave from 'components/AudioWave'
 import MenuItem from 'components/MenuItem'
-import MenuTrigger from 'components/MenuTrigger'
+import Menu from 'components/Menu'
 import TextScramble, { ScrambleTexts } from 'components/TextScramble'
 
 const scrambleTexts: ScrambleTexts = [
@@ -48,20 +47,7 @@ export default function Hero() {
           <Logo />
         </div>
         <div className={style.menuContainer}>
-          <p className={style.desc}>35yo</p>
-          <p className={style.desc}>Switzerland, Lugano</p>
-          <hr className={style.separator} />
-          <MenuTrigger />
-          <br />
-          <br />
-          <br />
-          <button
-            onClick={() => {
-              rootNavigate('/aquest')
-            }}
-          >
-            Open modal
-          </button>
+          <Menu />
         </div>
       </header>
       <Section name="hero" className={style.root}>
@@ -83,8 +69,8 @@ export default function Hero() {
         <footer className={scrollClasses}>
           <span className={style.scrollIndicator} />
           <div>
-            <p className={style.scrollText}>Scroll down</p>
-            <p className={style.scrollText}>to see some works</p>
+            <span className={style.scrollText}>Scroll down</span>
+            <span className={style.scrollText}>to see some works</span>
           </div>
         </footer>
       </Section>

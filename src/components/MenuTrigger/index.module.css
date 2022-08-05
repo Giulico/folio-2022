@@ -1,18 +1,8 @@
 .root {
   --offset-top: 150px;
-  --vertical-margin: var(--offset-top) * 2;
-  --size: 50px;
 
-  @mixin label;
-
-  position: relative;
-  font-family: var(--font-family-base);
   margin-top: var(--spc-4);
-  margin-left: var(--container-margins);
-  background-color: transparent;
-  border: none;
-  color: var(--color-white);
-  user-select: none;
+  margin-left: var(--frame-margin);
 
   @media (--md-l) {
     margin-left: var(--spc-15);
@@ -23,19 +13,35 @@
 
     margin-left: var(--spc-17);
   }
+}
 
-  /* &::before {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index: -1;
-    width: var(--size);
-    height: var(--size);
-    border-radius: 50%;
-    background-color: var(--color-gray-700);
-    content: '';
-    transform: translate3d(-50%, -50%, 0);
-  } */
+.label {
+  overflow: hidden;
+
+  span {
+    display: block;
+    transition: transform 0.7s ease-in-out 1.3s;
+
+    .hidden & {
+      transform: translate3d(0, -100%, 0);
+      transition: transform 0.3s ease-in-out;
+    }
+  }
+}
+
+.button {
+  --vertical-margin: var(--offset-top) * 2;
+  --size: 50px;
+
+  @mixin label;
+
+  position: relative;
+  display: block;
+  border: none;
+  background-color: transparent;
+  color: var(--color-white);
+  font-family: var(--font-family-base);
+  user-select: none;
 }
 
 .start,
@@ -50,9 +56,9 @@
   left: 50%;
   width: 1px;
   height: calc(100vh - var(--vertical-margin));
-  background-color: transparent;
   border: none;
   border-left: 1px dashed var(--color-gray-900);
+  background-color: transparent;
   transform: translate3d(-50%, calc(var(--size) / 2), 0) scaleY(0);
   transform-origin: top;
   transition: transform 0.5s ease-out;
@@ -64,10 +70,10 @@
 
 .start,
 .end {
-  border: 1px dashed var(--color-gray-900);
-  border-radius: 50%;
   width: var(--size);
   height: var(--size);
+  border: 1px dashed var(--color-gray-900);
+  border-radius: 50%;
 }
 
 .start {

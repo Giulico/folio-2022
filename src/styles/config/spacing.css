@@ -72,8 +72,9 @@
   --spc-30: calc(var(--spc-unit) * 30);
 
   /* SIDEBAR */
-  --container-margins: var(--spc-3);
+  --frame-margin: var(--spc-3);
   --text-margin-right: var(--spc-14);
+  --module-margin-bottom: var(--spc-14);
 }
 
 @media (--md-p) {
@@ -90,7 +91,7 @@
 
 @media (--lg) {
   :root {
-    --container-margins: var(--spc-6);
+    --frame-margin: var(--spc-6);
     --text-margin-right: var(--spc-30);
   }
 }

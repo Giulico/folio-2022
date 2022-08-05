@@ -10,8 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useCallback, useEffect } from 'react'
 
 // Components
-import ProjectDetail from 'partials/ProjectDetail'
-import { Route, Routes } from 'react-router-dom'
+import { ModalRoutes } from 'components/Router'
 import Modal from 'components/Modal'
 import ExperienceComponent from 'components/Experience'
 import LoadProgress from 'components/LoadProgress'
@@ -82,13 +81,7 @@ function App() {
       <Hero />
 
       <Modal>
-        {(displayLocation) => {
-          return (
-            <Routes location={displayLocation}>
-              <Route path=":project" element={<ProjectDetail />} />
-            </Routes>
-          )
-        }}
+        <ModalRoutes />
       </Modal>
 
       <Portfolio />

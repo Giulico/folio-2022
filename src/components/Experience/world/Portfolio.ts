@@ -136,6 +136,7 @@ export default class Portfolio {
         material
       })
       clickablMesh.name = name
+      clickablMesh.visible = false
       clickablMesh.position.set(i * 1.3 + offsetX, offsetY, offsetZ)
 
       clickablMesh.addEventListener(ThreeMouseEventType.CLICK, (e) => {
@@ -182,18 +183,12 @@ export default class Portfolio {
     }
   }
 
-  enterAnimation(): Promise<void[]> {
-    const promises = []
-    for (const item of this.items) {
+  enterAnimation() {
+    console.log('enter animation')
+    for (let i = 0; i < this.items.length; i++) {
+      const item = this.items[i]
       item.visible = true
-      promises.push(
-        new Promise<void>((resolve) => {
-          console.log('Portfolio enterAnimation')
-          resolve()
-        })
-      )
     }
-    return Promise.all(promises)
   }
 
   leaveAnimation() {
@@ -278,25 +273,6 @@ export default class Portfolio {
   }
 
   update() {
-    // if (this.isVisible) {
-    //   console.log('Portfolio cards are visible')
-    //   if (this.enteringItem) {
-    //     console.log('zooming')
-    //     this.camera.updateMatrixWorld()
-    //     const distanceFromCamera = 1 // 3 units
-    //     const target = new THREE.Vector3(0, 0, -distanceFromCamera)
-    //     target.applyMatrix4(this.camera.matrixWorld)
-    //     const moveSpeed = 0.001 // units per second
-    //     const distance = this.enteringItem.position.distanceTo(target)
-    //     if (distance > 0) {
-    //       const amount = Math.min(moveSpeed * this.time.delta, distance) / distance
-    //       console.log(target)
-    //       this.enteringItem.position.lerp(target, amount)
-    //     } else {
-    //       this.group.attach(this.enteringItem)
-    //       this.enteringItem = null
-    //     }
-    //   }
-    // }
+    // Update
   }
 }

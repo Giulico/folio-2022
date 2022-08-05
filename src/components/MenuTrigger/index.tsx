@@ -9,12 +9,16 @@ import cn from 'classnames'
 import breakpoints from 'utils/breakpoints'
 
 // Hooks
-import useMainMenu from 'hooks/useMainMenu'
 import React, { useCallback } from 'react'
+
+// Hooks
+import useMainMenu from 'hooks/useMainMenu'
+import { useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useMediaQuery } from 'react-responsive'
 
 const MenuTrigger = () => {
+  const location = useLocation()
   const dispatch = useDispatch()
 
   const { menu } = useSelector((state: RootState) => ({
@@ -54,17 +58,22 @@ const MenuTrigger = () => {
   )
 
   const classes = cn(style.root, {
-    [style.open]: menu.open
+    [style.open]: menu.open,
+    [style.hidden]: location.pathname !== '/'
   })
 
   return (
-    <button className={classes} onMouseDown={openMenu} onTouchStart={openMenu}>
-      {menu.open ? 'Close' : 'Menu'}
+    <div className={classes}>
+      <button className={style.button} onMouseDown={openMenu} onTouchStart={openMenu}>
+        <div className={style.label}>
+          <span>{menu.open ? 'Close' : 'Menu'}</span>
+        </div>
 
-      <div className={style.start}></div>
-      <div className={style.line} />
-      <div className={style.end}></div>
-    </button>
+        <div className={style.start}></div>
+        <div className={style.line} />
+        <div className={style.end}></div>
+      </button>
+    </div>
   )
 }
 export default MenuTrigger

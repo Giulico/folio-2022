@@ -1,0 +1,21 @@
+.root {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin-bottom: var(--module-margin-bottom);
+  gap: var(--spc-4);
+
+  @media (--md-l) {
+    flex-direction: row;
+    gap: var(--spc-8);
+  }
+
+  img,
+  video {
+    width: 100%;
+  }
+}
+
+.item {
+  flex: 1;
+}

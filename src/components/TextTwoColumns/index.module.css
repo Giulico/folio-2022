@@ -1,0 +1,22 @@
+.root {
+  margin-bottom: var(--module-margin-bottom);
+
+  @media(--md-l) {
+    display: flex;
+    gap: var(--spc-10);
+  }
+}
+
+.title {
+  @mixin highlight;
+
+  font-weight: var(--fw-semibold);
+
+  @media(--md-l) {
+    flex-basis: 50%;
+  }
+}
+
+.text {
+  @mixin body-1;
+}

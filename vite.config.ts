@@ -15,5 +15,10 @@ export default defineConfig({
       { find: 'utils', replacement: '/src/utils' },
       { find: 'gsap', replacement: '/src/vendor/gsap' }
     ]
+  },
+  css: {
+    modules: {
+      generateScopedName: '[folder]-[local]_[hash:base64:5]'
+    }
   }
 })

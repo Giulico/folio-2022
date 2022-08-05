@@ -3,29 +3,27 @@
   --color-primary: #ff2f00;
 
   /* Colour Secondary */
-  --color-secondary: hsl(199, 100%, 14%);
+  --color-secondary: hsl(199deg 100% 14%);
 
   /* Neutral Scale — Add other tint shades if necessary */
-  --color-blackRGB: 0, 0, 0; /* for RGBA values */
-  --color-black: hsl(0, 0%, 0%);
-  --color-gray-900: hsl(200, 0%, 30%);
-  --color-gray-700: hsl(200, 0%, 50%);
-  --color-gray-600: hsl(200, 0%, 60%);
-  --color-gray-500: hsl(200, 0%, 80%);
-  --color-gray-300: hsl(200, 0%, 85%);
-  --color-gray-250: hsl(200, 0%, 90%);
-  --color-gray-100: hsl(200, 0%, 95%);
-  --color-white: hsl(0, 0%, 100%);
-  --color-whiteRGB: 255, 255, 255; /* for RGBA values */
+  --color-blackRGB: 0 0 0; /* for RGBA values */
+  --color-black: hsl(0deg 0% 0%);
+  --color-gray-900: hsl(200deg 0% 30%);
+  --color-gray-700: hsl(200deg 0% 50%);
+  --color-gray-600: hsl(200deg 0% 60%);
+  --color-gray-500: hsl(200deg 0% 80%);
+  --color-gray-300: hsl(200deg 0% 85%);
+  --color-gray-250: hsl(200deg 0% 90%);
+  --color-gray-100: hsl(200deg 0% 95%);
+  --color-white: hsl(0deg 0% 100%);
+  --color-whiteRGB: 255 255 255; /* for RGBA values */
 
   /* Status, maybe not necessary */
   --color-error: var(--color-primary);
-  --color-warning: hsl(42, 88%, 52%);
-  --color-success: hsl(155, 89%, 45%);
-
-  --color-red: #ff0000;
-  --color-green: #00ff00;
-  --color-blue: #0000ff;
-
+  --color-warning: hsl(42deg 88% 52%);
+  --color-success: hsl(155deg 89% 45%);
+  --color-red: #f00;
+  --color-green: #0f0;
+  --color-blue: #00f;
   --opacity-hover: 0.5;
 }

@@ -1,9 +1,14 @@
 @define-mixin display-1 {
   font-size: var(--fs-display-1);
+  line-height: 1;
 }
 
 @define-mixin display-2 {
   font-size: var(--fs-display-2);
+}
+
+@define-mixin highlight {
+  font-size: var(--fs-highlight);
 }
 
 @define-mixin body-1 {
@@ -12,6 +17,7 @@
 
 @define-mixin body-2 {
   font-size: var(--fs-body-2);
+  line-height: 2;
 }
 
 @define-mixin label {
@@ -26,13 +32,13 @@
 
 @define-mixin text-outline-white $alpha: 1 {
   color: var(--color-black);
-  text-shadow: 1px 1px rgba(var(--color-whiteRGB), $alpha),
-    -1px -1px rgba(var(--color-whiteRGB), $alpha);
+  text-shadow: 1px 1px rgb(var(--color-whiteRGB) / $alpha),
+    -1px -1px rgb(var(--color-whiteRGB) / $alpha);
 
   @supports (-webkit-text-stroke: 1px black) {
     color: transparent;
-    -webkit-text-stroke: 1px rgba(var(--color-whiteRGB), $alpha);
     text-shadow: none;
+    -webkit-text-stroke: 1px rgb(var(--color-whiteRGB) / $alpha);
   }
 }
 
@@ -42,8 +48,8 @@
 
   @supports (-webkit-text-stroke: 1px black) {
     color: transparent;
-    -webkit-text-stroke: 1px var(--color-red);
     text-shadow: none;
+    -webkit-text-stroke: 1px var(--color-red);
   }
 }
 
@@ -53,8 +59,8 @@
 
   @supports (-webkit-text-stroke: 1px black) {
     color: transparent;
-    -webkit-text-stroke: 1px var(--color-green);
     text-shadow: none;
+    -webkit-text-stroke: 1px var(--color-green);
   }
 }
 
@@ -64,11 +70,11 @@
 
   @supports (-webkit-text-stroke: 1px black) {
     color: transparent;
-    -webkit-text-stroke: 1px var(--color-blue);
     text-shadow: none;
+    -webkit-text-stroke: 1px var(--color-blue);
   }
 }
 
 @define-mixin glow-white {
-  text-shadow: 0px 0px 10px var(--color-white);
+  text-shadow: 0 0 10px var(--color-white);
 }

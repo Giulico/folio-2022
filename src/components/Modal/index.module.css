@@ -1,6 +1,6 @@
- .root {
+.root {
   position: fixed;
-  z-index: 100;
+  z-index: calc(var(--z-burger) - 1);
   top: 0;
   left: 0;
   width: 100%;
@@ -40,7 +40,7 @@
       transform: translate3d(0, 100%, 0);
     }
   }
- }
+}
 
 .open {
   animation: 1s open forwards;
@@ -51,65 +51,47 @@
   animation: 1s close forwards;
 }
 
-.hero {
-  position: relative;
-  z-index: var(--z-above);
-  width: calc(100% - var(--spc-20));
-  height: 50vh;
-  margin: var(--spc-10) auto;
-  transition: visibility 0s var(--expo-ease-out) 1s;
-  visibility: hidden;
-  
-  .open & {
-    visibility: visible;
-  }
-  
-  &::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--color-white);
-    content: '';
-    transform-origin: bottom;
-    transition: transform 1s var(--expo-ease-in) 0s;
-
-    .open & {
-      transform: scale(1, 0);
-      transform-origin: top;
-      transition: transform 1s var(--expo-ease-out) 1s;
-    }
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-}
-
 .backButton {
+  position: fixed;
+  z-index: calc(var(--z-above) + 1);
+  top: 50%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   border: 0;
-  margin-left: var(--spc-4);
+  margin-left: var(--frame-margin);
   background-color: transparent;
-  cursor: pointer;  
+  cursor: pointer;
+  transform: translateY(-50%);
+  visibility: hidden;
+
+  .open & {
+    transition: visibility 0s 1s;
+    visibility: visible;
+  }
+
+  @media (--md-l) {
+    flex-direction: row;
+  }
 
   img {
-    margin-right: var(--spc-2)
+    margin-bottom: var(--spc-1);
+
+    @media (--md-l) {
+      margin-right: var(--spc-2);
+      margin-bottom: 0;
+    }
   }
 }
 
 .contentContainer {
   position: relative;
   z-index: var(--z-above);
-  min-height: 100vh;
-  padding-top: var(--spc-6);
-  margin-top: var(--margin-top);
+  overflow: auto;
+  height: var(--app-height);
   background-color: var(--color-white);
+  -webkit-overflow-scrolling: touch;
   visibility: hidden;
 
   .open & {

@@ -24,7 +24,10 @@ const MenuItem = ({ name, index }: Props) => {
   const clipRef = useRef(null)
   const prevMenuIndex = useRef(menu.index)
 
-  const letters = useMemo(() => name.split('').map((letter, index) => <span key={index}>{letter}</span>), [name])
+  const letters = useMemo(
+    () => name.split('').map((letter, index) => <span key={index}>{letter}</span>),
+    [name]
+  )
 
   useEffect(() => {
     dispatch.menu.addRef(ref.current)

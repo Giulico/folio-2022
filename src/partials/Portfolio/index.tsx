@@ -31,22 +31,18 @@ function Portfolio() {
   useEffect(() => {
     const world = window.experience.world
 
-    if (currentSection === 'portfolio') {
+    if (currentSection === 'portfolio' && !isActive.current) {
       isActive.current = true
-
       // Entering
-      if (!world.portfolio) return
-      world.portfolio.enterAnimation().then(() => {
-        if (!world.portfolio) return
-        world.portfolio.isVisible = true
-      })
+      if (world.portfolio) {
+        world.portfolio.enterAnimation()
+      }
     } else if (isActive.current) {
       isActive.current = false
-
       // Leaving
-      if (!world.portfolio) return
-      world.portfolio.isVisible = false
-      world.portfolio.leaveAnimation()
+      if (world.portfolio) {
+        world.portfolio.leaveAnimation()
+      }
     }
   }, [currentSection])
 

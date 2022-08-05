@@ -1,8 +1,14 @@
 .root {
-  text-transform: uppercase;
+  z-index: var(--z-cover);
+  color: var(--color-white);
   font-size: 16px;
   line-height: 1;
-  color: var(--color-white);
+  text-transform: uppercase;
+}
+
+.light,
+.bold {
+  overflow: hidden;
 }
 
 .light {
@@ -10,7 +16,65 @@
   font-weight: var(--fw-light);
 }
 
+.inner {
+  display: block;
+  animation: to-white 2.5s forwards;
+  line-height: 1;
+}
+
 .bold {
   display: block;
   font-weight: var(--fw-semibold);
+}
+
+.lightBg {
+  .inner {
+    animation: to-black 2.5s forwards;
+  }
+}
+
+@keyframes to-white {
+  0% {
+    color: var(--color-black);
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    color: var(--color-black);
+    transform: translate3d(0, -100%, 0);
+    transition-timing-function: var(--expo-ease-out);
+  }
+
+  51% {
+    color: var(--color-white);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  100% {
+    color: var(--color-white);
+    transform: translate3d(0, 0%, 0);
+    transition-timing-function: var(--expo-ease-out);
+  }
+}
+
+@keyframes to-black {
+  0% {
+    color: var(--color-white);
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    color: var(--color-white);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  51% {
+    color: var(--color-black);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  100% {
+    color: var(--color-black);
+    transform: translate3d(0, 0%, 0);
+  }
 }

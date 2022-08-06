@@ -1,6 +1,6 @@
 @define-mixin display-1 {
   font-size: var(--fs-display-1);
-  line-height: 1;
+  line-height: 0.8;
 }
 
 @define-mixin display-2 {

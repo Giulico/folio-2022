@@ -17,9 +17,12 @@ type Props = {
   role: string
   agency: string
   image: string
+  completed: string
+  awards: string[]
+  live: string
 }
 
-const ProjectHero = ({ title, role, agency, image }: Props) => {
+const ProjectHero = ({ title, role, agency, completed, awards, live, image }: Props) => {
   const { project } = useParams()
   const [ts, setTs] = useState<'open' | 'close'>()
   const transitionStage = useTransitionStage()
@@ -38,16 +41,39 @@ const ProjectHero = ({ title, role, agency, image }: Props) => {
         <figure className={style.figure}>
           <img src={image} alt={project} />
         </figure>
-        <div>
-          <h1 className={style.title}>{title}</h1>
+        <div className={style.info}>
+          <div className={style.titleContainer}>
+            <h1 className={style.title}>{title}</h1>
+          </div>
           <div className={style.detailContainer}>
-            <div>
-              <h3>Role</h3>
-              <p>{role}</p>
+            <div className={style.details}>
+              <div>
+                <h3>Role</h3>
+                <p>{role}</p>
+              </div>
+              <div>
+                <h3>Agency</h3>
+                <p>{agency}</p>
+              </div>
+              <div>
+                <h3>Completed</h3>
+                <p>{completed}</p>
+              </div>
+              <div>
+                {awards && (
+                  <>
+                    <h3>Awards</h3>
+                    {awards.map((a) => (
+                      <p>{a}</p>
+                    ))}
+                  </>
+                )}
+              </div>
             </div>
-            <div>
-              <h3>Agency</h3>
-              <p>{agency}</p>
+            <div className={style.live}>
+              <a href={live} target="_blank">
+                Visit live <img src="/icons/arrow-right.svg" />
+              </a>
             </div>
           </div>
         </div>

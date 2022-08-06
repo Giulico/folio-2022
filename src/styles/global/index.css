@@ -18,6 +18,10 @@ p:not(:first-child) {
   margin-top: 1.5em;
 }
 
+a {
+  color: var(--color-black);
+}
+
 * {
   padding: 0;
   margin: 0;

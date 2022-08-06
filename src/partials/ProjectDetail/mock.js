@@ -8,6 +8,9 @@ export const data = [
         title: 'AQuest',
         role: 'Frontend Developer',
         agency: 'AQuest',
+        completed: '06.2018',
+        awards: ['Awwwards', 'CSS Design Award', 'FWA'],
+        live: 'https://www.aquest.com',
         image: '/projects/aq/hero.jpg'
       },
       {
@@ -47,6 +50,92 @@ export const data = [
           {
             src: '/projects/aq/aquest-site.jpeg',
             alt: 'AQuest site'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'sketchin',
+    title: 'Sketchin',
+    modules: [
+      {
+        component: 'ProjectHero',
+        title: 'Sketchin',
+        role: 'UX Engineer',
+        agency: 'Sketchin',
+        completed: '08.2020',
+        live: 'https://www.sketchin.com',
+        image: '/projects/sk/hero.jpeg'
+      },
+      {
+        component: 'TextIntro',
+        text: 'Sketchin: an advanced strategic-design studio, a pioneer leading the way through the maze of future global experiences.'
+      },
+      {
+        component: 'Media',
+        media: [
+          {
+            src: '/projects/sk/sk-animation.mp4',
+            alt: 'Intro animation'
+          }
+        ]
+      },
+      {
+        component: 'Media',
+        media: [
+          {
+            src: '/projects/sk/sk-hero.jpg',
+            alt: 'Sketchin services page'
+          }
+        ]
+      },
+      {
+        component: 'Media',
+        media: [
+          {
+            src: '/projects/sk/sk-hero-2.jpg',
+            alt: 'Sketchin Associate page'
+          }
+        ]
+      },
+      {
+        component: 'Media',
+        media: [
+          {
+            src: '/projects/sk/sk-navi-1.jpg',
+            alt: 'Sketchin project filters'
+          },
+          {
+            src: '/projects/sk/sk-navi-2.jpg',
+            alt: 'Sketchin menu navigation'
+          }
+        ]
+      },
+      {
+        component: 'Media',
+        media: [
+          {
+            src: '/projects/sk/sk-cards.jpg',
+            alt: 'Sketchin cards'
+          }
+        ]
+      },
+      {
+        component: 'Media',
+        media: [
+          {
+            src: '/projects/sk/sk-cards-2.jpg',
+            alt: 'Sketchin cards'
+          }
+        ]
+      },
+      {
+        component: 'Media',
+        media: [
+          {
+            src: '/projects/sk/sk-footer.mp4',
+            alt: 'Footer animation'
           }
         ]
       }

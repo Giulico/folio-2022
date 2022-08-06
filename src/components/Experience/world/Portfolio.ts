@@ -1,6 +1,7 @@
 // Types
 import type { GUI } from 'lil-gui'
 import type { LoadResult } from '../utils/Resources'
+import type { RootState } from 'store'
 
 // Utils
 import * as THREE from 'three'
@@ -13,6 +14,7 @@ import {
   MouseEventManager,
   ThreeMouseEventType
 } from '@masatomakino/threejs-interactive-object'
+import StoreWatcher from '../utils/StoreWatcher'
 
 // Components
 import Experience from '../Experience'
@@ -45,10 +47,6 @@ export default class Portfolio {
   debugObject: DebugObject
   material!: StateMaterialSet
   camera: THREE.PerspectiveCamera
-  isVisible = false
-  isDragging = false
-  initialDragPosition = 0
-  initialScrollPosition = 0
   manager: MouseEventManager | undefined
   itemsXPosition: number[] = []
   projects: Project[]
@@ -72,7 +70,7 @@ export default class Portfolio {
     this.projects = [
       {
         name: 'sketchin',
-        video: document.getElementById('aqReel') as HTMLVideoElement
+        video: document.getElementById('skReel') as HTMLVideoElement
       },
       {
         name: 'aquest',
@@ -80,11 +78,15 @@ export default class Portfolio {
       },
       {
         name: 'fastweb',
-        video: document.getElementById('aqReel') as HTMLVideoElement
+        video: document.getElementById('fbReel') as HTMLVideoElement
       },
       {
-        name: 'nexi',
-        video: document.getElementById('aqReel') as HTMLVideoElement
+        name: 'feudi',
+        video: document.getElementById('feudiReel') as HTMLVideoElement
+      },
+      {
+        name: 'claraluna',
+        video: document.getElementById('claralunaReel') as HTMLVideoElement
       }
     ]
 
@@ -95,13 +97,30 @@ export default class Portfolio {
     }
 
     this.debugObject = {
-      offsetX: 0.3,
+      offsetX: 1.0,
       offsetY: 2.0,
       offsetZ: 0.8,
       pageHeightFactor: 2.1
     }
 
     this.setItems()
+
+    const storeWatcher = new StoreWatcher()
+    storeWatcher.addListener(this.stateChangeHandler.bind(this))
+  }
+
+  stateChangeHandler(state: RootState, prevState: RootState) {
+    const currentSection = state.section.current
+    const prevSection = prevState.section.current
+
+    // Section
+    if (currentSection !== prevSection && currentSection === 'portfolio') {
+      this.enterAnimation()
+    }
+
+    if (currentSection !== prevSection && prevSection === 'portfolio') {
+      this.leaveAnimation()
+    }
   }
 
   setItems() {
@@ -115,6 +134,7 @@ export default class Portfolio {
 
     const { offsetX, offsetY, offsetZ } = this.debugObject
 
+    const zRound = [0, 0.5, 0.75, 0.5, 0]
     for (let i = 0; i < this.projects.length; i++) {
       // Geometry
       const geometry = new THREE.PlaneGeometry(1, 0.7, 24, 24)
@@ -136,8 +156,10 @@ export default class Portfolio {
         material
       })
       clickablMesh.name = name
-      clickablMesh.visible = false
+      // clickablMesh.visible = false
       clickablMesh.position.set(i * 1.3 + offsetX, offsetY, offsetZ)
+      clickablMesh.position.z += zRound[i]
+      clickablMesh.rotation.y = -0.5 + (Math.PI / 10) * i
 
       clickablMesh.addEventListener(ThreeMouseEventType.CLICK, (e) => {
         rootNavigate(e.model.view.name)
@@ -148,7 +170,7 @@ export default class Portfolio {
     }
 
     this.group.position.x = -3
-    this.group.rotation.z = Math.PI / 15
+    // this.group.rotation.z = Math.PI / 15
     this.scene.add(this.group)
 
     // Debug

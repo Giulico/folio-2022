@@ -1,58 +1,30 @@
-// Types
-import { RootState } from 'store'
-
 // Style
 import style from './index.module.css'
-
-// Hooks
-import { useRef } from 'react'
-import { useSelector } from 'react-redux'
-import { useEffect } from 'react'
 
 // Components
 import Section from 'components/Section'
 import MenuItem from 'components/MenuItem'
 
 function Portfolio() {
-  const isActive = useRef<boolean>(false)
-  const elementYPosition = useRef<number>()
-
-  const { current: currentSection } = useSelector((state: RootState) => state.section)
-
-  const saveElementPosition = (boundary: RootState['section']['boundaries'][0]) => {
-    const world = window.experience.world
-    elementYPosition.current = boundary.start
-
-    if (world.portfolio) {
-      world.portfolio.initialScrollPosition = elementYPosition.current
-    }
-  }
-
-  useEffect(() => {
-    const world = window.experience.world
-
-    if (currentSection === 'portfolio' && !isActive.current) {
-      isActive.current = true
-      // Entering
-      if (world.portfolio) {
-        world.portfolio.enterAnimation()
-      }
-    } else if (isActive.current) {
-      isActive.current = false
-      // Leaving
-      if (world.portfolio) {
-        world.portfolio.leaveAnimation()
-      }
-    }
-  }, [currentSection])
-
   return (
-    <Section name="portfolio" className={style.root} onEnter={saveElementPosition}>
+    <Section name="portfolio" className={style.root}>
       <div className={style.titleContainer}>
         <MenuItem index={1} name="Portfolio" />
       </div>
+      <video id="skReel" autoPlay muted loop playsInline className={style.video}>
+        <source src="/projects/sk/sk-reel.mp4" type="video/mp4" />
+      </video>
       <video id="aqReel" autoPlay muted loop playsInline className={style.video}>
-        <source src="/textures/projects/aq/reel-aq.mp4" type="video/mp4" />
+        <source src="/projects/aq/reel-aq.mp4" type="video/mp4" />
+      </video>
+      <video id="fbReel" autoPlay muted loop playsInline className={style.video}>
+        <source src="/projects/fb/fb-reel.mp4" type="video/mp4" />
+      </video>
+      <video id="feudiReel" autoPlay muted loop playsInline className={style.video}>
+        <source src="/projects/feudi/feudi-reel.mp4" type="video/mp4" />
+      </video>
+      <video id="claralunaReel" autoPlay muted loop playsInline className={style.video}>
+        <source src="/projects/claraluna/claraluna-reel.mp4" type="video/mp4" />
       </video>
     </Section>
   )

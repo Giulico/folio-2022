@@ -1,3 +1,5 @@
+import type { Location } from 'history'
+import type { Store } from 'store'
 import type Experience from 'components/Experience/Experience'
 import type { BloomPass } from 'three/examples/jsm/postprocessing/BloomPass'
 import type { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass'
@@ -14,9 +16,9 @@ declare global {
   interface Window {
     cursor: Cursor
     experience: Experience
-    store: any
-    comingLocation: any
-    currentLocation: any
+    store: Store
+    comingLocation: Location
+    currentLocation: Location
   }
 
   interface BloomPassExtended extends BloomPass {

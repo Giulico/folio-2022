@@ -37,11 +37,46 @@
 
   position: relative;
   display: block;
+  width: var(--size);
+  height: var(--size);
   border: none;
   background-color: transparent;
   color: var(--color-white);
   font-family: var(--font-family-base);
   user-select: none;
+
+  .circle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--size);
+    height: var(--size);
+    will-change: transform;
+
+    &::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: var(--size);
+      height: var(--size);
+      background-color: var(--color-white);
+      border-radius: 50%;
+      content: '';
+      opacity: 0.2;
+      transform: translate3d(-50%, -50%, 0) scale(0, 0);
+      transition: transform 0.7s ease-in-out 0s;
+    }
+  }
+
+  &:hover,
+  .open & {
+    .circle {
+      &::after {
+        transform: translate3d(-50%, -50%, 0) scale(1, 1);
+        transition: transform 0.3s ease-in-out 0s;
+      }
+    }
+  }
 }
 
 .start,

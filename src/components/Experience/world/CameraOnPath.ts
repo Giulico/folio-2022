@@ -39,28 +39,23 @@ export default class CameraOnPath {
     // filename = "/Users/giulio/Desktop/Personal data/Portfolio 2022/Blender script/export_curve_points.py"
     // exec(compile(open(filename).read(), filename, 'exec'))
     this.points = [
-      [0.4926736354827881, -1.2741336822509766, 5.7993903160095215],
-      [6.481095314025879, -1.1794805526733398, 4.355730056762695],
-      [5.979461193084717, -2.4142465591430664, 4.092484951019287],
-      [4.6285905838012695, -3.106524705886841, 3.785893201828003],
-      [2.370417833328247, -3.4643492698669434, 3.6577494144439697],
-      [0.8954894542694092, -3.49639892578125, 3.643882989883423],
-      [0.899259090423584, -3.495410919189453, 3.6446266174316406],
-      [0.8954894542694092, -3.49639892578125, 3.643882989883423],
-      [0.8993373513221741, -3.4954590797424316, 3.6446948051452637],
-      [0.8954894542694092, -3.49639892578125, 3.643882989883423],
-      [-1.0636134147644043, -2.9119200706481934, 3.7828736305236816],
-      [-2.043549060821533, -1.7312498092651367, 3.946715831756592],
-      [-1.403911828994751, -0.2910417914390564, 4.682248592376709],
-      [1.4550237655639648, -1.9338868856430054, 4.648040294647217],
-      [1.7000510692596436, -1.6848936080932617, 4.73479700088501]
+      [2.250452756881714, -0.6193802356719971, 5.541167736053467],
+      [2.6620843410491943, 0.11057017743587494, 5.301249980926514],
+      [2.516335964202881, 0.9883434176445007, 5.428454399108887],
+      [4.733654975891113, 1.1559828519821167, 5.421966552734375],
+      [3.7817535400390625, -0.07272994518280029, 5.208369731903076],
+      [2.1067583560943604, -0.5117961764335632, 5.110057830810547],
+      [0.6217780113220215, -0.49705809354782104, 4.89720344543457],
+      [0.13143301010131836, 0.1222834587097168, 4.743571758270264],
+      [0.5761919021606445, -0.29803839325904846, 4.895688533782959],
+      [1.8171645402908325, -0.40591803193092346, 5.022176742553711]
     ]
     this.vertices = []
     this.lookAt = {
-      current: new THREE.Vector3(0, 3.4, 0),
-      head: new THREE.Vector3(0, 3.4, 0),
+      current: new THREE.Vector3(0, 3.2, 0),
+      head: new THREE.Vector3(0, 3.2, 0),
       body: new THREE.Vector3(0, 3, 0),
-      chest: new THREE.Vector3(0, 2, 0),
+      chest: new THREE.Vector3(0, 3.2, 0),
       behind: new THREE.Vector3(0, 4, -20)
     }
     this.percentage = 0
@@ -112,11 +107,11 @@ export default class CameraOnPath {
           })
           break
         case 'portfolio':
-          gsap.to(this.lookAt.current, {
-            y: this.lookAt.chest.y,
-            duration: 1,
-            ease: 'power3.inOut'
-          })
+          // gsap.to(this.lookAt.current, {
+          //   y: this.lookAt.chest.y,
+          //   duration: 1,
+          //   ease: 'power3.inOut'
+          // })
           break
         default:
           break
@@ -143,9 +138,9 @@ export default class CameraOnPath {
     // Convert the array of points into vertices
     // (in Blender the z axis is UP so we swap the z and y)
     for (let i = 0; i < this.points.length; i++) {
-      const x = this.points[i][0] - 2
-      const y = this.points[i][1]
-      const z = this.points[i][2] - 2
+      const x = this.points[i][0] - 1.5
+      const y = this.points[i][1] - 1.2
+      const z = this.points[i][2] - 2.5 // Altezza
 
       this.vertices[i] = new THREE.Vector3(x, z, -y)
     }

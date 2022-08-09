@@ -30,7 +30,7 @@ export default function Hero() {
     menu: state.menu
   }))
 
-  const { gone } = useScrollOffset({ offset: 50 })
+  const { gone } = useScrollOffset({ offset: 200 })
 
   const scrambleClasses = cn(style.scramble, {
     [style.gone]: gone || menu.open
@@ -51,7 +51,7 @@ export default function Hero() {
         </div>
       </header>
       <Section name="hero" className={style.root}>
-        <MenuItem index={0} name="TheyCallMeGiulio" />
+        <MenuItem index={0} name="Swag" />
         <div className={style.middle}>
           <span className={style.line} />
           <div className={scrambleClasses}>

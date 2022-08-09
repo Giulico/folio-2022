@@ -98,7 +98,7 @@ export default class Portfolio {
 
     this.debugObject = {
       offsetX: 1.0,
-      offsetY: 2.0,
+      offsetY: 2.7,
       offsetZ: 0.8,
       pageHeightFactor: 2.1
     }
@@ -134,7 +134,7 @@ export default class Portfolio {
 
     const { offsetX, offsetY, offsetZ } = this.debugObject
 
-    const zRound = [0, 0.5, 0.75, 0.5, 0]
+    const zRound = [-0.5, 0.0, 0.25, 0.0, -0.5]
     for (let i = 0; i < this.projects.length; i++) {
       // Geometry
       const geometry = new THREE.PlaneGeometry(1, 0.7, 24, 24)
@@ -156,7 +156,7 @@ export default class Portfolio {
         material
       })
       clickablMesh.name = name
-      // clickablMesh.visible = false
+      clickablMesh.visible = false
       clickablMesh.position.set(i * 1.3 + offsetX, offsetY, offsetZ)
       clickablMesh.position.z += zRound[i]
       clickablMesh.rotation.y = -0.5 + (Math.PI / 10) * i
@@ -206,15 +206,15 @@ export default class Portfolio {
   }
 
   enterAnimation() {
-    console.log('enter animation')
+    // console.log('enter animation')
     for (let i = 0; i < this.items.length; i++) {
       const item = this.items[i]
-      item.visible = true
+      // item.visible = true
     }
   }
 
   leaveAnimation() {
-    console.log('leave animation')
+    // console.log('leave animation')
     // const { offsetX, offsetY, offsetZ } = this.debugObject
     for (let i = 0; i < this.items.length; i++) {
       const item = this.items[i]

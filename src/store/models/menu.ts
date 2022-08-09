@@ -5,10 +5,12 @@ const initialState: {
   open: boolean
   refs: HTMLDivElement[]
   index: number
+  triggerY: number
 } = {
   open: false,
   refs: [],
-  index: -1
+  index: -1,
+  triggerY: 0
 }
 
 export const menu = createModel<RootModel>()({
@@ -30,6 +32,12 @@ export const menu = createModel<RootModel>()({
       return {
         ...state,
         index: payload
+      }
+    },
+    setTriggerY(state, payload: number) {
+      return {
+        ...state,
+        triggerY: payload
       }
     }
   }

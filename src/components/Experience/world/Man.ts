@@ -188,7 +188,6 @@ export default class Man {
 
     // Constrains
     // I.  The name "hero", "portfolio", ecc must be the same of the store.section
-    // II. The first clipAction must be the Armature, the second the Camera
     this.animation = {
       mixer,
       actions: {
@@ -200,34 +199,34 @@ export default class Man {
         },
         hero: {
           enter: {
-            a: mixer.clipAction(subClip(globalClip, 'hero', 80, 160))
+            a: mixer.clipAction(subClip(globalClip, 'hero', 80, 260))
           },
           loop: {
-            a: mixer.clipAction(subClip(globalClip, 'hero.loop', 160, 240))
+            a: mixer.clipAction(subClip(globalClip, 'hero.loop', 260, 610))
           }
         },
         portfolio: {
           enter: {
-            a: mixer.clipAction(subClip(globalClip, 'portfolio', 240, 320))
+            a: mixer.clipAction(subClip(globalClip, 'portfolio', 610, 690))
           },
           loop: {
-            a: mixer.clipAction(subClip(globalClip, 'portfolio.loop', 320, 400))
+            a: mixer.clipAction(subClip(globalClip, 'portfolio.loop', 690, 770))
           }
         },
         about: {
           enter: {
-            a: mixer.clipAction(subClip(globalClip, 'about', 400, 450))
+            a: mixer.clipAction(subClip(globalClip, 'about', 770, 820))
           },
           loop: {
-            a: mixer.clipAction(subClip(globalClip, 'about.loop', 450, 500))
+            a: mixer.clipAction(subClip(globalClip, 'about.loop', 820, 870))
           }
         },
         contact: {
           enter: {
-            a: mixer.clipAction(subClip(globalClip, 'contact', 500, 540))
+            a: mixer.clipAction(subClip(globalClip, 'contact', 870, 910))
           },
           loop: {
-            a: mixer.clipAction(subClip(globalClip, 'contact.loop', 540, 640))
+            a: mixer.clipAction(subClip(globalClip, 'contact.loop', 910, 1060))
           }
         }
       }
@@ -267,6 +266,12 @@ export default class Man {
     const finishedName = this._getAnimationName(finishedClipName)
     const finishedType = this._getAnimationType(finishedClipName)
 
+    // Check if the finished animation is already fading out. If so, return with no action.
+    // This can happen if user scroll quickly up and down and reach the end while user is in another section
+    if (finishedAction.getEffectiveWeight() < 1) {
+      return
+    }
+
     // Always stop finished animation
     // But in order to avoid jumps to the first frame when the animation is stale,
     // Animations are pushed into an array and stopped on the next action()
@@ -291,6 +296,48 @@ export default class Man {
       // Enable page scroll
       window.store.dispatch.scroll.canScroll()
     }
+  }
+
+  action(type = 'fade', animation: AnimationAction, prevAnimation?: AnimationAction) {
+    const thisClipName = animation.getClip().name
+    const thisAnimationName = this._getAnimationName(thisClipName) as Sections
+    const thisAnimationType = this._getAnimationType(thisClipName) as 'enter' | 'loop'
+
+    if (!thisAnimationName || !thisAnimationType) {
+      throw new Error('action() is not able to identify the animation name or type')
+    }
+
+    animation.reset()
+
+    if (!thisClipName.includes('loop')) {
+      animation.clampWhenFinished = true
+      animation.setLoop(THREE.LoopOnce, 1)
+    }
+
+    if (type === 'play') {
+      if (this.showLogs) console.log(`${thisClipName} play()`)
+
+      animation.play()
+    } else if (type === 'fade' && prevAnimation) {
+      if (this.showLogs)
+        console.log(`${thisClipName} crossFadeFrom(${prevAnimation.getClip().name})`)
+
+      animation.crossFadeFrom(prevAnimation, 1, false).play()
+    }
+
+    // Stop finished animation
+    for (const finishedAnimation of this.finishedAnimations) {
+      requestAnimationFrame(() => {
+        if (this.showLogs) console.log(`${finishedAnimation.getClip().name} stop()`)
+        finishedAnimation.stop()
+      })
+    }
+    this.finishedAnimations = []
+
+    // Set Current Animation
+    if (!this.animation?.actions) throw new Error('No this.animation.actions found in action()')
+
+    this.animation.actions.current = animation
   }
 
   _getAnimationName(clipName: string): Sections {
@@ -334,48 +381,6 @@ export default class Man {
     }
 
     throw new Error(`_getAnimationType cannot find type of ${clipName} clip`)
-  }
-
-  action(type = 'fade', animation: AnimationAction, prevAnimation?: AnimationAction) {
-    const thisClipName = animation.getClip().name
-    const thisAnimationName = this._getAnimationName(thisClipName) as Sections
-    const thisAnimationType = this._getAnimationType(thisClipName) as 'enter' | 'loop'
-
-    if (!thisAnimationName || !thisAnimationType) {
-      throw new Error('action() is not able to identify the animation name or type')
-    }
-
-    animation.reset()
-
-    if (!thisClipName.includes('loop')) {
-      animation.clampWhenFinished = true
-      animation.setLoop(THREE.LoopOnce, 1)
-    }
-
-    if (type === 'play') {
-      if (this.showLogs) console.log(`${thisClipName} play()`)
-
-      animation.play()
-    } else if (type === 'fade' && prevAnimation) {
-      if (this.showLogs)
-        console.log(`${thisClipName} crossFadeFrom(${prevAnimation.getClip().name})`)
-
-      animation.crossFadeFrom(prevAnimation, 1, true).play()
-    }
-
-    // Stop finished animation
-    for (const finishedAnimation of this.finishedAnimations) {
-      requestAnimationFrame(() => {
-        if (this.showLogs) console.log(`${finishedAnimation.getClip().name} stop()`)
-        finishedAnimation.stop()
-      })
-    }
-    this.finishedAnimations = []
-
-    // Set Current Animation
-    if (!this.animation?.actions) throw new Error('No this.animation.actions found in action()')
-
-    this.animation.actions.current = animation
   }
 
   update() {

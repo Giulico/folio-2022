@@ -10,6 +10,8 @@ import style from './index.module.css'
 // Hooks
 import { useSelector } from 'react-redux'
 
+import { showExperience } from 'settings'
+
 function LoadProgress() {
   const app = useSelector((state: RootState) => state.app)
 
@@ -17,19 +19,16 @@ function LoadProgress() {
     [style.loaded]: app.loadingProgress === 1
   })
 
-  return (
+  return showExperience ? (
     <div className={classes}>
       <div
         className={style.bar}
         style={{
-          transform:
-            app.loadingProgress < 1
-              ? `scaleX(${app.loadingProgress})`
-              : undefined
+          transform: app.loadingProgress < 1 ? `scaleX(${app.loadingProgress})` : undefined
         }}
       />
     </div>
-  )
+  ) : null
 }
 
 export default LoadProgress

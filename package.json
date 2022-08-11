@@ -30,7 +30,8 @@
     "redux": "^4.2.0",
     "requestanimationframe-timer": "^3.0.3",
     "scroll-lock": "^2.1.5",
-    "three": "^0.142.0"
+    "three": "^0.142.0",
+    "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.1",
@@ -40,6 +41,7 @@
     "@types/react-dom": "^18.0.5",
     "@types/scroll-lock": "^2.1.0",
     "@types/three": "^0.141.0",
+    "@types/webfontloader": "^1.6.34",
     "@typescript-eslint/eslint-plugin": "^5.31.0",
     "@typescript-eslint/parser": "^5.31.0",
     "@vitejs/plugin-react": "^1.3.2",

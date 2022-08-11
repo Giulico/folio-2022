@@ -6,7 +6,6 @@ import type { RootState } from 'store'
 // Utils
 import * as THREE from 'three'
 import { gsap } from 'gsap'
-import { scaleValue } from 'utils/math'
 import { disablePageScroll, enablePageScroll } from 'scroll-lock'
 import { rootNavigate } from 'components/CustomRouter'
 import {
@@ -17,18 +16,13 @@ import {
 } from '@masatomakino/threejs-interactive-object'
 import StoreWatcher from '../utils/StoreWatcher'
 
-// Shaders
-import vertexShader from './shaders/portfolio/vertex'
-import fragmentShader from './shaders/portfolio/fragment'
-
 // Components
 import Experience from '../Experience'
 
 type DebugObject = {
+  offsetX: number
   offsetY: number
-  distanceFromCamera: number
-  iColorOuter: THREE.Color
-  iColorInner: THREE.Color
+  offsetZ: number
 }
 
 type Project = {
@@ -42,35 +36,30 @@ export default class Portfolio {
   world: Experience['world']
   resources: Experience['resources']
   debug: Experience['debug']
-  time: Experience['time']
   sizes: Experience['sizes']
+  time: Experience['time']
+  resource: LoadResult
+  renderer: Experience['renderer']['instance']
   debugFolder: GUI | undefined
   group!: THREE.Group
-  groupPosition!: THREE.Vector3
   items!: THREE.Mesh[]
   debugObject: DebugObject
   material!: StateMaterialSet
   camera: THREE.PerspectiveCamera
   manager: MouseEventManager | undefined
+  itemsXPosition: number[] = []
   projects: Project[]
-  scrollBoundaries: [number, number]
-  xPosition: number
-  isVisible: boolean
-  visibleItemIndex: number
 
   constructor() {
-    this.isVisible = false
-    this.scrollBoundaries = [0, 0]
-    this.xPosition = 0
-    this.visibleItemIndex = 0
-
     this.experience = new Experience()
-    this.resources = this.experience.resources
+    this.sizes = this.experience.sizes
     this.scene = this.experience.scene
     this.world = this.experience.world
-    this.sizes = this.experience.sizes
 
+    this.resources = this.experience.resources
+    this.resource = this.resources.items.manModel
     this.time = this.experience.time
+    this.renderer = this.experience.renderer.instance
 
     this.camera = this.experience.world.cameraOnPath.camera
     if (this.camera && this.experience.renderer.canvas) {
@@ -107,10 +96,9 @@ export default class Portfolio {
     }
 
     this.debugObject = {
-      distanceFromCamera: 1.1,
-      offsetY: -0.039,
-      iColorOuter: new THREE.Color(0x426ff5),
-      iColorInner: new THREE.Color(0xc9ddf2)
+      offsetX: 1.0,
+      offsetY: 2.7,
+      offsetZ: 0.8
     }
 
     this.setItems()
@@ -123,13 +111,6 @@ export default class Portfolio {
     const currentSection = state.section.current
     const prevSection = prevState.section.current
 
-    if (state.section.boundaries !== prevState.section.boundaries) {
-      const portfolioBoundaries = state.section.boundaries.find((b) => b.name === 'portfolio')
-      if (portfolioBoundaries) {
-        this.scrollBoundaries = [portfolioBoundaries.start, portfolioBoundaries.end]
-      }
-    }
-
     // Section
     if (currentSection !== prevSection && currentSection === 'portfolio') {
       this.enterAnimation()
@@ -140,45 +121,28 @@ export default class Portfolio {
     }
   }
 
-  updateGroupPosition() {
-    const { offsetY, distanceFromCamera } = this.debugObject
-    this.groupPosition = new THREE.Vector3(this.xPosition, offsetY, -distanceFromCamera)
-    this.groupPosition.applyMatrix4(this.camera.matrixWorld)
-  }
-
   setItems() {
     this.group = new THREE.Group()
     this.group.name = 'portfolio'
 
-    // Set the group in front of the camera
-    this.updateGroupPosition()
-    this.group.position.set(this.groupPosition.x, this.groupPosition.y, this.groupPosition.z)
-
     this.items = []
 
+    const { offsetX, offsetY, offsetZ } = this.debugObject
+
+    const zRound = [-0.5, 0.0, 0.25, 0.0, -0.5]
     for (let i = 0; i < this.projects.length; i++) {
       // Geometry
-      const geometry = new THREE.PlaneGeometry(0.7, 0.5, 24, 24)
+      const geometry = new THREE.PlaneGeometry(1, 0.7, 24, 24)
 
       // Play video
       const { video, name } = this.projects[i]
       video.play()
 
-      const uniforms = {
-        iFactor: { value: 2 },
-        iChannel0: { value: new THREE.VideoTexture(video) },
-        iChannel1: { value: this.resources.items.noise },
-        iColorOuter: { value: this.debugObject.iColorOuter },
-        iColorInner: { value: this.debugObject.iColorInner }
-      }
-
       // Material
       const material = new StateMaterialSet({
-        normal: new THREE.ShaderMaterial({
-          transparent: true,
-          uniforms,
-          vertexShader,
-          fragmentShader
+        normal: new THREE.MeshBasicMaterial({
+          color: 0x333333,
+          map: new THREE.VideoTexture(video)
         })
       })
 
@@ -187,10 +151,12 @@ export default class Portfolio {
         material
       })
       clickablMesh.name = name
-      clickablMesh.position.set(i * 1.1, 0, 0)
+      clickablMesh.visible = true
+      clickablMesh.position.set(i * 1.3 + offsetX, offsetY, offsetZ)
+      clickablMesh.position.z += zRound[i]
+      clickablMesh.rotation.y = -0.5 + (Math.PI / 10) * i
 
       clickablMesh.addEventListener(ThreeMouseEventType.CLICK, (e) => {
-        if (!this.isVisible) return
         rootNavigate(e.model.view.name)
       })
 
@@ -198,61 +164,57 @@ export default class Portfolio {
       this.items[i] = clickablMesh
     }
 
+    this.group.position.x = -3
+    // this.group.rotation.z = Math.PI / 15
     this.scene.add(this.group)
 
     // Debug
     if (this.debug.active && this.debugFolder) {
-      this.debugFolder.add(this.debugObject, 'distanceFromCamera').min(0).max(5).step(0.1)
-
-      this.debugFolder.add(this.debugObject, 'offsetY').min(-5).max(5).step(0.001)
-      this.debugFolder.addColor(this.debugObject, 'iColorOuter').onChange((v: string) => {
-        for (const item of this.items) {
-          item.material.uniforms.iColorOuter.value = new THREE.Color(v)
-        }
-      })
-      this.debugFolder.addColor(this.debugObject, 'iColorInner').onChange((v: string) => {
-        for (const item of this.items) {
-          item.material.uniforms.iColorInner.value = new THREE.Color(v)
-        }
-      })
+      this.debugFolder.add(this.debugObject, 'offsetX').min(-10).max(3).step(0.1)
+      // .onChange((v: number) => {
+      //   for (let i = 0; i < this.items.length; i++) {
+      //     this.items[i].position.x = i * 2 + v;
+      //   }
+      // });
+      this.debugFolder
+        .add(this.debugObject, 'offsetY')
+        .min(0)
+        .max(10)
+        .step(0.01)
+        .onChange((v: number) => {
+          for (let i = 0; i < this.items.length; i++) {
+            this.items[i].position.y = v
+          }
+        })
+      this.debugFolder
+        .add(this.debugObject, 'offsetZ')
+        .min(-5)
+        .max(5)
+        .step(0.01)
+        .onChange((v: number) => {
+          for (let i = 0; i < this.items.length; i++) {
+            this.items[i].position.z = v
+          }
+        })
     }
   }
 
   enterAnimation() {
-    this.isVisible = true
-    window.addEventListener('scroll', this.scrollHandler)
-  }
-
-  revealItem(index: number) {
-    if (!this.items[index]) return
-
-    gsap.to(this.items[index].material.uniforms.iFactor, {
-      value: 3.2,
-      duration: 3,
-      ease: 'power3.out'
-    })
-  }
-
-  restoreItems() {
-    for (const item of this.items) {
-      gsap.killTweensOf(item.material.uniforms.iFactor, 'value')
-      gsap.set(item.material.uniforms.iFactor, { value: 2 })
-    }
-  }
-
-  scrollHandler = () => {
-    this.xPosition = scaleValue(window.scrollY, this.scrollBoundaries, [0, -this.projects.length])
-    if (Math.abs(this.xPosition - 0.2) !== this.visibleItemIndex) {
-      const itemIndex = Math.floor(Math.abs(this.xPosition - 0.2))
-      this.revealItem(itemIndex)
-      this.visibleItemIndex = itemIndex
+    // console.log('enter animation')
+    for (let i = 0; i < this.items.length; i++) {
+      const item = this.items[i]
+      // item.visible = true
     }
   }
 
   leaveAnimation() {
-    this.isVisible = false
-    this.restoreItems()
-    window.removeEventListener('scroll', this.scrollHandler)
+    // console.log('leave animation')
+    // const { offsetX, offsetY, offsetZ } = this.debugObject
+    for (let i = 0; i < this.items.length; i++) {
+      const item = this.items[i]
+      //   item.position.set(i * 1.3 + offsetX, offsetY, offsetZ)
+      item.visible = false
+    }
   }
 
   openProjectAnimation() {
@@ -299,15 +261,13 @@ export default class Portfolio {
     const item = this.items[index]
     if (!item) throw new Error('Project not found')
 
-    enablePageScroll()
-    /*
     // move object to parent without changing it's world orientation
     this.group.attach(item)
 
     this.camera.updateMatrixWorld()
 
     // Position
-    const { offsetY } = this.debugObject
+    const { offsetX, offsetY, offsetZ } = this.debugObject
     gsap.to(item.position, {
       x: index * 1.3 + offsetX,
       y: offsetY,
@@ -326,26 +286,9 @@ export default class Portfolio {
         enablePageScroll()
       }
     })
-    */
   }
 
   update() {
-    if (!this.isVisible) return
-
-    // Set the group in front of the camera
-    this.updateGroupPosition()
-
-    gsap.to(this.group.position, {
-      x: this.groupPosition.x,
-      y: this.groupPosition.y,
-      z: this.groupPosition.z,
-      duration: 2
-    })
-    gsap.to(this.group.rotation, {
-      x: this.camera.rotation.x,
-      y: this.camera.rotation.y,
-      z: this.camera.rotation.z,
-      duration: 2
-    })
+    // Update
   }
 }

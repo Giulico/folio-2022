@@ -23,11 +23,6 @@ const sources: Sources = [
     path: '/textures/man/roughness.jpeg'
   },
   {
-    name: 'smoke',
-    type: 'texture',
-    path: '/textures/Smoke/smoke.png'
-  },
-  {
     name: 'manSkin',
     type: 'texture',
     path: 'https://i.imgur.com/oYS135g.jpeg'
@@ -41,6 +36,11 @@ const sources: Sources = [
     name: 'manModel',
     type: 'gltfModel',
     path: '/models/Man/Man6.glb'
+  },
+  {
+    name: 'noise',
+    type: 'texture',
+    path: '/textures/noise/noise.jpeg'
   }
 ]
 

@@ -18,8 +18,9 @@
 
 .inner {
   display: block;
-  animation: to-white 2.5s forwards;
   line-height: 1;
+  transform: translate3d(0, 0, 0);
+  transition: transform 1s var(--expo-ease-in-out) 1s;
 }
 
 .bold {
@@ -27,9 +28,32 @@
   font-weight: var(--fw-semibold);
 }
 
-.lightBg {
+.root.hidden {
+  .inner {
+    transform: translate3d(-100%,0, 0);
+  }
+}
+
+.root.toWhite {
+  .inner {
+    animation: to-white 2.5s forwards;
+  }
+}
+
+.root.toBlack {
   .inner {
     animation: to-black 2.5s forwards;
+  }
+}
+
+
+@keyframes enter {
+  0% {
+    transform: translate3d(0, -100%, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
   }
 }
 

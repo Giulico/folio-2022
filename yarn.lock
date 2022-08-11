@@ -1411,6 +1411,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/webfontloader@npm:^1.6.34":
+  version: 1.6.34
+  resolution: "@types/webfontloader@npm:1.6.34"
+  checksum: acd945cbf76f22f9f1040ed0b86aafba0b0dd1f5fe05238896208273fd4243eec9412e0349fb4991948ee62102270ddacc21e354052dcbdcd5a3278131f83277
+  languageName: node
+  linkType: hard
+
 "@types/webxr@npm:*":
   version: 0.5.0
   resolution: "@types/webxr@npm:0.5.0"
@@ -3673,6 +3680,7 @@ __metadata:
     "@types/react-dom": ^18.0.5
     "@types/scroll-lock": ^2.1.0
     "@types/three": ^0.141.0
+    "@types/webfontloader": ^1.6.34
     "@typescript-eslint/eslint-plugin": ^5.31.0
     "@typescript-eslint/parser": ^5.31.0
     "@vitejs/plugin-react": ^1.3.2
@@ -3717,6 +3725,7 @@ __metadata:
     three: ^0.142.0
     typescript: ^4.7.4
     vite: ^2.9.13
+    webfontloader: ^1.6.28
   languageName: unknown
   linkType: soft
 
@@ -8485,6 +8494,13 @@ __metadata:
   dependencies:
     defaults: ^1.0.3
   checksum: 814e9d1ddcc9798f7377ffa448a5a3892232b9275ebb30a41b529607691c0491de47cba426e917a4d08ded3ee7e9ba2f3fe32e62ee3cd9c7d3bafb7754bd553c
+  languageName: node
+  linkType: hard
+
+"webfontloader@npm:^1.6.28":
+  version: 1.6.28
+  resolution: "webfontloader@npm:1.6.28"
+  checksum: cbebbe593cb0d27dbb4d418f7f96bd9893024f1f2062e858af76209b6524e25d766964b6e2a724f3b694fadef661dd3a01065455a96df05337b3281ca09ab656
   languageName: node
   linkType: hard
 

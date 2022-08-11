@@ -10,6 +10,7 @@ export default defineConfig({
       { find: 'components', replacement: '/src/components' },
       { find: 'partials', replacement: '/src/partials' },
       { find: 'store', replacement: '/src/store/store.ts' },
+      { find: 'settings', replacement: '/src/settings.ts' },
       { find: 'styles', replacement: '/src/styles' },
       { find: 'hooks', replacement: '/src/hooks' },
       { find: 'utils', replacement: '/src/utils' },

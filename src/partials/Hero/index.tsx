@@ -51,7 +51,7 @@ export default function Hero() {
         </div>
       </header>
       <Section name="hero" className={style.root}>
-        <MenuItem index={0} name="Swag" />
+        <MenuItem index={0} name="TCMG" />
         <div className={style.middle}>
           <span className={style.line} />
           <div className={scrambleClasses}>

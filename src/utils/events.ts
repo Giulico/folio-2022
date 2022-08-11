@@ -1,12 +1,17 @@
-export const cursorPosition = (e: any) => {
-  const cursor = { x: 0, y: 0 }
+type Cursor = { x: number; y: number }
+
+export const cursorPosition = (
+  e: (MouseEvent | TouchEvent) & { originalEvent?: TouchEvent }
+): Cursor => {
+  const cursor: Cursor = { x: 0, y: 0 }
   if (
     e.type == 'touchstart' ||
     e.type == 'touchmove' ||
     e.type == 'touchend' ||
     e.type == 'touchcancel'
   ) {
-    const evt = typeof e.originalEvent === 'undefined' ? e : e.originalEvent
+    const original = e.originalEvent
+    const evt = (typeof original === 'undefined' ? e : original) as TouchEvent
     const touch = evt.touches[0] || evt.changedTouches[0]
     cursor.x = touch.pageX
     cursor.y = touch.pageY
@@ -19,8 +24,9 @@ export const cursorPosition = (e: any) => {
     e.type == 'mouseenter' ||
     e.type == 'mouseleave'
   ) {
-    cursor.x = e.clientX
-    cursor.y = e.clientY
+    const evt = e as MouseEvent
+    cursor.x = evt.clientX
+    cursor.y = evt.clientY
   }
   return cursor
 }

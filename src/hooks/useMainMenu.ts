@@ -7,7 +7,7 @@ import ScrollToPlugin from 'gsap/ScrollToPlugin'
 import { disablePageScroll, enablePageScroll } from 'scroll-lock'
 
 // Hooks
-import { useEffect, useRef, useCallback } from 'react'
+import { useEffect, useRef, useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 gsap.registerPlugin(ScrollToPlugin)
@@ -15,9 +15,11 @@ gsap.registerPlugin(ScrollToPlugin)
 function useMainMenu() {
   const prevOpen = useRef<boolean>(false)
   const dispatch = useDispatch()
+  const [prevSection, setPrevSection] = useState<string>('')
 
-  const { menu, sizes } = useSelector((state: RootState) => ({
+  const { menu, section, sizes } = useSelector((state: RootState) => ({
     menu: state.menu,
+    section: state.section,
     sizes: state.sizes
   }))
 
@@ -39,6 +41,9 @@ function useMainMenu() {
   useEffect(() => {
     // Open menu
     if (menu.open && prevOpen.current === false) {
+      // Save current section
+      setPrevSection(section.current)
+
       // Disable scroll
       disablePageScroll()
 
@@ -76,20 +81,33 @@ function useMainMenu() {
         })
       }
 
-      gsap.delayedCall(1, () => {
-        gsap.to(window, {
-          scrollTo: menu.refs[menu.index],
-          duration: 1.5,
-          ease: 'power3.inOut'
-        })
+      // Scroll the page
+      // TODO scroll imediately
 
+      gsap.delayedCall(1, () => {
+        if (section.current !== prevSection) {
+          gsap.to(window, {
+            scrollTo: menu.refs[menu.index],
+            duration: 1.5,
+            ease: 'power3.inOut'
+          })
+        }
         // Reset menu index
         resetMenuIndex()
       })
     }
 
     prevOpen.current = menu.open
-  }, [menu.index, menu.open, menu.refs, resetMenuIndex, sizes.height, updateSelectedItem])
+  }, [
+    menu.index,
+    menu.open,
+    menu.refs,
+    prevSection,
+    resetMenuIndex,
+    section,
+    sizes.height,
+    updateSelectedItem
+  ])
 
   useEffect(() => {
     window.addEventListener('mousemove', updateSelectedItem)

@@ -10,6 +10,8 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 import { BloomPass } from 'three/examples/jsm/postprocessing/BloomPass'
 import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass'
 
+// Classes & Settings
+import { showOrbitControls } from 'settings'
 import Experience from './Experience'
 import { PerspectiveCamera } from 'three'
 
@@ -19,7 +21,6 @@ type DebugObject = {
   grayscale: number
   nIntensity: number
   sIntensity: number
-  orbitControls: boolean
 }
 
 export default class Renderer {
@@ -56,15 +57,14 @@ export default class Renderer {
       sCount: 115,
       grayscale: 0,
       nIntensity: 0.15,
-      sIntensity: 0.18,
-      orbitControls: false
+      sIntensity: 0.18
     }
 
     this.setInstance()
   }
 
   setOrbitControls(resources: Resources) {
-    if (this.debugObject.orbitControls && resources.items.manModel?.cameras) {
+    if (showOrbitControls && resources.items.manModel?.cameras) {
       const { width, height } = this.sizes
       this.controlsCamera = new THREE.PerspectiveCamera(45, width / height, 0.01, 1000)
       this.controls = new OrbitControls(this.controlsCamera, this.canvas)
@@ -181,7 +181,7 @@ export default class Renderer {
     this.instance.toneMappingExposure = 1.75
     this.instance.shadowMap.enabled = true
     this.instance.shadowMap.type = THREE.PCFSoftShadowMap
-    // this.instance.setClearColor("#211d20");
+    // this.instance.setClearColor('#ff0000')
     this.instance.setSize(this.sizes.width, this.sizes.height)
     this.instance.setPixelRatio(this.sizes.pixelRatio)
   }
@@ -201,7 +201,7 @@ export default class Renderer {
       //   ? this.controlsCamera
       //   : this.experience.resources.items.manModel.cameras[0];
       const camera =
-        this.debugObject.orbitControls && this.controlsCamera
+        showOrbitControls && this.controlsCamera
           ? this.controlsCamera
           : this.experience.world.cameraOnPath.camera
 

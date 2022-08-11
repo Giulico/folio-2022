@@ -6,6 +6,7 @@ import World from './world/World'
 import StoreWatcher from './utils/StoreWatcher'
 import Resources from './utils/Resources'
 import sources from './sources'
+import Loader from './Loader'
 
 import Debug from './utils/Debug'
 
@@ -25,6 +26,7 @@ export default class Experience {
   renderer!: Renderer
   resources!: Resources
   world!: World
+  loader!: Loader
 
   constructor(config: ExperienceConfig = {}) {
     if (instance) {
@@ -48,6 +50,8 @@ export default class Experience {
     // this.scene.fog = new THREE.Fog(0x000000, 3, 10);
     this.renderer = new Renderer()
     this.resources = new Resources(sources, this.renderer.instance)
+
+    this.loader = new Loader()
     this.world = new World()
 
     this.sizes.on('resize', this.resize.bind(this))

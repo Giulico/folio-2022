@@ -6,6 +6,7 @@
       "components/*": ["./src/components/*"],
       "partials/*": ["./src/partials/*"],
       "store": ["./src/store/store.ts"],
+      "settings": ["./src/settings.ts"],
       "styles/*": ["./src/styles/*"],
       "utils/*": ["./src/utils/*"],
       "hooks/*": ["./src/hooks/*"],

@@ -21,4 +21,7 @@
 
 .outlined {
   @mixin text-outline-white 0.2;
+
+  font-size: 400px;
+  font-weight: 700;
 }

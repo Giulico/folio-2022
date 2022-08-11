@@ -9,6 +9,9 @@ import StoreWatcher from '../utils/StoreWatcher'
 // Components
 import Experience from '../Experience'
 
+// Settings
+import { showOrbitControls, showCameraPath } from 'settings'
+
 export default class CameraOnPath {
   experience: Experience
   scene: Experience['scene']
@@ -22,6 +25,11 @@ export default class CameraOnPath {
   curvePath!: THREE.CatmullRomCurve3
   percentage: number
   bodyHeight?: number
+  menuOpen: boolean
+  snapshot: {
+    lookAt: THREE.Vector3
+    position: THREE.Vector3
+  }
   lookAt: {
     [key: string]: THREE.Vector3
   }
@@ -32,6 +40,11 @@ export default class CameraOnPath {
     this.sizes = this.experience.sizes
     this.renderer = this.experience.renderer
 
+    this.menuOpen = false
+    this.snapshot = {
+      lookAt: new THREE.Vector3(),
+      position: new THREE.Vector3()
+    }
     this.appReady = false
 
     // How to retrive the points from Blender
@@ -53,10 +66,10 @@ export default class CameraOnPath {
     this.vertices = []
     this.lookAt = {
       current: new THREE.Vector3(0, 3.2, 0),
-      head: new THREE.Vector3(0, 3.2, 0),
       body: new THREE.Vector3(0, 3, 0),
-      chest: new THREE.Vector3(0, 3.2, 0),
-      behind: new THREE.Vector3(0, 4, -20)
+      portfolio: new THREE.Vector3(0, 2.7, 0),
+      about: new THREE.Vector3(0, 3, 0.5),
+      menu: new THREE.Vector3(2, 2, -1)
     }
     this.percentage = 0
 
@@ -95,25 +108,75 @@ export default class CameraOnPath {
       this.bodyHeight = window.document.body.clientHeight - this.sizes.height
     }
 
+    // Menu
+    if (state.menu.open !== prevState.menu.open) {
+      if (state.menu.open) {
+        this.snapshot = {
+          position: this.camera.position.clone(),
+          lookAt: this.lookAt.current.clone()
+        }
+        this.menuOpen = true
+
+        gsap.to(this.camera.position, {
+          x: 6,
+          y: 5,
+          z: 6,
+          duration: 3,
+          ease: 'power4.out'
+        })
+        gsap.to(this.lookAt.current, {
+          x: this.lookAt.menu.x,
+          y: this.lookAt.menu.y,
+          z: this.lookAt.menu.z,
+          duration: 3,
+          ease: 'power4.out'
+        })
+      } else {
+        gsap.to(this.camera.position, {
+          x: this.snapshot.position.x,
+          y: this.snapshot.position.y,
+          z: this.snapshot.position.z,
+          duration: 1.5,
+          ease: 'power4.out',
+          onComplete: () => {
+            this.menuOpen = false
+          }
+        })
+        gsap.to(this.lookAt.current, {
+          x: this.snapshot.lookAt.x,
+          y: this.snapshot.lookAt.y,
+          z: this.snapshot.lookAt.z,
+          duration: 3,
+          ease: 'power4.out'
+        })
+      }
+    }
+
     // Section
     if (state.section.current !== prevState.section.current) {
       switch (state.section.current) {
-        case 'hero':
         case 'about':
           gsap.to(this.lookAt.current, {
-            y: this.lookAt.body.y,
-            duration: 1,
-            ease: 'power3.inOut'
+            y: this.lookAt.about.y,
+            z: this.lookAt.about.z,
+            duration: 2,
+            ease: 'power2.inOut'
           })
           break
         case 'portfolio':
-          // gsap.to(this.lookAt.current, {
-          //   y: this.lookAt.chest.y,
-          //   duration: 1,
-          //   ease: 'power3.inOut'
-          // })
+          gsap.to(this.lookAt.current, {
+            y: this.lookAt.portfolio.y,
+            duration: 2,
+            ease: 'power2.inOut'
+          })
           break
         default:
+          gsap.to(this.lookAt.current, {
+            y: this.lookAt.body.y,
+            z: this.lookAt.body.z,
+            duration: 2,
+            ease: 'power2.inOut'
+          })
           break
       }
     }
@@ -128,7 +191,7 @@ export default class CameraOnPath {
     this.camera.updateProjectionMatrix()
     this.scene.add(this.camera)
 
-    if (this.renderer.debugObject.orbitControls) {
+    if (showOrbitControls) {
       this.cameraHelper = new THREE.CameraHelper(this.camera)
       this.scene.add(this.cameraHelper)
     }
@@ -151,9 +214,10 @@ export default class CameraOnPath {
     const geometry = new THREE.TubeGeometry(this.curvePath, 50, radius, 10, false)
 
     const material = new THREE.MeshBasicMaterial({
-      wireframe: true,
+      wireframe: showCameraPath,
+      visible: showCameraPath,
       transparent: true,
-      opacity: 0.0
+      opacity: showCameraPath ? 1.0 : 0.0
     })
 
     const tube = new THREE.Mesh(geometry, material)
@@ -163,11 +227,13 @@ export default class CameraOnPath {
   update() {
     if (!this.appReady) return
 
+    this.camera.updateProjectionMatrix()
+
     // Always look the current position
     this.camera.lookAt(this.lookAt.current)
 
     // when store.scroll = true follow the scroll position
-    if (this.bodyHeight) {
+    if (this.bodyHeight && !this.menuOpen) {
       this.percentage = 1 - window.scrollY / this.bodyHeight
       const p1 = this.curvePath.getPointAt(this.percentage)
 
@@ -175,12 +241,12 @@ export default class CameraOnPath {
         x: p1.x + window.cursor.x * 0.2,
         y: p1.y + window.cursor.y * 0.2,
         z: p1.z,
-        duration: 0.3
+        duration: 0.2
       })
     }
 
     // Camera Helper
-    if (this.renderer.debugObject.orbitControls) {
+    if (showOrbitControls) {
       this.cameraHelper.update()
     }
   }

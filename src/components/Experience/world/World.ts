@@ -1,10 +1,11 @@
+// Classes & Settings
+import { showPortfolio } from 'settings'
 import Experience from '../Experience'
 import Environment from './Environment'
 import Man from './Man'
 import Smoke from './Smoke'
 import Portfolio from './Portfolio'
 import CameraOnPath from './CameraOnPath'
-import Loader from './Loader'
 
 export default class World {
   experience: Experience
@@ -15,14 +16,12 @@ export default class World {
   smoke: Smoke | undefined
   environment: Environment | undefined
   portfolio: Portfolio | undefined
-  loader: Loader
 
   constructor() {
     this.experience = new Experience()
     this.scene = this.experience.scene
     this.resources = this.experience.resources
 
-    this.loader = new Loader()
     this.cameraOnPath = new CameraOnPath()
 
     // Listeners
@@ -31,7 +30,9 @@ export default class World {
       this.environment = new Environment()
       this.man = new Man()
       // this.smoke = new Smoke();
-      this.portfolio = new Portfolio()
+      if (showPortfolio) {
+        this.portfolio = new Portfolio()
+      }
     })
   }
 

@@ -43,6 +43,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.0.6"],\
             ["@types/scroll-lock", "npm:2.1.0"],\
             ["@types/three", "npm:0.141.0"],\
+            ["@types/webfontloader", "npm:1.6.34"],\
             ["@typescript-eslint/eslint-plugin", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:5.31.0"],\
             ["@typescript-eslint/parser", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:5.31.0"],\
             ["@vitejs/plugin-react", "npm:1.3.2"],\
@@ -86,7 +87,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["stylelint-order", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:5.0.0"],\
             ["three", "npm:0.142.0"],\
             ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353"],\
-            ["vite", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:2.9.14"]\
+            ["vite", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:2.9.14"],\
+            ["webfontloader", "npm:1.6.28"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -1996,6 +1998,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-use-sync-external-store-npm-0.0.3-875a91a914-161ddb8eec.zip/node_modules/@types/use-sync-external-store/",\
           "packageDependencies": [\
             ["@types/use-sync-external-store", "npm:0.0.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/webfontloader", [\
+        ["npm:1.6.34", {\
+          "packageLocation": "./.yarn/cache/@types-webfontloader-npm-1.6.34-11708ba11c-acd945cbf7.zip/node_modules/@types/webfontloader/",\
+          "packageDependencies": [\
+            ["@types/webfontloader", "npm:1.6.34"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4693,6 +4704,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.0.6"],\
             ["@types/scroll-lock", "npm:2.1.0"],\
             ["@types/three", "npm:0.141.0"],\
+            ["@types/webfontloader", "npm:1.6.34"],\
             ["@typescript-eslint/eslint-plugin", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:5.31.0"],\
             ["@typescript-eslint/parser", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:5.31.0"],\
             ["@vitejs/plugin-react", "npm:1.3.2"],\
@@ -4736,7 +4748,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["stylelint-order", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:5.0.0"],\
             ["three", "npm:0.142.0"],\
             ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353"],\
-            ["vite", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:2.9.14"]\
+            ["vite", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:2.9.14"],\
+            ["webfontloader", "npm:1.6.28"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -10645,6 +10658,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["wcwidth", "npm:1.0.1"],\
             ["defaults", "npm:1.0.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["webfontloader", [\
+        ["npm:1.6.28", {\
+          "packageLocation": "./.yarn/cache/webfontloader-npm-1.6.28-5e6803960c-cbebbe593c.zip/node_modules/webfontloader/",\
+          "packageDependencies": [\
+            ["webfontloader", "npm:1.6.28"]\
           ],\
           "linkType": "HARD"\
         }]\

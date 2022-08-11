@@ -10,7 +10,8 @@ import type { GUI } from 'lil-gui'
 import type { LoadResult } from '../utils/Resources'
 import type { RootState } from 'store'
 
-// Components
+// Classes & Settings
+import { showManAnimationLogs } from 'settings'
 import Experience from '../Experience'
 import StoreWatcher from '../utils/StoreWatcher'
 
@@ -55,6 +56,7 @@ type AnimationConfigTypes = {
   portfolio: AnimationConfig
   about: AnimationConfig
   contact: AnimationConfig
+  menu: AnimationConfig
 }
 
 export default class Man {
@@ -62,7 +64,6 @@ export default class Man {
   scene: Experience['scene']
   resources: Experience['resources']
   debug: Experience['debug']
-  showLogs: boolean
   sizes: Experience['sizes']
   time: Experience['time']
   resource: LoadResult
@@ -78,6 +79,7 @@ export default class Man {
     mixer: THREE.AnimationMixer
     actions: AnimationConfigTypes
   }
+  animationBeforeMenuOpen!: AnimationAction
   finishedAnimations: AnimationAction[]
   scroll: boolean
 
@@ -94,10 +96,9 @@ export default class Man {
     this.finishedAnimations = []
 
     this.debug = this.experience.debug
-    this.showLogs = false
 
     if (this.debug.active) {
-      this.debugFolder = this.debug.ui?.addFolder('Man')
+      this.debugFolder = this.debug.ui?.addFolder('Man').close()
     }
 
     this.debugObject = {
@@ -174,6 +175,18 @@ export default class Man {
         this.action('play', nextAnimation)
       }
     }
+
+    // Menu
+    if (state.menu.open !== prevState.menu.open) {
+      const menuAnimation = this.animation.actions.menu.enter.a
+      const currentAnimation = this.animation.actions.current
+      if (state.menu.open) {
+        this.animationBeforeMenuOpen = currentAnimation as AnimationAction
+        this.action('fade', menuAnimation, currentAnimation)
+      } else {
+        this.action('fade', this.animationBeforeMenuOpen, menuAnimation)
+      }
+    }
   }
 
   startAnimations() {
@@ -227,6 +240,11 @@ export default class Man {
           },
           loop: {
             a: mixer.clipAction(subClip(globalClip, 'contact.loop', 910, 1060))
+          }
+        },
+        menu: {
+          enter: {
+            a: mixer.clipAction(subClip(globalClip, 'menu.loop', 1060, 1150))
           }
         }
       }
@@ -315,11 +333,11 @@ export default class Man {
     }
 
     if (type === 'play') {
-      if (this.showLogs) console.log(`${thisClipName} play()`)
+      if (showManAnimationLogs) console.log(`${thisClipName} play()`)
 
       animation.play()
     } else if (type === 'fade' && prevAnimation) {
-      if (this.showLogs)
+      if (showManAnimationLogs)
         console.log(`${thisClipName} crossFadeFrom(${prevAnimation.getClip().name})`)
 
       animation.crossFadeFrom(prevAnimation, 1, false).play()
@@ -328,7 +346,7 @@ export default class Man {
     // Stop finished animation
     for (const finishedAnimation of this.finishedAnimations) {
       requestAnimationFrame(() => {
-        if (this.showLogs) console.log(`${finishedAnimation.getClip().name} stop()`)
+        if (showManAnimationLogs) console.log(`${finishedAnimation.getClip().name} stop()`)
         finishedAnimation.stop()
       })
     }
@@ -390,6 +408,10 @@ export default class Man {
     // if (this.uniforms) {
     //   this.uniforms.u_time.value += delta * 0.05;
     // }
+  }
+
+  resize() {
+    // Resize handler
   }
 }
 

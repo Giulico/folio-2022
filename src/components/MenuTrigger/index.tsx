@@ -31,6 +31,7 @@ const MenuTrigger = () => {
 
   const [circleTop, setCircleTop] = useState<number>(0)
   const [endTop, setEndTop] = useState<number>(0)
+  const [appLoading, setAppLoading] = useState<boolean>(true)
 
   // Main Menu Effects
   useMainMenu()
@@ -103,6 +104,7 @@ const MenuTrigger = () => {
 
   useEffect(() => {
     if (!app.ready) return
+
     if (circleEl.current) {
       requestAnimationFrame(() => {
         if (!circleEl.current || !endEl.current) return
@@ -112,9 +114,17 @@ const MenuTrigger = () => {
     }
   }, [app.ready, dispatch.menu, sizes.height])
 
+  useEffect(() => {
+    if (app.ready) {
+      setTimeout(() => {
+        setAppLoading(false)
+      }, 1700)
+    }
+  }, [app.ready])
+
   const classes = cn(style.root, {
     [style.open]: menu.open,
-    [style.appLoading]: !app.ready,
+    [style.notReady]: appLoading,
     [style.hidden]: location.pathname !== '/'
   })
 

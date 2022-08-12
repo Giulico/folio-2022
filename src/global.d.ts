@@ -12,7 +12,6 @@ type Cursor = {
 
 declare global {
   type Sections = 'intro' | 'hero' | 'portfolio' | 'about' | 'contact'
-
   interface Window {
     cursor: Cursor
     experience: Experience

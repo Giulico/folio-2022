@@ -7,6 +7,9 @@ import style from './index.module.css'
 // Animations
 import { leaveTop, leaveBottom, enterTop, enterBottom } from './animations'
 
+// Utils
+import cn from 'classnames'
+
 // Hooks
 import { useEffect, useMemo, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -59,8 +62,12 @@ const MenuItem = ({ name, index }: Props) => {
     }
   }, [index, menu.index, menu.open])
 
+  const classes = cn(style.root, {
+    [style.open]: menu.open
+  })
+
   return (
-    <div className={style.root} ref={ref}>
+    <div className={classes} ref={ref}>
       <div className={style.clipped} ref={clipRef}>
         {name}
       </div>

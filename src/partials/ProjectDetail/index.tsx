@@ -28,15 +28,19 @@ const ProjectDetail = () => {
   const slices = data.find(({ id }) => id === project)?.modules || []
 
   // Return the modules of current project
-  return slices.map(({ component, ...props }, index) => {
-    if (!modules?.[component]) {
-      console.warn('Module not found -> ' + component)
-      return null
-    }
+  return (
+    <>
+      {slices.map(({ component, ...props }, index) => {
+        if (!modules?.[component]) {
+          console.warn('Module not found -> ' + component)
+          return null
+        }
 
-    const Component = modules[component]
-    return <Component key={index} {...props} />
-  })
+        const Component = modules[component]
+        return <Component key={index} {...props} />
+      })}
+    </>
+  )
 }
 
 export default ProjectDetail

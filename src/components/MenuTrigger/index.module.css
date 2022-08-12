@@ -3,129 +3,16 @@
   --offset-top: 150px;
 
   margin-top: var(--spc-4);
-  margin-left: var(--frame-margin);
+  margin-left: calc(var(--frame-margin) - 4px);
 
   @media (--md-l) {
-    margin-left: var(--spc-15);
+    margin-left: calc(var(--spc-15) - 4px);
   }
 
   @media (--lg) {
     --offset-top: 200px;
 
-    margin-left: var(--spc-17);
-  }
-}
-
-.labels {
-  position: relative;
-  overflow: hidden;
-}
-
-.labelMenu,
-.labelDrag {
-  position: relative;
-  z-index: calc(var(--z-above) + 1);
-  left: 50%;
-  display: block;
-  text-align: left;
-  transform: translate3d(-50%, 0, 0);
-  transform-origin: 50% 50%;
-  transition: all 0.3s ease-in-out;
-  will-change: transform, opacity;
-
-  .hidden & {
-    transform: translate3d(-100%, 0, 0);
-    transition: transform 0.3s ease-in-out;
-  }
-}
-
-.labelDrag {
-  position: absolute;
-  opacity: 0;
-
-  /* transform: translate3d(-50%, 0%, 0); */
-}
-
-.button {
-  --vertical-margin: var(--offset-top) * 2;
-
-  @mixin label;
-
-  position: relative;
-  display: block;
-  width: var(--size);
-  height: var(--size);
-  border: none;
-  background-color: transparent;
-  color: var(--color-white);
-  cursor: grab;
-  font-family: var(--font-family-base);
-  user-select: none;
-
-  .circle {
-    position: absolute;
-    z-index: calc(var(--z-above) + 1);
-    top: 0;
-    left: 0;
-    display: flex;
-    width: var(--size);
-    height: var(--size);
-    flex-direction: column;
-    color: rgb(var(--color-whiteRGB) / 0%);
-    place-content: center;
-    will-change: transform;
-
-    &::after {
-      position: absolute;
-      z-index: var(--z-neg);
-      top: 50%;
-      left: 50%;
-      width: var(--size);
-      height: var(--size);
-      background-color: var(--color-gray-700);
-      border-radius: 50%;
-      content: '';
-      opacity: 0.4;
-      transform: translate3d(-50%, -50%, 0) scale(0, 0);
-      transition: all 0.3s var(--power3-ease-in) 0s;
-    }
-  }
-
-  &:hover,
-  .open & {
-    .circle {
-      &::after {
-        transform: translate3d(-50%, -50%, 0) scale(1, 1);
-        transition: all 0.7s var(--power3-ease-out) 0s;
-      }
-    }
-  }
-
-  &:hover {
-    .labelMenu {
-      opacity: 0;
-      transform: translate3d(-50%, -100%, 0);
-    }
-
-    .labelDrag {
-      opacity: 1;
-      transform: translate3d(-50%, -100%, 0);
-    }
-  }
-
-  .open & {
-    .labelMenu,
-    .labelDrag {
-      opacity: 0;
-    }
-
-    .circle {
-      color: var(--color-white);
-
-      &::after {
-        opacity: 1;
-      }
-    }
+    margin-left: calc(var(--spc-17) - 4px);
   }
 }
 
@@ -191,3 +78,127 @@
     transition: opacity 0.3s ease-out 0.4s;
   }
 }
+
+.labels {
+  position: relative;
+  overflow: hidden;
+}
+
+@define-mixin hidden-label {
+  transform: translate3d(0, -100%, 0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.labelMenu,
+.labelDrag {
+  z-index: calc(var(--z-above) + 1);
+  left: 50%;
+  display: block;
+  transform: translate3d(-50%, 0, 0);
+  transform-origin: 50% 50%;
+  transition: all 0.7s var(--expo-ease-in-out);
+  will-change: transform, opacity;
+}
+
+.labelDrag {
+  position: absolute;
+  opacity: 0;
+
+  /* transform: translate3d(-50%, 0%, 0); */
+  .hidden & {
+    @mixin hidden-label;
+  }
+
+  .button:hover & {
+    opacity: 1;
+    transform: translate3d(-50%, -100%, 0);
+  }
+
+  .root.open .button & {
+    opacity: 0;
+  }
+}
+
+.labelMenu {
+  position: relative;
+
+  .hidden & {
+    @mixin hidden-label;
+  }
+
+  .notReady & {
+    transform: translate3d(-150%, 0, 0);
+  }
+
+  .open & {
+    opacity: 0;
+  }
+
+  .button:hover & {
+    opacity: 0;
+    transform: translate3d(-50%, -100%, 0);
+  }
+}
+
+.button {
+  --vertical-margin: var(--offset-top) * 2;
+
+  @mixin label;
+
+  position: relative;
+  display: block;
+  width: var(--size);
+  height: var(--size);
+  border: none;
+  background-color: transparent;
+  color: var(--color-white);
+  cursor: grab;
+  font-family: var(--font-family-base);
+  user-select: none;
+}
+
+.circle {
+  position: absolute;
+  z-index: calc(var(--z-above) + 1);
+  top: 0;
+  left: 0;
+  display: flex;
+  width: var(--size);
+  height: var(--size);
+  flex-direction: column;
+  color: rgb(var(--color-whiteRGB) / 0%);
+  place-content: center;
+  will-change: transform;
+
+  .open & {
+    color: var(--color-white);
+  }
+
+  &::after {
+    position: absolute;
+    z-index: var(--z-neg);
+    top: 50%;
+    left: 50%;
+    width: var(--size);
+    height: var(--size);
+    background-color: var(--color-gray-700);
+    border-radius: 50%;
+    content: '';
+    opacity: 0.4;
+    transform: translate3d(-50%, -50%, 0) scale(0, 0);
+    transition: all 0.3s var(--power3-ease-in) 0s;
+
+    .open & {
+      opacity: 1;
+    }
+
+    .open &,
+    .button:hover & {
+      transform: translate3d(-50%, -50%, 0) scale(1, 1);
+      transition: all 0.7s var(--power3-ease-out) 0s;
+    }
+  }
+}
+
+
+/* States */

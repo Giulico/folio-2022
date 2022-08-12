@@ -18,11 +18,17 @@
 
   &.body {
     max-width: var(--sm);
-    margin: 0 calc(var(--right-margin) * 6) 0 30%;
+
+    @media (--md-l) {
+      margin: 0 calc(var(--right-margin) * 6) 0 30%;
+    }
   }
 
   &.right {
     max-width: var(--sm);
-    margin: 0 calc(var(--right-margin) * 6) 0 50%;
+
+    @media (--md-l) {
+      margin: 0 calc(var(--right-margin) * 6) 0 50%;
+    }
   }
 }

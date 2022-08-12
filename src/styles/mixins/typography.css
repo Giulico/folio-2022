@@ -1,5 +1,6 @@
 @define-mixin display-1 {
   font-size: var(--fs-display-1);
+  font-weight: var(--fw-semibold);
   line-height: 0.8;
 }
 

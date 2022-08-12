@@ -207,11 +207,13 @@ export default class Portfolio {
       this.debugFolder.add(this.debugObject, 'offsetY').min(-5).max(5).step(0.001)
       this.debugFolder.addColor(this.debugObject, 'iColorOuter').onChange((v: string) => {
         for (const item of this.items) {
+          // @ts-ignore
           item.material.uniforms.iColorOuter.value = new THREE.Color(v)
         }
       })
       this.debugFolder.addColor(this.debugObject, 'iColorInner').onChange((v: string) => {
         for (const item of this.items) {
+          // @ts-ignore
           item.material.uniforms.iColorInner.value = new THREE.Color(v)
         }
       })
@@ -226,6 +228,7 @@ export default class Portfolio {
   revealItem(index: number) {
     if (!this.items[index]) return
 
+    // @ts-ignore
     gsap.to(this.items[index].material.uniforms.iFactor, {
       value: 3.2,
       duration: 3,
@@ -235,7 +238,9 @@ export default class Portfolio {
 
   restoreItems() {
     for (const item of this.items) {
+      // @ts-ignore
       gsap.killTweensOf(item.material.uniforms.iFactor, 'value')
+      // @ts-ignore
       gsap.set(item.material.uniforms.iFactor, { value: 2 })
     }
   }

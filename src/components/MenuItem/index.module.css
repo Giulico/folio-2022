@@ -1,14 +1,19 @@
 .root {
-  @mixin display-1;
-
   position: absolute;
   top: 15vh;
   left: 30%;
   overflow: hidden;
   width: 70%;
-  line-height: 1.1;
   opacity: 1;
   pointer-events: none;
+}
+
+.clipped,
+.outlined {
+  @mixin display-1;
+
+  transform-origin: top left;
+  transition: transform 0.3s ease-in-out;
 }
 
 .clipped {
@@ -21,7 +26,15 @@
 
 .outlined {
   @mixin text-outline-white 0.2;
+}
 
-  font-size: 400px;
-  font-weight: 700;
+.open {
+  .clipped,
+  .outlined {
+    transform: scale(0.5);
+  }
+
+  .outlined {
+    @mixin text-outline-white 0.5;
+  }
 }

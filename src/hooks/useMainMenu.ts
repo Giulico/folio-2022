@@ -52,11 +52,13 @@ function useMainMenu() {
 
       // Animate menu items
       const bounding = menu.refs.map((e) => e.getBoundingClientRect().top)
-      const snap = sizes.height / menu.refs.length
+      const offset = sizes.height / 8
+      const height = sizes.height - offset * 2
+      const snap = height / menu.refs.length
       for (let i = 0; i < menu.refs.length; i++) {
         const menuItem = menu.refs[i]
         gsap.to(menuItem, {
-          y: `${snap * i - bounding[i]}px`,
+          y: `${snap * i - bounding[i] + offset}px`,
           duration: 1,
           ease: 'power3.out'
         })

@@ -13,8 +13,8 @@ export const cursorPosition = (
     const original = e.originalEvent
     const evt = (typeof original === 'undefined' ? e : original) as TouchEvent
     const touch = evt.touches[0] || evt.changedTouches[0]
-    cursor.x = touch.pageX
-    cursor.y = touch.pageY
+    cursor.x = touch.clientX
+    cursor.y = touch.clientY
   } else if (
     e.type == 'mousedown' ||
     e.type == 'mouseup' ||

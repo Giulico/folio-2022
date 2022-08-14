@@ -34,7 +34,7 @@ const MenuTrigger = () => {
   const [appLoading, setAppLoading] = useState<boolean>(true)
 
   // Main Menu Effects
-  useMainMenu()
+  const { isScrolling } = useMainMenu()
 
   const isDesktop = useMediaQuery({ minWidth: breakpoints.lg })
   const circleEl = useRef<HTMLDivElement>(null)
@@ -56,14 +56,14 @@ const MenuTrigger = () => {
   const openMenu = useCallback(
     (event: React.MouseEvent<Element, MouseEvent> | React.TouchEvent<HTMLButtonElement>) => {
       const eventType = isDesktop ? 'mousedown' : 'touchstart'
-      if (event.type !== eventType) return
+      if (isScrolling || event.type !== eventType) return
 
       dispatch.menu.open(true)
 
       window.addEventListener('mouseup', closeMenu)
       window.addEventListener('touchend', closeMenu)
     },
-    [closeMenu, dispatch.menu, isDesktop]
+    [closeMenu, dispatch.menu, isDesktop, isScrolling]
   )
 
   const syncYAxe = useCallback(
@@ -71,6 +71,7 @@ const MenuTrigger = () => {
       if (!circleEl.current) return
 
       const { y: cursorY } = cursorPosition(e)
+      // console.log(cursorY)
       const absCurrCircleT = cursorY - 25
       const currCircleT = cursorY - circleTop - 25
 
@@ -98,10 +99,12 @@ const MenuTrigger = () => {
     } else {
       window.removeEventListener('mousemove', syncYAxe)
       window.removeEventListener('touchmove', syncYAxe)
-      gsap.set(circleEl.current, { clearProps: 'all' })
+      gsap.killTweensOf(circleEl.current)
+      gsap.set(circleEl.current, { clearProps: 'all', delay: 0.5 })
     }
   }, [menu.open, syncYAxe])
 
+  // Saving boundaries on app ready and on resize
   useEffect(() => {
     if (!app.ready) return
 

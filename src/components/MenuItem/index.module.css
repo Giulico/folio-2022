@@ -12,8 +12,9 @@
 .outlined {
   @mixin display-1;
 
+  transform: scale(1);
   transform-origin: top left;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.7s var(--expo-ease-in-out) 0.3s;
 }
 
 .clipped {
@@ -32,6 +33,7 @@
   .clipped,
   .outlined {
     transform: scale(0.5);
+    transition: transform 0.3s var(--expo-ease-in-out) 0s;
   }
 
   .outlined {

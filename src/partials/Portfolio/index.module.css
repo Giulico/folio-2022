@@ -7,10 +7,12 @@
   pointer-events: none;
 }
 
+/*
 .titleContainer {
   position: sticky;
   top: 0;
 }
+*/
 
 .video {
   display: none;

@@ -8,9 +8,7 @@ import MenuItem from 'components/MenuItem'
 function Portfolio() {
   return (
     <Section name="portfolio" className={style.root}>
-      <div className={style.titleContainer}>
-        <MenuItem index={1} name="Portfolio" />
-      </div>
+      <MenuItem index={1} name="Portfolio" />
       <video id="skReel" autoPlay muted loop playsInline className={style.video}>
         <source src="/projects/sk/sk-reel.mp4" type="video/mp4" />
       </video>

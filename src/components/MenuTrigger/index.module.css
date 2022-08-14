@@ -6,10 +6,10 @@
   margin-left: calc(var(--frame-margin) - 4px);
 
   @media (--md-l) {
-    margin-left: calc(var(--spc-15) - 4px);
+    margin-left: calc(var(--spc-6) - 4px);
   }
 
-  @media (--lg) {
+  @media (--xl) {
     --offset-top: 200px;
 
     margin-left: calc(var(--spc-17) - 4px);
@@ -29,13 +29,17 @@
   top: 50%;
   left: 50%;
   width: 1px;
-  height: calc(100vh - var(--vertical-margin));
+  height: calc(80vh - var(--vertical-margin));
   border: none;
   border-left: 1px dashed var(--color-gray-900);
   background-color: transparent;
   transform: translate3d(-50%, calc(var(--size) / 2), 0) scaleY(0);
   transform-origin: top;
   transition: transform 0.5s ease-out;
+
+  @media (--md-l) {
+    height: calc(100vh - var(--vertical-margin));
+  }
 
   .open & {
     transform: translate3d(-50%, calc(var(--size) / 2), 0) scaleY(1);
@@ -65,8 +69,12 @@
 
 .end {
   --end-top-start: calc(50% + var(--size) / 2);
-  --end-height: calc(100vh - var(--vertical-margin));
+  --end-height: calc(80vh - var(--vertical-margin));
   --end-top: calc(var(--end-top-start) + var(--end-height));
+
+  @media (--md-l) {
+    --end-height: calc(100vh - var(--vertical-margin));
+  }
 
   top: var(--end-top);
   opacity: 0;
@@ -104,14 +112,16 @@
   position: absolute;
   opacity: 0;
 
+  @media (--lg) {
+    .button:hover & {
+      opacity: 1;
+      transform: translate3d(-50%, -100%, 0);
+    }
+  }
+
   /* transform: translate3d(-50%, 0%, 0); */
   .hidden & {
     @mixin hidden-label;
-  }
-
-  .button:hover & {
-    opacity: 1;
-    transform: translate3d(-50%, -100%, 0);
   }
 
   .root.open .button & {
@@ -134,9 +144,11 @@
     opacity: 0;
   }
 
-  .button:hover & {
-    opacity: 0;
-    transform: translate3d(-50%, -100%, 0);
+  @media (--lg) {
+    .button:hover & {
+      opacity: 0;
+      transform: translate3d(-50%, -100%, 0);
+    }
   }
 }
 
@@ -190,12 +202,15 @@
 
     .open & {
       opacity: 1;
-    }
-
-    .open &,
-    .button:hover & {
       transform: translate3d(-50%, -50%, 0) scale(1, 1);
       transition: all 0.7s var(--power3-ease-out) 0s;
+    }
+
+    @media (--lg) {
+      .button:hover & {
+        transform: translate3d(-50%, -50%, 0) scale(1, 1);
+        transition: all 0.7s var(--power3-ease-out) 0s;
+      }
     }
   }
 }

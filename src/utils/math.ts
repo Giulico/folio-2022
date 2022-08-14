@@ -15,3 +15,10 @@ export function scaleValue(value: number, from: [number, number], to: [number, n
   const capped = Math.min(from[1], Math.max(from[0], value)) - from[0]
   return capped * scale + to[0]
 }
+
+/** Keep a number between a range */
+export function betweenRange(value: number, min: number, max: number) {
+  if (value < min) return min
+  if (value > max) return max
+  return value
+}

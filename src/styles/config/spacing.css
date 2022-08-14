@@ -62,6 +62,12 @@
   /* Equivalent to 136px  */
   --spc-17: calc(var(--spc-unit) * 17);
 
+  /* Equivalent to 144px  */
+  --spc-18: calc(var(--spc-unit) * 18);
+
+  /* Equivalent to 152px  */
+  --spc-19: calc(var(--spc-unit) * 19);
+
   /* Equivalent to 160px  */
   --spc-20: calc(var(--spc-unit) * 20);
 
@@ -85,13 +91,18 @@
 
 @media (--md-l) {
   :root {
-    --text-margin-right: var(--spc-25);
+    --text-margin-right: var(--spc-19);
   }
 }
 
 @media (--lg) {
   :root {
     --frame-margin: var(--spc-6);
+  }
+}
+
+@media (--xl) {
+  :root {
     --text-margin-right: var(--spc-30);
   }
 }

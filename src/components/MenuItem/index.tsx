@@ -38,6 +38,8 @@ const MenuItem = ({ name, index }: Props) => {
   }, [])
 
   useEffect(() => {
+    if (!menu.open) return
+
     if (menu.index === index && prevMenuIndex.current < index && clipRef.current) {
       enterTop(clipRef.current)
     }
@@ -53,7 +55,7 @@ const MenuItem = ({ name, index }: Props) => {
 
     // Update prevMenuIndex
     prevMenuIndex.current = menu.index
-  }, [index, menu.index, menu.refs])
+  }, [index, menu.index, menu.open, menu.refs])
 
   useEffect(() => {
     // Leave clip when close menu

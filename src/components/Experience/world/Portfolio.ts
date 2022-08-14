@@ -103,7 +103,7 @@ export default class Portfolio {
     this.debug = this.experience.debug
 
     if (this.debug.active) {
-      this.debugFolder = this.debug.ui?.addFolder('Portfolio')
+      this.debugFolder = this.debug.ui?.addFolder('Portfolio').close()
     }
 
     this.debugObject = {

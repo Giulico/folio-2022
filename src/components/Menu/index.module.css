@@ -3,7 +3,7 @@
 
   display: none;
   overflow: hidden;
-  margin-left: var(--spc-15);
+  margin-left: var(--spc-6);
   color: var(--color-white);
 
   &:nth-child(1) {
@@ -18,7 +18,7 @@
     display: block;
   }
 
-  @media (--lg) {
+  @media (--xl) {
     margin-left: var(--spc-17);
   }
 }
@@ -54,10 +54,10 @@
   @media (--md-l) {
     width: 120px;
     margin-top: var(--spc-4);
-    margin-left: var(--spc-15);
+    margin-left: var(--spc-6);
   }
 
-  @media (--lg) {
+  @media (--xl) {
     margin-left: var(--spc-17);
   }
 }

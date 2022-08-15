@@ -80,11 +80,12 @@ export default class Renderer {
     const effect = composerEffect as string
     if (effect === 'neon') {
       this.debugObject = {
-        exposure: 1,
-        bloomStrength: 1.5,
-        bloomThreshold: 0,
-        bloomRadius: 0
+        exposure: 0.64,
+        bloomThreshold: 0.0,
+        bloomStrength: 1.67,
+        bloomRadius: 1
       }
+      this.instance.toneMappingExposure = Math.pow(this.debugObject.exposure, 4.0)
 
       const renderScene = new RenderPass(this.scene, this.experience.world.cameraOnPath.camera)
 
@@ -245,6 +246,19 @@ export default class Renderer {
           : this.experience.world.cameraOnPath.camera
 
       if (camera) {
+        if (this.composer) {
+          this.instance.autoClear = false
+          this.instance.clear()
+          // Render layer 1
+          camera.layers.set(1)
+          this.composer.setSize(this.sizes.width, this.sizes.height)
+          this.composer.render(this.time.delta)
+
+          // Render layer 2
+          this.instance.clearDepth()
+          camera.layers.set(0)
+        }
+
         this.instance.render(this.scene, camera)
       }
     }
@@ -252,11 +266,6 @@ export default class Renderer {
     if (this.controls) {
       this.controls.update()
       // this.cameraHelper.update();
-    }
-
-    if (this.composer) {
-      this.composer.setSize(this.sizes.width, this.sizes.height)
-      this.composer.render(this.time.delta)
     }
   }
 }

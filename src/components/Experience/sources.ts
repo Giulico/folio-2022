@@ -16,13 +16,28 @@ const sources: Sources = [
     name: 'envMap',
     type: 'cubeTexture',
     path: [
-      '/textures/env/3/nx.jpg',
-      '/textures/env/3/px.jpg',
-      '/textures/env/3/ny.jpg',
-      '/textures/env/3/py.jpg',
-      '/textures/env/3/nz.jpg',
-      '/textures/env/3/pz.jpg'
+      '/textures/env/1/nx.jpg',
+      '/textures/env/1/px.jpg',
+      '/textures/env/1/ny.jpg',
+      '/textures/env/1/py.jpg',
+      '/textures/env/1/nz.jpg',
+      '/textures/env/1/pz.jpg'
     ]
+  },
+  {
+    name: 'manColor',
+    type: 'texture',
+    path: '/textures/man/color.jpeg'
+  },
+  {
+    name: 'manAO',
+    type: 'texture',
+    path: '/textures/man/AO.jpeg'
+  },
+  {
+    name: 'manNormal',
+    type: 'texture',
+    path: '/textures/man/normal.jpeg'
   },
   {
     name: 'manMetallic',

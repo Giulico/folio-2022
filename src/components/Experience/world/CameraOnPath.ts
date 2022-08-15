@@ -189,6 +189,7 @@ export default class CameraOnPath {
     this.camera.position.set(0, 3.4, 0.3)
     this.camera.lookAt(this.lookAt.current)
     this.camera.updateProjectionMatrix()
+    this.camera.layers.enable(1)
     this.scene.add(this.camera)
 
     if (showOrbitControls) {

@@ -102,8 +102,8 @@ export default class Man {
     }
 
     this.debugObject = {
-      roughness: 0.5,
-      metalness: 1
+      roughness: 0.01,
+      metalness: 0.44
     }
 
     this.setModel()
@@ -127,12 +127,12 @@ export default class Man {
       color: 0xedd1ff,
       metalness: this.debugObject.metalness,
       roughness: this.debugObject.roughness,
-      roughnessMap: this.resources.items.manRoughness as THREE.Texture,
       envMap: this.resources.items.envMap as THREE.Texture
-      // map: this.resources.items.manColor,
-      // aoMap: this.resources.items.manAO,
-      // normalMap: this.resources.items.manNormal,
-      // metalnessMap: this.resources.items.manMetallic,
+      // roughnessMap: this.resources.items.manRoughness as THREE.Texture,
+      // map: this.resources.items.manColor as THREE.Texture,
+      // aoMap: this.resources.items.manAO as THREE.Texture,
+      // normalMap: this.resources.items.manNormal as THREE.Texture,
+      // metalnessMap: this.resources.items.manMetallic as THREE.Texture
     })
 
     const manArmature = this.model.children.find((child) => child.userData.name === 'Armature')
@@ -156,6 +156,7 @@ export default class Man {
     }
 
     this.mesh.material = this.material
+    this.mesh.layers.set(1)
   }
 
   stateChangeHandler(state: RootState, prevState: RootState) {

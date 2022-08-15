@@ -32,8 +32,8 @@ export default class Environment {
       this.debugFolder = this.debug.ui?.addFolder('Environment').close()
     }
 
-    this.setAmbientLight()
-    this.setSunLight()
+    // this.setAmbientLight()
+    // this.setSunLight()
     this.setEnvironmentMap()
   }
 
@@ -73,41 +73,17 @@ export default class Environment {
         .min(0)
         .max(10)
         .name('sunLight R Intensity')
-      this.debugFolder
-        .add(this.sunLightLeft.position, 'x')
-        .min(-20)
-        .max(20)
-        .name('sunLightX R')
-      this.debugFolder
-        .add(this.sunLightLeft.position, 'y')
-        .min(-20)
-        .max(20)
-        .name('sunLightY R')
-      this.debugFolder
-        .add(this.sunLightLeft.position, 'z')
-        .min(-20)
-        .max(20)
-        .name('sunLightZ R')
+      this.debugFolder.add(this.sunLightLeft.position, 'x').min(-20).max(20).name('sunLightX R')
+      this.debugFolder.add(this.sunLightLeft.position, 'y').min(-20).max(20).name('sunLightY R')
+      this.debugFolder.add(this.sunLightLeft.position, 'z').min(-20).max(20).name('sunLightZ R')
       this.debugFolder
         .add(this.sunLightRight, 'intensity')
         .min(0)
         .max(10)
         .name('sunLight L Intensity')
-      this.debugFolder
-        .add(this.sunLightRight.position, 'x')
-        .min(-20)
-        .max(20)
-        .name('sunLightX L')
-      this.debugFolder
-        .add(this.sunLightRight.position, 'y')
-        .min(-20)
-        .max(20)
-        .name('sunLightY L')
-      this.debugFolder
-        .add(this.sunLightRight.position, 'z')
-        .min(-20)
-        .max(20)
-        .name('sunLightZ L')
+      this.debugFolder.add(this.sunLightRight.position, 'x').min(-20).max(20).name('sunLightX L')
+      this.debugFolder.add(this.sunLightRight.position, 'y').min(-20).max(20).name('sunLightY L')
+      this.debugFolder.add(this.sunLightRight.position, 'z').min(-20).max(20).name('sunLightZ L')
     }
   }
 
@@ -123,10 +99,7 @@ export default class Environment {
     }
     this.environmentMap.updateMaterial = () => {
       this.scene.traverse((child) => {
-        if (
-          child instanceof THREE.Mesh &&
-          child.material instanceof THREE.MeshStandardMaterial
-        ) {
+        if (child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial) {
           child.material.envMap = this.environmentMap.texture
           child.material.envMapIntensity = this.environmentMap.intensity
           child.material.needsUpdate = true

@@ -98,7 +98,7 @@ export default class Man {
     this.debug = this.experience.debug
 
     if (this.debug.active) {
-      this.debugFolder = this.debug.ui?.addFolder('Man').close()
+      this.debugFolder = this.debug.ui?.addFolder('Man')
     }
 
     this.debugObject = {
@@ -127,7 +127,8 @@ export default class Man {
       color: 0xedd1ff,
       metalness: this.debugObject.metalness,
       roughness: this.debugObject.roughness,
-      roughnessMap: this.resources.items.manRoughness as THREE.Texture
+      roughnessMap: this.resources.items.manRoughness as THREE.Texture,
+      envMap: this.resources.items.envMap as THREE.Texture
       // map: this.resources.items.manColor,
       // aoMap: this.resources.items.manAO,
       // normalMap: this.resources.items.manNormal,

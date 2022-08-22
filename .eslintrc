@@ -21,6 +21,9 @@
       {
         "allowedNames": ["instance"]
       }
-    ]
+    ],
+    "react-hooks/exhaustive-deps": ["warn", {
+      "additionalHooks": "useDebounced"
+    }]
   }
 }

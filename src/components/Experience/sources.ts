@@ -50,15 +50,20 @@ const sources: Sources = [
     path: '/textures/man/roughness.jpeg'
   },
   {
-    name: 'manSkin',
+    name: 'manHeight',
     type: 'texture',
-    path: 'https://i.imgur.com/oYS135g.jpeg'
+    path: '/textures/man/height.jpeg'
   },
-  {
-    name: 'manSkinDisplacement',
-    type: 'texture',
-    path: 'https://i.imgur.com/L1pqRg9.jpeg'
-  },
+  // {
+  //   name: 'manSkin',
+  //   type: 'texture',
+  //   path: 'https://i.imgur.com/oYS135g.jpeg'
+  // },
+  // {
+  //   name: 'manSkinDisplacement',
+  //   type: 'texture',
+  //   path: 'https://i.imgur.com/L1pqRg9.jpeg'
+  // },
   {
     name: 'manModel',
     type: 'gltfModel',

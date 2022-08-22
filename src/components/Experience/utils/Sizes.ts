@@ -1,9 +1,11 @@
 import EventEmitter from 'utils/EventEmitter'
+import { debounce } from 'ts-debounce'
 
 export default class Sizes extends EventEmitter {
   width: number
   height: number
   pixelRatio: number
+  debouncedResizeHandler: () => void
 
   constructor() {
     super()
@@ -12,12 +14,16 @@ export default class Sizes extends EventEmitter {
     this.height = window.innerHeight
     this.pixelRatio = Math.min(window.devicePixelRatio, 2)
 
-    window.addEventListener('resize', () => {
-      this.width = window.innerWidth
-      this.height = window.innerHeight
-      this.pixelRatio = Math.min(window.devicePixelRatio, 2)
+    this.debouncedResizeHandler = debounce(this.resizeHandler.bind(this), 300)
 
-      this.trigger('resize')
-    })
+    window.addEventListener('resize', this.debouncedResizeHandler)
+  }
+
+  resizeHandler() {
+    this.width = window.innerWidth
+    this.height = window.innerHeight
+    this.pixelRatio = Math.min(window.devicePixelRatio, 2)
+
+    this.trigger('resize')
   }
 }

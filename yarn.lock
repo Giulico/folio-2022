@@ -3723,6 +3723,7 @@ __metadata:
     stylelint-config-standard: ^26.0.0
     stylelint-order: ^5.0.0
     three: ^0.142.0
+    ts-debounce: ^4.0.0
     typescript: ^4.7.4
     vite: ^2.9.13
     webfontloader: ^1.6.28
@@ -8156,6 +8157,13 @@ __metadata:
   version: 3.0.1
   resolution: "trim-newlines@npm:3.0.1"
   checksum: b530f3fadf78e570cf3c761fb74fef655beff6b0f84b29209bac6c9622db75ad1417f4a7b5d54c96605dcd72734ad44526fef9f396807b90839449eb543c6206
+  languageName: node
+  linkType: hard
+
+"ts-debounce@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "ts-debounce@npm:4.0.0"
+  checksum: e1e509632c5aa09c40d3fa315b3a95b2c2e8813ccc706a400aa08e41f691e658061f34b42a1e8a578a043540d6db198e6ecf3ce26a5356a02a0940985fb1e379
   languageName: node
   linkType: hard
 

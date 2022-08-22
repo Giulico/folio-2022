@@ -73,20 +73,23 @@ const Modal = ({ children }: Props) => {
   }, [location, displayLocation, closeModal, openModal])
 
   const classes = cn(style.root, style[transitionStage])
+  const buttonClasses = cn(style.backButton, style[transitionStage])
 
   return (
-    <div className={classes} onAnimationEnd={updateDisplayLocation}>
-      <button className={style.backButton} onClick={() => rootNavigate('/')}>
-        <img src="/icons/arrow-left.svg" /> Back
-      </button>
-      <div data-scroll-lock-scrollable className={style.contentContainer}>
-        <div>
-          <ModalContext.Provider value={{ displayLocation, transitionStage }}>
-            {children}
-          </ModalContext.Provider>
+    <>
+      <div className={classes} onAnimationEnd={updateDisplayLocation}>
+        <div data-scroll-lock-scrollable className={style.contentContainer}>
+          <div>
+            <ModalContext.Provider value={{ displayLocation, transitionStage }}>
+              {children}
+            </ModalContext.Provider>
+          </div>
         </div>
       </div>
-    </div>
+      <button className={buttonClasses} onClick={() => rootNavigate('/')}>
+        <img src="/icons/arrow-left.svg" /> Back
+      </button>
+    </>
   )
 }
 

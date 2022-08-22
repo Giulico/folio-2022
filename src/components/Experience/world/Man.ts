@@ -2,8 +2,7 @@ import * as THREE from 'three'
 import { gsap } from 'gsap'
 
 // Shaders
-import vertexShader from './shaders/shader2/vertex'
-import fragmentShader from './shaders/shader2/fragment'
+import cnoise from './shaders/perlin.glsl?raw'
 
 // Types
 import type { GUI } from 'lil-gui'
@@ -16,16 +15,16 @@ import Experience from '../Experience'
 import StoreWatcher from '../utils/StoreWatcher'
 
 type Uniforms = {
-  colorA: THREE.Color
-  colorB: THREE.Color
-  depth: number
-  displacement: number
-  displacementMap: LoadResult
-  heightMap: LoadResult
-  iterations: number
-  smoothing: number
-  time: number
+  uTime: number
+  uBigWavesElevation: number
+  uBigWavesFrequency: THREE.Vector2
+  uBigWavesSpeed: number
+  uDepthColor: THREE.Color
+  uSurfaceColor: THREE.Color
+  uColorOffset: number
+  uColorMultiplier: number
 }
+
 type UniformsValue = {
   [P in keyof Uniforms]: { value: Uniforms[P] }
 }
@@ -33,6 +32,13 @@ type UniformsValue = {
 type DebugObject = {
   roughness: number
   metalness: number
+  uBigWavesElevation: number
+  uBigWavesFrequency: THREE.Vector2
+  uBigWavesSpeed: number
+  uDepthColor: THREE.Color
+  uSurfaceColor: THREE.Color
+  uColorOffset: number
+  uColorMultiplier: number
 }
 
 interface AnimationAction extends THREE.AnimationAction {
@@ -102,8 +108,15 @@ export default class Man {
     }
 
     this.debugObject = {
-      roughness: 0.01,
-      metalness: 0.44
+      roughness: 0.46,
+      metalness: 1,
+      uBigWavesElevation: 0.06,
+      uBigWavesFrequency: new THREE.Vector2(0.01, 0.01),
+      uBigWavesSpeed: 0.52,
+      uDepthColor: new THREE.Color('#252e46'),
+      uSurfaceColor: new THREE.Color('#667fa9'),
+      uColorOffset: 0.48,
+      uColorMultiplier: 3.85
     }
 
     this.setModel()
@@ -124,9 +137,9 @@ export default class Man {
 
   setMaterial() {
     this.material = new THREE.MeshStandardMaterial({
-      color: 0xedd1ff,
-      metalness: this.debugObject.metalness,
-      roughness: this.debugObject.roughness,
+      // color: 0xedd1ff,
+      // metalness: this.debugObject.metalness,
+      // roughness: this.debugObject.roughness,
       envMap: this.resources.items.envMap as THREE.Texture
       // roughnessMap: this.resources.items.manRoughness as THREE.Texture,
       // map: this.resources.items.manColor as THREE.Texture,
@@ -134,6 +147,95 @@ export default class Man {
       // normalMap: this.resources.items.manNormal as THREE.Texture,
       // metalnessMap: this.resources.items.manMetallic as THREE.Texture
     })
+
+    this.uniforms = {
+      uTime: { value: this.time.elapsed },
+      uBigWavesElevation: { value: this.debugObject.uBigWavesElevation },
+      uBigWavesFrequency: { value: this.debugObject.uBigWavesFrequency },
+      uBigWavesSpeed: { value: this.debugObject.uBigWavesSpeed },
+      uDepthColor: { value: this.debugObject.uDepthColor },
+      uSurfaceColor: { value: this.debugObject.uSurfaceColor },
+      uColorOffset: { value: this.debugObject.uColorOffset },
+      uColorMultiplier: { value: this.debugObject.uColorMultiplier }
+    }
+
+    this.resources.items.manHeight.wrapS = THREE.RepeatWrapping
+    this.resources.items.manHeight.wrapT = THREE.RepeatWrapping
+
+    this.material.onBeforeCompile = (shader) => {
+      shader.uniforms = { ...shader.uniforms, ...this.uniforms }
+
+      // Add to top of vertex shader
+      shader.vertexShader =
+        `
+          uniform float uTime;
+          uniform float uBigWavesElevation;
+          uniform vec2 uBigWavesFrequency;
+          uniform float uBigWavesSpeed;
+
+          // uniform float uSmallWavesElevation;
+          // uniform float uSmallWavesFrequency;
+          // uniform float uSmallWavesSpeed;
+          // uniform float uSmallWavesIteration;
+
+          uniform sampler2D heightMap;
+
+          varying float vElevation;
+          varying float vAmount;
+          
+          ${cnoise}
+        ` + shader.vertexShader
+
+      shader.vertexShader = shader.vertexShader.replace(
+        /void main\(\) {/,
+        (match) =>
+          match +
+          `
+            vec4 modelPosition = modelMatrix * vec4(position, 1.0);
+
+            // float elevation = sin(modelPosition.x * uBigWavesFrequency.x + uTime * uBigWavesSpeed) 
+            //   * sin(modelPosition.z * uBigWavesFrequency.y + uTime * uBigWavesSpeed)
+            //   * uBigWavesElevation;
+            
+            // for (float i = 1.0; i <= uSmallWavesIteration; i++) {
+            //   elevation -= abs(cnoise(vec3(modelPosition.xz * uSmallWavesFrequency * i, uTime * uSmallWavesSpeed)) * uSmallWavesElevation / i);
+            // }
+
+            vElevation = sin(modelPosition.z * uBigWavesFrequency.x + uTime * uBigWavesSpeed)
+              * sin(modelPosition.z * uBigWavesFrequency.y + uTime * uBigWavesSpeed)
+              * uBigWavesElevation;
+          `
+      )
+
+      shader.fragmentShader =
+        `
+          uniform vec3 uDepthColor;
+          uniform vec3 uSurfaceColor;
+
+          uniform float uColorOffset;
+          uniform float uColorMultiplier;
+
+          uniform vec3 uFogColor;
+          uniform float uFogNear;
+          uniform float uFogFar;
+
+          uniform sampler2D heightMap;
+
+          varying float vElevation;
+          varying float vAmount;
+        ` + shader.fragmentShader
+
+      shader.fragmentShader = shader.fragmentShader.replace(
+        /vec4 diffuseColor.*;/,
+        (match) =>
+          match +
+          `
+            float mixStrength = (vElevation + uColorOffset) * uColorMultiplier;
+            vec3 color = mix(uDepthColor, uSurfaceColor, mixStrength);
+            diffuseColor = vec4(color, 1.0);
+          `
+      )
+    }
 
     const manArmature = this.model.children.find((child) => child.userData.name === 'Armature')
     if (!manArmature) throw new Error("Man's Armature mesh not found")
@@ -146,13 +248,80 @@ export default class Man {
         .min(0.01)
         .max(5)
         .step(0.01)
-        .onChange((v: DebugObject['roughness']) => (this.material.roughness = v))
+        .onChange(() => (this.material.roughness = this.debugObject.roughness))
       this.debugFolder
         .add(this.debugObject, 'metalness')
         .min(0.01)
         .max(1)
         .step(0.01)
-        .onChange((v: DebugObject['metalness']) => (this.material.metalness = v))
+        .onChange(() => (this.material.metalness = this.debugObject.metalness))
+      // Waves
+      this.debugFolder
+        .add(this.debugObject, 'uBigWavesElevation')
+        .min(0.01)
+        .max(1.0)
+        .step(0.01)
+        .name('Big Waves Elevation')
+        .onChange(() => {
+          this.uniforms.uBigWavesElevation.value = this.debugObject.uBigWavesElevation
+        })
+      this.debugFolder
+        .add(this.debugObject.uBigWavesFrequency, 'x')
+        .min(0.01)
+        .max(10.0)
+        .step(0.01)
+        .name('Big Waves Frequency x')
+        .onChange(() => {
+          this.uniforms.uBigWavesFrequency.value.x = this.debugObject.uBigWavesFrequency.x
+        })
+      this.debugFolder
+        .add(this.debugObject.uBigWavesFrequency, 'y')
+        .min(0.01)
+        .max(10.0)
+        .step(0.01)
+        .name('Big Waves Frequency y')
+        .onChange(() => {
+          this.uniforms.uBigWavesFrequency.value.y = this.debugObject.uBigWavesFrequency.y
+        })
+      this.debugFolder
+        .add(this.debugObject, 'uBigWavesSpeed')
+        .min(0.01)
+        .max(5.0)
+        .step(0.01)
+        .name('Big Waves Speed')
+        .onChange(() => {
+          this.uniforms.uBigWavesSpeed.value = this.debugObject.uBigWavesSpeed
+        })
+      this.debugFolder
+        .addColor(this.debugObject, 'uDepthColor')
+        .name('Depth Color')
+        .onChange(() => {
+          this.uniforms.uDepthColor.value.set(this.debugObject.uDepthColor)
+        })
+      this.debugFolder
+        .addColor(this.debugObject, 'uSurfaceColor')
+        .name('Surface Color')
+        .onChange(() => {
+          this.uniforms.uSurfaceColor.value.set(this.debugObject.uSurfaceColor)
+        })
+      this.debugFolder
+        .add(this.debugObject, 'uColorOffset')
+        .min(0)
+        .max(1)
+        .step(0.01)
+        .name('Color Offset')
+        .onChange(() => {
+          this.uniforms.uColorOffset.value = this.debugObject.uColorOffset
+        })
+      this.debugFolder
+        .add(this.debugObject, 'uColorMultiplier')
+        .min(0)
+        .max(10)
+        .step(0.01)
+        .name('Color Multiplier')
+        .onChange(() => {
+          this.uniforms.uColorMultiplier.value = this.debugObject.uColorMultiplier
+        })
     }
 
     this.mesh.material = this.material
@@ -407,9 +576,9 @@ export default class Man {
     const delta = this.time.delta * 0.001
     this.animation?.mixer?.update?.(delta)
 
-    // if (this.uniforms) {
-    //   this.uniforms.u_time.value += delta * 0.05;
-    // }
+    if (this.uniforms) {
+      this.uniforms.uTime.value = this.time.clockElapsed
+    }
   }
 
   resize() {

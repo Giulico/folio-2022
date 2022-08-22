@@ -13,7 +13,11 @@
     --small-left-margin: calc(var(--frame-margin) * 3);
 
     max-width: calc(var(--lg) - var(--small-left-margin));
-    margin: 0 var(--right-margin) 0 calc(var(--left-margin) * 1.5);
+    margin: 0 var(--right-margin) 0 var(--left-margin);
+
+    @media (--md-p) {
+      margin: 0 var(--right-margin) 0 calc(var(--left-margin) * 1.5);
+    }
   }
 
   &.body {

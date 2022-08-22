@@ -261,6 +261,7 @@ export default class Portfolio {
   }
 
   openProjectAnimation() {
+    // Get the project name and its card
     const location = window.comingLocation
     const projectName = location.pathname.split('/')[1]
 
@@ -276,7 +277,7 @@ export default class Portfolio {
 
     this.camera.updateMatrixWorld()
 
-    const distanceFromCamera = 0.8
+    const distanceFromCamera = 0.5
     const target = new THREE.Vector3(0, 0, -distanceFromCamera)
     target.applyMatrix4(this.camera.matrixWorld)
 
@@ -285,7 +286,8 @@ export default class Portfolio {
       x: target.x,
       y: target.y,
       z: target.z,
-      duration: 0.5
+      duration: 1,
+      ease: 'power4.in'
     })
 
     // Transition
@@ -293,7 +295,8 @@ export default class Portfolio {
       x: this.camera.rotation.x,
       y: this.camera.rotation.y,
       z: this.camera.rotation.z,
-      duration: 0.5
+      duration: 1,
+      ease: 'power4.in'
     })
   }
 
@@ -304,20 +307,19 @@ export default class Portfolio {
     const item = this.items[index]
     if (!item) throw new Error('Project not found')
 
-    enablePageScroll()
-    /*
     // move object to parent without changing it's world orientation
     this.group.attach(item)
 
     this.camera.updateMatrixWorld()
 
     // Position
-    const { offsetY } = this.debugObject
     gsap.to(item.position, {
-      x: index * 1.3 + offsetX,
-      y: offsetY,
-      z: offsetZ,
-      duration: 0.5
+      x: index * 1.1,
+      y: 0,
+      z: 0,
+      delay: 0.7,
+      ease: 'power4.inOut',
+      duration: 1.4
     })
 
     // Transition
@@ -325,13 +327,14 @@ export default class Portfolio {
       x: 0,
       y: 0,
       z: 0,
-      duration: 0.5,
+      delay: 0.7,
+      ease: 'power4.inOut',
+      duration: 1.4,
       onComplete: () => {
         // Enable scroll
         enablePageScroll()
       }
     })
-    */
   }
 
   update() {

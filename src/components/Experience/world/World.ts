@@ -1,11 +1,14 @@
 // Classes & Settings
-import { showPortfolio } from 'settings'
+import { showPortfolio, showMan } from 'settings'
 import Experience from '../Experience'
 import Environment from './Environment'
 import Man from './Man'
 import Smoke from './Smoke'
 import Portfolio from './Portfolio'
 import CameraOnPath from './CameraOnPath'
+
+// Utils
+import { fontLoader } from 'utils/fonts'
 
 export default class World {
   experience: Experience
@@ -28,8 +31,14 @@ export default class World {
     this.resources.on('ready', () => {
       // Setup
       this.environment = new Environment()
-      this.man = new Man()
-      // this.smoke = new Smoke();
+      if (showMan) {
+        this.man = new Man()
+      } else {
+        fontLoader().then(() => {
+          window.store.dispatch.app.setReady()
+          window.store.dispatch.scroll.canScroll()
+        })
+      }
       if (showPortfolio) {
         this.portfolio = new Portfolio()
       }

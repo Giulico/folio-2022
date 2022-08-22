@@ -64,7 +64,7 @@ const ProjectHero = ({ title, role, agency, completed, awards, live, image }: Pr
                   <>
                     <h3>Awards</h3>
                     {awards.map((a) => (
-                      <p>{a}</p>
+                      <p key={a}>{a}</p>
                     ))}
                   </>
                 )}

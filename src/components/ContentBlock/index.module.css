@@ -1,0 +1,12 @@
+.root {
+  margin-top: 2em;
+  transform: translate3d(0, 0, 0) scale(1);
+  transition: all 1s var(--power3-ease-out);
+  will-change: transform, opacity;
+}
+
+.menuOpen {
+  opacity: 0.0;
+  transform: translate3d(0, 0, 0) scale(0.8);
+  transition: all 0.5s var(--power3-ease-out);
+}

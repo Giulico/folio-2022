@@ -80,10 +80,10 @@ export default class Renderer {
     const effect = composerEffect as string
     if (effect === 'neon') {
       this.debugObject = {
-        exposure: 0.64,
-        bloomThreshold: 0.0,
-        bloomStrength: 1.67,
-        bloomRadius: 1
+        exposure: 0.69,
+        bloomThreshold: 0.041,
+        bloomStrength: 6.0,
+        bloomRadius: 0.5
       }
       this.instance.toneMappingExposure = Math.pow(this.debugObject.exposure, 4.0)
 
@@ -109,13 +109,15 @@ export default class Renderer {
         })
 
         this.debugFolder
-          .add(this.debugObject, 'bloomThreshold', 0.0, 1.0)
+          .add(this.debugObject, 'bloomThreshold', 0.0, 5.0)
+          .step(0.001)
           .onChange(function (value: number) {
             bloomPass.threshold = Number(value)
           })
 
         this.debugFolder
-          .add(this.debugObject, 'bloomStrength', 0.0, 3.0)
+          .add(this.debugObject, 'bloomStrength', 0.0, 10.0)
+          .step(0.01)
           .onChange(function (value: number) {
             bloomPass.strength = Number(value)
           })

@@ -8,6 +8,7 @@ import { disablePageScroll, enablePageScroll } from 'scroll-lock'
 // Hooks
 import { useDispatch, useSelector } from 'react-redux'
 import { useCallback, useEffect } from 'react'
+import { useDebounce } from 'hooks/useDebounce'
 
 // Components
 import { ModalRoutes } from 'components/Router'
@@ -31,7 +32,7 @@ function App() {
     sizes: state.sizes
   }))
 
-  const updateAppHeight = useCallback(() => {
+  const updateAppHeight = useDebounce(() => {
     // Save sizes to the store
     dispatch.sizes.update({
       width: window.innerWidth,
@@ -40,7 +41,7 @@ function App() {
 
     // Save CSS Variable --app-height
     document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`)
-  }, [dispatch.sizes])
+  }, 300)
 
   const updatePointerPosition = useCallback(
     (e: TouchEvent | MouseEvent) => {
@@ -52,7 +53,7 @@ function App() {
   )
 
   useEffect(() => {
-    updateAppHeight()
+    // updateAppHeight()
 
     window.addEventListener('resize', updateAppHeight)
     window.addEventListener('touchstart', updatePointerPosition)

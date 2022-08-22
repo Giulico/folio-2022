@@ -31,6 +31,7 @@
     "requestanimationframe-timer": "^3.0.3",
     "scroll-lock": "^2.1.5",
     "three": "^0.142.0",
+    "ts-debounce": "^4.0.0",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {

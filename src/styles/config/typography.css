@@ -8,7 +8,8 @@
 
   /* SIZES */
   --fs-display-1: 150px;
-  --fs-display-2: 36px;
+  --fs-display-2: 52px;
+  --fs-display-3: 36px;
   --fs-highlight: 28px;
   --fs-body-1: 21px;
   --fs-body-2: 18px;
@@ -27,6 +28,7 @@
   :root {
     --fs-display-1: 200px;
     --fs-display-2: 92px;
+    --fs-display-3: 92px;
     --fs-highlight: 36px;
     --fs-body-1: 24px;
     --fs-body-2: 21px;
@@ -39,5 +41,6 @@
 @media (--lg) {
   :root {
     --fs-display-1: 400px;
+    --fs-display-2: 125px;
   }
 }

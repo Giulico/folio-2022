@@ -5,7 +5,6 @@ import type { RootState } from 'store'
 // Hooks
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useRef, useCallback } from 'react'
-import { useInView } from 'react-hook-inview'
 
 type Props = {
   children: ReactNode
@@ -42,10 +41,7 @@ function Section({ children, name, className, onEnter, onResize }: Props) {
 
   // Resize
   useEffect(() => {
-    if (
-      sizes.width !== prevSizes.current.width ||
-      sizes.height !== prevSizes.current.height
-    ) {
+    if (sizes.width !== prevSizes.current.width || sizes.height !== prevSizes.current.height) {
       setBoundary()
       const currentBoundary = section.boundaries.find((b) => b.name === name)
       if (currentBoundary) {

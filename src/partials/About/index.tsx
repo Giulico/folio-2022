@@ -2,7 +2,6 @@ import style from './index.module.css'
 
 // Components
 import Section from 'components/Section'
-import MenuItem from 'components/MenuItem'
 import Container from 'components/Container'
 import ContentBlock from 'components/ContentBlock'
 import { List, ListItem } from 'components/List'
@@ -10,7 +9,6 @@ import { List, ListItem } from 'components/List'
 function About() {
   return (
     <Section name="about" className={style.root}>
-      <MenuItem index={2} name="About" />
       <Container body>
         <ContentBlock>
           <p>

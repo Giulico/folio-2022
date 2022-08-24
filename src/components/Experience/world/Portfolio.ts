@@ -1,6 +1,5 @@
 // Types
 import type { GUI } from 'lil-gui'
-import type { LoadResult } from '../utils/Resources'
 import type { RootState } from 'store'
 
 // Utils
@@ -25,8 +24,9 @@ import fragmentShader from './shaders/portfolio/fragment'
 import Experience from '../Experience'
 
 type DebugObject = {
+  offsetX: number
   offsetY: number
-  distanceFromCamera: number
+  offsetZ: number
   iColorOuter: THREE.Color
   iColorInner: THREE.Color
 }
@@ -107,8 +107,9 @@ export default class Portfolio {
     }
 
     this.debugObject = {
-      distanceFromCamera: 1.1,
+      offsetX: 1.5,
       offsetY: -0.039,
+      offsetZ: -1,
       iColorOuter: new THREE.Color(0x426ff5),
       iColorInner: new THREE.Color(0xc9ddf2)
     }
@@ -126,7 +127,10 @@ export default class Portfolio {
     if (state.section.boundaries !== prevState.section.boundaries) {
       const portfolioBoundaries = state.section.boundaries.find((b) => b.name === 'portfolio')
       if (portfolioBoundaries) {
-        this.scrollBoundaries = [portfolioBoundaries.start, portfolioBoundaries.end]
+        this.scrollBoundaries = [
+          portfolioBoundaries.start,
+          portfolioBoundaries.end - this.sizes.height
+        ]
       }
     }
 
@@ -140,19 +144,13 @@ export default class Portfolio {
     }
   }
 
-  updateGroupPosition() {
-    const { offsetY, distanceFromCamera } = this.debugObject
-    this.groupPosition = new THREE.Vector3(this.xPosition, offsetY, -distanceFromCamera)
-    this.groupPosition.applyMatrix4(this.camera.matrixWorld)
-  }
-
   setItems() {
     this.group = new THREE.Group()
     this.group.name = 'portfolio'
 
     // Set the group in front of the camera
-    this.updateGroupPosition()
-    this.group.position.set(this.groupPosition.x, this.groupPosition.y, this.groupPosition.z)
+    const { offsetX, offsetY, offsetZ } = this.debugObject
+    this.group.position.set(offsetX, offsetY, offsetZ)
 
     this.items = []
 
@@ -198,13 +196,26 @@ export default class Portfolio {
       this.items[i] = clickablMesh
     }
 
-    this.scene.add(this.group)
+    this.camera.add(this.group)
 
     // Debug
     if (this.debug.active && this.debugFolder) {
-      this.debugFolder.add(this.debugObject, 'distanceFromCamera').min(0).max(5).step(0.1)
-
-      this.debugFolder.add(this.debugObject, 'offsetY').min(-5).max(5).step(0.001)
+      this.debugFolder
+        .add(this.debugObject, 'offsetY')
+        .min(-5)
+        .max(5)
+        .step(0.001)
+        .onChange(() => {
+          this.group.position.y = this.debugObject.offsetY
+        })
+      this.debugFolder
+        .add(this.debugObject, 'offsetZ')
+        .min(-5)
+        .max(5)
+        .step(0.001)
+        .onChange(() => {
+          this.group.position.z = this.debugObject.offsetZ
+        })
       this.debugFolder.addColor(this.debugObject, 'iColorOuter').onChange((v: string) => {
         for (const item of this.items) {
           // @ts-ignore
@@ -246,7 +257,10 @@ export default class Portfolio {
   }
 
   scrollHandler = () => {
-    this.xPosition = scaleValue(window.scrollY, this.scrollBoundaries, [0, -this.projects.length])
+    this.xPosition = scaleValue(window.scrollY, this.scrollBoundaries, [
+      this.debugObject.offsetX,
+      -this.projects.length - 1
+    ])
     if (Math.abs(this.xPosition - 0.2) !== this.visibleItemIndex) {
       const itemIndex = Math.floor(Math.abs(this.xPosition - 0.2))
       this.revealItem(itemIndex)
@@ -341,19 +355,19 @@ export default class Portfolio {
     if (!this.isVisible) return
 
     // Set the group in front of the camera
-    this.updateGroupPosition()
+    // this.updateGroupPosition()
 
     gsap.to(this.group.position, {
-      x: this.groupPosition.x,
-      y: this.groupPosition.y,
-      z: this.groupPosition.z,
+      x: this.xPosition,
+      // y: this.groupPosition.y,
+      // z: this.groupPosition.z,
       duration: 2
     })
-    gsap.to(this.group.rotation, {
-      x: this.camera.rotation.x,
-      y: this.camera.rotation.y,
-      z: this.camera.rotation.z,
-      duration: 2
-    })
+    // gsap.to(this.group.rotation, {
+    //   x: this.camera.rotation.x,
+    //   y: this.camera.rotation.y,
+    //   z: this.camera.rotation.z,
+    //   duration: 2
+    // })
   }
 }

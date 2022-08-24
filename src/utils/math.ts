@@ -22,3 +22,8 @@ export function betweenRange(value: number, min: number, max: number) {
   if (value > max) return max
   return value
 }
+
+export function toFixedNumber(num: number, digits: number, base: number): number {
+  const pow = Math.pow(base || 10, digits)
+  return Math.round(num * pow) / pow
+}

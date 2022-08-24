@@ -17,13 +17,11 @@ gsap.registerPlugin(ScrollToPlugin)
 
 function useMainMenu() {
   const prevOpen = useRef<boolean>(false)
-  const bounding = useRef<number[]>([])
   const dispatch = useDispatch()
   const [prevSection, setPrevSection] = useState<string>('')
   const [isScrolling, setIsScrolling] = useState<boolean>(false)
 
-  const { app, menu, section, sizes } = useSelector((state: RootState) => ({
-    app: state.app,
+  const { menu, section, sizes } = useSelector((state: RootState) => ({
     menu: state.menu,
     section: state.section,
     sizes: state.sizes
@@ -39,21 +37,15 @@ function useMainMenu() {
     if (!isMediumLandscape) {
       normY = normY * 1.2
     }
+    const length = section.boundaries.length
     const min = 0
-    const max = section.boundaries.length - 1
-    const itemIndex = betweenRange(Math.floor(normY * menu.refs.length), min, max)
+    const max = length - 1
+    const itemIndex = betweenRange(Math.floor(normY * length), min, max)
 
     if (itemIndex !== menu.index) {
       dispatch.menu.setIndex(itemIndex)
     }
-  }, [
-    menu.open,
-    menu.refs.length,
-    menu.index,
-    isMediumLandscape,
-    section.boundaries.length,
-    dispatch.menu
-  ])
+  }, [menu.open, menu.index, isMediumLandscape, section.boundaries.length, dispatch.menu])
 
   const resetMenuIndex = useCallback(() => {
     dispatch.menu.setIndex(-1)
@@ -72,17 +64,10 @@ function useMainMenu() {
       updateSelectedItem()
 
       // Animate menu items
-      const scrollY = window.scrollY
-      const offset = sizes.height / 8
-      const height = sizes.height - offset * 2
-      const snap = height / menu.refs.length
-      for (let i = 0; i < menu.refs.length; i++) {
-        const menuItem = menu.refs[i]
-        gsap.to(menuItem, {
-          y: `${snap * i - bounding.current[i] + offset + scrollY}px`,
-          duration: 1,
-          ease: 'power3.out'
-        })
+      const titles = window.experience.world.titles
+      for (let i = 0; i < titles.length; i++) {
+        const title = titles[i]
+        title.menuOpen(i)
       }
     }
 
@@ -92,16 +77,10 @@ function useMainMenu() {
       enablePageScroll()
 
       // Restore menu items
-      for (let i = 0; i < menu.refs.length; i++) {
-        const menuItem = menu.refs[i]
-        gsap.to(menuItem, {
-          y: `0px`,
-          onComplete: () => {
-            gsap.set(menuItem, { clearProps: 'all' })
-          },
-          duration: 1,
-          ease: 'expo.inOut'
-        })
+      const titles = window.experience.world.titles
+      for (let i = 0; i < titles.length; i++) {
+        const title = titles[i]
+        title.menuClose()
       }
 
       // Scroll the page
@@ -111,7 +90,7 @@ function useMainMenu() {
         gsap.to(window, {
           scrollTo: selectedItem.start,
           duration: 1.5,
-          ease: 'power3.inOut',
+          ease: 'power3.out',
           onStart: () => {
             setIsScrolling(true)
           },
@@ -129,24 +108,12 @@ function useMainMenu() {
   }, [
     menu.index,
     menu.open,
-    menu.refs,
     prevSection,
     resetMenuIndex,
     section,
     sizes.height,
     updateSelectedItem
   ])
-
-  useEffect(() => {
-    // Calculate bounding when app ready and when size.height changes
-    if (app.ready) {
-      bounding.current = menu.refs.map((ref) => {
-        const menuItemOffsetTop = ref.offsetTop
-        const sectionOffsetTop = ref.parentElement?.offsetTop || 0
-        return menuItemOffsetTop + sectionOffsetTop
-      })
-    }
-  }, [app.ready, menu.refs, sizes.height])
 
   useEffect(() => {
     window.addEventListener('mousemove', updateSelectedItem)

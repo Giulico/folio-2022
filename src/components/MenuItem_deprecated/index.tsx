@@ -55,7 +55,7 @@ const MenuItem = ({ name, index }: Props) => {
 
     // Update prevMenuIndex
     prevMenuIndex.current = menu.index
-  }, [index, menu.index, menu.open, menu.refs])
+  }, [index, menu.index, menu.open])
 
   useEffect(() => {
     // Leave clip when close menu

@@ -5,6 +5,7 @@ import type { RootState } from 'store'
 import * as THREE from 'three'
 import { gsap } from 'gsap'
 import StoreWatcher from '../utils/StoreWatcher'
+import { betweenRange, toFixedNumber } from 'utils/math'
 
 // Components
 import Experience from '../Experience'
@@ -235,15 +236,19 @@ export default class CameraOnPath {
 
     // when store.scroll = true follow the scroll position
     if (this.bodyHeight && !this.menuOpen) {
-      this.percentage = 1 - window.scrollY / this.bodyHeight
+      this.percentage = betweenRange(1 - window.scrollY / this.bodyHeight, 0, 1)
       const p1 = this.curvePath.getPointAt(this.percentage)
+      const x = toFixedNumber(p1.x + window.cursor.x * 0.2, 6, 10)
+      const y = toFixedNumber(p1.y + window.cursor.y * 0.2, 6, 10)
+      const z = toFixedNumber(p1.z, 6, 10)
 
-      gsap.to(this.camera.position, {
-        x: p1.x + window.cursor.x * 0.2,
-        y: p1.y + window.cursor.y * 0.2,
-        z: p1.z,
-        duration: 0.2
-      })
+      if (
+        this.camera.position.x !== x ||
+        this.camera.position.y !== y ||
+        this.camera.position.z !== z
+      ) {
+        gsap.to(this.camera.position, { x, y, z, duration: 0.2 })
+      }
     }
 
     // Camera Helper

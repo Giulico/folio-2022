@@ -1755,6 +1755,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"an-array@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "an-array@npm:1.0.0"
+  checksum: 82a4af4e3471e737e9b1d15fd12ea3e07bab759336f15b16d41e33289b40939cf3bdb614b1da77e6455e0001357c6a80cf1bb0c2e0d07f9a47c06429ac936c59
+  languageName: node
+  linkType: hard
+
 "ansi-escapes@npm:^4.2.1":
   version: 4.3.2
   resolution: "ansi-escapes@npm:4.3.2"
@@ -2931,6 +2938,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dtype@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "dtype@npm:2.0.0"
+  checksum: a8fcdf549eda9237d453a6d9a163a93e7ac5dff10fe50e33e6cca04fe303a63bc63490fc0b4c7a53f058bedb1bf28588bf0b80a6f68d35a99cfa37c90fe2ee59
+  languageName: node
+  linkType: hard
+
 "duplexer2@npm:~0.1.0":
   version: 0.1.4
   resolution: "duplexer2@npm:0.1.4"
@@ -3706,6 +3720,7 @@ __metadata:
     postcss-preset-env: ^7.7.2
     postcss-simple-vars: ^6.0.3
     prettier: ^2.7.1
+    quad-indices: ^2.0.1
     react: ^18.2.0
     react-dom: ^18.2.0
     react-hook-inview: ^4.5.0
@@ -3723,10 +3738,12 @@ __metadata:
     stylelint-config-standard: ^26.0.0
     stylelint-order: ^5.0.0
     three: ^0.142.0
+    three-msdf-text: "https://github.com/leochocolat/three-msdf-text"
     ts-debounce: ^4.0.0
     typescript: ^4.7.4
     vite: ^2.9.13
     webfontloader: ^1.6.28
+    word-wrapper: ^1.0.7
   languageName: unknown
   linkType: soft
 
@@ -4463,6 +4480,13 @@ __metadata:
   version: 0.2.1
   resolution: "is-arrayish@npm:0.2.1"
   checksum: eef4417e3c10e60e2c810b6084942b3ead455af16c4509959a27e490e7aee87cfb3f38e01bbde92220b528a0ee1a18d52b787e1458ee86174d8c7f0e58cd488f
+  languageName: node
+  linkType: hard
+
+"is-buffer@npm:^1.0.2":
+  version: 1.1.6
+  resolution: "is-buffer@npm:1.1.6"
+  checksum: 4a186d995d8bbf9153b4bd9ff9fd04ae75068fe695d29025d25e592d9488911eeece84eefbd8fa41b8ddcc0711058a71d4c466dcf6f1f6e1d83830052d8ca707
   languageName: node
   linkType: hard
 
@@ -6857,6 +6881,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"quad-indices@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "quad-indices@npm:2.0.1"
+  dependencies:
+    an-array: ^1.0.0
+    dtype: ^2.0.0
+    is-buffer: ^1.0.2
+  checksum: 9796d511e069d4a82f822ce6bb322b747e9c9387c98eddd3ebb622c629cd1ebf35a78d107d9307184a1be5e1c6f950b3a42090b1de1141e4ac0fab5e77d12e83
+  languageName: node
+  linkType: hard
+
 "queue-microtask@npm:^1.2.2":
   version: 1.2.3
   resolution: "queue-microtask@npm:1.2.3"
@@ -8053,6 +8088,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"three-msdf-text@https://github.com/leochocolat/three-msdf-text":
+  version: 1.0.0
+  resolution: "three-msdf-text@https://github.com/leochocolat/three-msdf-text.git#commit=1608aff2bcfb7d74c14c13e27f04fe3e35d87cab"
+  dependencies:
+    quad-indices: ^2.0.1
+    word-wrapper: ^1.0.7
+  peerDependencies:
+    three: ">= 0.129.0"
+    tweakpane: ^3.1.0
+  checksum: 24f5182fb654c712347d77da89ce5cd201a49d6da774f05486aebd8838c1cff2b3ffbf50c52f6253d67121f8fb0522334e3c619d9f478dfa010c3a04b69cc2a9
+  languageName: node
+  linkType: hard
+
 "three@npm:^0.142.0":
   version: 0.142.0
   resolution: "three@npm:0.142.0"
@@ -8564,6 +8612,13 @@ __metadata:
   version: 1.2.3
   resolution: "word-wrap@npm:1.2.3"
   checksum: 30b48f91fcf12106ed3186ae4fa86a6a1842416df425be7b60485de14bec665a54a68e4b5156647dec3a70f25e84d270ca8bc8cd23182ed095f5c7206a938c1f
+  languageName: node
+  linkType: hard
+
+"word-wrapper@npm:^1.0.7":
+  version: 1.0.7
+  resolution: "word-wrapper@npm:1.0.7"
+  checksum: 70ddc213c04edc30761aacd56810271892a06d7dced870302d1976129d7a4b83bb7bca100fed898d06acc2380bb0545e52c1025297372cc2c9c39ce88e28f967
   languageName: node
   linkType: hard
 

@@ -3,12 +3,10 @@ import style from './index.module.css'
 
 // Components
 import Section from 'components/Section'
-import MenuItem from 'components/MenuItem'
 
 function Portfolio() {
   return (
     <Section name="portfolio" className={style.root}>
-      <MenuItem index={1} name="Portfolio" />
       <video id="skReel" autoPlay muted loop playsInline className={style.video}>
         <source src="/projects/sk/sk-reel.mp4" type="video/mp4" />
       </video>

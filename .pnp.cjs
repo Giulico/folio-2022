@@ -69,6 +69,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["postcss-preset-env", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:7.7.2"],\
             ["postcss-simple-vars", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:6.0.3"],\
             ["prettier", "npm:2.7.1"],\
+            ["quad-indices", "npm:2.0.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:18.2.0"],\
             ["react-hook-inview", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:4.5.0"],\
@@ -86,10 +87,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["stylelint-config-standard", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:26.0.0"],\
             ["stylelint-order", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:5.0.0"],\
             ["three", "npm:0.142.0"],\
+            ["three-msdf-text", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#https://github.com/leochocolat/three-msdf-text.git#commit=1608aff2bcfb7d74c14c13e27f04fe3e35d87cab"],\
             ["ts-debounce", "npm:4.0.0"],\
             ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353"],\
             ["vite", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:2.9.14"],\
-            ["webfontloader", "npm:1.6.28"]\
+            ["webfontloader", "npm:1.6.28"],\
+            ["word-wrapper", "npm:1.0.7"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -2462,6 +2465,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["an-array", [\
+        ["npm:1.0.0", {\
+          "packageLocation": "./.yarn/cache/an-array-npm-1.0.0-4bc53da308-82a4af4e34.zip/node_modules/an-array/",\
+          "packageDependencies": [\
+            ["an-array", "npm:1.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["ansi-escapes", [\
         ["npm:4.3.2", {\
           "packageLocation": "./.yarn/cache/ansi-escapes-npm-4.3.2-3ad173702f-93111c4218.zip/node_modules/ansi-escapes/",\
@@ -3848,6 +3860,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["dtype", [\
+        ["npm:2.0.0", {\
+          "packageLocation": "./.yarn/cache/dtype-npm-2.0.0-5c3c475c6d-a8fcdf549e.zip/node_modules/dtype/",\
+          "packageDependencies": [\
+            ["dtype", "npm:2.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["duplexer2", [\
         ["npm:0.1.4", {\
           "packageLocation": "./.yarn/cache/duplexer2-npm-0.1.4-6bca6bef12-744961f03c.zip/node_modules/duplexer2/",\
@@ -4731,6 +4752,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["postcss-preset-env", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:7.7.2"],\
             ["postcss-simple-vars", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:6.0.3"],\
             ["prettier", "npm:2.7.1"],\
+            ["quad-indices", "npm:2.0.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:18.2.0"],\
             ["react-hook-inview", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:4.5.0"],\
@@ -4748,10 +4770,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["stylelint-config-standard", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:26.0.0"],\
             ["stylelint-order", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:5.0.0"],\
             ["three", "npm:0.142.0"],\
+            ["three-msdf-text", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#https://github.com/leochocolat/three-msdf-text.git#commit=1608aff2bcfb7d74c14c13e27f04fe3e35d87cab"],\
             ["ts-debounce", "npm:4.0.0"],\
             ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353"],\
             ["vite", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:2.9.14"],\
-            ["webfontloader", "npm:1.6.28"]\
+            ["webfontloader", "npm:1.6.28"],\
+            ["word-wrapper", "npm:1.0.7"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -5567,6 +5591,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/is-arrayish-npm-0.2.1-23927dfb15-eef4417e3c.zip/node_modules/is-arrayish/",\
           "packageDependencies": [\
             ["is-arrayish", "npm:0.2.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["is-buffer", [\
+        ["npm:1.1.6", {\
+          "packageLocation": "./.yarn/cache/is-buffer-npm-1.1.6-08199d9ccc-4a186d995d.zip/node_modules/is-buffer/",\
+          "packageDependencies": [\
+            ["is-buffer", "npm:1.1.6"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -8675,6 +8708,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["quad-indices", [\
+        ["npm:2.0.1", {\
+          "packageLocation": "./.yarn/cache/quad-indices-npm-2.0.1-486a31badc-9796d511e0.zip/node_modules/quad-indices/",\
+          "packageDependencies": [\
+            ["quad-indices", "npm:2.0.1"],\
+            ["an-array", "npm:1.0.0"],\
+            ["dtype", "npm:2.0.0"],\
+            ["is-buffer", "npm:1.1.6"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["queue-microtask", [\
         ["npm:1.2.3", {\
           "packageLocation": "./.yarn/cache/queue-microtask-npm-1.2.3-fcc98e4e2d-b676f8c040.zip/node_modules/queue-microtask/",\
@@ -10124,6 +10169,34 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["three-msdf-text", [\
+        ["https://github.com/leochocolat/three-msdf-text.git#commit=1608aff2bcfb7d74c14c13e27f04fe3e35d87cab", {\
+          "packageLocation": "./.yarn/cache/three-msdf-text-https-54a791c0fe-24f5182fb6.zip/node_modules/three-msdf-text/",\
+          "packageDependencies": [\
+            ["three-msdf-text", "https://github.com/leochocolat/three-msdf-text.git#commit=1608aff2bcfb7d74c14c13e27f04fe3e35d87cab"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#https://github.com/leochocolat/three-msdf-text.git#commit=1608aff2bcfb7d74c14c13e27f04fe3e35d87cab", {\
+          "packageLocation": "./.yarn/__virtual__/three-msdf-text-virtual-d75e03d07a/0/cache/three-msdf-text-https-54a791c0fe-24f5182fb6.zip/node_modules/three-msdf-text/",\
+          "packageDependencies": [\
+            ["three-msdf-text", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#https://github.com/leochocolat/three-msdf-text.git#commit=1608aff2bcfb7d74c14c13e27f04fe3e35d87cab"],\
+            ["@types/three", "npm:0.141.0"],\
+            ["@types/tweakpane", null],\
+            ["quad-indices", "npm:2.0.1"],\
+            ["three", "npm:0.142.0"],\
+            ["tweakpane", null],\
+            ["word-wrapper", "npm:1.0.7"]\
+          ],\
+          "packagePeers": [\
+            "@types/three",\
+            "@types/tweakpane",\
+            "three",\
+            "tweakpane"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["through", [\
         ["npm:2.3.8", {\
           "packageLocation": "./.yarn/cache/through-npm-2.3.8-df5f72a16e-a38c3e0598.zip/node_modules/through/",\
@@ -10735,6 +10808,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/word-wrap-npm-1.2.3-7fb15ab002-30b48f91fc.zip/node_modules/word-wrap/",\
           "packageDependencies": [\
             ["word-wrap", "npm:1.2.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["word-wrapper", [\
+        ["npm:1.0.7", {\
+          "packageLocation": "./.yarn/cache/word-wrapper-npm-1.0.7-3b7c024f36-70ddc213c0.zip/node_modules/word-wrapper/",\
+          "packageDependencies": [\
+            ["word-wrapper", "npm:1.0.7"]\
           ],\
           "linkType": "HARD"\
         }]\

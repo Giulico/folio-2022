@@ -4,7 +4,7 @@
   left: 30%;
   overflow: hidden;
   width: 70%;
-  opacity: 1;
+  opacity: 0;
   pointer-events: none;
 }
 

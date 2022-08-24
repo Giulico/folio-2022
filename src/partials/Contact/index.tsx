@@ -2,14 +2,12 @@ import style from './index.module.css'
 
 // Components
 import Section from 'components/Section'
-import MenuItem from 'components/MenuItem'
 import Container from 'components/Container'
 import ContentBlock from 'components/ContentBlock'
 
 function Contact() {
   return (
     <Section name="contact" className={style.root}>
-      <MenuItem index={3} name="Contact" />
       <Container right>
         <ContentBlock>
           <p>

@@ -14,7 +14,6 @@ import { useSelector } from 'react-redux'
 import Logo from 'components/Logo'
 import Section from 'components/Section'
 import AudioWave from 'components/AudioWave'
-import MenuItem from 'components/MenuItem'
 import Menu from 'components/Menu'
 import TextScramble, { ScrambleTexts } from 'components/TextScramble'
 
@@ -51,7 +50,6 @@ export default function Hero() {
         </div>
       </header>
       <Section name="hero" className={style.root}>
-        <MenuItem index={0} name="TCMG" />
         <div className={style.middle}>
           <span className={style.line} />
           <div className={scrambleClasses}>

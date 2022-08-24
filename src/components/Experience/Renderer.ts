@@ -48,7 +48,7 @@ export default class Renderer {
     this.debug = this.experience.debug
 
     if (this.debug.active) {
-      this.debugFolder = this.debug.ui?.addFolder('Postprocessing')
+      this.debugFolder = this.debug.ui?.addFolder('Postprocessing').close()
     }
 
     this.setInstance()
@@ -238,10 +238,6 @@ export default class Renderer {
       this.experience.resources.items.manModel?.cameras &&
       this.experience.world?.cameraOnPath?.camera
     ) {
-      // const camera =
-      // this.debugObject.orbitControls && this.controlsCamera
-      //   ? this.controlsCamera
-      //   : this.experience.resources.items.manModel.cameras[0];
       const camera =
         showOrbitControls && this.controlsCamera
           ? this.controlsCamera

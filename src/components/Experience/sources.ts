@@ -54,16 +54,21 @@ const sources: Sources = [
     type: 'texture',
     path: '/textures/man/height.jpeg'
   },
-  // {
-  //   name: 'manSkin',
-  //   type: 'texture',
-  //   path: 'https://i.imgur.com/oYS135g.jpeg'
-  // },
-  // {
-  //   name: 'manSkinDisplacement',
-  //   type: 'texture',
-  //   path: 'https://i.imgur.com/L1pqRg9.jpeg'
-  // },
+  {
+    name: 'manSkin',
+    type: 'texture',
+    path: 'https://i.imgur.com/oYS135g.jpeg'
+  },
+  {
+    name: 'manSkinDisplacement',
+    type: 'texture',
+    path: 'https://i.imgur.com/L1pqRg9.jpeg'
+  },
+  {
+    name: 'manOutlineSkin',
+    type: 'texture',
+    path: '/textures/outline/pattern.jpg'
+  },
   {
     name: 'manModel',
     type: 'gltfModel',

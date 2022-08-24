@@ -20,6 +20,7 @@
     "history": "^5.3.0",
     "intersection-observer": "^0.12.2",
     "lil-gui": "^0.16.1",
+    "quad-indices": "^2.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-inview": "^4.5.0",
@@ -31,8 +32,10 @@
     "requestanimationframe-timer": "^3.0.3",
     "scroll-lock": "^2.1.5",
     "three": "^0.142.0",
+    "three-msdf-text": "https://github.com/leochocolat/three-msdf-text",
     "ts-debounce": "^4.0.0",
-    "webfontloader": "^1.6.28"
+    "webfontloader": "^1.6.28",
+    "word-wrapper": "^1.0.7"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.1",

@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "repository": "git@github.com:Giulico/folio-2022.git",
-  "packageManager": "yarn@3.2.1",
+  "packageManager": "yarn@3.2.3",
   "scripts": {
     "build": "tsc && vite build",
     "dev": "vite --host",

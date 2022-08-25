@@ -1,5 +1,5 @@
 // Classes & Settings
-import { showPortfolio, showMan } from 'settings'
+import { showPortfolio, showMan, showTitles } from 'settings'
 import Experience from '../Experience'
 import Environment from './Environment'
 import Man from './Man'
@@ -71,12 +71,14 @@ export default class World {
       }
 
       // Titles
-      this.titles = [
-        new Title({ itemIndex: 0, text: 'TCMG' }),
-        new Title({ itemIndex: 1, text: 'Portfolio' }),
-        new Title({ itemIndex: 2, text: 'About' }),
-        new Title({ itemIndex: 3, text: 'Contact' })
-      ]
+      if (showTitles) {
+        this.titles = [
+          new Title({ itemIndex: 0, text: 'TCMG' }),
+          new Title({ itemIndex: 1, text: 'Portfolio' }),
+          new Title({ itemIndex: 2, text: 'About' }),
+          new Title({ itemIndex: 3, text: 'Contact' })
+        ]
+      }
     })
   }
 

@@ -58,6 +58,7 @@ export default class Renderer {
     if (showOrbitControls) {
       const { width, height } = this.sizes
       this.controlsCamera = new THREE.PerspectiveCamera(45, width / height, 0.01, 1000)
+      this.controlsCamera.layers.enable(1)
       this.controls = new OrbitControls(this.controlsCamera, this.canvas)
       this.controlsCamera.position.set(0, 2.5, 3)
       this.controls.target.set(0, 2.5, 0)
@@ -100,6 +101,7 @@ export default class Renderer {
       bloomPass.radius = this.debugObject.bloomRadius
 
       this.composer = new EffectComposer(this.instance)
+      this.composer.setSize(this.sizes.width, this.sizes.height)
       this.composer.addPass(renderScene)
       this.composer.addPass(bloomPass)
 
@@ -223,6 +225,7 @@ export default class Renderer {
     this.instance.toneMappingExposure = 1.75
     this.instance.shadowMap.enabled = true
     this.instance.shadowMap.type = THREE.PCFSoftShadowMap
+    this.instance.autoClear = false
     // this.instance.setClearColor('#ff0000')
     this.instance.setSize(this.sizes.width, this.sizes.height)
     this.instance.setPixelRatio(this.sizes.pixelRatio)
@@ -231,6 +234,9 @@ export default class Renderer {
   resize() {
     this.instance.setSize(this.sizes.width, this.sizes.height)
     this.instance.setPixelRatio(this.sizes.pixelRatio)
+    if (this.composer) {
+      this.composer.setSize(this.sizes.width, this.sizes.height)
+    }
   }
 
   update() {
@@ -245,11 +251,10 @@ export default class Renderer {
 
       if (camera) {
         if (this.composer) {
-          this.instance.autoClear = false
           this.instance.clear()
+
           // Render layer 1
           camera.layers.set(1)
-          this.composer.setSize(this.sizes.width, this.sizes.height)
           this.composer.render(this.time.delta)
 
           // Render layer 2

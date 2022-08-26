@@ -7,6 +7,7 @@ import Smoke from './Smoke'
 import Portfolio from './Portfolio'
 import CameraOnPath from './CameraOnPath'
 import Title from './Title'
+import Strikes from './Strikes'
 
 // Utils
 import { fontLoader } from 'utils/fonts'
@@ -22,6 +23,7 @@ export default class World {
   environment: Environment | undefined
   portfolio: Portfolio | undefined
   titles: Title[]
+  strikes: Strikes
 
   constructor() {
     this.experience = new Experience()
@@ -51,6 +53,7 @@ export default class World {
     // Listeners
     this.resources.on('ready', async () => {
       const dispatch = store.dispatch
+    this.strikes = new Strikes()
 
       // Setup
       this.environment = new Environment()

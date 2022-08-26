@@ -6,4 +6,4 @@ export const showPortfolio = true
 export const showCameraPath = false
 export const showManAnimationLogs = false
 export const showOrbitControls = false
-export const composerEffect = 'neon' // neon
+export const composerEffect = 'neon' // neon | bloom

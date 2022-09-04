@@ -3801,6 +3801,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     react-hook-inview: ^4.5.0
+    react-intersection-observer: ^9.4.0
     react-redux: ^8.0.2
     react-responsive: ^9.0.0-beta.10
     react-router: ^6.3.0
@@ -7126,6 +7127,15 @@ __metadata:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
   checksum: 7c258de16ec1ee2de3f48d9160bbc56171b99d63ccc1704b47195d4724fd4d7dabb41b24e19a89956533e9434d377c521ec528a24b04d1fb7fa976716f70b64f
+  languageName: node
+  linkType: hard
+
+"react-intersection-observer@npm:^9.4.0":
+  version: 9.4.0
+  resolution: "react-intersection-observer@npm:9.4.0"
+  peerDependencies:
+    react: ^15.0.0 || ^16.0.0 || ^17.0.0|| ^18.0.0
+  checksum: 6b9caff424c27ffac81bd7275f0d97512366d24434ebe15718f5e106e7198448a7027b1586ecbbb3eff81ac1348362320b7f740ac3d6cd505d62222fd251d718
   languageName: node
   linkType: hard
 

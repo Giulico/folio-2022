@@ -1,4 +1,6 @@
 .root {
+  position: relative;
+  overflow:auto;
   margin-top: 2em;
   transform: translate3d(0, 0, 0) scale(1);
   transition: all 1s var(--power3-ease-out);
@@ -9,4 +11,45 @@
   opacity: 0.0;
   transform: translate3d(0, 0, 0) scale(0.8);
   transition: all 0.5s var(--power3-ease-out);
+}
+
+.front {
+  display: none;
+  pointer-events: none;
+}
+
+.reveal.isDesktop {
+  .front {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    opacity: 1;
+  }
+
+  .base {
+    opacity: 0.3;
+  }
+
+  .line {
+    overflow: hidden;
+    width: 0%;
+    transform: translateZ(0);
+    transition: width 1.7s var(--expo-ease-in-out);
+    white-space: nowrap;
+    will-change: width;
+  }
+}
+
+.reveal.isVisible.isDesktop {
+  @for $i from 1 to 10 {
+    .line {
+      width: 100%;
+
+      &.line-$i {
+        transition: width 1.7s var(--expo-ease-out) calc($i * 0.1s);
+      }
+    }
+  }
 }

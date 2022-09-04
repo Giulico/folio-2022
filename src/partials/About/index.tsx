@@ -15,7 +15,7 @@ function About() {
             I have a solid experience in the design and development of architectures and interactive
             web applications as well as Design Systems. My preferred methodologies are those that
             are based on Lean and Agile principles. I incline towards these methodologies because
-            they encourage the teamwork and decentralize the decision-making processes.
+            they encourage the teamwork and decentralize the decision making processes.
           </p>
         </ContentBlock>
         <ContentBlock>
@@ -28,7 +28,7 @@ function About() {
         <ContentBlock>
           <h4 className={style.awardsTitle}>Awards and Recognitions</h4>
         </ContentBlock>
-        <ContentBlock>
+        <ContentBlock reveal={false}>
           <List>
             <ListItem end="x6">Awwwards</ListItem>
             <ListItem end="x6">CSS Design Awards</ListItem>

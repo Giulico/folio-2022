@@ -5,6 +5,7 @@ import type { RootState } from 'store'
 // Utils
 import * as THREE from 'three'
 import { gsap } from 'gsap'
+import lerp from 'utils/lerp'
 import { scaleValue } from 'utils/math'
 import { disablePageScroll, enablePageScroll } from 'scroll-lock'
 import { rootNavigate } from 'components/CustomRouter'
@@ -55,6 +56,7 @@ export default class Portfolio {
   projects: Project[]
   scrollBoundaries: [number, number]
   xPosition: number
+  scrollOffset: number
   isVisible: boolean
   visibleItemIndex: number
 
@@ -62,6 +64,7 @@ export default class Portfolio {
     this.isVisible = false
     this.scrollBoundaries = [0, 0]
     this.xPosition = 0
+    this.scrollOffset = 0
     this.visibleItemIndex = 0
 
     this.experience = new Experience()
@@ -107,7 +110,7 @@ export default class Portfolio {
     }
 
     this.debugObject = {
-      offsetX: 1.5,
+      offsetX: 2.2,
       offsetY: -0.039,
       offsetZ: -1,
       iColorOuter: new THREE.Color(0x426ff5),
@@ -167,7 +170,8 @@ export default class Portfolio {
         iChannel0: { value: new THREE.VideoTexture(video) },
         iChannel1: { value: this.resources.items.noise },
         iColorOuter: { value: this.debugObject.iColorOuter },
-        iColorInner: { value: this.debugObject.iColorInner }
+        iColorInner: { value: this.debugObject.iColorInner },
+        iOffset: { value: new THREE.Vector2(0.01, 0.01) }
       }
 
       // Material
@@ -184,6 +188,8 @@ export default class Portfolio {
         geo: geometry,
         material
       })
+      clickablMesh.castShadow = false
+      clickablMesh.receiveShadow = false
       clickablMesh.name = name
       clickablMesh.position.set(i * 1.1, 0, 0)
 
@@ -353,6 +359,13 @@ export default class Portfolio {
 
   update() {
     if (!this.isVisible) return
+    const scrollY = window.scrollY
+    this.scrollOffset = lerp(this.scrollOffset, scrollY, 0.1)
+    const offset = (scrollY - this.scrollOffset) * 0.0002
+    // Update iOffset
+    for (const item of this.items) {
+      ;(item.material as THREE.ShaderMaterial).uniforms.iOffset.value.set(-offset, 0.0)
+    }
 
     // Set the group in front of the camera
     // this.updateGroupPosition()

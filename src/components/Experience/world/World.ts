@@ -1,5 +1,5 @@
 // Classes & Settings
-import { showPortfolio, showMan, showTitles } from 'settings'
+import { showPortfolio, showMan, showTitles, showStrikes } from 'settings'
 import Experience from '../Experience'
 import Environment from './Environment'
 import Man from './Man'
@@ -23,7 +23,7 @@ export default class World {
   environment: Environment | undefined
   portfolio: Portfolio | undefined
   titles: Title[]
-  strikes: Strikes
+  strikes!: Strikes
 
   constructor() {
     this.experience = new Experience()
@@ -53,7 +53,11 @@ export default class World {
     // Listeners
     this.resources.on('ready', async () => {
       const dispatch = store.dispatch
-    this.strikes = new Strikes()
+
+      // Strikes and lighting
+      if (showStrikes) {
+        this.strikes = new Strikes()
+      }
 
       // Setup
       this.environment = new Environment()
@@ -95,6 +99,7 @@ export default class World {
     this.smoke?.update?.()
     this.portfolio?.update?.()
     this.cameraOnPath?.update?.()
+    this.strikes?.update?.()
 
     for (const title of this.titles) {
       title?.update?.()

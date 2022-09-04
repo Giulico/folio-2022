@@ -25,10 +25,10 @@ function Menu() {
   return (
     <div className={classes}>
       <p className={style.desc}>
-        <span className={style.line}>Since '86</span>
+        <span className={style.line}>v4.0</span>
       </p>
       <p className={style.desc}>
-        <span className={style.line}>now as Creative Technologist</span>
+        <span className={style.line}>2003 - 2022</span>
       </p>
       <hr className={style.separator} />
       <MenuTrigger />

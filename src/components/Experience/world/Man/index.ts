@@ -15,6 +15,7 @@ import StoreWatcher from '../../utils/StoreWatcher'
 import magicalMarble from './materials/MagicalMarble'
 import glow from './materials/Glow'
 import outline from './materials/Outline'
+import lambert from './materials/Lambert'
 
 interface AnimationAction extends THREE.AnimationAction {
   _clip?: THREE.AnimationClip
@@ -104,6 +105,10 @@ export default class Man {
         material = outline()
         break
 
+      case 'lambert':
+        material = lambert()
+        break
+
       default:
         material = [new THREE.MeshStandardMaterial({ color: 0x398424 })]
         break
@@ -116,17 +121,12 @@ export default class Man {
       (child) => child instanceof THREE.SkinnedMesh
     ) as THREE.SkinnedMesh
 
-    const geom = this.mesh.geometry
-    if (geom?.index) {
-      geom.addGroup(0, Infinity, 0)
-      geom.addGroup(0, geom.index.count, 1)
-      geom.addGroup(0, Infinity, 2)
-    }
+    this.mesh.castShadow = false
+    this.mesh.receiveShadow = false
+    this.mesh.material = material[0]
 
-    this.mesh.material = material
-
-    if (materialName === 'glow') {
-      this.mesh.layers.set(1)
+    if (materialName === 'lambert') {
+      this.mesh.layers.enable(1)
     }
   }
 

@@ -1,11 +1,10 @@
 import EventEmitter from 'utils/EventEmitter'
-import { debounce } from 'ts-debounce'
-
+import StoreWatcher from './StoreWatcher'
+import type { RootState } from 'store'
 export default class Sizes extends EventEmitter {
   width: number
   height: number
   pixelRatio: number
-  debouncedResizeHandler: () => void
 
   constructor() {
     super()
@@ -14,16 +13,21 @@ export default class Sizes extends EventEmitter {
     this.height = window.innerHeight
     this.pixelRatio = Math.min(window.devicePixelRatio, 2)
 
-    this.debouncedResizeHandler = debounce(this.resizeHandler.bind(this), 300)
-
-    window.addEventListener('resize', this.debouncedResizeHandler)
+    // Store change listener
+    const storeWatcher = new StoreWatcher()
+    storeWatcher.addListener(this.stateChangeHandler.bind(this))
   }
 
-  resizeHandler() {
-    this.width = window.innerWidth
-    this.height = window.innerHeight
-    this.pixelRatio = Math.min(window.devicePixelRatio, 2)
+  stateChangeHandler(state: RootState, prevState: RootState) {
+    if (
+      state.sizes.width !== prevState.sizes.width ||
+      state.sizes.height !== prevState.sizes.height
+    ) {
+      this.width = state.sizes.width
+      this.height = state.sizes.height
+      this.pixelRatio = Math.min(window.devicePixelRatio, 2)
 
-    this.trigger('resize')
+      this.trigger('resize')
+    }
   }
 }

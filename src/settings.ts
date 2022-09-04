@@ -1,9 +1,10 @@
 export const showExperience = true
-export const showMan = true
-export const manMaterial = 'glow' // glow
+export const showMan = false
+export const manMaterial = 'lambert' // glow
 export const showTitles = true
 export const showPortfolio = true
 export const showCameraPath = false
 export const showManAnimationLogs = false
+export const showStrikes = false
 export const showOrbitControls = false
-export const composerEffect = 'neon' // neon | bloom
+export const composerEffect = 'lambert' // neon | bloom

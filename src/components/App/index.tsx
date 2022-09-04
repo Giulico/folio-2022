@@ -7,7 +7,7 @@ import { disablePageScroll, enablePageScroll } from 'scroll-lock'
 
 // Hooks
 import { useDispatch, useSelector } from 'react-redux'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { useDebounce } from 'hooks/useDebounce'
 
 // Components
@@ -27,21 +27,43 @@ window.cursor = {
 
 function App() {
   const dispatch = useDispatch()
+  const prevSizes = useRef({ height: 0, width: 0 })
+  const appHeightTesterRef = useRef<HTMLDivElement>(null)
   const { scroll, sizes } = useSelector((state: RootState) => ({
     scroll: state.scroll,
     sizes: state.sizes
   }))
 
-  const updateAppHeight = useDebounce(() => {
-    // Save sizes to the store
-    dispatch.sizes.update({
-      width: window.innerWidth,
-      height: window.innerHeight
-    })
+  const updateAppHeight = useDebounce(
+    () => {
+      if (!appHeightTesterRef.current) return
 
-    // Save CSS Variable --app-height
-    document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`)
-  }, 300)
+      const newWidth = appHeightTesterRef.current?.clientWidth
+      const newHeight = appHeightTesterRef.current?.clientHeight
+
+      const oldWidth = prevSizes.current.width
+      const oldHeight = prevSizes.current.height
+
+      if (newWidth !== oldWidth || newHeight !== oldHeight) {
+        // Save sizes to the store
+        dispatch.sizes.update({
+          width: newWidth,
+          height: newHeight
+        })
+
+        // Save CSS Variable --app-height
+        document.documentElement.style.setProperty('--app-height', `${newHeight}px`)
+
+        // Update prevSizes
+        prevSizes.current = {
+          width: newWidth,
+          height: newHeight
+        }
+      }
+    },
+    300,
+    [sizes.width, sizes.height]
+  )
 
   const updatePointerPosition = useCallback(
     (e: TouchEvent | MouseEvent) => {
@@ -53,7 +75,7 @@ function App() {
   )
 
   useEffect(() => {
-    // updateAppHeight()
+    updateAppHeight()
 
     window.addEventListener('resize', updateAppHeight)
     window.addEventListener('touchstart', updatePointerPosition)
@@ -78,6 +100,10 @@ function App() {
 
   return (
     <>
+      <div
+        ref={appHeightTesterRef}
+        style={{ height: '100vh', width: '100%', pointerEvents: 'none', position: 'fixed' }}
+      />
       <ExperienceComponent />
       <Hero />
 

@@ -186,6 +186,7 @@ export default class CameraOnPath {
   setCamera() {
     const { width, height } = this.sizes
     this.camera = new THREE.PerspectiveCamera(45, width / height, 0.01, 10)
+
     // Set the camera in front of the face of the man
     this.camera.position.set(0, 3.4, 0.3)
     this.camera.lookAt(this.lookAt.current)

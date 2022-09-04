@@ -2,6 +2,10 @@
   --left-margin: calc(var(--frame-margin) * 4);
   --right-margin: var(--frame-margin);
 
+  @media (--md-p) {
+    --left-margin: calc(var(--frame-margin) * 5);
+  }
+
   @media (--md-l) {
     --left-margin: calc(var(--frame-margin) * 6);
   }

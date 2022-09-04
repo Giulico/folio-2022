@@ -4,11 +4,13 @@ For responsive font-sizes */
   /* MOBILE */
   --xsm: 480px;
   --sm: 600px;
+
   /* TABLET */
   --md-p: 768px;
   --md: 840px;
   --under-md-l: 1023px;
   --md-l: 1024px;
+
   /* DESKTOP */
   --lg: 1280px;
   --xl: 1440px;
@@ -34,7 +36,7 @@ For responsive font-sizes */
   * {
     animation-duration: 0s !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0s !important;
     scroll-behavior: auto !important;
+    transition-duration: 0s !important;
   }
 }

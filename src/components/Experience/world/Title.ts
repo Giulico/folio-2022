@@ -17,6 +17,7 @@ import { MSDFTextGeometry, uniforms } from '../utils/MSDFText'
 import { scaleValue } from 'utils/math'
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
 import StoreWatcher from '../utils/StoreWatcher'
+import breakpoints from 'utils/breakpoints'
 
 // Components
 import Experience from '../Experience'
@@ -50,7 +51,7 @@ export default class Title {
   camera: Experience['world']['cameraOnPath']['camera']
   material!: THREE.ShaderMaterial
   mesh!: THREE.Mesh
-  scale: number
+  scale!: number
   debugFolder: GUI | undefined
   debugObject: DebugObject
   yTop: number
@@ -67,9 +68,8 @@ export default class Title {
     this.camera = this.experience.world.cameraOnPath.camera
     this.isVisible = false
 
-    this.scale = 0.0165
-    this.yTop = 0.9
-    this.yBottom = -1.4
+    this.yTop = 2
+    this.yBottom = -3
     this._pageYPosition = Infinity
 
     this.debug = this.experience.debug
@@ -79,7 +79,7 @@ export default class Title {
     }
 
     this.debugObject = {
-      offsetY: 0.32,
+      offsetY: 1.02,
       progress1: 0,
       progress2: 0,
       progress3: 0,
@@ -98,6 +98,8 @@ export default class Title {
     // Store change listener
     const storeWatcher = new StoreWatcher()
     storeWatcher.addListener(this.stateChangeHandler.bind(this))
+
+    this.setScale()
 
     this.setTitle().then(() => {
       // Todo remove autoplay
@@ -132,6 +134,22 @@ export default class Title {
         this.leaveToBottom()
       }
     }
+
+    const width = state.sizes.width
+    const prevWidth = prevState.sizes.width
+    if (width !== prevWidth) {
+      this.setScale()
+      this.positionItem()
+    }
+  }
+
+  setScale() {
+    // Mobile
+    this.scale = 0.012
+
+    if (this.sizes.width >= breakpoints.mdL) {
+      this.scale = 0.03
+    }
   }
 
   menuOpen(itemIndex: number) {
@@ -142,8 +160,17 @@ export default class Title {
       ease: 'expo.inOut'
     })
 
+    // Mobile
+    let offsetTop = 0.7
+    let distanceBetweenItems = -0.4
+
+    if (this.sizes.width > breakpoints.mdL) {
+      offsetTop = 0.8
+      distanceBetweenItems = -0.8
+    }
+
     gsap.to(this.mesh.position, {
-      y: 0.4 + -0.3 * itemIndex,
+      y: offsetTop + distanceBetweenItems * itemIndex,
       duration: 1,
       ease: 'power3.out'
     })
@@ -273,6 +300,14 @@ export default class Title {
     const { y, position } = this.getPositionInfo()
     this.mesh.position.y = y
 
+    // Find out the width of a rendered portion of the scene
+    // https://stackoverflow.com/a/13351534/2150128
+    const vFOV = THREE.MathUtils.degToRad(this.camera.fov) // convert vertical fov to radians
+    const dist = -1
+    const height = 2 * Math.tan(vFOV / 2) * dist // visible height
+    const width = height * this.camera.aspect // visible width
+    this.mesh.position.x = width
+
     // item is in viewport
     if (position === 'inview') {
       if (!this.isVisible) {
@@ -360,8 +395,8 @@ export default class Title {
       this.mesh.rotation.x = Math.PI
       this.mesh.scale.set(this.scale, this.scale, this.scale)
 
-      this.mesh.position.x = -0.7
-      this.mesh.position.z = -2
+      // this.mesh.position.x = -1.8
+      this.mesh.position.z = -4.5
 
       this.camera.add(this.mesh)
 

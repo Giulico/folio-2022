@@ -58,9 +58,10 @@ export default class Experience {
 
     this.time.on('tick', this.update.bind(this))
 
+    // this.renderer.setComposer()
     this.resources.on('ready', () => {
-      this.renderer.setComposer()
       this.renderer.setOrbitControls()
+      this.renderer.setComposer()
     })
   }
 

@@ -1,6 +1,9 @@
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 
+// Polyfills
+import 'intersection-observer'
+
 // Global styles
 import 'styles/index.css'
 

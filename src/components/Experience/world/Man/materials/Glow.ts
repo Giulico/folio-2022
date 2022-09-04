@@ -217,7 +217,7 @@ function GlowMaterial(): MeshStandardMaterial[] {
       })
     debugFolder
       .add(debugObject, 'uColorMultiplier')
-      .min(0)
+      .min(-10)
       .max(10)
       .step(0.01)
       .name('Color Multiplier')

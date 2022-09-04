@@ -1,10 +1,10 @@
 export const showExperience = true
-export const showMan = false
+export const showMan = true
 export const manMaterial = 'lambert' // glow
 export const showTitles = true
 export const showPortfolio = true
 export const showCameraPath = false
 export const showManAnimationLogs = false
-export const showStrikes = false
+export const showStrikes = true
 export const showOrbitControls = false
 export const composerEffect = 'lambert' // neon | bloom

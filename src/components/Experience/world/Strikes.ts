@@ -19,11 +19,12 @@ export default class Strikes {
   scene: Experience['scene']
   debug: Experience['debug']
   time: Experience['time']
+  sizes: Experience['sizes']
   debugFolder: GUI | undefined
   debugObject: DebugObject
 
   geometry!: THREE.PlaneGeometry
-  material!: THREE.MeshLambertMaterial
+  material!: THREE.ShaderMaterial
   mesh!: THREE.Mesh
   camera: THREE.PerspectiveCamera
 
@@ -54,7 +55,7 @@ export default class Strikes {
 
   createMaterial() {
     this.material = new THREE.ShaderMaterial({
-      color: this.debugObject.color,
+      // color: this.debugObject.color,
       fragmentShader,
       vertexShader,
       uniforms: {
@@ -77,7 +78,7 @@ export default class Strikes {
 
     if (this.debug.active && this.debugFolder) {
       this.debugFolder.addColor(this.debugObject, 'color').onChange((v: DebugObject['color']) => {
-        this.material.color = this.debugObject.color
+        // this.material.color = this.debugObject.color
       })
     }
   }

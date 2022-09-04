@@ -355,17 +355,19 @@ export default class Renderer {
     this.instance.setPixelRatio(this.sizes.pixelRatio)
   }
 
-  darkenNonBloomed(object: THREE.Object3D<THREE.Event>): any {
-    if (object.isMesh && this.bloomLayer.test(object.layers) === false) {
-      this.materials[object.uuid] = object.material
-      object.material = this.darkMaterial
+  darkenNonBloomed(object: THREE.Object3D<THREE.Event>): void {
+    const obj = object as THREE.Mesh
+    if (obj.isMesh && this.bloomLayer.test(obj.layers) === false) {
+      this.materials[obj.uuid] = obj.material
+      obj.material = this.darkMaterial
     }
   }
 
   restoreMaterial(object: THREE.Object3D<THREE.Event>) {
-    if (this.materials[object.uuid]) {
-      object.material = this.materials[object.uuid]
-      delete this.materials[object.uuid]
+    const obj = object as THREE.Mesh
+    if (this.materials[obj.uuid]) {
+      obj.material = this.materials[obj.uuid]
+      delete this.materials[obj.uuid]
     }
   }
 

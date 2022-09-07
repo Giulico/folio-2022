@@ -25,20 +25,20 @@ export default class Environment {
     this.experience = new Experience()
     this.scene = this.experience.scene
     this.resources = this.experience.resources
-
     this.debug = this.experience.debug
 
     if (this.debug.active) {
       this.debugFolder = this.debug.ui?.addFolder('Environment').close()
     }
 
-    this.setAmbientLight()
-    this.setSunLight()
-    this.setEnvironmentMap()
+    // this.setAmbientLight()
+    // this.setSunLight()
+    // this.setEnvironmentMap()
   }
 
   setAmbientLight() {
     this.ambientLight = new THREE.AmbientLight(0x91908e, 1.6) // soft white light
+    this.ambientLight.castShadow = false
     this.scene.add(this.ambientLight)
 
     if (this.debug.active && this.debugFolder) {
@@ -52,17 +52,17 @@ export default class Environment {
 
   setSunLight() {
     this.sunLightLeft = new THREE.DirectionalLight('#ffffff', 1.5)
-    // this.sunLightLeft.castShadow = true;
-    this.sunLightLeft.shadow.camera.far = 15
-    this.sunLightLeft.shadow.mapSize.set(1024, 1024)
-    this.sunLightLeft.shadow.normalBias = 0.05
+    this.sunLightLeft.castShadow = false
+    // this.sunLightLeft.shadow.camera.far = 15
+    // this.sunLightLeft.shadow.mapSize.set(1024, 1024)
+    // this.sunLightLeft.shadow.normalBias = 0.05
     this.sunLightLeft.position.set(-0.1, -4, 5)
 
     this.sunLightRight = new THREE.DirectionalLight('#f1cf98', 1.5)
-    // this.sunLight.castShadow = true;
-    this.sunLightRight.shadow.camera.far = 15
-    this.sunLightRight.shadow.mapSize.set(1024, 1024)
-    this.sunLightRight.shadow.normalBias = 0.05
+    this.sunLightRight.castShadow = false
+    // this.sunLightRight.shadow.camera.far = 15
+    // this.sunLightRight.shadow.mapSize.set(1024, 1024)
+    // this.sunLightRight.shadow.normalBias = 0.05
     this.sunLightRight.position.set(-2, 1, -4)
 
     this.scene.add(this.sunLightLeft, this.sunLightRight)
@@ -97,6 +97,7 @@ export default class Environment {
       texture: this.resources.items.environmentMapTexture as THREE.CubeTexture,
       encoding: THREE.sRGBEncoding
     }
+
     this.environmentMap.updateMaterial = () => {
       this.scene.traverse((child) => {
         if (child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial) {
@@ -106,6 +107,7 @@ export default class Environment {
         }
       })
     }
+
     this.environmentMap.updateMaterial()
 
     this.scene.environment = this.environmentMap.texture

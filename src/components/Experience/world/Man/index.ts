@@ -16,6 +16,7 @@ import magicalMarble from './materials/MagicalMarble'
 import glow from './materials/Glow'
 import outline from './materials/Outline'
 import lambert from './materials/Lambert'
+import vibrant from './materials/Vibrant'
 
 interface AnimationAction extends THREE.AnimationAction {
   _clip?: THREE.AnimationClip
@@ -77,8 +78,6 @@ export default class Man {
 
     const storeWatcher = new StoreWatcher()
     storeWatcher.addListener(this.stateChangeHandler.bind(this))
-
-    gsap.delayedCall(0.5, this.startAnimations.bind(this))
   }
 
   setModel() {
@@ -109,6 +108,10 @@ export default class Man {
         material = lambert()
         break
 
+      case 'vibrant':
+        material = vibrant()
+        break
+
       default:
         material = [new THREE.MeshStandardMaterial({ color: 0x398424 })]
         break
@@ -123,7 +126,19 @@ export default class Man {
 
     this.mesh.castShadow = false
     this.mesh.receiveShadow = false
-    this.mesh.material = material[0]
+    this.mesh.material = material
+
+    if (materialName === 'outline') {
+      const geom = this.mesh.geometry
+
+      if (geom.index) {
+        geom.addGroup(0, Infinity, 0)
+        geom.addGroup(0, geom.index.count, 1)
+        geom.addGroup(0, Infinity, 2)
+      }
+    } else {
+      this.mesh.material = material[0]
+    }
 
     if (materialName === 'lambert') {
       this.mesh.layers.enable(1)
@@ -131,8 +146,14 @@ export default class Man {
   }
 
   stateChangeHandler(state: RootState, prevState: RootState) {
-    const prevSection = prevState.section.current
+    // App ready - starting animation
+    if (state.app.ready && !prevState.app.ready) {
+      // gsap.delayedCall(0.5, this.startAnimations.bind(this))
+      this.startAnimations()
+    }
 
+    // Change section
+    const prevSection = prevState.section.current
     const currentSection = state.section.current as Sections
     if (currentSection !== prevSection) {
       if (!this.animation?.actions) {
@@ -179,8 +200,7 @@ export default class Man {
       actions: {
         intro: {
           enter: {
-            a: mixer.clipAction(subClip(globalClip, 'intro', 0, 80)),
-            delay: 5
+            a: mixer.clipAction(subClip(globalClip, 'intro', 0, 80))
           }
         },
         hero: {

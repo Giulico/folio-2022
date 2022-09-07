@@ -70,9 +70,14 @@ const sources: Sources = [
     path: '/textures/outline/pattern.jpg'
   },
   {
+    name: 'manVibrantSkin',
+    type: 'texture',
+    path: '/textures/outline/2c.jpg'
+  },
+  {
     name: 'manModel',
     type: 'gltfModel',
-    path: '/models/Man/Man6.glb'
+    path: '/models/Man/Man7.glb'
   },
   {
     name: 'noise',

@@ -51,8 +51,8 @@ export default class Experience {
     this.renderer = new Renderer()
     this.resources = new Resources(sources, this.renderer.instance)
 
-    this.loader = new Loader()
     this.world = new World()
+    this.loader = new Loader() // Loader needs camera
 
     this.sizes.on('resize', this.resize.bind(this))
 
@@ -71,6 +71,7 @@ export default class Experience {
   }
 
   update() {
+    this.loader.update()
     this.world.update()
     this.renderer.update()
   }

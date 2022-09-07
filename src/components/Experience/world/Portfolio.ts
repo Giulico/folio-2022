@@ -197,6 +197,14 @@ export default class Portfolio {
         if (!this.isVisible) return
         rootNavigate(e.model.view.name)
       })
+      clickablMesh.addEventListener(ThreeMouseEventType.OVER, (e) => {
+        if (!this.isVisible) return
+        window.store.dispatch.pointer.setLabel(e.model.view.name)
+      })
+      clickablMesh.addEventListener(ThreeMouseEventType.OUT, () => {
+        if (!this.isVisible) return
+        window.store.dispatch.pointer.setLabel('')
+      })
 
       this.group.add(clickablMesh)
       this.items[i] = clickablMesh

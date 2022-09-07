@@ -37,7 +37,9 @@ export const ModalContext = createContext<ChildrenProps>({
 const Modal = ({ children }: Props) => {
   const location = useLocation()
   const [displayLocation, setDisplayLocation] = useState<Location>(location)
-  const [transitionStage, setTransitionStage] = useState<'open' | 'close'>('close')
+  const [transitionStage, setTransitionStage] = useState<'open' | 'close'>(
+    location.pathname === '/' ? 'close' : 'open'
+  )
 
   const updateDisplayLocation = useCallback(() => {
     setDisplayLocation(location)

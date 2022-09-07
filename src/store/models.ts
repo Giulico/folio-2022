@@ -6,6 +6,7 @@ import { menu } from './models/menu'
 import { scroll } from './models/scroll'
 import { section } from './models/section'
 import { sizes } from './models/sizes'
+import { pointer } from './models/pointer'
 
 export interface RootModel extends Models<RootModel> {
   app: typeof app
@@ -13,6 +14,7 @@ export interface RootModel extends Models<RootModel> {
   scroll: typeof scroll
   section: typeof section
   sizes: typeof sizes
+  pointer: typeof pointer
 }
 
-export const models: RootModel = { app, menu, scroll, section, sizes }
+export const models: RootModel = { app, menu, scroll, section, sizes, pointer }

@@ -2,11 +2,19 @@
 import { ModalContext } from 'components/Modal'
 
 // Hooks
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 
 function useTransitionStage() {
+  const [ts, setTs] = useState<'open' | 'close'>()
   const { transitionStage } = useContext(ModalContext)
-  return transitionStage
+
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      setTs(transitionStage)
+    })
+  }, [transitionStage])
+
+  return ts
 }
 
 export default useTransitionStage

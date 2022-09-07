@@ -94,6 +94,7 @@
   height: var(--app-height);
   background-color: var(--color-white);
   -webkit-overflow-scrolling: touch;
+  transition: visibility 0s 0.3s;
   visibility: hidden;
 
   .open & {

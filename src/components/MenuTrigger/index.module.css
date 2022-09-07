@@ -164,7 +164,7 @@
   border: none;
   background-color: transparent;
   color: var(--color-white);
-  cursor: grab;
+  cursor: none;
   font-family: var(--font-family-base);
   user-select: none;
 }

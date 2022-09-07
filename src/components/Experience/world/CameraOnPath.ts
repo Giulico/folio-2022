@@ -92,14 +92,14 @@ export default class CameraOnPath {
         y: this.vertices[index].y,
         z: this.vertices[index].z,
         duration: 3.5,
-        delay: 1,
+        delay: 0.3,
         ease: 'power4.out'
       })
 
       gsap.to(this.lookAt.current, {
         y: this.lookAt.body.y,
         duration: 3.5,
-        delay: 1,
+        delay: 0.3,
         ease: 'power4.out'
       })
     }
@@ -188,10 +188,8 @@ export default class CameraOnPath {
     this.camera = new THREE.PerspectiveCamera(45, width / height, 0.01, 10)
 
     // Set the camera in front of the face of the man
-    this.camera.position.set(0, 3.4, 0.3)
+    this.camera.position.set(0, 3.41, 0.23)
     this.camera.lookAt(this.lookAt.current)
-    this.camera.updateProjectionMatrix()
-    this.camera.layers.enable(1)
     this.scene.add(this.camera)
 
     if (showOrbitControls) {
@@ -239,8 +237,8 @@ export default class CameraOnPath {
     if (this.bodyHeight && !this.menuOpen) {
       this.percentage = betweenRange(1 - window.scrollY / this.bodyHeight, 0, 1)
       const p1 = this.curvePath.getPointAt(this.percentage)
-      const x = toFixedNumber(p1.x + window.cursor.x * 0.2, 6, 10)
-      const y = toFixedNumber(p1.y + window.cursor.y * 0.2, 6, 10)
+      const x = toFixedNumber(p1.x + window.cursorNormalized.x * 0.2, 6, 10)
+      const y = toFixedNumber(p1.y + window.cursorNormalized.y * 0.2, 6, 10)
       const z = toFixedNumber(p1.z, 6, 10)
 
       if (

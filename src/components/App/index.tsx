@@ -11,6 +11,7 @@ import { useCallback, useEffect, useRef } from 'react'
 import { useDebounce } from 'hooks/useDebounce'
 
 // Components
+import Pointer from 'components/Pointer'
 import { ModalRoutes } from 'components/Router'
 import Modal from 'components/Modal'
 import ExperienceComponent from 'components/Experience'
@@ -21,6 +22,10 @@ import About from 'partials/About'
 import Contact from 'partials/Contact'
 
 window.cursor = {
+  x: 0,
+  y: 0
+}
+window.cursorNormalized = {
   x: 0,
   y: 0
 }
@@ -68,8 +73,10 @@ function App() {
   const updatePointerPosition = useCallback(
     (e: TouchEvent | MouseEvent) => {
       const { x, y } = cursorPosition(e)
-      window.cursor.x = x / sizes.width - 0.5
-      window.cursor.y = y / sizes.height - 0.5
+      window.cursor.x = x
+      window.cursor.y = y
+      window.cursorNormalized.x = x / sizes.width - 0.5
+      window.cursorNormalized.y = y / sizes.height - 0.5
     },
     [sizes.height, sizes.width]
   )
@@ -100,6 +107,7 @@ function App() {
 
   return (
     <>
+      <Pointer />
       <div
         ref={appHeightTesterRef}
         style={{ height: '100vh', width: '100%', pointerEvents: 'none', position: 'fixed' }}
@@ -114,7 +122,7 @@ function App() {
       <Portfolio />
       <About />
       <Contact />
-      <LoadProgress />
+      {/* <LoadProgress /> */}
     </>
   )
 }

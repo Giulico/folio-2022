@@ -1,4 +1,4 @@
-import { RootState } from 'store'
+import type { RootState } from 'store'
 
 // Style
 import style from './index.module.css'
@@ -15,6 +15,7 @@ import Logo from 'components/Logo'
 import Section from 'components/Section'
 import AudioWave from 'components/AudioWave'
 import Menu from 'components/Menu'
+import EnterCTA from 'components/EnterCTA'
 import TextScramble, { ScrambleTexts } from 'components/TextScramble'
 
 const scrambleTexts: ScrambleTexts = [
@@ -25,7 +26,8 @@ const scrambleTexts: ScrambleTexts = [
 ]
 
 export default function Hero() {
-  const { menu } = useSelector((state: RootState) => ({
+  const { app, menu } = useSelector((state: RootState) => ({
+    app: state.app,
     menu: state.menu
   }))
 
@@ -36,7 +38,7 @@ export default function Hero() {
   })
 
   const scrollClasses = cn(style.scroll, {
-    [style.gone]: gone || menu.open
+    [style.gone]: gone || menu.open || !app.ready
   })
 
   return (
@@ -53,17 +55,22 @@ export default function Hero() {
         <div className={style.middle}>
           <span className={style.line} />
           <div className={scrambleClasses}>
-            <TextScramble
-              texts={scrambleTexts}
-              dudClassName={style.dud}
-              letterSpeed={40}
-              nextLetterSpeed={100}
-              pauseTime={2500}
-              lineDelay={1000}
-              loop={false}
-            />
+            {app.ready && (
+              <TextScramble
+                texts={scrambleTexts}
+                dudClassName={style.dud}
+                letterSpeed={40}
+                nextLetterSpeed={100}
+                pauseTime={2500}
+                lineDelay={1000}
+                loop={false}
+              />
+            )}
           </div>
         </div>
+
+        <EnterCTA />
+
         <footer className={scrollClasses}>
           <span className={style.scrollIndicator} />
           <div>

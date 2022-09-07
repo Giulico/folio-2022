@@ -49,8 +49,9 @@ const MenuTrigger = () => {
       if (event.type !== eventType) return
 
       dispatch.menu.open(false)
+      dispatch.pointer.setType('default')
     },
-    [dispatch.menu, isDesktop]
+    [dispatch.menu, dispatch.pointer, isDesktop]
   )
 
   const openMenu = useCallback(
@@ -59,11 +60,12 @@ const MenuTrigger = () => {
       if (isScrolling || event.type !== eventType) return
 
       dispatch.menu.open(true)
+      dispatch.pointer.setType('hidden')
 
       window.addEventListener('mouseup', closeMenu)
       window.addEventListener('touchend', closeMenu)
     },
-    [closeMenu, dispatch.menu, isDesktop, isScrolling]
+    [closeMenu, dispatch.menu, dispatch.pointer, isDesktop, isScrolling]
   )
 
   const syncYAxe = useCallback(

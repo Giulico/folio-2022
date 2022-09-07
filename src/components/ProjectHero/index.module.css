@@ -44,7 +44,7 @@
     .open & {
       transform: scale(1, 0);
       transform-origin: top;
-      transition: transform 1s var(--expo-ease-out) 1s;
+      transition: transform 1s var(--expo-ease-out) var(  --modal-enter-delay);
     }
   }
 
@@ -94,10 +94,37 @@
   }
 }
 
+.detailBlock {
+  overflow: hidden;
+
+  h3,
+  p {
+    transform: translate3d(-100%, 0, 0);
+    transition: transform 1s var(--expo-ease-in-out) 0s;
+
+    .open & {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .open & {
+    h3 {
+      transition: transform 1s var(--expo-ease-in-out) calc(var(  --modal-enter-delay) + 0.2s);
+    }
+
+    p {
+      transition: transform 1s var(--expo-ease-in-out) calc(var(  --modal-enter-delay) + 0.3s);
+    }
+  }
+
+
+}
+
 .info {
   display: flex;
   width: 100%;
   flex-direction: column;
+  visibility: visible;
 
   @media (--md-l) {
     max-width: 39%;
@@ -108,10 +135,18 @@
   position: relative;
   z-index: var(--z-above);
   margin-top: var(--spc-4);
-  background-color: var(--color-white);
+  mix-blend-mode: difference;
 
   @media (--md-l) {
     direction: rtl;
+  }
+}
+
+.titleInner {
+  overflow: hidden;
+
+  @media (--md-l) {
+    margin-left: -20%;
   }
 }
 
@@ -120,17 +155,21 @@
 
   color: var(--color-white);
   font-weight: var(--fw-light);
-  mix-blend-mode: difference;
+  transform: translate3d(0, 100%, 0);
+  transition: transform 1s 0s;
+
+  .open & {
+    transform: translate3d(0, 0, 0);
+    transition: transform 1s var(  --modal-enter-delay);
+  }
 
   @media (--md-l) {
     margin-top: 0;
-    margin-left: -20%;
     text-align: left;
   }
 
   @media (--lg) {
     margin-top: 0;
-    text-align: left;
   }
 }
 
@@ -138,6 +177,7 @@
   @mixin label;
 
   display: flex;
+  overflow: hidden;
   margin-top: var(--spc-6);
   place-content: flex-end;
 
@@ -145,9 +185,16 @@
     display: flex;
     place-items: center;
     text-decoration: none;
+    transform: translate3d(-100%, 0, 0);
+    transition: transform 1s var(--expo-ease-in-out) 0s;
 
     img {
       margin-left: var(--spc-1);
+    }
+
+    .open & {
+      transform: translate3d(0, 0, 0);
+      transition: transform 1s var(--expo-ease-in-out) calc(var(  --modal-enter-delay) + 0.5s);
     }
   }
 

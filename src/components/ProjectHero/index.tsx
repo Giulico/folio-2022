@@ -24,14 +24,7 @@ type Props = {
 
 const ProjectHero = ({ title, role, agency, completed, awards, live, image }: Props) => {
   const { project } = useParams()
-  const [ts, setTs] = useState<'open' | 'close'>()
-  const transitionStage = useTransitionStage()
-
-  useEffect(() => {
-    requestAnimationFrame(() => {
-      setTs(transitionStage)
-    })
-  }, [transitionStage])
+  const ts = useTransitionStage()
 
   const classes = cn(style.root, ts && style[ts])
 
@@ -43,23 +36,25 @@ const ProjectHero = ({ title, role, agency, completed, awards, live, image }: Pr
         </figure>
         <div className={style.info}>
           <div className={style.titleContainer}>
-            <h1 className={style.title}>{title}</h1>
+            <div className={style.titleInner}>
+              <h1 className={style.title}>{title}</h1>
+            </div>
           </div>
           <div className={style.detailContainer}>
             <div className={style.details}>
-              <div>
+              <div className={style.detailBlock}>
                 <h3>Role</h3>
                 <p>{role}</p>
               </div>
-              <div>
+              <div className={style.detailBlock}>
                 <h3>Agency</h3>
                 <p>{agency}</p>
               </div>
-              <div>
+              <div className={style.detailBlock}>
                 <h3>Completed</h3>
                 <p>{completed}</p>
               </div>
-              <div>
+              <div className={style.detailBlock}>
                 {awards && (
                   <>
                     <h3>Awards</h3>

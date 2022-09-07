@@ -32,7 +32,7 @@ function useMainMenu() {
   const updateSelectedItem = useCallback(() => {
     if (!menu.open) return
 
-    let normY = window.cursor.y + 0.5
+    let normY = window.cursorNormalized.y + 0.5
     // On mobile the height of the menu line is 80vh
     if (!isMediumLandscape) {
       normY = normY * 1.2

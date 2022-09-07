@@ -2,6 +2,13 @@
   position: relative;
   width: var(--spc-3);
   height: var(--spc-3);
+  transform-origin: center bottom;
+  transition: transform 0.7s ease;
+  will-change: transform;
+
+  &.hidden {
+    transform: scale(1, 0);
+  }
 }
 
 .bar {

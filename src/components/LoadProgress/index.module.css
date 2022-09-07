@@ -5,7 +5,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #b1abb5;
+  background: rgb(115 136 245);
+  background: linear-gradient(6deg, rgb(0 0 0 / 100%) 0%, rgb(115 136 245 / 100%) 8%, rgb(63 94 251 / 100%) 14%, rgb(23 57 159 / 100%) 39%, rgb(10 46 129 / 100%) 100%);
   pointer-events: none;
   will-change: opacity;
 

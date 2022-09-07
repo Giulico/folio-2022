@@ -259,6 +259,13 @@ export default class Renderer {
             if (filmPass.uniforms) filmPass.uniforms.sIntensity.value = v
           })
       }
+    } else if (effect === 'outline') {
+      const camera = this.experience.world.cameraOnPath.camera
+      this.composer = new EffectComposer(this.instance)
+      this.composer.addPass(new RenderPass(this.scene, camera))
+      this.composer.addPass(
+        new UnrealBloomPass(new THREE.Vector2(this.sizes.width, this.sizes.height), 1, 1, 0.5)
+      )
     } else if (effect === 'lambert' && this.camera) {
       const renderScene = new RenderPass(this.scene, this.camera)
       this.debugObject = {
@@ -347,7 +354,7 @@ export default class Renderer {
     this.instance.outputEncoding = THREE.sRGBEncoding
     this.instance.toneMapping = THREE.ReinhardToneMapping
     this.instance.toneMappingExposure = 1.75
-    // this.instance.shadowMap.enabled = true
+    this.instance.shadowMap.enabled = false
     // this.instance.shadowMap.type = THREE.PCFSoftShadowMap
     // this.instance.autoClear = false
     // this.instance.setClearColor('#ff0000')
@@ -378,20 +385,23 @@ export default class Renderer {
   }
 
   update() {
+    const effect = composerEffect as string
     if (
       this.experience.resources.items.manModel?.cameras &&
       this.experience.world?.cameraOnPath?.camera
     ) {
-      if (!showOrbitControls) {
-        if (this.finalComposer) {
-          // render scene with bloom
-          this.renderBloom()
+      if (effect === 'lambert' && this.camera) {
+        // render scene with bloom
+        this.renderBloom()
 
-          // render the entire scene, then render bloom scene on top
-          this.finalComposer.render()
-        }
-      } else if (this.controlsCamera) {
+        // render the entire scene, then render bloom scene on top
+        this.finalComposer.render()
+      } else if (this.composer) {
+        this.composer.render()
+      } else if (showOrbitControls && this.controlsCamera) {
         this.instance.render(this.scene, this.controlsCamera)
+      } else if (this.camera) {
+        this.instance.render(this.scene, this.camera)
       }
     }
 

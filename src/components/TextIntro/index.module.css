@@ -1,5 +1,19 @@
 .root {
   @mixin highlight;
 
+  overflow: hidden;
   margin-bottom: var(--module-margin-bottom);
+  visibility: visible;
+}
+
+.inner {
+  opacity: 0;
+  transform: translate3d(0, 100%, 0);
+  transition: all 1s var(--expo-ease-in-out) 0s;
+
+  .open & {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition: all 2s var(--expo-ease-in-out) calc(var(  --modal-enter-delay) + 0.5s);
+  }
 }

@@ -15,12 +15,13 @@ import { useSelector } from 'react-redux'
 
 function Logo() {
   const location = useLocation()
+  const [visible, setVisible] = useState(false)
   const [closingModal, setClosingModal] = useState(false)
   const currentPathname = useRef<string>(location.pathname)
   const app = useSelector((state: RootState) => state.app)
 
   const classes = cn(style.root, {
-    [style.hidden]: !app.ready,
+    [style.hidden]: !visible,
     [style.toWhite]: app.ready && closingModal,
     [style.toBlack]: app.ready && location.pathname !== '/'
   })
@@ -29,6 +30,13 @@ function Logo() {
     if (e.animationName === style['to-white']) {
       setClosingModal(false)
     }
+  }, [])
+
+  // Visible
+  useEffect(() => {
+    setTimeout(() => {
+      setVisible(true)
+    }, 500)
   }, [])
 
   useEffect(() => {

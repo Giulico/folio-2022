@@ -1,0 +1,51 @@
+.root {
+  position: fixed;
+  z-index: var(--z-pointer);
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.leftLine,
+.rightLine {
+  display: inline-block;
+  width: 1px;
+  height: 20px;
+  background-color: var(--color-white);
+  border-radius: 1px;
+  box-shadow:
+    0 0 1px 0 var(--color-white) inset,
+    0 0 1px 0 var(--color-white),
+    0 2px 16px 2px var(--color-blue-500);
+  transform-origin: top center;
+  transition: transform 0.3s var(--power3-ease-out);
+}
+
+.leftLine {
+  transform: rotate(-5deg);
+}
+
+.rightLine {
+  transform: rotate(-55deg);
+}
+
+.label {
+  display: block;
+  color: var(--color-white);
+  text-shadow: 2px 2px 2px var(--color-blue-500);
+  text-transform: uppercase;
+}
+
+.type-hidden {
+  .leftLine {
+    transform: rotate(-5deg) scale(1, 0);
+    transition: transform 0.3s var(--power3-ease-out);
+  }
+
+  .rightLine {
+    transform: rotate(-55deg) scale(1, 0);
+    transition: transform 0.3s var(--power3-ease-out) 0.1s;
+  }
+}

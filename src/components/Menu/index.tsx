@@ -13,13 +13,20 @@ import MenuTrigger from '../MenuTrigger'
 // Hooks
 import { useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { useState, useEffect } from 'react'
 
 function Menu() {
   const location = useLocation()
-  const app = useSelector((state: RootState) => state.app)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setVisible(true)
+    }, 500)
+  }, [])
 
   const classes = cn({
-    [style.hidden]: !app.ready || location.pathname !== '/'
+    [style.hidden]: !visible || location.pathname !== '/'
   })
 
   return (

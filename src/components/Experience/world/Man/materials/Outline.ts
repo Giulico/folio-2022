@@ -8,8 +8,8 @@ function OutlineMaterial(): (MeshStandardMaterial | ShaderMaterial | MeshBasicMa
   const time = experience.time
   // const debug = experience.debug
 
-  const skin = resources.items.manSkinDisplacement as THREE.Texture
-  skin.repeat.set(1, 1)
+  const skin = resources.items.manOutlineSkin as THREE.Texture
+  skin.repeat.set(0.2, 20)
   skin.wrapS = THREE.MirroredRepeatWrapping
   skin.wrapT = THREE.MirroredRepeatWrapping
 
@@ -18,6 +18,7 @@ function OutlineMaterial(): (MeshStandardMaterial | ShaderMaterial | MeshBasicMa
   //   debugFolder = debug.ui?.addFolder('Man')
   // }
 
+  // outline https://codepen.io/ycw/pen/popBqBJ
   const sha0 = THREE.ShaderLib.basic
   const mat0 = new THREE.ShaderMaterial({
     side: THREE.BackSide,
@@ -36,19 +37,23 @@ function OutlineMaterial(): (MeshStandardMaterial | ShaderMaterial | MeshBasicMa
     fragmentShader: sha0.fragmentShader
   })
 
+  // Textured
   const mat1 = new THREE.MeshLambertMaterial({
     side: THREE.DoubleSide,
-    map: skin
+    map: skin,
+    emissiveMap: skin,
+    emissiveIntensity: 0.8,
+    emissive: 'white'
     // color: new THREE.Color(0xffffff),
     // emissive: new THREE.Color(0xffffff)
-    // emissiveMap: skin,
-    // emissiveIntensity: 0.8,
-    // emissive: 'black'
   })
-  const mat2 = new THREE.MeshBasicMaterial({ color: 'black', wireframe: true })
+
+  // Wireframe
+  const mat2 = new THREE.MeshBasicMaterial({ color: 'white', wireframe: true })
 
   time.on('tick', () => {
-    skin.offset.y -= 0.0002
+    skin.offset.x -= 0.0005
+    skin.offset.y -= 0.002
   })
 
   return [mat0, mat1, mat2]

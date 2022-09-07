@@ -16,7 +16,7 @@ function LoadProgress() {
   const app = useSelector((state: RootState) => state.app)
 
   const classes = cn(style.root, {
-    [style.loaded]: app.loadingProgress === 1
+    // [style.loaded]: app.loadingProgress === 1
   })
 
   return showExperience ? (

@@ -1,5 +1,5 @@
 // Classes & Settings
-import { showPortfolio, showMan, showTitles, showStrikes } from 'settings'
+import { showPortfolio, showMan, showTitles, showStrikes, showClouds } from 'settings'
 import Experience from '../Experience'
 import Environment from './Environment'
 import Man from './Man'
@@ -8,6 +8,7 @@ import Portfolio from './Portfolio'
 import CameraOnPath from './CameraOnPath'
 import Title from './Title'
 import Strikes from './Strikes'
+import Clouds from './Clouds'
 
 // Utils
 import { fontLoader } from 'utils/fonts'
@@ -24,6 +25,7 @@ export default class World {
   portfolio: Portfolio | undefined
   titles: Title[]
   strikes!: Strikes
+  clouds!: Clouds
 
   constructor() {
     this.experience = new Experience()
@@ -57,6 +59,11 @@ export default class World {
       // Strikes and lighting
       if (showStrikes) {
         this.strikes = new Strikes()
+      }
+
+      // Strikes and lighting
+      if (showClouds) {
+        this.clouds = new Clouds()
       }
 
       // Setup
@@ -100,6 +107,7 @@ export default class World {
     this.portfolio?.update?.()
     this.cameraOnPath?.update?.()
     this.strikes?.update?.()
+    this.clouds?.update?.()
 
     for (const title of this.titles) {
       title?.update?.()

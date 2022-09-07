@@ -1,0 +1,43 @@
+.root {
+  position: fixed;
+  top: var(--frame-margin);
+  right: var(--frame-margin);
+  left: auto;
+  display: flex;
+  flex-direction: column;
+  place-items: flex-end;
+}
+
+.marker {
+  display: inline-block;
+  width: 0;
+  height: 1px;
+  margin-left: 0;
+  background-color: var(--color-white);
+  transition: all 0.3s;
+}
+
+.button {
+  display: flex;
+  padding-bottom: var(--spc-1);
+  border: 0;
+  background-color: transparent;
+  color: var(--color-white);
+  cursor: none;
+  place-items: center;
+  text-align: right;
+
+  &.active {
+    .marker {
+      width: var(--spc-2);
+      margin-left: var(--spc-1);
+    }
+  }
+
+  &:hover:not(.active) {
+    .marker {
+      width: var(--spc-1);
+      margin-left: var(--spc-1);
+    }
+  }
+}

@@ -16,6 +16,7 @@ import Section from 'components/Section'
 import AudioWave from 'components/AudioWave'
 import Menu from 'components/Menu'
 import EnterCTA from 'components/EnterCTA'
+import LangSwitch from 'components/LangSwitch'
 import TextScramble, { ScrambleTexts } from 'components/TextScramble'
 
 const scrambleTexts: ScrambleTexts = [
@@ -50,6 +51,7 @@ export default function Hero() {
         <div className={style.menuContainer}>
           <Menu />
         </div>
+        <LangSwitch />
       </header>
       <Section name="hero" className={style.root}>
         <div className={style.middle}>

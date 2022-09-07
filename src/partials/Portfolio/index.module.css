@@ -3,19 +3,16 @@
 
   position: relative;
   z-index: 1;
-  height: 400vh;
+  height: 200vh;
   padding-top: calc(15vh + var(--fs-display-1) + var(--spc-10));
   margin-top: calc(var(--app-height) / 2);
   color: var(--color-white);
   pointer-events: none;
-}
 
-/*
-.titleContainer {
-  position: sticky;
-  top: 0;
+  @media (--md-l) {
+    height: 400vh;
+  }
 }
-*/
 
 .video {
   display: none;

@@ -2,11 +2,16 @@
 import type { GUI } from 'lil-gui'
 import type { RootState } from 'store'
 
+// Fonts
+import fnt from '/fonts/MSDF/SairaSemiCondensed-SemiBold-msdf.json?url'
+import png from '/fonts/MSDF/SairaSemiCondensed-SemiBold.png?url'
+
 // Utils
 import * as THREE from 'three'
 import { gsap } from 'gsap'
 import lerp from 'utils/lerp'
 import { scaleValue } from 'utils/math'
+import breakpoints from 'utils/breakpoints'
 import { disablePageScroll, enablePageScroll } from 'scroll-lock'
 import { rootNavigate } from 'components/CustomRouter'
 import {
@@ -15,11 +20,15 @@ import {
   MouseEventManager,
   ThreeMouseEventType
 } from '@masatomakino/threejs-interactive-object'
+import { MSDFTextGeometry, uniforms } from '../utils/MSDFText'
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
 import StoreWatcher from '../utils/StoreWatcher'
 
 // Shaders
 import vertexShader from './shaders/portfolio/vertex'
 import fragmentShader from './shaders/portfolio/fragment'
+import captionVertexShader from './shaders/title/vertex'
+import captionFragmentShader from './shaders/title/fragment'
 
 // Components
 import Experience from '../Experience'
@@ -34,6 +43,7 @@ type DebugObject = {
 
 type Project = {
   name: string
+  url: string
   video: HTMLVideoElement
 }
 
@@ -82,23 +92,28 @@ export default class Portfolio {
 
     this.projects = [
       {
-        name: 'sketchin',
+        name: 'Sketchin',
+        url: 'sketchin',
         video: document.getElementById('skReel') as HTMLVideoElement
       },
       {
-        name: 'aquest',
+        name: 'AQuest',
+        url: 'aquest',
         video: document.getElementById('aqReel') as HTMLVideoElement
       },
       {
-        name: 'fastweb',
+        name: 'Fastweb',
+        url: 'fastweb',
         video: document.getElementById('fbReel') as HTMLVideoElement
       },
       {
-        name: 'feudi',
+        name: 'Feudi',
+        url: 'feudi',
         video: document.getElementById('feudiReel') as HTMLVideoElement
       },
       {
-        name: 'claraluna',
+        name: 'Claraluna',
+        url: 'claraluna',
         video: document.getElementById('claralunaReel') as HTMLVideoElement
       }
     ]
@@ -118,6 +133,7 @@ export default class Portfolio {
     }
 
     this.setItems()
+    this.setCaptions()
 
     const storeWatcher = new StoreWatcher()
     storeWatcher.addListener(this.stateChangeHandler.bind(this))
@@ -159,7 +175,7 @@ export default class Portfolio {
 
     for (let i = 0; i < this.projects.length; i++) {
       // Geometry
-      const geometry = new THREE.PlaneGeometry(0.7, 0.5, 24, 24)
+      const geometry = new THREE.PlaneGeometry(0.7, 0.5, 12, 12)
 
       // Play video
       const { video, name } = this.projects[i]
@@ -210,6 +226,8 @@ export default class Portfolio {
       this.items[i] = clickablMesh
     }
 
+    this.setScale()
+
     this.camera.add(this.group)
 
     // Debug
@@ -242,6 +260,91 @@ export default class Portfolio {
           item.material.uniforms.iColorInner.value = new THREE.Color(v)
         }
       })
+    }
+  }
+
+  setCaptions() {
+    const promises = [this.loadFontAtlas(png), this.loadFont(fnt)]
+
+    return Promise.all(promises).then(([atlas, fnt]) => {
+      const font = (fnt as { data: any }).data
+
+      for (let i = 0; i < this.items.length; i++) {
+        const geometry = new MSDFTextGeometry({
+          text: this.items[i].name,
+          font
+        })
+        const material = new THREE.ShaderMaterial({
+          side: THREE.DoubleSide,
+          transparent: true,
+          defines: {
+            IS_SMALL: false
+          },
+          extensions: {
+            derivatives: true
+          },
+          uniforms: {
+            // Common
+            ...uniforms.common,
+
+            // Rendering
+            ...uniforms.rendering,
+
+            // Strokes
+            ...uniforms.strokes,
+
+            uStrokeOutsetWidth: { value: 0.1 },
+            uStrokeInsetWidth: { value: 0.0 },
+            uProgress1: { value: 1 },
+            uProgress2: { value: 0 },
+            uProgress3: { value: 0 },
+            uProgress4: { value: 0 },
+            uProgress5: { value: 0 },
+            uDirection: { value: 1 }
+          },
+          vertexShader: captionVertexShader,
+          fragmentShader: captionFragmentShader
+        })
+        material.uniforms.uMap.value = atlas
+
+        const mesh = new THREE.Mesh(geometry, material)
+        mesh.rotation.x = Math.PI
+
+        this.group.add(mesh)
+      }
+      this.positionCaptions()
+    })
+  }
+
+  positionCaptions() {
+    const captions = this.group.children.filter(
+      (mesh) => (mesh as THREE.Mesh).geometry instanceof MSDFTextGeometry
+    )
+    for (let i = 0; i < captions.length; i++) {
+      const mesh = captions[i]
+      if (this.sizes.width >= breakpoints.mdL) {
+        const scale = 0.004
+        mesh.scale.set(scale, scale, scale)
+        mesh.position.set(i * 1.1 - 0.1, -0.27, 0.1)
+      } else {
+        const scale = 0.0015
+        mesh.scale.set(scale, scale, scale)
+        mesh.position.set(i * 0.5 - 0.1, -0.1, 0.1)
+      }
+    }
+  }
+
+  setScale() {
+    for (let i = 0; i < this.items.length; i++) {
+      const item = this.items[i]
+      if (this.sizes.width >= breakpoints.mdL) {
+        item.scale.set(1, 1, 1)
+        item.position.set(i * 1.1, 0, 0)
+      } else {
+        const item = this.items[i]
+        item.scale.set(0.4, 0.4, 0.4)
+        item.position.set(i * 0.5, 0, 0)
+      }
     }
   }
 
@@ -365,6 +468,24 @@ export default class Portfolio {
     })
   }
 
+  loadFontAtlas(path: string) {
+    const promise = new Promise((resolve) => {
+      const loader = new THREE.TextureLoader()
+      loader.load(path, resolve)
+    })
+
+    return promise
+  }
+
+  loadFont(path: string) {
+    const promise = new Promise((resolve) => {
+      const loader = new FontLoader()
+      loader.load(path, resolve)
+    })
+
+    return promise
+  }
+
   update() {
     if (!this.isVisible) return
     const scrollY = window.scrollY
@@ -375,20 +496,13 @@ export default class Portfolio {
       ;(item.material as THREE.ShaderMaterial).uniforms.iOffset.value.set(-offset, 0.0)
     }
 
-    // Set the group in front of the camera
-    // this.updateGroupPosition()
-
     gsap.to(this.group.position, {
       x: this.xPosition,
-      // y: this.groupPosition.y,
-      // z: this.groupPosition.z,
       duration: 2
     })
-    // gsap.to(this.group.rotation, {
-    //   x: this.camera.rotation.x,
-    //   y: this.camera.rotation.y,
-    //   z: this.camera.rotation.z,
-    //   duration: 2
-    // })
+  }
+
+  resize() {
+    this.setScale()
   }
 }

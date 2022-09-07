@@ -14,8 +14,8 @@ import fragmentShader from './shaders/title/fragment'
 import * as THREE from 'three'
 import { gsap } from 'gsap'
 import { MSDFTextGeometry, uniforms } from '../utils/MSDFText'
-import { scaleValue } from 'utils/math'
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
+import { scaleValue } from 'utils/math'
 import StoreWatcher from '../utils/StoreWatcher'
 import breakpoints from 'utils/breakpoints'
 
@@ -133,13 +133,6 @@ export default class Title {
       if (index > itemIndex && prevIndex === itemIndex) {
         this.leaveToBottom()
       }
-    }
-
-    const width = state.sizes.width
-    const prevWidth = prevState.sizes.width
-    if (width !== prevWidth) {
-      this.setScale()
-      this.positionItem()
     }
   }
 
@@ -307,6 +300,7 @@ export default class Title {
     const height = 2 * Math.tan(vFOV / 2) * dist // visible height
     const width = height * this.camera.aspect // visible width
     this.mesh.position.x = width
+    this.mesh.scale.set(this.scale, this.scale, this.scale)
 
     // item is in viewport
     if (position === 'inview') {
@@ -480,5 +474,10 @@ export default class Title {
 
   update() {
     // Animations
+  }
+
+  resize() {
+    this.setScale()
+    this.positionItem()
   }
 }

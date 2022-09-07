@@ -4,18 +4,19 @@ import type { RootState } from 'store'
 // Utils
 import { cursorPosition } from 'utils/events'
 import { disablePageScroll, enablePageScroll } from 'scroll-lock'
+import breakpoints from 'utils/breakpoints'
 
 // Hooks
 import { useDispatch, useSelector } from 'react-redux'
 import { useCallback, useEffect, useRef } from 'react'
 import { useDebounce } from 'hooks/useDebounce'
+import { useMediaQuery } from 'react-responsive'
 
 // Components
 import Pointer from 'components/Pointer'
 import { ModalRoutes } from 'components/Router'
 import Modal from 'components/Modal'
 import ExperienceComponent from 'components/Experience'
-import LoadProgress from 'components/LoadProgress'
 import Hero from 'partials/Hero'
 import Portfolio from 'partials/Portfolio'
 import About from 'partials/About'
@@ -32,8 +33,11 @@ window.cursorNormalized = {
 
 function App() {
   const dispatch = useDispatch()
+
+  const isDesktop = useMediaQuery({ minWidth: breakpoints.lg })
   const prevSizes = useRef({ height: 0, width: 0 })
   const appHeightTesterRef = useRef<HTMLDivElement>(null)
+
   const { scroll, sizes } = useSelector((state: RootState) => ({
     scroll: state.scroll,
     sizes: state.sizes
@@ -107,7 +111,6 @@ function App() {
 
   return (
     <>
-      <Pointer />
       <div
         ref={appHeightTesterRef}
         style={{ height: '100vh', width: '100%', pointerEvents: 'none', position: 'fixed' }}
@@ -122,7 +125,8 @@ function App() {
       <Portfolio />
       <About />
       <Contact />
-      {/* <LoadProgress /> */}
+
+      {isDesktop && <Pointer />}
     </>
   )
 }

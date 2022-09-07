@@ -112,6 +112,11 @@ export default class World {
   resize() {
     this.man?.resize?.()
     this.cameraOnPath?.resize?.()
+    this.portfolio?.resize?.()
+
+    for (const title of this.titles) {
+      title?.resize?.()
+    }
   }
 
   update() {

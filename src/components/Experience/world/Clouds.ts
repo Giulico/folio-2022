@@ -63,7 +63,7 @@ export default class Clouds {
         iResolution: {
           value: new THREE.Vector3(this.sizes.width, this.sizes.height, window.devicePixelRatio)
         },
-        iAlpha: { value: 1.0 },
+        iAlpha: { value: 0.2 },
         scale: { value: 1.2 },
         speed: { value: 0.15 }
       }

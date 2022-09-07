@@ -2,6 +2,7 @@ export const showExperience = true
 export const showStrikes = false
 export const showClouds = true
 export const showMan = true
+export const showParticles = true
 export const manMaterial = 'vibrant' // glow | lambert | outline | vibrant
 export const showTitles = true
 export const showPortfolio = true

@@ -1,7 +1,11 @@
 .root {
   --ring-size: 150px;
 
-  margin-left: var(--text-margin-right);
+  margin: auto;
+
+  @media(--md-l) {
+    margin-left: var(--text-margin-right);
+  }
 }
 
 .button {

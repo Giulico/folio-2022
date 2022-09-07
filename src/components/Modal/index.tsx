@@ -12,6 +12,7 @@ import { rootNavigate } from 'components/CustomRouter'
 
 // Hooks
 import { useLocation } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { useEffect, useState, useCallback } from 'react'
 
 type ChildrenProps = {
@@ -36,6 +37,7 @@ export const ModalContext = createContext<ChildrenProps>({
 
 const Modal = ({ children }: Props) => {
   const location = useLocation()
+  const dispatch = useDispatch()
   const [displayLocation, setDisplayLocation] = useState<Location>(location)
   const [transitionStage, setTransitionStage] = useState<'open' | 'close'>(
     location.pathname === '/' ? 'close' : 'open'
@@ -47,8 +49,10 @@ const Modal = ({ children }: Props) => {
 
   const openModal = useCallback(() => {
     setTransitionStage('open')
+    dispatch.pointer.setType('default')
+    dispatch.pointer.setLabel('')
     window.experience.world.portfolio?.openProjectAnimation()
-  }, [])
+  }, [dispatch.pointer])
 
   const closeModal = useCallback(() => {
     setTransitionStage('close')
@@ -89,7 +93,10 @@ const Modal = ({ children }: Props) => {
         </div>
       </div>
       <button className={buttonClasses} onClick={() => rootNavigate('/')}>
-        <img src="/icons/arrow-left.svg" /> Back
+        <figure>
+          <img src="/icons/arrow-left.svg" />
+        </figure>
+        <span>Back</span>
       </button>
     </>
   )

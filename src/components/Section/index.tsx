@@ -66,6 +66,12 @@ function Section({ children, name, className, onEnter, onResize }: Props) {
 
   useEffect(() => {
     window.addEventListener('scroll', checkBoundary)
+
+    if (section.current !== 'portfolio') {
+      dispatch.pointer.setType('default')
+      dispatch.pointer.setLabel('')
+    }
+
     return () => {
       window.removeEventListener('scroll', checkBoundary)
     }

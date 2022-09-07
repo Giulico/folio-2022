@@ -4,10 +4,17 @@
   flex-direction: column;
   margin-bottom: var(--module-margin-bottom);
   gap: var(--spc-4);
+  opacity: 0;
+  transition: all 0.5s ease 0s;
 
   @media (--md-l) {
     flex-direction: row;
     gap: var(--spc-8);
+  }
+
+  &.open {
+    opacity: 1;
+    transition: all 0.3s ease;
   }
 
   img,

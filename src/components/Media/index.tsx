@@ -1,8 +1,14 @@
 // Style
 import style from './index.module.css'
 
+// Utils
+import cn from 'classnames'
+
 // Components
 import Container from 'components/Container'
+
+// Hooks
+import useTransitionStage from 'hooks/useTransitionStage'
 
 type Media = {
   src: string
@@ -23,9 +29,13 @@ function Video({ src, alt }: Media) {
 }
 
 function Media({ media }: Props) {
+  const ts = useTransitionStage()
+
+  const classes = cn(style.root, ts && style[ts])
+
   return (
     <Container>
-      <div className={style.root}>
+      <div className={classes}>
         {media.map(({ src, alt }, index) => {
           const isVideo = src.endsWith('.mp4')
           return (

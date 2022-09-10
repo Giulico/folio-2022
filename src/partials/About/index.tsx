@@ -69,7 +69,7 @@ function About() {
           ))}
         </ContentBlock>
       </Container>
-      <Container>
+      <Container wide>
         <ContentBlock reveal={false}>
           <List>
             <ListItem end="x6">Awwwards</ListItem>

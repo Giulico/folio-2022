@@ -11,14 +11,16 @@ type Props = {
   small?: boolean
   body?: boolean
   right?: boolean
+  wide?: boolean
   children: ReactElement | ReactElement[]
 }
 
-const Container = ({ children, body, small, right }: Props) => {
+const Container = ({ children, body, small, right, wide }: Props) => {
   const classes = cn(style.root, {
     [style.small]: small,
     [style.body]: body,
-    [style.right]: right
+    [style.right]: right,
+    [style.wide]: wide
   })
 
   return <div className={classes}>{children} </div>

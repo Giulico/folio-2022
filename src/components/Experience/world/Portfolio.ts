@@ -125,7 +125,7 @@ export default class Portfolio {
     }
 
     this.debugObject = {
-      offsetX: 3.8,
+      offsetX: 4.5,
       offsetY: -0.039,
       offsetZ: -1,
       iColorOuter: new THREE.Color(0x426ff5),

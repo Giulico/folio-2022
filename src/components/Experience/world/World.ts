@@ -13,6 +13,7 @@ import Man from './Man'
 import Smoke from './Smoke'
 import Portfolio from './Portfolio'
 import CameraOnPath from './CameraOnPath'
+import Image from './Image'
 import Title from './Title'
 import Strikes from './Strikes'
 import Clouds from './Clouds'
@@ -21,6 +22,11 @@ import Particles from './Particles'
 // Utils
 import { fontLoader } from 'utils/fonts'
 import { arrayEquals } from 'utils/arrays'
+
+type ImageProps = {
+  name: string
+  sizes: [number, number]
+}
 
 export default class World {
   experience: Experience
@@ -31,6 +37,7 @@ export default class World {
   smoke: Smoke | undefined
   environment: Environment | undefined
   portfolio: Portfolio | undefined
+  images: Image[]
   titles: Title[]
   strikes!: Strikes
   clouds!: Clouds
@@ -41,6 +48,7 @@ export default class World {
     this.scene = this.experience.scene
     this.resources = this.experience.resources
     this.titles = []
+    this.images = []
 
     this.cameraOnPath = new CameraOnPath()
 
@@ -64,6 +72,16 @@ export default class World {
     // Listeners
     this.resources.on('ready', async () => {
       const dispatch = store.dispatch
+      const state = store.getState()
+      const images: { [key: string]: ImageProps } = state.images
+
+      for (const name of Object.keys(images)) {
+        const image = new Image({
+          name,
+          sizes: images[name].sizes
+        })
+        this.images.push(image)
+      }
 
       // Strikes and lighting
       if (showStrikes) {
@@ -101,7 +119,7 @@ export default class World {
       if (showTitles) {
         this.titles = [
           new Title({ itemIndex: 0, text: 'TCMG' }),
-          new Title({ itemIndex: 1, text: 'Portfolio' }),
+          new Title({ itemIndex: 1, text: 'Works' }),
           new Title({ itemIndex: 2, text: 'About' }),
           new Title({ itemIndex: 3, text: 'Contact' })
         ]
@@ -127,6 +145,10 @@ export default class World {
     this.strikes?.update?.()
     this.clouds?.update?.()
     this.particles?.update?.()
+
+    for (const image of this.images) {
+      image?.update?.()
+    }
 
     for (const title of this.titles) {
       title?.update?.()

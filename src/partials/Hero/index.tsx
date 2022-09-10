@@ -9,6 +9,7 @@ import cn from 'classnames'
 // Hooks
 import useScrollOffset from 'hooks/useScrollOffset'
 import { useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 
 // Components
 import Logo from 'components/Logo'
@@ -20,13 +21,15 @@ import LangSwitch from 'components/LangSwitch'
 import TextScramble, { ScrambleTexts } from 'components/TextScramble'
 
 const scrambleTexts: ScrambleTexts = [
-  ['Hi'],
-  ["I'm Giulio", 'a creative developer'],
-  ["I've seen things", "you people wouldn't believe."],
-  ['Attack ships on fire', 'off the shoulder of Orion.']
+  ['Si tratta di tecnologia', 'e di processo di design'],
+  ["La ricerca e l'innovazione", 'sono il driver per esperienze memorabili'],
+  ['Sono un Creative Technologist'],
+  ['They call me Giulio.']
 ]
 
 export default function Hero() {
+  const { t } = useTranslation()
+
   const { app, menu } = useSelector((state: RootState) => ({
     app: state.app,
     menu: state.menu
@@ -76,8 +79,8 @@ export default function Hero() {
         <footer className={scrollClasses}>
           <span className={style.scrollIndicator} />
           <div>
-            <span className={style.scrollText}>Scroll down</span>
-            <span className={style.scrollText}>to see some works</span>
+            <span className={style.scrollText}>{t('scroll_cta.line1')}</span>
+            <span className={style.scrollText}>{t('scroll_cta.line2')}</span>
           </div>
         </footer>
       </Section>

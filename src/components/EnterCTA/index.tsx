@@ -11,12 +11,15 @@ import cn from 'classnames'
 import { randomIntFromInterval } from 'utils/math'
 
 // Hooks
-import { useRef, useEffect, useState, useCallback } from 'react'
+import { useRef, useEffect, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 
 gsap.registerPlugin(ScrambleTextPlugin)
 
 const EnterCTA = () => {
+  const { t } = useTranslation()
+
   const app = useSelector((state: RootState) => state.app)
   const buttonRef = useRef<HTMLButtonElement>(null)
   const labelRef = useRef<HTMLElement>(null)
@@ -53,7 +56,7 @@ const EnterCTA = () => {
       const rings = buttonRef.current?.querySelectorAll(`.${style.ring}`)
       if (rings) {
         gsap.to(labelRef.current, {
-          scrambleText: 'Entra',
+          scrambleText: t('enter'),
           duration: 2
         })
         if (rings) {
@@ -66,7 +69,7 @@ const EnterCTA = () => {
         }
       }
     }
-  }, [app.loaded])
+  }, [app.loaded, t])
 
   const classes = cn(style.root, {
     [style.loaded]: app.loaded,
@@ -82,7 +85,7 @@ const EnterCTA = () => {
         <span className={style.ring} />
         <span className={style.ring} />
         <em className={style.label} ref={labelRef}>
-          Loading
+          {t('loading')}
         </em>
       </button>
     </div>

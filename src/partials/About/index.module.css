@@ -12,6 +12,10 @@
   @media (--md-l) {
     margin-top: var(--app-height);
   }
+
+  h3 {
+    margin-top: var(--content-block-margin-top);
+  }
 }
 
 .awardsTitle {

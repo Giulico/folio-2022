@@ -1,6 +1,3 @@
-// Types
-import type { RootState } from 'store'
-
 // Style
 import style from './index.module.css'
 
@@ -12,7 +9,6 @@ import MenuTrigger from '../MenuTrigger'
 
 // Hooks
 import { useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 
 function Menu() {

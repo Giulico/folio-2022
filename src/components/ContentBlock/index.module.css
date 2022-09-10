@@ -1,7 +1,6 @@
 .root {
   position: relative;
   overflow:auto;
-  margin-top: 2em;
   transform: translate3d(0, 0, 0) scale(1);
   transition: all 1s var(--power3-ease-out);
   will-change: transform, opacity;
@@ -29,7 +28,18 @@
   }
 
   .base {
+    position: relative;
     opacity: 0.3;
+  }
+
+  &.subtext {
+    .front,
+    .base {
+      @media (--md-l) {
+        width: calc(100% - var(--spc-6));
+        padding-left: var(--spc-6);
+      }
+    }
   }
 
   .line {

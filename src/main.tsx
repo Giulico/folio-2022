@@ -1,5 +1,9 @@
+import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
+
+// i18n
+import './i18n'
 
 // Polyfills
 import 'intersection-observer'
@@ -20,11 +24,11 @@ if (!rootElement) throw new Error('Failed to find the root element')
 
 const root = ReactDOM.createRoot(rootElement)
 root.render(
-  // <React.StrictMode>
-  <CustomRouter>
-    <Provider store={store}>
-      <Router />
-    </Provider>
-  </CustomRouter>
-  // </React.StrictMode>
+  <React.Suspense>
+    <CustomRouter>
+      <Provider store={store}>
+        <Router />
+      </Provider>
+    </CustomRouter>
+  </React.Suspense>
 )

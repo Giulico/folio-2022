@@ -6,17 +6,29 @@ import Section from 'components/Section'
 import Container from 'components/Container'
 import ContentBlock from 'components/ContentBlock'
 
+// Hooks
+import { useTranslation } from 'react-i18next'
+
 function Portfolio() {
+  const { t } = useTranslation('translation', { keyPrefix: 'portfolio' })
+  const intro: string[] = t('intro', { returnObjects: true })
+  const portfolio: string[] = t('portfolio', { returnObjects: true })
+
   return (
     <Section name="portfolio" className={style.root}>
       <Container right>
         <ContentBlock>
-          <p>
-            At the moment this portfolio is my last project. It's made on top of React + Redux and
-            Three.js.
-          </p>
-          <p>The code is written in Typescript and Glsl, and it's available on Github.</p>
-          <p>Here is a selection of projects I was involved on</p>
+          {intro.map((txt, i) => (
+            <p key={i}>{txt}</p>
+          ))}
+        </ContentBlock>
+      </Container>
+      <Container body>
+        <h3>Portfolio</h3>
+        <ContentBlock subtext>
+          {portfolio.map((txt, i) => (
+            <p key={i}>{txt}</p>
+          ))}
         </ContentBlock>
       </Container>
       <video id="skReel" autoPlay muted loop playsInline className={style.video}>

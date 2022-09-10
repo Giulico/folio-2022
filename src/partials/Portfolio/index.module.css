@@ -12,6 +12,10 @@
   @media (--md-l) {
     height: 400vh;
   }
+
+  h3 {
+    margin-top: var(--content-block-margin-top);
+  }
 }
 
 .video {

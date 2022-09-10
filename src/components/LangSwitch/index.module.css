@@ -29,7 +29,7 @@
 
   &.active {
     .marker {
-      width: var(--spc-2);
+      width: var(--spc-4);
       margin-left: var(--spc-1);
     }
   }

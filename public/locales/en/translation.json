@@ -1,0 +1,39 @@
+{
+  "loading": "Loading",
+  "enter": "Enter",
+  "scroll_cta": {
+    "line1": "Scroll down",
+    "line2": "to see some work"
+  },
+  "portfolio": {
+    "intro": [
+      "Ho una solida esperienza di progettazione e sviluppo di esperienze digitali interattive e di servizio.",
+      "Dall'architettura delle informazioni, che attraverso i suoi livelli determina la narrazione, alla certosina ricerca dei componenti di UI fino alla cura delle interazioni.",
+      "Ma è l'ottimizzazione del codice a darmi le maggiori soddisfazioni."
+    ],
+    "portfolio": [
+      "Nella mia carriera ho avuto la (s?)fortuna di lavorare per clienti come: Nexi, Sky, Fastweb, AMDL Circle, IBL, Generali, Corner.",
+      "Ecco alcuni progetti che ho contribuito a portare in porto, con un approfondimento sulle sfide che ho affrontato."
+    ]
+  },
+  "about": {
+    "intro": [
+      "Nato a <ImageVenice>Venezia</ImageVenice>, oggi vivo a Como e lavoro per Sketchin, uno studio di advanced-design.",
+      "Circa Vent’anni fa  pubblicai su Altervista la prima versione di They call me Giulio. La terza versione, datata 2004 aveva il dominio di primo livello theycallmegiulio.tk.",
+      "Da allora disegno e realizzo applicazioni web. La passione per il web mi ha portato a formarmi prima in PHP, ActionScript e MySql poi HTML, CSS e Javascript.  Oggi penso in Javsacript."
+    ],
+    "clan_title": "Maturità tra i clan",
+    "clan": [
+      "Nei primi anni 2000, la mia principale passione era il famoso gioco di strategia in tempo reale Starcraft Brood War. Con un modem 56k era possibile connettersi al multiplayer e sfidare altri giocatori in coinvolgenti sfide.",
+      "A volte capitava che un gruppo di player formasse un Clan. Un team nel quale riconoscersi e creare community. Tra i vari clan di cui ho fatto parte, ricordo in particolare i Numbers One, perchè fui co-fondatore e webmaster.",
+      "Nel 2004 realizzai il primo n1clan.net, e nel 2006 un portale Web 2.0, con Login, News, Interviews e Upload e sharing dei replay di gioco. Visual con Adobe Photoshop, frontend con HTML, CSS e Javascript, backend con Codeigniter e MySql.",
+      "Fa sorridere che sembra quasi uno stack tecnologico moderno."
+    ],
+    "method_title": "Metodologie e riconoscimenti",
+    "method": [
+      "L'efficacia e l'usabilità di un progetto dipende dalle sinergie che si formano tra designer e sviluppatori. Nessuno di questi (macro) ruoli può prescindere dall'altro. Per creare un prodotto di successo il team è essenziale.",
+      "Prediligo metodologie Lean e Agili, che decentralizzano i processi decisionali. Presto molta attenzione al miglioramento continuo, sia esso personale o di flusso di lavoro.",
+      "Lungo il mio percorso ho avuto l'onore veder riconosciuti da giurie internazionali alcuni dei progetti ai quali ho lavorato."
+    ]
+  }
+}

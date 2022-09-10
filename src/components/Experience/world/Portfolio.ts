@@ -125,7 +125,7 @@ export default class Portfolio {
     }
 
     this.debugObject = {
-      offsetX: 2.2,
+      offsetX: 3.8,
       offsetY: -0.039,
       offsetZ: -1,
       iColorOuter: new THREE.Color(0x426ff5),
@@ -504,5 +504,6 @@ export default class Portfolio {
 
   resize() {
     this.setScale()
+    this.positionCaptions()
   }
 }

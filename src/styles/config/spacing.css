@@ -2,6 +2,12 @@
   /* unit: px value */
   --spc-unit: 8px;
 
+  /* Equivalent to -4px  */
+  --spc-_5-neg: calc(var(--spc-unit) * 0.5);
+
+  /* Equivalent to -8px  */
+  --spc-1-neg: calc(var(--spc-unit) * 1);
+
   /* Equivalent to 0px  */
   --spc-0: 0;
 
@@ -81,6 +87,9 @@
   --frame-margin: var(--spc-3);
   --text-margin-right: var(--spc-14);
   --module-margin-bottom: var(--spc-14);
+
+  /* TEXT */
+  --content-block-margin-top: var(--spc-8);
 }
 
 @media (--md-p) {
@@ -92,12 +101,14 @@
 @media (--md-l) {
   :root {
     --text-margin-right: var(--spc-19);
+    --content-block-margin-top: var(--spc-15);
   }
 }
 
 @media (--lg) {
   :root {
     --frame-margin: var(--spc-6);
+    --content-block-margin-top: var(--spc-30);
   }
 }
 

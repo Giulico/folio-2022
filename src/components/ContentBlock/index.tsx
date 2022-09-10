@@ -19,11 +19,12 @@ import { useInView } from 'react-intersection-observer'
 type Props = {
   children: ReactElement | ReactElement[]
   reveal?: boolean
+  subtext?: boolean
 }
 
 gsap.registerPlugin(SplitText)
 
-function ContentBlock({ children, reveal = true }: Props) {
+function ContentBlock({ children, reveal = true, subtext }: Props) {
   const frontRef = useRef<HTMLDivElement>(null)
   const splitText = useRef<SplitText | null>(null)
   const { scroll, menu, sizes } = useSelector((state: RootState) => ({
@@ -64,7 +65,8 @@ function ContentBlock({ children, reveal = true }: Props) {
     [style.isDesktop]: isDesktop,
     [style.isVisible]: isDesktop && inView,
     [style.menuOpen]: menu.open,
-    [style.reveal]: reveal
+    [style.reveal]: reveal,
+    [style.subtext]: subtext
   })
 
   return (

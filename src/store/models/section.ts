@@ -20,9 +20,7 @@ export const section = createModel<RootModel>()({
       }
     },
     setBoundary(state, payload) {
-      const currentIndex = state.boundaries.findIndex(
-        (boundary) => boundary.name === payload.name
-      )
+      const currentIndex = state.boundaries.findIndex((boundary) => boundary.name === payload.name)
       if (currentIndex > -1) {
         return {
           ...state,

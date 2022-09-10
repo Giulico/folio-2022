@@ -44,7 +44,7 @@ function MagicalMarbleMaterial(): MeshStandardMaterial[] {
   resources.items.manSkinDisplacement.wrapS = THREE.RepeatWrapping
   resources.items.manSkinDisplacement.wrapT = THREE.RepeatWrapping
 
-  resources.items.manSkin.minFilter = THREE.NearestFilter
+  resources.items.manSkinDisplacement.minFilter = THREE.NearestFilter
   resources.items.manSkinDisplacement.minFilter = THREE.NearestFilter
 
   const material = new THREE.MeshStandardMaterial({

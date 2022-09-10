@@ -4,30 +4,72 @@ import style from './index.module.css'
 import Section from 'components/Section'
 import Container from 'components/Container'
 import ContentBlock from 'components/ContentBlock'
+import ImageTrigger from 'components/ImageTrigger'
 import { List, ListItem } from 'components/List'
 
+// Hooks
+import { Trans, useTranslation } from 'react-i18next'
+
 function About() {
+  const { t } = useTranslation('translation', { keyPrefix: 'about' })
+  const intro: string[] = t('intro', { returnObjects: true })
+  const clanTitle: string = t('clan_title')
+  const clan: string[] = t('clan', { returnObjects: true })
+  const methodTitle: string = t('method_title')
+  const method: string[] = t('method', { returnObjects: true })
+
   return (
     <Section name="about" className={style.root}>
+      <Container right>
+        <ContentBlock>
+          {intro.map((txt, i) => (
+            <p key={i}>
+              <Trans
+                i18nKey={`about.intro.${i}`}
+                components={{
+                  ImageVenice: <ImageTrigger name="venice" />,
+                  ImageSketchin: <ImageTrigger name="sketchin" />,
+                  ImageTCMGTK: <ImageTrigger name="tcmgtk" sizes={[2, 3]} />
+                }}
+              />
+            </p>
+          ))}
+        </ContentBlock>
+      </Container>
       <Container body>
-        <ContentBlock>
-          <p>
-            I have a solid experience in the design and development of architectures and interactive
-            web applications as well as Design Systems. My preferred methodologies are those that
-            are based on Lean and Agile principles. I incline towards these methodologies because
-            they encourage the teamwork and decentralize the decision making processes.
-          </p>
+        <h3>{clanTitle}</h3>
+        <ContentBlock subtext>
+          {clan.map((txt, i) => (
+            <p key={i}>
+              <Trans
+                i18nKey={`about.clan.${i}`}
+                components={{
+                  ImageBW: <ImageTrigger name="bw" sizes={[2.5, 2.5]} />,
+                  ImageNO1: <ImageTrigger name="no1" />,
+                  ImageNO2: <ImageTrigger name="no2" />,
+                  ImageNO3: <ImageTrigger name="no3" sizes={[2, 2.5]} />
+                }}
+              />
+            </p>
+          ))}
         </ContentBlock>
-        <ContentBlock>
-          <p>
-            I pay close attention to the continuous improvement of the workflow. Furthermore, I
-            adjust to a humble attitude and I prefer to empower rather than demand. I have daily
-            interactions with developers, designers, IT managers and product owners.
-          </p>
+      </Container>
+      <Container right>
+        <h3 className={style.awardsTitle}>{methodTitle}</h3>
+        <ContentBlock subtext>
+          {method.map((txt, i) => (
+            <p key={i}>
+              <Trans
+                i18nKey={`about.method.${i}`}
+                components={{
+                  ImageVenice: <ImageTrigger name="JPEG" />
+                }}
+              />
+            </p>
+          ))}
         </ContentBlock>
-        <ContentBlock>
-          <h4 className={style.awardsTitle}>Awards and Recognitions</h4>
-        </ContentBlock>
+      </Container>
+      <Container>
         <ContentBlock reveal={false}>
           <List>
             <ListItem end="x6">Awwwards</ListItem>

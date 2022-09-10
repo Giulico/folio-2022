@@ -1,5 +1,3 @@
-import * as THREE from 'three'
-
 const vertex = /* glsl */ `
   // switch on high precision floats
   #ifdef GL_ES

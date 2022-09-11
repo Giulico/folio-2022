@@ -1,9 +1,12 @@
 .root {
   --ring-size: 150px;
 
+  height: 30%;
   margin: auto;
+  will-change: opacity, visibility, height;
 
   @media(--md-l) {
+    height: auto;
     margin-left: var(--text-margin-right);
   }
 }
@@ -93,10 +96,11 @@
 }
 
 .hidden {
+  height: 0;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease 0s, visibility 0s 0.3s;
-  visibility: 0;
+  transition: opacity 0.3s ease 0s, visibility 0s 0.3s, height 0s 0.3s;
+  visibility: hidden;
 }
 
 @keyframes blink {

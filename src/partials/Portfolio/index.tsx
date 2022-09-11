@@ -31,6 +31,9 @@ function Portfolio() {
           ))}
         </ContentBlock>
       </Container>
+
+      <div className={style.cardContainer} id="card-container" />
+
       <video id="skReel" autoPlay muted loop playsInline className={style.video}>
         <source src="/projects/sk/sk-reel.mp4" type="video/mp4" />
       </video>

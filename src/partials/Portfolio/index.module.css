@@ -3,7 +3,6 @@
 
   position: relative;
   z-index: 1;
-  height: 200vh;
   padding-top: calc(15vh + var(--fs-display-1) + var(--spc-10));
   margin-top: calc(var(--app-height) / 2);
   color: var(--color-white);
@@ -16,6 +15,10 @@
   h3 {
     margin-top: var(--content-block-margin-top);
   }
+}
+
+.cardContainer {
+  height: 200vh;
 }
 
 .video {

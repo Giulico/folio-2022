@@ -37,11 +37,12 @@
   width: 130px;
   align-items: flex-end;
   margin-right: var(--frame-margin);
-  margin-bottom: var(--frame-margin);
+  margin-bottom: calc(var(--frame-margin) + var(--spc-8));
   margin-left: var(--text-margin-right);
 
   @media (--md-l) {
     width: 170px;
+    margin-bottom: var(--frame-margin);
   }
 
   .scrollText {

@@ -11,6 +11,7 @@ import * as THREE from 'three'
 import { gsap } from 'gsap'
 import lerp from 'utils/lerp'
 import { scaleValue } from 'utils/math'
+import { arrayEquals } from 'utils/arrays'
 import breakpoints from 'utils/breakpoints'
 import { disablePageScroll, enablePageScroll } from 'scroll-lock'
 import { rootNavigate } from 'components/CustomRouter'
@@ -125,7 +126,7 @@ export default class Portfolio {
     }
 
     this.debugObject = {
-      offsetX: 4.5,
+      offsetX: 1.5, // TODO OffsetX is related to sizes.width and should be calculated run time
       offsetY: -0.039,
       offsetZ: -1,
       iColorOuter: new THREE.Color(0x426ff5),
@@ -142,16 +143,6 @@ export default class Portfolio {
   stateChangeHandler(state: RootState, prevState: RootState) {
     const currentSection = state.section.current
     const prevSection = prevState.section.current
-
-    if (state.section.boundaries !== prevState.section.boundaries) {
-      const portfolioBoundaries = state.section.boundaries.find((b) => b.name === 'portfolio')
-      if (portfolioBoundaries) {
-        this.scrollBoundaries = [
-          portfolioBoundaries.start,
-          portfolioBoundaries.end - this.sizes.height
-        ]
-      }
-    }
 
     // Section
     if (currentSection !== prevSection && currentSection === 'portfolio') {
@@ -178,7 +169,7 @@ export default class Portfolio {
       const geometry = new THREE.PlaneGeometry(0.7, 0.5, 12, 12)
 
       // Play video
-      const { video, name } = this.projects[i]
+      const { video, name, url } = this.projects[i]
       video.play()
 
       const uniforms = {
@@ -200,33 +191,35 @@ export default class Portfolio {
         })
       })
 
-      const clickablMesh = new ClickableMesh({
+      const clickableMesh: ClickableMesh & { pathname?: string } = new ClickableMesh({
         geo: geometry,
         material
       })
-      clickablMesh.castShadow = false
-      clickablMesh.receiveShadow = false
-      clickablMesh.name = name
-      clickablMesh.position.set(i * 1.1, 0, 0)
+      clickableMesh.castShadow = false
+      clickableMesh.receiveShadow = false
+      clickableMesh.name = name
+      clickableMesh.pathname = url
+      clickableMesh.position.set(i * 1.1, 0, 0)
 
-      clickablMesh.addEventListener(ThreeMouseEventType.CLICK, (e) => {
+      clickableMesh.addEventListener(ThreeMouseEventType.CLICK, (e) => {
         if (!this.isVisible) return
-        rootNavigate(e.model.view.name)
+        rootNavigate(e.model.view.pathname)
       })
-      clickablMesh.addEventListener(ThreeMouseEventType.OVER, (e) => {
-        if (!this.isVisible) return
-        window.store.dispatch.pointer.setLabel(e.model.view.name)
-      })
-      clickablMesh.addEventListener(ThreeMouseEventType.OUT, () => {
-        if (!this.isVisible) return
-        window.store.dispatch.pointer.setLabel('')
-      })
+      // clickableMesh.addEventListener(ThreeMouseEventType.OVER, (e) => {
+      //   if (!this.isVisible) return
+      //   window.store.dispatch.pointer.setLabel(e.model.view.name)
+      // })
+      // clickableMesh.addEventListener(ThreeMouseEventType.OUT, () => {
+      //   if (!this.isVisible) return
+      //   window.store.dispatch.pointer.setLabel('')
+      // })
 
-      this.group.add(clickablMesh)
-      this.items[i] = clickablMesh
+      this.group.add(clickableMesh)
+      this.items[i] = clickableMesh
     }
 
     this.setScale()
+    this.setBoundaries()
 
     this.camera.add(this.group)
 
@@ -334,20 +327,6 @@ export default class Portfolio {
     }
   }
 
-  setScale() {
-    for (let i = 0; i < this.items.length; i++) {
-      const item = this.items[i]
-      if (this.sizes.width >= breakpoints.mdL) {
-        item.scale.set(1, 1, 1)
-        item.position.set(i * 1.1, 0, 0)
-      } else {
-        const item = this.items[i]
-        item.scale.set(0.4, 0.4, 0.4)
-        item.position.set(i * 0.5, 0, 0)
-      }
-    }
-  }
-
   enterAnimation() {
     this.isVisible = true
     window.addEventListener('scroll', this.scrollHandler)
@@ -378,6 +357,10 @@ export default class Portfolio {
       this.debugObject.offsetX,
       -this.projects.length - 1
     ])
+    console.log(window.scrollY, this.scrollBoundaries, [
+      this.debugObject.offsetX,
+      -this.projects.length - 1
+    ])
     if (Math.abs(this.xPosition - 0.2) !== this.visibleItemIndex) {
       const itemIndex = Math.floor(Math.abs(this.xPosition - 0.2))
       this.revealItem(itemIndex)
@@ -396,7 +379,9 @@ export default class Portfolio {
     const location = window.comingLocation
     const projectName = location.pathname.split('/')[1]
 
-    const item = this.items.find((item) => item.name === projectName)
+    const item = this.items.find(
+      (item) => (item as THREE.Mesh & { pathname: string }).pathname === projectName
+    )
     if (!item) throw new Error('Project not found')
 
     // Disable scroll
@@ -434,7 +419,9 @@ export default class Portfolio {
   closeProjectAnimation() {
     const name = window.currentLocation.pathname.split('/')[1]
 
-    const index = this.items.findIndex((item) => item.name === name)
+    const index = this.items.findIndex(
+      (item) => (item as THREE.Mesh & { pathname: string }).pathname === name
+    )
     const item = this.items[index]
     if (!item) throw new Error('Project not found')
 
@@ -466,6 +453,30 @@ export default class Portfolio {
         enablePageScroll()
       }
     })
+  }
+
+  setScale() {
+    for (let i = 0; i < this.items.length; i++) {
+      const item = this.items[i]
+      if (this.sizes.width >= breakpoints.mdL) {
+        item.scale.set(1, 1, 1)
+        item.position.set(i * 1.1, 0, 0)
+      } else {
+        const item = this.items[i]
+        item.scale.set(0.4, 0.4, 0.4)
+        item.position.set(i * 0.5, 0, 0)
+      }
+    }
+  }
+
+  setBoundaries() {
+    const cardContainerEl = document.getElementById('card-container')
+    console.dir('setBoundaries, cardContainer', cardContainerEl)
+    if (cardContainerEl) {
+      const start = cardContainerEl.offsetTop + this.sizes.height + this.sizes.height * 0.5 // adding half height to enter the cards after the text
+      const end = start + cardContainerEl.clientHeight + this.sizes.height * 0.5
+      this.scrollBoundaries = [start, end]
+    }
   }
 
   loadFontAtlas(path: string) {
@@ -504,6 +515,7 @@ export default class Portfolio {
 
   resize() {
     this.setScale()
+    this.setBoundaries()
     this.positionCaptions()
   }
 }

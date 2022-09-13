@@ -20,12 +20,6 @@ function Logo() {
   const currentPathname = useRef<string>(location.pathname)
   const app = useSelector((state: RootState) => state.app)
 
-  const classes = cn(style.root, {
-    [style.hidden]: !visible,
-    [style.toWhite]: app.ready && closingModal,
-    [style.toBlack]: app.ready && location.pathname !== '/'
-  })
-
   const endAnimationHandler = useCallback((e: AnimationEvent) => {
     if (e.animationName === style['to-white']) {
       setClosingModal(false)
@@ -45,6 +39,12 @@ function Logo() {
     }
     currentPathname.current = location.pathname
   }, [closingModal, location.pathname])
+
+  const classes = cn(style.root, {
+    [style.hidden]: !visible,
+    [style.toWhite]: app.ready && closingModal,
+    [style.toBlack]: app.ready && location.pathname !== '/'
+  })
 
   return (
     <div className={classes}>

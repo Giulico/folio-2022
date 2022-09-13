@@ -4,6 +4,7 @@
   right: var(--frame-margin);
   left: auto;
   display: flex;
+  width: 55px;
   flex-direction: column;
   place-items: flex-end;
 }
@@ -14,18 +15,36 @@
   height: 1px;
   margin-left: 0;
   background-color: var(--color-white);
+  transform-origin: right;
   transition: all 0.3s;
+  transition: transform 0.5s var(--power3-ease-out), background-color 0.3s 0.5s;
+  will-change: transform;
+
+  .dark & {
+    background-color: var(--color-black);
+  }
+
+  .hidden .active & {
+    transform: scale(0, 1);
+  }
 }
 
 .button {
   display: flex;
+  width: 100%;
   padding-bottom: var(--spc-1);
   border: 0;
   background-color: transparent;
   color: var(--color-white);
   cursor: none;
+  place-content: flex-end;
   place-items: center;
   text-align: right;
+  transition: color 0.3s 0.5s;
+
+  .dark & {
+    color: var(--color-black);
+  }
 
   &.active {
     .marker {
@@ -38,6 +57,32 @@
     .marker {
       width: var(--spc-1);
       margin-left: var(--spc-1);
+    }
+  }
+}
+
+.label {
+  display: inline-block;
+  overflow: hidden;
+
+  span {
+    display: inline-block;
+    transition: transform 0.5s var(--power3-ease-out) 0.2s;
+
+    .hidden & {
+      transform: translate3d(15px, 0, 0);
+      transition: transform 0.5s var(--power3-ease-out) 0s;
+    }
+  }
+}
+
+.hidden {
+  .active {
+    .label {
+      span {
+        transform: translate3d(15px, 0, 0);
+        transition: transform 0.5s var(--power3-ease-out) 0s;
+      }
     }
   }
 }

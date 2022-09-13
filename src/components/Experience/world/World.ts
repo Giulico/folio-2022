@@ -18,6 +18,7 @@ import Title from './Title'
 import Strikes from './Strikes'
 import Clouds from './Clouds'
 import Particles from './Particles'
+import Floor from './Floor'
 
 // Utils
 import { fontLoader } from 'utils/fonts'
@@ -42,6 +43,7 @@ export default class World {
   strikes!: Strikes
   clouds!: Clouds
   particles!: Particles
+  floor!: Floor
 
   constructor() {
     this.experience = new Experience()
@@ -74,6 +76,8 @@ export default class World {
       const dispatch = store.dispatch
       const state = store.getState()
       const images: { [key: string]: ImageProps } = state.images
+
+      // this.floor = new Floor()
 
       for (const name of Object.keys(images)) {
         const image = new Image({
@@ -145,6 +149,7 @@ export default class World {
     this.strikes?.update?.()
     this.clouds?.update?.()
     this.particles?.update?.()
+    // this.floor?.update?.()
 
     for (const image of this.images) {
       image?.update?.()

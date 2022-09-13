@@ -76,6 +76,8 @@ export default class MSDFTextGeometry extends BufferGeometry {
     // update vertex data
     this.setIndex(indices)
 
+    // const positions = attributes.positions.filter((p) => !isNaN(p))
+    // console.log(positions)
     this.setAttribute('position', new BufferAttribute(attributes.positions, 2))
     this.setAttribute('center', new BufferAttribute(attributes.centers, 2))
     this.setAttribute('uv', new BufferAttribute(attributes.uvs, 2))

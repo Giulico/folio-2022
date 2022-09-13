@@ -20,7 +20,7 @@ function About() {
 
   return (
     <Section name="about" className={style.root}>
-      <Container right>
+      <Container body>
         <ContentBlock>
           {intro.map((txt, i) => (
             <p key={i}>
@@ -36,7 +36,7 @@ function About() {
           ))}
         </ContentBlock>
       </Container>
-      <Container body>
+      <Container right>
         <h3>{clanTitle}</h3>
         <ContentBlock subtext>
           {clan.map((txt, i) => (
@@ -54,7 +54,7 @@ function About() {
           ))}
         </ContentBlock>
       </Container>
-      <Container right>
+      <Container body>
         <h3 className={style.awardsTitle}>{methodTitle}</h3>
         <ContentBlock subtext>
           {method.map((txt, i) => (

@@ -70,7 +70,6 @@ function attributes(glyphs, texWidth, texHeight, flipY, layout) {
     layoutUvs[l++] = (glyph.position[1] + layout.height) / layout.height
 
     // Positions, Centers
-
     // bottom left position
     const x = glyph.position[0] + bitmap.xoffset
     const y = glyph.position[1] + bitmap.yoffset

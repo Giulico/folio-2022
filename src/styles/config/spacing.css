@@ -85,7 +85,7 @@
 
   /* SIDEBAR */
   --frame-margin: var(--spc-3);
-  --text-margin-right: var(--spc-14);
+  --text-margin-left: var(--spc-14);
   --module-margin-bottom: var(--spc-14);
 
   /* TEXT */
@@ -94,13 +94,13 @@
 
 @media (--md-p) {
   :root {
-    --text-margin-right: var(--spc-16);
+    --text-margin-left: var(--spc-16);
   }
 }
 
 @media (--md-l) {
   :root {
-    --text-margin-right: var(--spc-19);
+    --text-margin-left: 30%;
     --content-block-margin-top: var(--spc-15);
   }
 }
@@ -114,6 +114,6 @@
 
 @media (--xl) {
   :root {
-    --text-margin-right: var(--spc-30);
+    --text-margin-left: var(--spc-30);
   }
 }

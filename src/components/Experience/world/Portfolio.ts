@@ -357,10 +357,6 @@ export default class Portfolio {
       this.debugObject.offsetX,
       -this.projects.length - 1
     ])
-    console.log(window.scrollY, this.scrollBoundaries, [
-      this.debugObject.offsetX,
-      -this.projects.length - 1
-    ])
     if (Math.abs(this.xPosition - 0.2) !== this.visibleItemIndex) {
       const itemIndex = Math.floor(Math.abs(this.xPosition - 0.2))
       this.revealItem(itemIndex)
@@ -471,7 +467,6 @@ export default class Portfolio {
 
   setBoundaries() {
     const cardContainerEl = document.getElementById('card-container')
-    console.dir('setBoundaries, cardContainer', cardContainerEl)
     if (cardContainerEl) {
       const start = cardContainerEl.offsetTop + this.sizes.height + this.sizes.height * 0.5 // adding half height to enter the cards after the text
       const end = start + cardContainerEl.clientHeight + this.sizes.height * 0.5

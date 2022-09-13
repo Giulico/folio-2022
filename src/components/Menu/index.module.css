@@ -46,7 +46,8 @@
   transform-origin: left;
   transition: transform 0.3s ease-in-out 1.5s;
 
-  .hidden & {
+  .hidden &,
+  &.hidden {
     transform: scale(0, 1);
     transition: transform 0.3s ease-in-out;
   }

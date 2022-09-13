@@ -32,7 +32,7 @@ export default class Loader {
     const storeWatcher = new StoreWatcher()
     storeWatcher.addListener(this.stateChangeHandler.bind(this))
 
-    Promise.all([this.fontLoader(), this.resourcesLoader()]).then(() => {
+    Promise.all([this.fontLoader(), this.resourcesLoader(), this.firstAnimations()]).then(() => {
       window.store.dispatch.app.setLoaded()
     })
 
@@ -61,6 +61,7 @@ export default class Loader {
       uniforms: {
         iTime: { value: this.time.clockElapsed },
         iAlpha: { value: 1.0 },
+        iLight: { value: 0.0 },
         iResolution: {
           value: new THREE.Vector3(this.sizes.width, this.sizes.height, window.devicePixelRatio)
         },
@@ -73,6 +74,12 @@ export default class Loader {
     this.mesh.position.z = -0.01
 
     this.camera.add(this.mesh)
+  }
+
+  firstAnimations() {
+    return new Promise((resolve) => {
+      setTimeout(resolve, 4000)
+    })
   }
 
   fontLoader() {
@@ -100,6 +107,13 @@ export default class Loader {
           window.store.dispatch.app.setLoadingProgress(loaded / total)
         })
       })
+    })
+  }
+
+  onReady() {
+    gsap.to(this.material.uniforms.iLight, {
+      value: 0.4,
+      duration: 3
     })
   }
 

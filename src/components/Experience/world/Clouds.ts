@@ -50,7 +50,7 @@ export default class Clouds {
   }
 
   createGeometry() {
-    this.geometry = new THREE.PlaneGeometry(10, 5)
+    this.geometry = new THREE.PlaneGeometry(20, 10)
   }
 
   createMaterial() {
@@ -64,26 +64,22 @@ export default class Clouds {
           value: new THREE.Vector3(this.sizes.width, this.sizes.height, window.devicePixelRatio)
         },
         iAlpha: { value: 0.2 },
+        iLight: { value: 0.4 },
         scale: { value: 1.2 },
         speed: { value: 0.15 }
       }
-
-      // map: this.resource as THREE.Texture,
-      // emissive: 0x222222,
-      // opacity: 0.15,
-      // transparent: true
     })
     this.mesh = new THREE.Mesh(this.geometry, this.material)
-    this.mesh.position.z = -5
+    this.mesh.position.z = -10
     // this.mesh.layers.enable(1)
 
     this.camera.add(this.mesh)
 
-    if (this.debug.active && this.debugFolder) {
-      this.debugFolder.addColor(this.debugObject, 'color').onChange((v: DebugObject['color']) => {
-        // this.material.color = this.debugObject.color
-      })
-    }
+    // if (this.debug.active && this.debugFolder) {
+    //   this.debugFolder.addColor(this.debugObject, 'color').onChange((v: DebugObject['color']) => {
+    //     // this.material.color = this.debugObject.color
+    //   })
+    // }
   }
 
   update() {

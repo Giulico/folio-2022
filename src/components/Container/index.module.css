@@ -1,26 +1,17 @@
 .root {
-  --left-margin: calc(var(--frame-margin) * 4);
   --right-margin: var(--frame-margin);
 
-  @media (--md-p) {
-    --left-margin: calc(var(--frame-margin) * 5);
-  }
-
-  @media (--md-l) {
-    --left-margin: calc(var(--frame-margin) * 6);
-  }
 
   max-width: var(--lg);
-  margin: 0 var(--right-margin) 0 var(--left-margin);
+  margin: 0 var(--right-margin) 0 var(--text-margin-left);
 
   &.small {
     --small-left-margin: calc(var(--frame-margin) * 3);
 
     max-width: calc(var(--lg) - var(--small-left-margin));
-    margin: 0 var(--right-margin) 0 var(--left-margin);
 
     @media (--md-p) {
-      margin: 0 var(--right-margin) 0 calc(var(--left-margin) * 1.5);
+      margin: 0 var(--right-margin) 0 calc(var(--small-left-margin) * 1.5);
     }
   }
 
@@ -36,7 +27,7 @@
     max-width: var(--sm);
 
     @media (--md-l) {
-      margin: 0 calc(var(--right-margin) * 6) 0 50%;
+      margin: 0 calc(var(--right-margin) * 3) 0 50%;
     }
   }
 

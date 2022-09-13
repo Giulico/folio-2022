@@ -62,6 +62,8 @@ export default class Experience {
     this.resources.on('ready', () => {
       this.renderer.setOrbitControls()
       this.renderer.setComposer()
+
+      this.loader.onReady()
     })
   }
 

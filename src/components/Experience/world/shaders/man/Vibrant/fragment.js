@@ -82,6 +82,8 @@ const cnoise = /* glsl */ `
 const fragment = /* glsl */ `
   uniform float time;
   uniform sampler2D outline;
+  uniform float fresnelMax;
+  uniform float fresnelMultiplier;
 
   varying vec2 vUv;
   varying vec3 vNormal;
@@ -97,7 +99,7 @@ const fragment = /* glsl */ `
     float angle = atan(vNormal.x, vNormal.z);
 
     float fresnel = abs(dot(cameraPosition, vNormal));
-    fresnel = 3.0 - fresnel * 2.0;
+    fresnel = fresnelMax - fresnel * fresnelMultiplier;
 
     vec2 fakeUv = vec2(dot(vec3(1.0), vNormal), dot(vec3(-1.0, 0.0, 1.0), vNormal));
     fakeUv = fract(fakeUv + vec2(time / 100.0, time / 50.0));
@@ -108,7 +110,7 @@ const fragment = /* glsl */ `
     // gl_FragColor = vec4(vNormal, 1.0);
     // gl_FragColor = vec4(fresnel);
     // gl_FragColor = txt;
-    gl_FragColor = vec4(mix(vec3(0.0), txt.rgb, fresnel), 1.0);
+    gl_FragColor = vec4(mix(vec3(0.,0.,0.4), txt.rgb, fresnel), 1.0);
   }
 `
 

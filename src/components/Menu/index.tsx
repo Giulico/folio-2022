@@ -1,3 +1,6 @@
+// Types
+import type { RootState } from 'store'
+
 // Style
 import style from './index.module.css'
 
@@ -10,10 +13,12 @@ import MenuTrigger from '../MenuTrigger'
 // Hooks
 import { useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
 function Menu() {
   const location = useLocation()
   const [visible, setVisible] = useState(false)
+  const app = useSelector((state: RootState) => state.app)
 
   useEffect(() => {
     setTimeout(() => {
@@ -21,8 +26,14 @@ function Menu() {
     }, 500)
   }, [])
 
+  const isHome = location.pathname === '/'
+
   const classes = cn({
-    [style.hidden]: !visible || location.pathname !== '/'
+    [style.hidden]: !visible || !isHome
+  })
+
+  const separatorClasses = cn(style.separator, {
+    [style.hidden]: !app.ready && isHome
   })
 
   return (
@@ -33,7 +44,7 @@ function Menu() {
       <p className={style.desc}>
         <span className={style.line}>2003 - 2022</span>
       </p>
-      <hr className={style.separator} />
+      <hr className={separatorClasses} />
       <MenuTrigger />
     </div>
   )

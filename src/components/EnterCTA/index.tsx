@@ -11,7 +11,7 @@ import cn from 'classnames'
 import { randomIntFromInterval } from 'utils/math'
 
 // Hooks
-import { useRef, useEffect, useCallback } from 'react'
+import { useRef, useEffect, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -21,6 +21,8 @@ const EnterCTA = () => {
   const { t } = useTranslation()
 
   const app = useSelector((state: RootState) => state.app)
+  const [visible, setVisible] = useState(false)
+
   const buttonRef = useRef<HTMLButtonElement>(null)
   const labelRef = useRef<HTMLElement>(null)
   const dispatch = useDispatch()
@@ -60,10 +62,10 @@ const EnterCTA = () => {
           duration: 2
         })
         if (rings) {
-          gsap.killTweensOf(rings, 'rotation, opacity')
+          gsap.killTweensOf(rings, 'opacity')
           gsap.to(rings, {
-            rotation: 0,
-            opacity: 0,
+            // rotation: 0,
+            opacity: 0.5,
             duration: 0.5
           })
         }
@@ -71,9 +73,16 @@ const EnterCTA = () => {
     }
   }, [app.loaded, t])
 
+  // Visible
+  useEffect(() => {
+    setTimeout(() => {
+      setVisible(true)
+    }, 2500)
+  }, [])
+
   const classes = cn(style.root, {
     [style.loaded]: app.loaded,
-    [style.hidden]: app.ready
+    [style.hidden]: app.ready || !visible
   })
 
   return (

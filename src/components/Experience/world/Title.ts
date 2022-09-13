@@ -23,7 +23,6 @@ import breakpoints from 'utils/breakpoints'
 import Experience from '../Experience'
 
 type DebugObject = {
-  offsetY: number
   progress1: number
   progress2: number
   progress3: number
@@ -54,10 +53,12 @@ export default class Title {
   scale!: number
   debugFolder: GUI | undefined
   debugObject: DebugObject
-  yTop: number
-  yBottom: number
+  yTop!: number
+  yBottom!: number
+  yOffset!: number
   _pageYPosition: number
   isVisible: boolean
+  depth: number
 
   constructor(options: Settings) {
     this.settings = options
@@ -66,10 +67,10 @@ export default class Title {
     this.scene = this.experience.scene
     this.sizes = this.experience.sizes
     this.camera = this.experience.world.cameraOnPath.camera
+
     this.isVisible = false
 
-    this.yTop = 2
-    this.yBottom = -3
+    this.depth = -4.5
     this._pageYPosition = Infinity
 
     this.debug = this.experience.debug
@@ -79,7 +80,6 @@ export default class Title {
     }
 
     this.debugObject = {
-      offsetY: 1.02,
       progress1: 0,
       progress2: 0,
       progress3: 0,
@@ -104,6 +104,7 @@ export default class Title {
     this.setTitle().then(() => {
       // Todo remove autoplay
       setTimeout(() => {
+        this.setYBoundaries()
         this.positionItem()
         this.enterFromLeft()
       }, 1500)
@@ -136,34 +137,88 @@ export default class Title {
     }
   }
 
+  setYBoundaries() {
+    const { screenHeight } = this.getScreenSizes()
+    const geometry = this.mesh.geometry as MSDFTextGeometry
+    const halfTextHeight = ((geometry.layout?.height || 0) * this.scale) / 2
+
+    this.yTop = screenHeight * 0.5 + halfTextHeight
+    this.yBottom = screenHeight * -0.5 - halfTextHeight * 2
+
+    // Find the margin top
+    let marginTopPx = 105
+    if (this.sizes.width >= breakpoints.lg) {
+      marginTopPx = 145
+    } else if (this.sizes.width >= breakpoints.mdL) {
+      marginTopPx = 125
+    }
+    const screenTopPosition = screenHeight / 2 - halfTextHeight / 2
+    const marginTop = (screenHeight * marginTopPx) / this.sizes.height
+    this.yOffset = screenTopPosition - marginTop
+  }
+
   setScale() {
     // Mobile
     this.scale = 0.012
 
     if (this.sizes.width >= breakpoints.mdL) {
       this.scale = 0.03
+      // this.scale = 1
     }
   }
 
   menuOpen(itemIndex: number) {
+    const { height: screenHeightPx } = this.sizes
+    const { screenHeight } = this.getScreenSizes()
+    const geometry = this.mesh.geometry as MSDFTextGeometry
+    const textHeight = (geometry.layout?.height || 0) * this.scale
+    const halfTextHeight = textHeight / 2
+
     gsap.to(this.mesh.scale, {
-      x: this.scale / 2,
-      y: this.scale / 2,
+      x: this.scale / 1.5,
+      y: this.scale / 1.5,
+      z: this.scale / 1.5,
       duration: 0.3,
       ease: 'expo.inOut'
     })
 
-    // Mobile
-    let offsetTop = 0.7
-    let distanceBetweenItems = -0.4
+    // Find the margin top of the first element
+    let marginTopPx = 145
+    if (this.sizes.width >= breakpoints.lg) {
+      marginTopPx = 195
+    } else if (this.sizes.width >= breakpoints.mdL) {
+      marginTopPx = 175
+    }
+    const screenTopPosition = screenHeight / 2 - halfTextHeight / 2
+    const marginTop = (screenHeight * marginTopPx) / screenHeightPx
+    const firstItemPosition = screenTopPosition - marginTop
 
-    if (this.sizes.width > breakpoints.mdL) {
-      offsetTop = 0.8
-      distanceBetweenItems = -0.8
+    // Find the snaps between the items
+    const circleSize = 50 // MenuTrigger index.module.css --size
+    let offsetTop = 155 // MenuTrigger index.module.css --offset-top
+    if (this.sizes.width >= breakpoints.lg) {
+      offsetTop = 200
+    }
+    const verticalMargin = offsetTop * 2
+    let lineHeight = this.sizes.height * 0.8 - verticalMargin
+    if (this.sizes.width >= breakpoints.mdL) {
+      lineHeight = this.sizes.height - verticalMargin
     }
 
+    const sliderHeightPx = circleSize * 2 + lineHeight
+    const sliderHeight = (sliderHeightPx * screenHeight) / screenHeightPx
+    const itemLength = window.store.getState().section.boundaries.length
+    const points = itemLength - 1
+    const scale = 3 // should be 1.5, but 3 looks better. Issue with MSDFT font bounding
+    const subtractor = (textHeight / scale / points) * itemIndex
+
+    const snap = sliderHeight / points
+    const currentSnap = snap * itemIndex - subtractor
+
+    const y = firstItemPosition - currentSnap
+
     gsap.to(this.mesh.position, {
-      y: offsetTop + distanceBetweenItems * itemIndex,
+      y,
       duration: 1,
       ease: 'power3.out'
     })
@@ -291,15 +346,18 @@ export default class Title {
     if (!this.mesh) return
 
     const { y, position } = this.getPositionInfo()
+
     this.mesh.position.y = y
 
-    // Find out the width of a rendered portion of the scene
-    // https://stackoverflow.com/a/13351534/2150128
-    const vFOV = THREE.MathUtils.degToRad(this.camera.fov) // convert vertical fov to radians
-    const dist = -1
-    const height = 2 * Math.tan(vFOV / 2) * dist // visible height
-    const width = height * this.camera.aspect // visible width
-    this.mesh.position.x = width
+    const { screenWidth } = this.getScreenSizes()
+
+    const leftPosition =
+      this.sizes.width >= breakpoints.mdL
+        ? screenWidth * 0.3 // 30%
+        : (screenWidth * 116) / this.sizes.width // 96px (spacing.css --text-margin-left)
+
+    // Since 0 is in the middle of the screen, subtract half width
+    this.mesh.position.x = leftPosition - screenWidth / 2
     this.mesh.scale.set(this.scale, this.scale, this.scale)
 
     // item is in viewport
@@ -316,17 +374,29 @@ export default class Title {
     }
   }
 
+  getScreenSizes(): { screenWidth: number; screenHeight: number } {
+    // Find out the width of a rendered portion of the scene
+    // https://stackoverflow.com/a/13351534/2150128
+    const vFOV = THREE.MathUtils.degToRad(this.camera.fov) // convert vertical fov to radians
+    const screenHeight = 2 * Math.tan(vFOV / 2) * Math.abs(this.depth) // visible height
+    const screenWidth = screenHeight * this.camera.aspect // visible width
+    return { screenWidth, screenHeight }
+  }
+
   getPositionInfo() {
     const scrollY = window.scrollY
     const height = this.sizes.height
     const scrollStart = this._pageYPosition
     const scrollEnd = this._pageYPosition + height
-
     // item is in viewport
     if (scrollY + height >= scrollStart && scrollY < scrollEnd) {
-      const y = scaleValue(scrollY, [scrollStart - height, scrollEnd], [this.yBottom, this.yTop])
+      // Set positions based on scroll position, then add an offset to align the text to the menu separator line
+      const y =
+        scaleValue(scrollY, [scrollStart - height, scrollEnd], [this.yBottom, this.yTop]) +
+        this.yOffset
+
       return {
-        y: y + this.debugObject.offsetY,
+        y,
         position: 'inview'
       }
     } else if (scrollY + height < scrollEnd) {
@@ -349,18 +419,14 @@ export default class Title {
       const font = (fnt as { data: any }).data
       const geometry = new MSDFTextGeometry({
         text: this.settings.text,
+        mode: 'nowrap',
+        lineHeight: 50,
         font
       })
 
       this.material = new THREE.ShaderMaterial({
         side: THREE.DoubleSide,
         transparent: true,
-        defines: {
-          IS_SMALL: false
-        },
-        extensions: {
-          derivatives: true
-        },
         uniforms: {
           // Common
           ...uniforms.common,
@@ -386,24 +452,15 @@ export default class Title {
       this.material.uniforms.uMap.value = atlas
 
       this.mesh = new THREE.Mesh(geometry, this.material)
+
       this.mesh.rotation.x = Math.PI
       this.mesh.scale.set(this.scale, this.scale, this.scale)
-
-      // this.mesh.position.x = -1.8
-      this.mesh.position.z = -4.5
+      this.mesh.position.z = this.depth
 
       this.camera.add(this.mesh)
 
       // Debug
       if (this.debug.active && this.debugFolder) {
-        this.debugFolder
-          .add(this.debugObject, 'offsetY')
-          .min(-2)
-          .max(2)
-          .step(0.001)
-          .onChange(() => {
-            this.positionItem()
-          })
         this.debugFolder.add(this.debugObject, 'enterFromLeft')
         this.debugFolder.add(this.debugObject, 'enterFromTop')
         this.debugFolder.add(this.debugObject, 'enterFromBottom')
@@ -474,10 +531,14 @@ export default class Title {
 
   update() {
     // Animations
+    // if (this.settings.text === 'TCMG' && this.mesh) {
+    //   console.log('upda', this.mesh.position.y)
+    // }
   }
 
   resize() {
     this.setScale()
+    this.setYBoundaries()
     this.positionItem()
   }
 }

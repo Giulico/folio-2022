@@ -1,8 +1,6 @@
 import * as THREE from 'three'
-import { gsap } from 'gsap'
 
 // Types
-import type { GUI } from 'lil-gui'
 import type { LoadResult } from '../../utils/Resources'
 import type { RootState } from 'store'
 

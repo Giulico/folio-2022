@@ -1,16 +1,27 @@
+// Types
+import type { RootState } from 'store'
+
+// Styles
 import style from './index.module.css'
 
 // Utils
 import cn from 'classnames'
 
 // Hooks
+import { useSelector } from 'react-redux'
 import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useLocation } from 'react-router-dom'
 
 const languages = ['it', 'en']
 
 const LangSwitch = () => {
+  const { app, menu } = useSelector((state: RootState) => ({
+    app: state.app,
+    menu: state.menu
+  }))
   const { i18n } = useTranslation()
+  const location = useLocation()
 
   const changeLanguage = useCallback(
     (lang: string) => () => {
@@ -19,8 +30,15 @@ const LangSwitch = () => {
     [i18n]
   )
 
+  const isHome = location.pathname === '/'
+
+  const classes = cn(style.root, {
+    [style.hidden]: !app.ready || menu.open,
+    [style.dark]: !isHome
+  })
+
   return (
-    <div className={style.root}>
+    <div className={classes}>
       {languages.map((lang) => {
         const classes = cn(style.button, {
           [style.active]: lang === i18n.resolvedLanguage
@@ -28,7 +46,10 @@ const LangSwitch = () => {
 
         return (
           <button key={lang} className={classes} onClick={changeLanguage(lang)}>
-            {lang} <span className={style.marker} />
+            <span className={style.label}>
+              <span>{lang}</span>
+            </span>
+            <span className={style.marker} />
           </button>
         )
       })}

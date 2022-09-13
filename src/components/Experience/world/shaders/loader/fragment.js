@@ -3,6 +3,7 @@ const fragment = /* glsl */ `
 
   uniform float iTime;
   uniform float iAlpha;
+  uniform float iLight;
   uniform vec2 iResolution;
   uniform float scale;
   uniform float speed;
@@ -55,7 +56,11 @@ const fragment = /* glsl */ `
     uv -= vec2(1.2 * sin(uv.x + t + h) + 1.8, 0.4 * sin(uv.y + t + 0.3 * h) + 1.6);
 
     // Time varying pixel color
-    vec3 col = vec3(0.01 * sin(uv.x) + 0.1, .01 * sin(uv.x) + 0.2, 0.9 * sin(uv.y + uv.x) + 0.9) * 0.4;
+    vec3 col = vec3(
+      0.01 * sin(uv.x) + 0.1,
+      .01 * sin(uv.x) + 0.2,
+      0.9 * sin(uv.y + uv.x) + 0.9
+    ) * iLight;
 
     // Output to screen
     gl_FragColor = vec4(col, iAlpha);

@@ -47,7 +47,7 @@ export default class Particles {
     this.setParticles()
 
     if (this.debug.active && this.debug.ui) {
-      this.debugFolder = this.debug.ui.addFolder('Particles')
+      this.debugFolder = this.debug.ui.addFolder('Particles').close()
 
       const { uSize, uStrength } = this.material.uniforms
       this.debugFolder.add(uSize, 'value').min(1).max(500).step(1).name('Size')
@@ -64,9 +64,9 @@ export default class Particles {
     const scaleArray = new Float32Array(count)
 
     for (let i = 0; i < count; i++) {
-      positionArray[i * 3] = (Math.random() - 0.5) * 4
-      positionArray[i * 3 + 1] = Math.random() * 4
-      positionArray[i * 3 + 2] = (Math.random() - 0.5) * 4
+      positionArray[i * 3] = (Math.random() - 0.5) * 20
+      positionArray[i * 3 + 1] = Math.random() * 8
+      positionArray[i * 3 + 2] = (Math.random() - 0.5) * 8
 
       scaleArray[i] = Math.random()
     }

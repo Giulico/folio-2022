@@ -10,8 +10,8 @@ import png from '/fonts/MSDF/SairaSemiCondensed-SemiBold.png?url'
 import * as THREE from 'three'
 import { gsap } from 'gsap'
 import lerp from 'utils/lerp'
-import { scaleValue } from 'utils/math'
-import { arrayEquals } from 'utils/arrays'
+import { scaleValue, randomIntFromInterval } from 'utils/math'
+import { Howl } from 'howler'
 import breakpoints from 'utils/breakpoints'
 import { disablePageScroll, enablePageScroll } from 'scroll-lock'
 import { rootNavigate } from 'components/CustomRouter'
@@ -63,6 +63,7 @@ export default class Portfolio {
   debugObject: DebugObject
   material!: StateMaterialSet
   camera: THREE.PerspectiveCamera
+  howls: Howl[]
   manager: MouseEventManager | undefined
   projects: Project[]
   scrollBoundaries: [number, number]
@@ -89,6 +90,17 @@ export default class Portfolio {
     this.camera = this.experience.world.cameraOnPath.camera
     if (this.camera && this.experience.renderer.canvas) {
       this.manager = new MouseEventManager(this.scene, this.camera, this.experience.renderer.canvas)
+    }
+
+    const bells = 4
+    this.howls = []
+    for (let i = 1; i <= bells; i++) {
+      this.howls.push(
+        new Howl({
+          src: [`/audio/bell${i}.mp3`],
+          volume: 1
+        })
+      )
     }
 
     this.projects = [
@@ -205,10 +217,9 @@ export default class Portfolio {
         if (!this.isVisible) return
         rootNavigate(e.model.view.pathname)
       })
-      // clickableMesh.addEventListener(ThreeMouseEventType.OVER, (e) => {
-      //   if (!this.isVisible) return
-      //   window.store.dispatch.pointer.setLabel(e.model.view.name)
-      // })
+      clickableMesh.addEventListener(ThreeMouseEventType.OVER, (e) => {
+        this.howls[randomIntFromInterval(1, this.howls.length)].play()
+      })
       // clickableMesh.addEventListener(ThreeMouseEventType.OUT, () => {
       //   if (!this.isVisible) return
       //   window.store.dispatch.pointer.setLabel('')

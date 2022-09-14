@@ -38,6 +38,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@semantic-release/changelog", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:6.0.1"],\
             ["@semantic-release/git", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:10.0.1"],\
             ["@twistezo/react-text-scramble", "npm:1.0.6"],\
+            ["@types/howler", "npm:2.2.7"],\
             ["@types/node", "npm:18.7.13"],\
             ["@types/react", "npm:18.0.17"],\
             ["@types/react-dom", "npm:18.0.6"],\
@@ -58,6 +59,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-react-hooks", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:4.6.0"],\
             ["gsap", "npm:3.11.0"],\
             ["history", "npm:5.3.0"],\
+            ["howler", "npm:2.2.3"],\
             ["i18next", "npm:21.9.1"],\
             ["i18next-browser-languagedetector", "npm:6.1.5"],\
             ["i18next-http-backend", "npm:1.4.1"],\
@@ -1913,6 +1915,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/hoist-non-react-statics", "npm:3.3.1"],\
             ["@types/react", "npm:18.0.17"],\
             ["hoist-non-react-statics", "npm:3.3.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/howler", [\
+        ["npm:2.2.7", {\
+          "packageLocation": "./.yarn/cache/@types-howler-npm-2.2.7-a74a6d0441-e9d6723f94.zip/node_modules/@types/howler/",\
+          "packageDependencies": [\
+            ["@types/howler", "npm:2.2.7"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4853,6 +4864,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@semantic-release/changelog", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:6.0.1"],\
             ["@semantic-release/git", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:10.0.1"],\
             ["@twistezo/react-text-scramble", "npm:1.0.6"],\
+            ["@types/howler", "npm:2.2.7"],\
             ["@types/node", "npm:18.7.13"],\
             ["@types/react", "npm:18.0.17"],\
             ["@types/react-dom", "npm:18.0.6"],\
@@ -4873,6 +4885,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-react-hooks", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:4.6.0"],\
             ["gsap", "npm:3.11.0"],\
             ["history", "npm:5.3.0"],\
+            ["howler", "npm:2.2.3"],\
             ["i18next", "npm:21.9.1"],\
             ["i18next-browser-languagedetector", "npm:6.1.5"],\
             ["i18next-http-backend", "npm:1.4.1"],\
@@ -5413,6 +5426,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["hosted-git-info", "npm:5.1.0"],\
             ["lru-cache", "npm:7.14.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["howler", [\
+        ["npm:2.2.3", {\
+          "packageLocation": "./.yarn/cache/howler-npm-2.2.3-254b855819-c04ce19411.zip/node_modules/howler/",\
+          "packageDependencies": [\
+            ["howler", "npm:2.2.3"]\
           ],\
           "linkType": "HARD"\
         }]\

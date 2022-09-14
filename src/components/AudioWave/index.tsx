@@ -4,26 +4,46 @@ import type { RootState } from 'store'
 import style from './index.module.css'
 
 // Hooks
-import { useSelector } from 'react-redux'
+import { useCallback } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import useBackgroundAudio from 'hooks/useBackgroundAudio'
+import useIntroAudio from 'hooks/useIntroAudio'
+import useVangelisAudio from 'hooks/useVangelisAudio'
 
 // Utils
 import cn from 'classnames'
 
 function AudioWave() {
-  const app = useSelector((state: RootState) => state.app)
+  const dispatch = useDispatch()
+  const { app, audio } = useSelector((state: RootState) => ({ app: state.app, audio: state.audio }))
+  const { toggle, isPlaying } = useBackgroundAudio()
+  useIntroAudio()
+  useVangelisAudio()
 
-  const classes = cn(style.wave, {
-    [style.hidden]: !app.ready
+  const muteHandler = useCallback(() => {
+    if (audio.mute) {
+      dispatch.audio.unmute()
+    } else {
+      dispatch.audio.mute()
+    }
+    toggle()
+  }, [audio.mute, dispatch.audio, toggle])
+
+  const classes = cn(style.root, {
+    [style.hidden]: !app.ready,
+    [style.isPlaying]: isPlaying
   })
 
   return (
-    <div className={classes}>
-      <div className={style.bar} />
-      <div className={style.bar} />
-      <div className={style.bar} />
-      <div className={style.bar} />
-      <div className={style.bar} />
-    </div>
+    <button className={classes}>
+      <div className={style.wave} onClick={muteHandler}>
+        <div className={style.bar} />
+        <div className={style.bar} />
+        <div className={style.bar} />
+        <div className={style.bar} />
+        <div className={style.bar} />
+      </div>
+    </button>
   )
 }
 

@@ -16,9 +16,8 @@
   margin-left: 0;
   background-color: var(--color-white);
   transform-origin: right;
-  transition: all 0.3s;
-  transition: transform 0.5s var(--power3-ease-out), background-color 0.3s 0.5s;
-  will-change: transform;
+  transition: all 0.5s var(--power3-ease-out), background-color 0.3s 0.5s;
+  will-change: width, margin-left;
 
   .dark & {
     background-color: var(--color-black);

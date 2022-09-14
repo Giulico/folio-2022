@@ -55,6 +55,9 @@ function Pointer() {
       <span className={style.leftLine} />
       <span className={style.rightLine} />
       <span className={style.label} ref={labelRef} />
+      <div className={style.hoverLeft} />
+      <div className={style.hoverCenter} />
+      <div className={style.hoverRight} />
     </div>
   )
 }

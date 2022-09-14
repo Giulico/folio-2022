@@ -11,10 +11,10 @@
 .leftLine,
 .rightLine {
   display: inline-block;
-  width: 1px;
+  width: 2px;
   height: 20px;
   background-color: var(--color-white);
-  border-radius: 1px;
+  border-radius: 2px;
   box-shadow:
     0 0 1px 0 var(--color-white) inset,
     0 0 1px 0 var(--color-white),
@@ -28,7 +28,7 @@
 }
 
 .rightLine {
-  transform: rotate(-55deg);
+  transform: translate3d(-2px, 0 , 0) rotate(-55deg);
 }
 
 .label {
@@ -36,6 +36,43 @@
   color: var(--color-white);
   text-shadow: 2px 2px 2px var(--color-blue-500);
   text-transform: uppercase;
+}
+
+.hoverLeft,
+.hoverCenter,
+.hoverRight {
+  position: absolute;
+  top: -13px;
+  left: 0;
+  display: inline-block;
+  width: 2px;
+  height: 6px;
+  background-color: var(--color-white);
+  border-radius: 2px;
+  box-shadow:
+    0 0 1px 0 var(--color-white) inset,
+    0 0 1px 0 var(--color-white),
+    0 2px 16px 2px var(--color-blue-500);
+  transform-origin: bottom center;
+  transition: transform 0.2s ease;
+}
+
+.hoverLeft {
+  top: -8px;
+  left: -7px;
+  transform: rotate(-65deg) scale(1, 0);
+}
+
+.hoverCenter {
+  top: -13px;
+  left: -4px;
+  transform: rotate(-35deg) scale(1, 0);
+}
+
+.hoverRight {
+  top: -13px;
+  left: 2px;
+  transform: rotate(5deg) scale(1, 0);
 }
 
 .type-hidden {
@@ -47,5 +84,27 @@
   .rightLine {
     transform: rotate(-55deg) scale(1, 0);
     transition: transform 0.3s var(--power3-ease-out) 0.1s;
+  }
+}
+
+.type-hover {
+  .hoverLeft {
+    transform: rotate(-65deg) scale(1, 1);
+  }
+
+  .hoverCenter {
+    transform: rotate(-35deg) scale(1, 1);
+  }
+
+  .hoverRight {
+    transform: rotate(5deg) scale(1, 1);
+  }
+
+  .leftLine {
+    transform: rotate(4deg);
+  }
+
+  .rightLine {
+    transform: translate3d(-2px, 0 , 0) rotate(-65deg);
   }
 }

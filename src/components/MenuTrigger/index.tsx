@@ -18,6 +18,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useMediaQuery } from 'react-responsive'
+import useHoverAudio from 'hooks/useHoverAudio'
 
 const MenuTrigger = () => {
   const location = useLocation()
@@ -32,6 +33,8 @@ const MenuTrigger = () => {
   const [circleTop, setCircleTop] = useState<number>(0)
   const [endTop, setEndTop] = useState<number>(0)
   const [appLoading, setAppLoading] = useState<boolean>(true)
+
+  const { play } = useHoverAudio(2)
 
   // Main Menu Effects
   const { isScrolling } = useMainMenu()
@@ -94,6 +97,10 @@ const MenuTrigger = () => {
     [circleTop, endTop]
   )
 
+  const playSound = useCallback(() => {
+    play()
+  }, [play])
+
   useEffect(() => {
     if (menu.open) {
       window.addEventListener('mousemove', syncYAxe)
@@ -135,7 +142,12 @@ const MenuTrigger = () => {
 
   return (
     <div className={classes}>
-      <button className={style.button} onMouseDown={openMenu} onTouchStart={openMenu}>
+      <button
+        className={style.button}
+        onMouseEnter={playSound}
+        onMouseDown={openMenu}
+        onTouchStart={openMenu}
+      >
         <div className={style.circle} ref={circleEl}>
           Drop
         </div>

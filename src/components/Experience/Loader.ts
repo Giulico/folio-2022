@@ -78,7 +78,7 @@ export default class Loader {
 
   firstAnimations() {
     return new Promise((resolve) => {
-      setTimeout(resolve, 4000)
+      setTimeout(resolve, 4500)
     })
   }
 

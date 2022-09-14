@@ -73,11 +73,19 @@ const EnterCTA = () => {
     }
   }, [app.loaded, t])
 
+  const setHover = useCallback(() => {
+    dispatch.pointer.setType('hover')
+  }, [dispatch.pointer])
+
+  const removeHover = useCallback(() => {
+    dispatch.pointer.setType('')
+  }, [dispatch.pointer])
+
   // Visible
   useEffect(() => {
     setTimeout(() => {
       setVisible(true)
-    }, 2500)
+    }, 3000)
   }, [])
 
   const classes = cn(style.root, {
@@ -87,7 +95,13 @@ const EnterCTA = () => {
 
   return (
     <div className={classes}>
-      <button className={style.button} ref={buttonRef} onClick={clickHandler}>
+      <button
+        className={style.button}
+        ref={buttonRef}
+        onClick={clickHandler}
+        onMouseEnter={setHover}
+        onMouseLeave={removeHover}
+      >
         <span className={style.ring} />
         <span className={style.ring} />
         <span className={style.ring} />

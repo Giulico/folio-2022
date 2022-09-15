@@ -1,9 +1,25 @@
 {
   "loading": "Caricamento",
   "enter": "Entra",
-  "scroll_cta": {
-    "line1": "Scrolla per",
-    "line2": "vedere i progetti"
+  "intro": {
+    "p1": {
+      "l1": "Si tratta di tecnologia",
+      "l2": "e di metodo di design"
+    },
+    "p2": {
+      "l1": "La ricerca e l'innovazione",
+      "l2": "sono il driver per esperienze memorabili"
+    },
+    "p3": {
+      "l1": "Sono un Creative Technologist"
+    },
+    "p4": {
+      "l1": "They Call Me Giulio."
+    },
+    "scroll_cta": {
+      "line1": "Scrolla per",
+      "line2": "vedere i progetti"
+    }
   },
   "portfolio": {
     "intro": [

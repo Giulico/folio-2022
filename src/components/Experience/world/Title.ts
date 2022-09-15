@@ -537,6 +537,8 @@ export default class Title {
   }
 
   resize() {
+    if (!this.mesh) return
+
     this.setScale()
     this.setYBoundaries()
     this.positionItem()

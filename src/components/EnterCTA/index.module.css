@@ -1,13 +1,11 @@
 .root {
   --ring-size: 150px;
 
-  height: 30%;
   margin: auto;
   transition: opacity 0.7s ease 0s, visibility 0s 0s, height 0s 0s;
   will-change: opacity, visibility, height;
 
   @media(--md-l) {
-    height: auto;
     margin-left: var(--text-margin-left);
   }
 }

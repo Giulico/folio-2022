@@ -18,17 +18,17 @@ import AudioWave from 'components/AudioWave'
 import Menu from 'components/Menu'
 import EnterCTA from 'components/EnterCTA'
 import LangSwitch from 'components/LangSwitch'
-import TextScramble, { ScrambleTexts } from 'components/TextScramble'
-
-const scrambleTexts: ScrambleTexts = [
-  ['Si tratta di tecnologia', 'e di processo di design'],
-  ["La ricerca e l'innovazione", 'sono il driver per esperienze memorabili'],
-  ['Sono un Creative Technologist'],
-  ['They call me Giulio.']
-]
+// import TextScramble, { ScrambleTexts } from 'components/TextScramble'
+import GSAPScrumbleText, { ScrambleTexts } from 'components/GSAPScrumbleText'
 
 export default function Hero() {
-  const { t } = useTranslation()
+  const { t } = useTranslation('translation', { keyPrefix: 'intro' })
+  const scrambleTexts: ScrambleTexts = [
+    [t('p1.l1'), t('p1.l2')],
+    [t('p2.l1'), t('p2.l2')],
+    [t('p3.l1')],
+    [t('p4.l1')]
+  ]
 
   const { app, menu } = useSelector((state: RootState) => ({
     app: state.app,
@@ -60,17 +60,7 @@ export default function Hero() {
         <div className={style.middle}>
           <span className={style.line} />
           <div className={scrambleClasses}>
-            {app.ready && (
-              <TextScramble
-                texts={scrambleTexts}
-                dudClassName={style.dud}
-                letterSpeed={40}
-                nextLetterSpeed={100}
-                pauseTime={2500}
-                lineDelay={1000}
-                loop={false}
-              />
-            )}
+            <GSAPScrumbleText content={scrambleTexts} paused={!app.ready} />
           </div>
         </div>
 

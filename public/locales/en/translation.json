@@ -1,9 +1,25 @@
 {
   "loading": "Loading",
   "enter": "Enter",
-  "scroll_cta": {
-    "line1": "Scroll down",
-    "line2": "to see some work"
+  "intro": {
+    "p1": {
+      "l1": "It's all about technology",
+      "l2": "and design method"
+    },
+    "p2": {
+      "l1": "The research and the innovation",
+      "l2": "are the driver of memorable experiences"
+    },
+    "p3": {
+      "l1": "I'm a Creative Technologist"
+    },
+    "p4": {
+      "l1": "They Call Me Giulio."
+    },
+    "scroll_cta": {
+      "line1": "Scroll down",
+      "line2": "to see some work"
+    }
   },
   "portfolio": {
     "intro": [

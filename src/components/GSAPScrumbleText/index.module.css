@@ -1,0 +1,12 @@
+.root {
+  @mixin body-2;
+}
+
+.phrase {
+  color: var(--color-gray-900);
+  white-space: nowrap;
+}
+
+.completed {
+  color: var(--color-white);
+}

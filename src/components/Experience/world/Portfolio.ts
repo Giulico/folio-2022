@@ -67,6 +67,7 @@ export default class Portfolio {
   manager: MouseEventManager | undefined
   projects: Project[]
   scrollBoundaries: [number, number]
+  screenSizes: { screenWidth: number; screenHeight: number }
   xPosition: number
   scrollOffset: number
   isVisible: boolean
@@ -77,7 +78,7 @@ export default class Portfolio {
     this.scrollBoundaries = [0, 0]
     this.xPosition = 0
     this.scrollOffset = 0
-    this.visibleItemIndex = 0
+    this.visibleItemIndex = -1
 
     this.experience = new Experience()
     this.resources = this.experience.resources
@@ -138,7 +139,7 @@ export default class Portfolio {
     }
 
     this.debugObject = {
-      offsetX: 1.5, // TODO OffsetX is related to sizes.width and should be calculated run time
+      offsetX: 1.5,
       offsetY: -0.039,
       offsetZ: -1,
       iColorOuter: new THREE.Color(0x426ff5),
@@ -147,6 +148,7 @@ export default class Portfolio {
 
     this.setItems()
     this.setCaptions()
+    this.screenSizes = this.getScreenSizes()
 
     const storeWatcher = new StoreWatcher()
     storeWatcher.addListener(this.stateChangeHandler.bind(this))
@@ -345,7 +347,6 @@ export default class Portfolio {
 
   revealItem(index: number) {
     if (!this.items[index]) return
-
     // @ts-ignore
     gsap.to(this.items[index].material.uniforms.iFactor, {
       value: 3.2,
@@ -355,12 +356,12 @@ export default class Portfolio {
   }
 
   restoreItems() {
-    for (const item of this.items) {
-      // @ts-ignore
-      gsap.killTweensOf(item.material.uniforms.iFactor, 'value')
-      // @ts-ignore
-      gsap.set(item.material.uniforms.iFactor, { value: 2 })
-    }
+    // for (const item of this.items) {
+    //   // @ts-ignore
+    //   gsap.killTweensOf(item.material.uniforms.iFactor, 'value')
+    //   // @ts-ignore
+    //   gsap.set(item.material.uniforms.iFactor, { value: 2 })
+    // }
   }
 
   scrollHandler = () => {
@@ -368,11 +369,6 @@ export default class Portfolio {
       this.debugObject.offsetX,
       -this.projects.length - 1
     ])
-    if (Math.abs(this.xPosition - 0.2) !== this.visibleItemIndex) {
-      const itemIndex = Math.floor(Math.abs(this.xPosition - 0.2))
-      this.revealItem(itemIndex)
-      this.visibleItemIndex = itemIndex
-    }
   }
 
   leaveAnimation() {
@@ -503,14 +499,34 @@ export default class Portfolio {
     return promise
   }
 
+  getScreenSizes(): { screenWidth: number; screenHeight: number } {
+    // Find out the width of a rendered portion of the scene
+    // https://stackoverflow.com/a/13351534/2150128
+    const vFOV = THREE.MathUtils.degToRad(this.camera.fov) // convert vertical fov to radians
+    const screenHeight = 2 * Math.tan(vFOV / 2) * Math.abs(this.debugObject.offsetZ) // visible height
+    const screenWidth = screenHeight * this.camera.aspect // visible width
+    return { screenWidth, screenHeight }
+  }
+
   update() {
     if (!this.isVisible) return
     const scrollY = window.scrollY
     this.scrollOffset = lerp(this.scrollOffset, scrollY, 0.1)
     const offset = (scrollY - this.scrollOffset) * 0.0002
     // Update iOffset
+
+    let i = 0
     for (const item of this.items) {
       ;(item.material as THREE.ShaderMaterial).uniforms.iOffset.value.set(-offset, 0.0)
+
+      const itemX = this.group.position.x + i * (this.sizes.width >= breakpoints.mdL ? 1.1 : 0.5)
+
+      if (itemX < this.screenSizes.screenWidth && this.visibleItemIndex < i) {
+        this.visibleItemIndex = i
+        this.revealItem(i)
+      }
+
+      i++
     }
 
     gsap.to(this.group.position, {

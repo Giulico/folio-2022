@@ -76,7 +76,8 @@ function Heading({ children, alignRight, misaligned, className }: Props) {
     [style.alignRight]: alignRight,
     [style.misaligned]: misaligned,
     [style.isDesktop]: isDesktop,
-    [style.isVisible]: isDesktop && inView
+    [style.isVisible]: isDesktop && inView,
+    [style.menuOpen]: menu.open
   })
 
   return (

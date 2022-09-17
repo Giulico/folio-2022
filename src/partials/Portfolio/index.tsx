@@ -20,9 +20,11 @@ function Portfolio() {
     <Section name="portfolio" className={style.root}>
       <Container grid outerRightOnMobile>
         <Row start={1} end={2}>
-          <div className={style.pre}>{intro[0]}</div>
           <Heading misaligned>
-            <Trans i18nKey="portfolio.intro.1" />
+            <>
+              <pre className={style.pre}>{intro[0]}</pre>
+              <Trans i18nKey="portfolio.intro.1" />
+            </>
           </Heading>
         </Row>
       </Container>

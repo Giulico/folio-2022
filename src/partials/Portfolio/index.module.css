@@ -18,6 +18,7 @@
 }
 
 .pre {
+  display: block !important;
   font-style: italic;
   line-height: 1;
 }

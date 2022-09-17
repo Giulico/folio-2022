@@ -3,14 +3,17 @@
 
   margin: var(--spc-2) 0;
   user-select: none;
+  will-change: transform opacity;
 
   pre {
     @mixin body-2;
 
     display: inline;
+    overflow: hidden;
     font-family: var(--font-family-base);
     font-style: italic;
     text-transform: none;
+    transition: transform 1.3s var(--power3-ease-in-out) 0s;
     vertical-align: top;
   }
 }
@@ -22,13 +25,27 @@
 .line {
   overflow: hidden;
 
-  .misaligned &:nth-child(2) {
+  .misaligned &:nth-child(3) {
     margin-left: 40px;
   }
 }
 
 .char {
   transform: translate3d(0, 100%, 0);
+  will-change: transform;
+
+  pre & {
+    transform: translate3d(0, 200%, 0);
+  }
+}
+
+.menuOpen {
+  &,
+  pre {
+    opacity: 0.0;
+    transform: translate3d(0, 0, 0) scale(0.8);
+    transition: all 0.5s var(--power3-ease-out);
+  }
 }
 
 .isVisible {

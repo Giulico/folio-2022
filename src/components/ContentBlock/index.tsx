@@ -52,12 +52,15 @@ function ContentBlock({ children, reveal = true, subtext, className }: Props) {
       `.${style.front} > div, .${style.base} > div`
     )
     if (elements) {
-      splitText.current = new SplitText(elements, {
-        type: 'lines',
-        linesClass: `${style.line}`
-      })
-      splitText.current.lines.forEach((line, index) => {
-        line.classList.add(style[`line-${index + 1}`])
+      // if (elements[0]?.innerText?.startsWith('Nei primi anni 2000')) debugger
+      requestAnimationFrame(() => {
+        splitText.current = new SplitText(elements, {
+          type: 'lines',
+          linesClass: `${style.line}`
+        })
+        splitText.current.lines.forEach((line, index) => {
+          line.classList.add(style[`line-${index + 1}`])
+        })
       })
     }
   }, [])

@@ -1,3 +1,4 @@
+// Types
 import type { ReactElement } from 'react'
 import type { RootState } from 'store'
 
@@ -7,6 +8,7 @@ import style from './index.module.css'
 // Utils
 import cn from 'classnames'
 import breakpoints from 'utils/breakpoints'
+
 import { gsap } from 'gsap'
 import SplitText from 'gsap/SplitText'
 
@@ -18,20 +20,23 @@ import { useInView } from 'react-intersection-observer'
 
 type Props = {
   children: ReactElement | ReactElement[]
+  className?: string
   reveal?: boolean
   subtext?: boolean
 }
 
 gsap.registerPlugin(SplitText)
 
-function ContentBlock({ children, reveal = true, subtext }: Props) {
+function ContentBlock({ children, reveal = true, subtext, className }: Props) {
   const frontRef = useRef<HTMLDivElement>(null)
   const splitText = useRef<SplitText | null>(null)
+
   const { scroll, menu, sizes } = useSelector((state: RootState) => ({
     scroll: state.scroll,
     menu: state.menu,
     sizes: state.sizes
   }))
+
   const { ref, inView } = useInView()
 
   const isDesktop = useMediaQuery({ minWidth: breakpoints.lg })
@@ -43,7 +48,9 @@ function ContentBlock({ children, reveal = true, subtext }: Props) {
       splitText.current.revert()
     }
     // New split text
-    const elements = frontRef.current?.querySelectorAll('p')
+    const elements = frontRef.current?.querySelectorAll(
+      `.${style.front} > div, .${style.base} > div`
+    )
     if (elements) {
       splitText.current = new SplitText(elements, {
         type: 'lines',
@@ -69,14 +76,17 @@ function ContentBlock({ children, reveal = true, subtext }: Props) {
     [style.subtext]: subtext
   })
 
+  const frontClasses = cn(style.front, className)
+  const baseClasses = cn(style.base, className)
+
   return (
     <div className={classes} ref={ref}>
       {isDesktop && reveal && (
-        <div ref={frontRef} className={style.front}>
+        <div ref={frontRef} className={frontClasses}>
           {children}
         </div>
       )}
-      <div className={style.base}>{children}</div>
+      <div className={baseClasses}>{children}</div>
     </div>
   )
 }

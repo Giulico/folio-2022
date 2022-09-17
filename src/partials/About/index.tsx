@@ -2,9 +2,11 @@ import style from './index.module.css'
 
 // Components
 import Section from 'components/Section'
-import Container from 'components/Container'
+import Container, { Row } from 'components/Container'
 import ContentBlock from 'components/ContentBlock'
 import ImageTrigger from 'components/ImageTrigger'
+import Square from 'components/Square'
+import Heading from 'components/Heading'
 import { List, ListItem } from 'components/List'
 
 // Hooks
@@ -20,65 +22,156 @@ function About() {
 
   return (
     <Section name="about" className={style.root}>
-      <Container body>
-        <ContentBlock>
-          {intro.map((txt, i) => (
-            <p key={i}>
-              <Trans
-                i18nKey={`about.intro.${i}`}
-                components={{
-                  ImageVenice: <ImageTrigger name="venice" />,
-                  ImageSketchin: <ImageTrigger name="sketchin" />,
-                  ImageTCMGTK: <ImageTrigger name="tcmgtk" sizes={[2, 3]} />
-                }}
-              />
-            </p>
-          ))}
-        </ContentBlock>
+      <Container grid>
+        <Row start={3} end={1}>
+          <div className={style.section}>
+            <ContentBlock>
+              <div>
+                <Trans
+                  i18nKey={`about.intro.0`}
+                  components={{
+                    ImageVenice: <ImageTrigger name="venice" />,
+                    ImageSketchin: <ImageTrigger name="sketchin" />,
+                    ImageTCMGTK: <ImageTrigger name="tcmgtk" sizes={[2, 3]} />
+                  }}
+                />
+              </div>
+            </ContentBlock>
+          </div>
+        </Row>
       </Container>
-      <Container right>
-        <h3>{clanTitle}</h3>
-        <ContentBlock subtext>
-          {clan.map((txt, i) => (
-            <p key={i}>
-              <Trans
-                i18nKey={`about.clan.${i}`}
-                components={{
-                  ImageBW: <ImageTrigger name="bw" sizes={[2.5, 2.5]} />,
-                  ImageNO1: <ImageTrigger name="no1" />,
-                  ImageNO2: <ImageTrigger name="no2" />,
-                  ImageNO3: <ImageTrigger name="no3" sizes={[2, 2.5]} />
-                }}
-              />
-            </p>
-          ))}
-        </ContentBlock>
+      <Container grid outerRightOnMobile>
+        <Row start={1} end={2}>
+          <Heading>
+            <Trans
+              i18nKey="about.intro.1"
+              components={{
+                Square: <Square />,
+                pre: <pre />
+              }}
+            />
+          </Heading>
+        </Row>
       </Container>
-      <Container body>
-        <h3 className={style.awardsTitle}>{methodTitle}</h3>
-        <ContentBlock subtext>
-          {method.map((txt, i) => (
-            <p key={i}>
-              <Trans
-                i18nKey={`about.method.${i}`}
-                components={{
-                  ImageVenice: <ImageTrigger name="JPEG" />
-                }}
-              />
-            </p>
-          ))}
-        </ContentBlock>
+      <Container grid>
+        <Row start={2} end={1}>
+          <ContentBlock>
+            {intro.slice(2).map((txt, i) => (
+              <div key={i}>
+                <Trans
+                  i18nKey={`about.intro.${i + 2}`}
+                  components={{
+                    ImageVenice: <ImageTrigger name="venice" />,
+                    ImageSketchin: <ImageTrigger name="sketchin" />,
+                    ImageTCMGTK: <ImageTrigger name="tcmgtk" sizes={[2, 3]} />
+                  }}
+                />
+              </div>
+            ))}
+          </ContentBlock>
+        </Row>
       </Container>
-      <Container wide>
-        <ContentBlock reveal={false}>
-          <List>
-            <ListItem end="x6">Awwwards</ListItem>
-            <ListItem end="x6">CSS Design Awards</ListItem>
-            <ListItem end="x1">FWA</ListItem>
-            <ListItem end="x3">iF Design Award</ListItem>
-            <ListItem end="x8">Other</ListItem>
-          </List>
-        </ContentBlock>
+      <Container grid outerRightOnMobile>
+        <Row start={2} end={2}>
+          <div className={style.section}>
+            <Heading alignRight>
+              <>
+                {clanTitle[0]}
+                <br /> {clanTitle[1]}
+              </>
+            </Heading>
+          </div>
+        </Row>
+      </Container>
+      <Container grid>
+        <Row start={2} end={2}>
+          <div className={style.columns}>
+            <ContentBlock>
+              {clan.slice(0, 2).map((txt, i) => (
+                <div key={i}>
+                  <Trans
+                    i18nKey={`about.clan.${i}`}
+                    components={{
+                      ImageBW: <ImageTrigger name="bw" sizes={[2.5, 2.5]} />,
+                      ImageNO1: <ImageTrigger name="no1" />,
+                      ImageNO2: <ImageTrigger name="no2" />,
+                      ImageNO3: <ImageTrigger name="no3" sizes={[2, 2.5]} />
+                    }}
+                  />
+                </div>
+              ))}
+            </ContentBlock>
+            <ContentBlock>
+              {clan.slice(2).map((txt, i) => (
+                <div key={i}>
+                  <Trans
+                    i18nKey={`about.clan.${i + 2}`}
+                    components={{
+                      ImageBW: <ImageTrigger name="bw" sizes={[2.5, 2.5]} />,
+                      ImageNO1: <ImageTrigger name="no1" />,
+                      ImageNO2: <ImageTrigger name="no2" />,
+                      ImageNO3: <ImageTrigger name="no3" sizes={[2, 2.5]} />
+                    }}
+                  />
+                </div>
+              ))}
+            </ContentBlock>
+          </div>
+        </Row>
+      </Container>
+      <Container grid outerRightOnMobile>
+        <Row start={1} end={3}>
+          <div className={style.section}>
+            <Heading>
+              <Trans i18nKey="about.method_title" components={{ pre: <pre /> }} />
+            </Heading>
+          </div>
+        </Row>
+      </Container>
+      <Container grid>
+        <Row start={2} end={1}>
+          <ContentBlock>
+            <div>
+              <Trans i18nKey={`about.method.0`} />
+            </div>
+          </ContentBlock>
+        </Row>
+      </Container>
+      <Container grid outerRightOnMobile>
+        <Row start={1} end={3}>
+          <div className={style.section}>
+            <Heading>
+              <Trans i18nKey="about.method.1" />
+            </Heading>
+            <Heading alignRight>
+              <Trans i18nKey="about.method.2" />
+            </Heading>
+          </div>
+        </Row>
+      </Container>
+      <Container grid>
+        <Row start={1} end={1}>
+          <div className={style.section}>
+            <ContentBlock>
+              <div>
+                <Trans i18nKey={`about.method.3`} />
+              </div>
+            </ContentBlock>
+          </div>
+        </Row>
+      </Container>
+      <Container grid>
+        <Row start={1} end={3}>
+          <ContentBlock>
+            <List>
+              <ListItem end="x6">Awwwards</ListItem>
+              <ListItem end="x6">CSS Design Awards</ListItem>
+              <ListItem end="x1">FWA</ListItem>
+              <ListItem end="x3">iF Design Award</ListItem>
+              <ListItem end="x8">Other</ListItem>
+            </List>
+          </ContentBlock>
+        </Row>
       </Container>
     </Section>
   )

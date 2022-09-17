@@ -3,7 +3,6 @@
 
   position: relative;
   z-index: 1;
-  height: 100vh;
   padding-top: calc(15vh + var(--fs-display-1) + var(--spc-10));
   margin-top: calc(var(--app-height) / 2);
   margin-bottom: 300vh;
@@ -20,4 +19,21 @@
 
 .awardsTitle {
   margin-top: var(--spc-10);
+}
+
+.section {
+  margin-top: var(--content-block-margin-top);
+}
+
+.columns {
+
+  @media (--md-l) {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spc-4);
+
+    > * {
+      flex: 1;
+    }
+  }
 }

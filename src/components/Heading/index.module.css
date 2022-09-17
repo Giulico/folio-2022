@@ -1,0 +1,44 @@
+.root {
+  @mixin heading;
+
+  margin: var(--spc-2) 0;
+  user-select: none;
+
+  pre {
+    @mixin body-2;
+
+    display: inline;
+    font-family: var(--font-family-base);
+    font-style: italic;
+    text-transform: none;
+    vertical-align: top;
+  }
+}
+
+.alignRight {
+  text-align: right;
+}
+
+.line {
+  overflow: hidden;
+
+  .misaligned &:nth-child(2) {
+    margin-left: 40px;
+  }
+}
+
+.char {
+  transform: translate3d(0, 100%, 0);
+}
+
+.isVisible {
+  .char {
+    transform: translate3d(0, 0, 0);
+
+    @for $i from 1 to 35 {
+      &:nth-child($i) {
+        transition: transform 1.3s var(--power3-ease-in-out) calc(0.03s * $i);
+      }
+    }
+  }
+}

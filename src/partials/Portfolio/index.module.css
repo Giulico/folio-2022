@@ -17,10 +17,19 @@
   }
 }
 
+.pre {
+  font-style: italic;
+  line-height: 1;
+}
+
 .cardContainer {
   height: 200vh;
 }
 
 .video {
   display: none;
+}
+
+.projectSection {
+  padding-top: 33vh;
 }

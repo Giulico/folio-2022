@@ -19,7 +19,6 @@ gsap.registerPlugin(ScrambleTextPlugin)
 function Pointer() {
   const pointer = useSelector((state: RootState) => state.pointer)
   const cursorRef = useRef<HTMLDivElement>(null)
-  const labelRef = useRef<HTMLDivElement>(null)
 
   const update = useCallback(() => {
     if (cursorRef.current) {
@@ -36,28 +35,15 @@ function Pointer() {
     update()
   }, [update])
 
-  useEffect(() => {
-    // Scramble text
-    if (labelRef.current) {
-      gsap.to(labelRef.current, {
-        scrambleText: pointer.label,
-        duration: 1
-      })
-    }
-  }, [pointer.label])
-
   const classes = cn(style.root, {
     [style[`type-${pointer.type}`]]: pointer.type
   })
 
   return (
     <div className={classes} ref={cursorRef}>
-      <span className={style.leftLine} />
-      <span className={style.rightLine} />
-      <span className={style.label} ref={labelRef} />
-      <div className={style.hoverLeft} />
-      <div className={style.hoverCenter} />
-      <div className={style.hoverRight} />
+      <div className={style.leftLine} />
+      <div className={style.rightLine} />
+      <div className={style.circle} />
     </div>
   )
 }

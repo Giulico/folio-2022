@@ -2,7 +2,7 @@
   --font-family-base: "Saira Semi Condensed", -apple-system, blinkmacsystemfont,
     "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
-  --font-family-heading: "NOVU M", -apple-system, blinkmacsystemfont, "Segoe UI",
+  --font-family-heading: "Iskry", -apple-system, blinkmacsystemfont, "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
     "Helveootica Neue", sans-serif;
 
@@ -11,8 +11,8 @@
   --fs-display-2: 52px;
   --fs-display-3: 36px;
   --fs-highlight: 28px;
-  --fs-body-1: 21px;
-  --fs-body-2: 18px;
+  --fs-body-1: 16px;
+  --fs-body-2: 14px;
   --fs-label: 16px;
   --fs-desc: 14px;
 
@@ -30,8 +30,7 @@
     --fs-display-2: 92px;
     --fs-display-3: 92px;
     --fs-highlight: 36px;
-    --fs-body-1: 24px;
-    --fs-body-2: 21px;
+    --fs-body-1: 21px;
     --fs-label: 16px;
     --fs-desc: 16px;
   }
@@ -42,5 +41,7 @@
   :root {
     --fs-display-1: 400px;
     --fs-display-2: 125px;
+    --fs-body-1: 24px;
+    --fs-body-2: 16px;
   }
 }

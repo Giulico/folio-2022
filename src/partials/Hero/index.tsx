@@ -5,11 +5,13 @@ import style from './index.module.css'
 
 // Utils
 import cn from 'classnames'
+import breakpoints from 'utils/breakpoints'
 
 // Hooks
 import useScrollOffset from 'hooks/useScrollOffset'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
+import { useMediaQuery } from 'react-responsive'
 
 // Components
 import Logo from 'components/Logo'
@@ -23,6 +25,8 @@ import GSAPScrumbleText, { ScrambleTexts } from 'components/GSAPScrumbleText'
 
 export default function Hero() {
   const { t } = useTranslation('translation', { keyPrefix: 'intro' })
+  const isTabletOrDesktop = useMediaQuery({ minWidth: breakpoints.mdP })
+
   const scrambleTexts: ScrambleTexts = [
     [t('p1.l1'), t('p1.l2')],
     [t('p2.l1'), t('p2.l2')],
@@ -35,7 +39,7 @@ export default function Hero() {
     menu: state.menu
   }))
 
-  const { gone } = useScrollOffset({ offset: 200 })
+  const { gone } = useScrollOffset({ offset: isTabletOrDesktop ? 200 : 50 })
 
   const scrambleClasses = cn(style.scramble, {
     [style.gone]: gone || menu.open

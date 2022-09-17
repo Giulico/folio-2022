@@ -3,10 +3,8 @@ import type { RootModel } from '../models'
 
 const initialState: {
   type: string
-  label: string
 } = {
-  type: 'default',
-  label: ''
+  type: 'default'
 }
 
 export const pointer = createModel<RootModel>()({
@@ -16,12 +14,6 @@ export const pointer = createModel<RootModel>()({
       return {
         ...state,
         type: payload
-      }
-    },
-    setLabel(state, payload: string) {
-      return {
-        ...state,
-        label: payload
       }
     }
   }

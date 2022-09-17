@@ -29,13 +29,21 @@ function AudioWave() {
     toggle()
   }, [audio.mute, dispatch.audio, toggle])
 
+  const overHandler = useCallback(() => {
+    dispatch.pointer.setType('hover')
+  }, [dispatch.pointer])
+
+  const outHandler = useCallback(() => {
+    dispatch.pointer.setType('default')
+  }, [dispatch.pointer])
+
   const classes = cn(style.root, {
     [style.hidden]: !app.ready,
     [style.isPlaying]: isPlaying
   })
 
   return (
-    <button className={classes}>
+    <button className={classes} onMouseEnter={overHandler} onMouseLeave={outHandler}>
       <div className={style.wave} onClick={muteHandler}>
         <div className={style.bar} />
         <div className={style.bar} />

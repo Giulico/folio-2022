@@ -1,0 +1,7 @@
+.root::first-letter {
+  padding-right: 15px;
+  float: left;
+  font-family: var(--font-family-heading);
+  font-size: 60px;
+  line-height: 1;
+}

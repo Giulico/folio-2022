@@ -14,6 +14,10 @@
 
     margin-left: calc(var(--spc-17) - 4px);
   }
+
+  &.notReady {
+    pointer-events: none;
+  }
 }
 
 .start,

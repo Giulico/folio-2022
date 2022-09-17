@@ -100,13 +100,14 @@
 
 @media (--md-l) {
   :root {
-    --text-margin-left: 30%;
+    --text-margin-left: 280px;
     --content-block-margin-top: var(--spc-15);
   }
 }
 
 @media (--lg) {
   :root {
+    --text-margin-left: 320px;
     --frame-margin: var(--spc-6);
     --content-block-margin-top: var(--spc-30);
   }
@@ -114,6 +115,6 @@
 
 @media (--xl) {
   :root {
-    --text-margin-left: var(--spc-30);
+    --text-margin-left: 450px;
   }
 }

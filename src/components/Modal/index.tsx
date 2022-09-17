@@ -50,7 +50,6 @@ const Modal = ({ children }: Props) => {
   const openModal = useCallback(() => {
     setTransitionStage('open')
     dispatch.pointer.setType('default')
-    dispatch.pointer.setLabel('')
     window.experience.world.portfolio?.openProjectAnimation()
   }, [dispatch.pointer])
 

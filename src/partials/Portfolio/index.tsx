@@ -3,8 +3,10 @@ import style from './index.module.css'
 
 // Components
 import Section from 'components/Section'
-import Container from 'components/Container'
+import Container, { Row } from 'components/Container'
 import ContentBlock from 'components/ContentBlock'
+import Heading from 'components/Heading'
+import { Trans } from 'react-i18next'
 
 // Hooks
 import { useTranslation } from 'react-i18next'
@@ -16,20 +18,34 @@ function Portfolio() {
 
   return (
     <Section name="portfolio" className={style.root}>
-      <Container right>
-        <ContentBlock>
-          {intro.map((txt, i) => (
-            <p key={i}>{txt}</p>
-          ))}
-        </ContentBlock>
+      <Container grid outerRightOnMobile>
+        <Row start={1} end={2}>
+          <div className={style.pre}>{intro[0]}</div>
+          <Heading misaligned>
+            <Trans i18nKey="portfolio.intro.1" />
+          </Heading>
+        </Row>
       </Container>
-      <Container body>
-        <h3>Portfolio</h3>
-        <ContentBlock subtext>
-          {portfolio.map((txt, i) => (
-            <p key={i}>{txt}</p>
-          ))}
-        </ContentBlock>
+      <Container grid>
+        <Row start={3} end={1}>
+          <ContentBlock subtext>
+            <div>{intro[2]}</div>
+            <div>{intro[3]}</div>
+          </ContentBlock>
+        </Row>
+      </Container>
+      <Container grid outerRightOnMobile className={style.projectSection}>
+        <Row start={2} end={2}>
+          <Heading>{portfolio[0]}</Heading>
+        </Row>
+      </Container>
+      <Container grid>
+        <Row start={2} end={1}>
+          <ContentBlock>
+            <div>{portfolio[1]}</div>
+            <div>{portfolio[2]}</div>
+          </ContentBlock>
+        </Row>
       </Container>
 
       <div className={style.cardContainer} id="card-container" />

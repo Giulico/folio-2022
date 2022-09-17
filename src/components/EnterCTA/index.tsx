@@ -99,8 +99,8 @@ const EnterCTA = () => {
         className={style.button}
         ref={buttonRef}
         onClick={clickHandler}
-        onMouseEnter={setHover}
-        onMouseLeave={removeHover}
+        onMouseEnter={app.loaded ? setHover : undefined}
+        onMouseLeave={app.loaded ? removeHover : undefined}
       >
         <span className={style.ring} />
         <span className={style.ring} />

@@ -97,9 +97,14 @@ const MenuTrigger = () => {
     [circleTop, endTop]
   )
 
-  const playSound = useCallback(() => {
+  const overHandler = useCallback(() => {
     play()
-  }, [play])
+    dispatch.pointer.setType('drag')
+  }, [dispatch.pointer, play])
+
+  const outHandler = useCallback(() => {
+    dispatch.pointer.setType('default')
+  }, [dispatch.pointer])
 
   useEffect(() => {
     if (menu.open) {
@@ -144,7 +149,8 @@ const MenuTrigger = () => {
     <div className={classes}>
       <button
         className={style.button}
-        onMouseEnter={playSound}
+        onMouseEnter={overHandler}
+        onMouseLeave={outHandler}
         onMouseDown={openMenu}
         onTouchStart={openMenu}
       >

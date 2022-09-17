@@ -1,12 +1,16 @@
+@import "./fontface.css";
 @import "./keyframe-animations.css";
 
 body {
   margin: 0;
   cursor: none;
   font-family: var(--font-family-base);
+  font-kerning: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: var(--fw-light);
+  -webkit-text-rendering: optimizespeed;
+  text-rendering: optimizespeed;
 }
 
 code {

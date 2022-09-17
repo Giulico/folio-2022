@@ -1,9 +1,14 @@
 .root {
   position: relative;
-  overflow:auto;
+  overflow: auto;
   transform: translate3d(0, 0, 0) scale(1);
   transition: all 1s var(--power3-ease-out);
+  user-select: none;
   will-change: transform, opacity;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .menuOpen {
@@ -44,21 +49,21 @@
 
   .line {
     overflow: hidden;
-    width: 0%;
+    clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
     transform: translateZ(0);
-    transition: width 1.7s var(--expo-ease-in-out);
-    white-space: nowrap;
-    will-change: width;
+
+    /* white-space: nowrap; */
+    will-change: clip-path
   }
 }
 
 .reveal.isVisible.isDesktop {
-  @for $i from 1 to 10 {
+  @for $i from 1 to 20 {
     .line {
-      width: 100%;
+      clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
 
       &.line-$i {
-        transition: width 1.7s var(--expo-ease-out) calc($i * 0.1s);
+        transition: clip-path 1.7s var(--expo-ease-out) calc($i * 0.1s);
       }
     }
   }

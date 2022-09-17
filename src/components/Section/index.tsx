@@ -69,7 +69,6 @@ function Section({ children, name, className, onEnter, onResize }: Props) {
 
     if (section.current !== 'portfolio') {
       dispatch.pointer.setType('default')
-      dispatch.pointer.setLabel('')
     }
 
     return () => {

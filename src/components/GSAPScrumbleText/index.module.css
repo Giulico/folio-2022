@@ -1,5 +1,5 @@
 .root {
-  @mixin body-2;
+  @mixin body-1;
 }
 
 .phrase {

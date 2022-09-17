@@ -1336,6 +1336,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/jquery@npm:*":
+  version: 3.5.14
+  resolution: "@types/jquery@npm:3.5.14"
+  dependencies:
+    "@types/sizzle": "*"
+  checksum: 159d6f804ed1a204b3f79f2d591a271d82e866bd45bd49fb6ef40561a25dbe0f47ec7815681b44cc2db5598425f72811e7e80ab0e983d980470998ac56feb375
+  languageName: node
+  linkType: hard
+
 "@types/json-buffer@npm:~3.0.0":
   version: 3.0.0
   resolution: "@types/json-buffer@npm:3.0.0"
@@ -1448,6 +1457,22 @@ __metadata:
   version: 7.3.12
   resolution: "@types/semver@npm:7.3.12"
   checksum: 35536b2fc5602904f21cae681f6c9498e177dab3f54ae37c92f9a1b7e43c35f18bcd81e1c98c1cf0d33ee046bb06c771e9928c1c00a401d56a03f56549252a15
+  languageName: node
+  linkType: hard
+
+"@types/sizzle@npm:*":
+  version: 2.3.3
+  resolution: "@types/sizzle@npm:2.3.3"
+  checksum: 586a9fb1f6ff3e325e0f2cc1596a460615f0bc8a28f6e276ac9b509401039dd242fa8b34496d3a30c52f5b495873922d09a9e76c50c2ab2bcc70ba3fb9c4e160
+  languageName: node
+  linkType: hard
+
+"@types/textfit@npm:^2.4.2":
+  version: 2.4.2
+  resolution: "@types/textfit@npm:2.4.2"
+  dependencies:
+    "@types/jquery": "*"
+  checksum: d35cab87639569e5b456d7717864f7dffa2a74a390c5d25a1359d064b9abd8c791dfa8e2b3938196270942952f3320940e604657dc3d2d77477ea7f4313527c1
   languageName: node
   linkType: hard
 
@@ -3796,6 +3821,7 @@ __metadata:
     "@types/react": ^18.0.17
     "@types/react-dom": ^18.0.6
     "@types/scroll-lock": ^2.1.0
+    "@types/textfit": ^2.4.2
     "@types/three": ^0.143.1
     "@types/webfontloader": ^1.6.34
     "@typescript-eslint/eslint-plugin": ^5.35.0
@@ -3846,6 +3872,7 @@ __metadata:
     stylelint-config-prettier: ^9.0.3
     stylelint-config-standard: ^28.0.0
     stylelint-order: ^5.0.0
+    textfit: ^2.4.0
     three: ^0.143.0
     ts-debounce: ^4.0.0
     typescript: ^4.7.4
@@ -8410,6 +8437,13 @@ __metadata:
   version: 0.2.0
   resolution: "text-table@npm:0.2.0"
   checksum: b6937a38c80c7f84d9c11dd75e49d5c44f71d95e810a3250bd1f1797fc7117c57698204adf676b71497acc205d769d65c16ae8fa10afad832ae1322630aef10a
+  languageName: node
+  linkType: hard
+
+"textfit@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "textfit@npm:2.4.0"
+  checksum: 9a231bc9699af52ae8926556637f3072c85113885dd4762dc4d02706e695b611fb5de11e39348c1132cd4a0a7be51facb7c4bafd3ad81f354eeea3a8f8f3695a
   languageName: node
   linkType: hard
 

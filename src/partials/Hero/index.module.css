@@ -27,7 +27,11 @@
   flex: 1 1 auto;
   flex-direction: column;
   justify-content: center;
-  margin-left: var(--text-margin-left);
+  margin-left: var(--frame-margin);
+
+  @media (--md-p) {
+    margin-left: var(--text-margin-left);
+  }
 }
 
 .scroll {
@@ -38,7 +42,11 @@
   align-items: flex-end;
   margin-right: var(--frame-margin);
   margin-bottom: calc(var(--frame-margin) + var(--spc-8));
-  margin-left: var(--text-margin-left);
+  margin-left: var(--frame-margin);
+
+  @media (--md-p) {
+    margin-left: var(--text-margin-left);
+  }
 
   @media (--md-l) {
     width: 170px;
@@ -89,8 +97,6 @@
 }
 
 .scramble {
-  @mixin body-1;
-
   margin-top: var(--spc-15);
   letter-spacing: 3px;
   line-height: 1;

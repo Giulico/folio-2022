@@ -43,6 +43,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.0.17"],\
             ["@types/react-dom", "npm:18.0.6"],\
             ["@types/scroll-lock", "npm:2.1.0"],\
+            ["@types/textfit", "npm:2.4.2"],\
             ["@types/three", "npm:0.143.1"],\
             ["@types/webfontloader", "npm:1.6.34"],\
             ["@typescript-eslint/eslint-plugin", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:5.35.1"],\
@@ -93,6 +94,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["stylelint-config-prettier", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:9.0.3"],\
             ["stylelint-config-standard", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:28.0.0"],\
             ["stylelint-order", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:5.0.0"],\
+            ["textfit", "npm:2.4.0"],\
             ["three", "npm:0.143.0"],\
             ["ts-debounce", "npm:4.0.0"],\
             ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=a1c5e5"],\
@@ -1937,6 +1939,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@types/jquery", [\
+        ["npm:3.5.14", {\
+          "packageLocation": "./.yarn/cache/@types-jquery-npm-3.5.14-5fafe75fbb-159d6f804e.zip/node_modules/@types/jquery/",\
+          "packageDependencies": [\
+            ["@types/jquery", "npm:3.5.14"],\
+            ["@types/sizzle", "npm:2.3.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@types/json-buffer", [\
         ["npm:3.0.0", {\
           "packageLocation": "./.yarn/cache/@types-json-buffer-npm-3.0.0-9f2fe89eaa-6b0a371dd6.zip/node_modules/@types/json-buffer/",\
@@ -2074,6 +2086,25 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-semver-npm-7.3.12-c91001a94c-35536b2fc5.zip/node_modules/@types/semver/",\
           "packageDependencies": [\
             ["@types/semver", "npm:7.3.12"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/sizzle", [\
+        ["npm:2.3.3", {\
+          "packageLocation": "./.yarn/cache/@types-sizzle-npm-2.3.3-9403924950-586a9fb1f6.zip/node_modules/@types/sizzle/",\
+          "packageDependencies": [\
+            ["@types/sizzle", "npm:2.3.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/textfit", [\
+        ["npm:2.4.2", {\
+          "packageLocation": "./.yarn/cache/@types-textfit-npm-2.4.2-d6e03b6728-d35cab8763.zip/node_modules/@types/textfit/",\
+          "packageDependencies": [\
+            ["@types/textfit", "npm:2.4.2"],\
+            ["@types/jquery", "npm:3.5.14"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4869,6 +4900,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.0.17"],\
             ["@types/react-dom", "npm:18.0.6"],\
             ["@types/scroll-lock", "npm:2.1.0"],\
+            ["@types/textfit", "npm:2.4.2"],\
             ["@types/three", "npm:0.143.1"],\
             ["@types/webfontloader", "npm:1.6.34"],\
             ["@typescript-eslint/eslint-plugin", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:5.35.1"],\
@@ -4919,6 +4951,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["stylelint-config-prettier", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:9.0.3"],\
             ["stylelint-config-standard", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:28.0.0"],\
             ["stylelint-order", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:5.0.0"],\
+            ["textfit", "npm:2.4.0"],\
             ["three", "npm:0.143.0"],\
             ["ts-debounce", "npm:4.0.0"],\
             ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=a1c5e5"],\
@@ -10545,6 +10578,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/text-table-npm-0.2.0-d92a778b59-b6937a38c8.zip/node_modules/text-table/",\
           "packageDependencies": [\
             ["text-table", "npm:0.2.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["textfit", [\
+        ["npm:2.4.0", {\
+          "packageLocation": "./.yarn/cache/textfit-npm-2.4.0-d5071a9246-9a231bc969.zip/node_modules/textfit/",\
+          "packageDependencies": [\
+            ["textfit", "npm:2.4.0"]\
           ],\
           "linkType": "HARD"\
         }]\

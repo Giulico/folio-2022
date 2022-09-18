@@ -1,12 +1,18 @@
 .root {
   --ring-size: 150px;
 
-  margin: auto;
-  transition: opacity 0.7s ease 0s, visibility 0s 0s, height 0s 0s;
-  will-change: opacity, visibility, height;
+  position: absolute;
+  top: calc(100% - var(--ring-size));
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  transition: opacity 0.7s ease 0s, visibility 0s 0s;
+  will-change: opacity, visibility;
 
   @media(--md-l) {
-    margin-left: var(--text-margin-left);
+    left: var(--text-margin-left);
+    transform: translate3d(0, 0, 0);
+
+    /* margin-left: var(--text-margin-left); */
   }
 }
 
@@ -95,10 +101,9 @@
 }
 
 .hidden {
-  height: 0;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease 0s, visibility 0s 0.3s, height 0s 0.3s;
+  transition: opacity 0.3s ease 0s, visibility 0s 0.3s;
   visibility: hidden;
 }
 

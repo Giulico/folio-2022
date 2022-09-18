@@ -56,7 +56,7 @@
   .scrollText {
     display: block;
     margin-left: var(--spc-2);
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out 4s;
 
     @media (--md-l) {
       margin-left: var(--spc-4);
@@ -66,6 +66,7 @@
   &.gone {
     .scrollText {
       opacity: 0;
+      transition: opacity 0.5s ease-in-out;
     }
   }
 }
@@ -75,8 +76,8 @@
   width: 1px;
   height: 100px;
   background-color: #ccc;
-  transform-origin: 50% 100%;
-  transition: transform 0.5s ease-in-out;
+  transform-origin: 50% 0%;
+  transition: transform 0.5s ease-in-out 4s;
 
   &::before {
     top: 0;
@@ -93,6 +94,7 @@
 
   .scroll.gone & {
     transform: scaleY(0);
+    transition: transform 0.5s ease-in-out;
   }
 }
 

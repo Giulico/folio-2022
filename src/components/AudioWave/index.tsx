@@ -30,12 +30,14 @@ function AudioWave() {
   }, [audio.mute, dispatch.audio, toggle])
 
   const overHandler = useCallback(() => {
+    if (!app.ready) return
     dispatch.pointer.setType('hover')
-  }, [dispatch.pointer])
+  }, [app.ready, dispatch.pointer])
 
   const outHandler = useCallback(() => {
+    if (!app.ready) return
     dispatch.pointer.setType('default')
-  }, [dispatch.pointer])
+  }, [app.ready, dispatch.pointer])
 
   const classes = cn(style.root, {
     [style.hidden]: !app.ready,

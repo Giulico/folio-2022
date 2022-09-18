@@ -16,7 +16,7 @@
   margin-left: 0;
   background-color: var(--color-white);
   transform-origin: right;
-  transition: all 0.5s var(--power3-ease-out), background-color 0.3s 0.5s;
+  transition: transform 0.5s var(--power3-ease-out) 3.5s, background-color 0.3s 0.5s;
   will-change: width, margin-left;
 
   .dark & {
@@ -25,6 +25,7 @@
 
   .hidden .active & {
     transform: scale(0, 1);
+    transition: transform 0.5s var(--power3-ease-out), background-color 0.3s 0.5s;
   }
 }
 
@@ -66,7 +67,7 @@
 
   span {
     display: inline-block;
-    transition: transform 0.5s var(--power3-ease-out) 0.2s;
+    transition: transform 0.5s var(--power3-ease-out) 3.7s;
 
     .hidden & {
       transform: translate3d(15px, 0, 0);

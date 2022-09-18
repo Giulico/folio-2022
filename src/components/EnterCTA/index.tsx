@@ -28,8 +28,9 @@ const EnterCTA = () => {
   const dispatch = useDispatch()
 
   const clickHandler = useCallback(() => {
+    if (!app.loaded) return
     dispatch.app.setReady()
-  }, [dispatch.app])
+  }, [app.loaded, dispatch.app])
 
   useEffect(() => {
     const rings = buttonRef.current?.querySelectorAll(`.${style.ring}`)
@@ -74,12 +75,16 @@ const EnterCTA = () => {
   }, [app.loaded, t])
 
   const setHover = useCallback(() => {
+    if (!app.loaded) return
+
     dispatch.pointer.setType('hover')
-  }, [dispatch.pointer])
+  }, [app.loaded, dispatch.pointer])
 
   const removeHover = useCallback(() => {
+    if (!app.loaded) return
+
     dispatch.pointer.setType('')
-  }, [dispatch.pointer])
+  }, [app.loaded, dispatch.pointer])
 
   // Visible
   useEffect(() => {

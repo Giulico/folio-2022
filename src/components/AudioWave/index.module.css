@@ -10,7 +10,7 @@
   width: 20px;
   height: var(--spc-3);
   transform-origin: center bottom;
-  transition: transform 0.7s ease;
+  transition: transform 0.7s ease 3.7s;
   will-change: transform;
 
   &::before {
@@ -37,6 +37,7 @@
 
   .hidden & {
     transform: scale(0, 0);
+    transition: transform 0.7s ease;
   }
 }
 

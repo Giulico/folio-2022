@@ -20,7 +20,7 @@ function Portfolio() {
     <Section name="portfolio" className={style.root}>
       <Container grid outerRightOnMobile>
         <Row start={1} end={2}>
-          <Heading misaligned>
+          <Heading misaligned key={intro[0]}>
             <>
               <pre className={style.pre}>{intro[0]}</pre>
               <Trans i18nKey="portfolio.intro.1" />
@@ -28,7 +28,7 @@ function Portfolio() {
           </Heading>
         </Row>
       </Container>
-      <Container grid>
+      <Container grid key={intro[2]}>
         <Row start={3} end={1}>
           <ContentBlock subtext>
             <div>{intro[2]}</div>
@@ -38,10 +38,10 @@ function Portfolio() {
       </Container>
       <Container grid outerRightOnMobile className={style.projectSection}>
         <Row start={2} end={2}>
-          <Heading>{portfolio[0]}</Heading>
+          <Heading key={portfolio[0]}>{portfolio[0]}</Heading>
         </Row>
       </Container>
-      <Container grid>
+      <Container grid key={portfolio[1]}>
         <Row start={2} end={1}>
           <ContentBlock>
             <div>{portfolio[1]}</div>

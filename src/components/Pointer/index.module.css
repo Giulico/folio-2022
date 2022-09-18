@@ -47,7 +47,7 @@
   background-color: var(--color-white);
   border-radius: 50%;
   transform: translate3d(-50%, -50%, 0) scale(0, 0);
-  transition: transform 0.3s var(--power3-ease-out);
+  transition: all 0.3s var(--power3-ease-out);
 }
 
 .type-hidden {
@@ -87,5 +87,20 @@
 
   .circle {
     transform: translate3d(-50%, -50%, 0) scale(1, 1);
+  }
+}
+
+.type-image {
+  .leftLine {
+    transform: rotate(-5deg) scale(1, 0);
+  }
+
+  .rightLine {
+    transform: rotate(-55deg) scale(1, 0);
+  }
+
+  .circle {
+    border-radius: 0;
+    transform: translate3d(-50%, -50%, 0) scale(1, 0.7);
   }
 }

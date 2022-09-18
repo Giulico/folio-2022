@@ -23,33 +23,38 @@
   },
   "portfolio": {
     "intro": [
-      "Sviluppo esperienze digitali interattive e di servizio.",
-      "Dall'architettura delle informazioni, che determina la narrazione, alla scrupolosa ricerca degli elementi di UI, fino alla cura maniacale delle interazioni.",
-      "Ma è l'ottimizzazione del codice a darmi le maggiori soddisfazioni."
+      "I craft",
+      "digital interactive<br />experiences.",
+      "EN Dall'architettura delle informazioni, che determina la narrazione, alla scrupolosa ricerca degli elementi di UI, fino alla cura maniacale delle interazioni.",
+      "EN Ma è l'ottimizzazione del codice a darmi le maggiori soddisfazioni."
     ],
     "portfolio": [
-      "Ho lavorato per clienti come: Nexi, Sky, Fastweb, AMDL Circle, IBL, Generali, Corner.",
-      "Ecco alcuni progetti che ho contribuito a portare in porto, con un approfondimento sulle sfide che ho affrontato."
+      "Projects",
+      "EN Ho lavorato per clienti come: Nexi, Sky, Fastweb, AMDL Circle, IBL, Generali, Corner.",
+      "EN Ecco alcuni progetti che ho contribuito a portare in porto, con un approfondimento sulle sfide che ho affrontato."
     ]
   },
   "about": {
     "intro": [
-      "Nato a <ImageVenice>Venezia</ImageVenice> nel settembre dell'86, oggi vivo a Como e lavoro per <ImageSketchin>Sketchin</ImageSketchin>, uno studio di advanced-design, come Creative Technologist.",
-      "Vent’anni fa ho pubblicato la prima versione di They Call Me Giulio. La terza versione, nel 2004 fu la prima ad avere il dominio di primo livello <ImageTCMGTK>theycallmegiulio.tk</ImageTCMGTK>.",
-      "Da allora progetto e realizzo esperienze virtuali. Ho studiato diversi linguaggi di programmazione e database per coprire l'intero stack. Oggi penso in Javsacript."
+      "EN Nato a <ImageVenice>Venezia</ImageVenice> nel settembre dell'86, oggi vivo a Como e lavoro per <ImageSketchin>Sketchin</ImageSketchin>, uno studio di advanced-design, come Creative Technologist.",
+      "<pre>Twenty/ys</pre>ago the first<br />version of<br /> TheyCallMeGiulio",
+      "EN La terza versione, nel 2004 fu la prima ad avere il dominio di primo livello <ImageTCMGTK>theycallmegiulio.tk</ImageTCMGTK>",
+      "EN Da allora progetto e realizzo esperienze virtuali. Ho studiato diversi linguaggi di programmazione e database per coprire l'intero stack.",
+      "EN Oggi penso in Javsacript."
     ],
-    "clan_title": "Maturità tra i clan",
+    "clan_title": ["Numbers", "One"],
     "clan": [
-      "Nei primi anni 2000, la mia principale passione era <ImageBW>Starcraft Brood War</ImageBW>. Con il 56k mi connettevo alla piattaforma multiplayer e sfidavo gli altri giocatori.",
+      "EN Nei primi anni 2000, la mia principale passione era <ImageBW>Starcraft Brood War</ImageBW>. Con il 56k mi connettevo alla piattaforma multiplayer e sfidavo gli altri giocatori.",
       "A volte capitava che un gruppo di player formasse un Clan. Un team nel quale riconoscersi e creare community. Tra i vari clan di cui ho fatto parte, ricordo i <ImageNO1>Numbers One</ImageNO1>, perchè fui cofondatore.",
-      "Nel 2004 realizzai il primo <ImageNO2>n1clan.net</ImageNO2>, e nel 2006 un <ImageNO3>portale Web 2.0</ImageNO3>, con logiche di Login, News, Interviews, Upload e sharing dei replay di gioco. Visual con Adobe Photoshop, frontend con HTML, CSS e Javascript. Backend con PHP Codeigniter e MySql.",
+      "EN Nel 2004 realizzai il primo <ImageNO2>n1clan.net</ImageNO2>, e nel 2006 un <ImageNO3>portale Web 2.0</ImageNO3>, con logiche di Login, News, Interviews, Upload e sharing dei replay di gioco. Visual con Adobe Photoshop, frontend con HTML, CSS e Javascript. Backend con PHP Codeigniter e MySql.",
       "Sembra uno stack tecnologico moderno."
     ],
-    "method_title": "Metodologie e riconoscimenti",
+    "method_title": "Method<br /><pre>&</pre>awards",
     "method": [
-      "L'efficacia e l'usabilità di un progetto dipende dalle sinergie che si formano tra designer e developer. In un team non si prescinde dagli altri. Per creare un prodotto di successo il team è essenziale.",
-      "Prediligo metodologie Lean e Agili, che decentralizzano i processi decisionali. Presto molta attenzione al miglioramento continuo, personale e di metodo.",
-      "Lungo il mio percorso ho avuto l'onore veder riconosciuti da giurie internazionali alcuni dei progetti ai quali ho lavorato."
+      "EN L'efficacia e l'usabilità di un progetto dipende dalle sinergie che si formano tra designer e developer. In un team non si prescinde dagli altri. Per creare un prodotto di successo il team è essenziale.",
+      "EN Prediligo metodologie Lean<br />e Agili, che decentralizzano<br />i processi decisionali.",
+      "EN Presto molta attenzione al<br />miglioramento continuo,<br />personale e di metodo.",
+      "EN Lungo il mio percorso ho avuto l'onore veder riconosciuti da giurie internazionali alcuni dei progetti ai quali ho lavorato."
     ]
   }
 }

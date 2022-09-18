@@ -25,7 +25,7 @@ function About() {
       <Container grid>
         <Row start={3} end={1}>
           <div className={style.section}>
-            <ContentBlock>
+            <ContentBlock key={intro[0]}>
               <div>
                 <Trans
                   i18nKey={`about.intro.0`}
@@ -42,7 +42,7 @@ function About() {
       </Container>
       <Container grid outerRightOnMobile>
         <Row start={1} end={2}>
-          <Heading>
+          <Heading key={intro[1]}>
             <Trans
               i18nKey="about.intro.1"
               components={{
@@ -55,7 +55,7 @@ function About() {
       </Container>
       <Container grid>
         <Row start={2} end={1}>
-          <ContentBlock>
+          <ContentBlock key={intro[2]}>
             {intro.slice(2).map((txt, i) => (
               <div key={i}>
                 <Trans
@@ -74,7 +74,7 @@ function About() {
       <Container grid outerRightOnMobile>
         <Row start={2} end={2}>
           <div className={style.section}>
-            <Heading alignRight>
+            <Heading alignRight key={clanTitle[0]}>
               <>
                 {clanTitle[0]}
                 <br /> {clanTitle[1]}
@@ -86,7 +86,7 @@ function About() {
       <Container grid>
         <Row start={2} end={2}>
           <div className={style.columns}>
-            <ContentBlock>
+            <ContentBlock key={clan[0]}>
               {clan.slice(0, 2).map((txt, i) => (
                 <div key={i}>
                   <Trans
@@ -101,7 +101,7 @@ function About() {
                 </div>
               ))}
             </ContentBlock>
-            <ContentBlock>
+            <ContentBlock key={clan[2]}>
               {clan.slice(2).map((txt, i) => (
                 <div key={i}>
                   <Trans
@@ -122,7 +122,7 @@ function About() {
       <Container grid outerRightOnMobile>
         <Row start={1} end={3}>
           <div className={style.section}>
-            <Heading>
+            <Heading key={methodTitle}>
               <Trans i18nKey="about.method_title" components={{ pre: <pre /> }} />
             </Heading>
           </div>
@@ -130,7 +130,7 @@ function About() {
       </Container>
       <Container grid>
         <Row start={2} end={1}>
-          <ContentBlock>
+          <ContentBlock key={method[0]}>
             <div>
               <Trans i18nKey={`about.method.0`} />
             </div>
@@ -140,10 +140,10 @@ function About() {
       <Container grid outerRightOnMobile>
         <Row start={1} end={3}>
           <div className={style.section}>
-            <Heading>
+            <Heading key={method[1]}>
               <Trans i18nKey="about.method.1" />
             </Heading>
-            <Heading alignRight>
+            <Heading alignRight key={method[2]}>
               <Trans i18nKey="about.method.2" />
             </Heading>
           </div>
@@ -152,7 +152,7 @@ function About() {
       <Container grid>
         <Row start={1} end={1}>
           <div className={style.section}>
-            <ContentBlock>
+            <ContentBlock key={method[3]}>
               <div>
                 <Trans i18nKey={`about.method.3`} />
               </div>

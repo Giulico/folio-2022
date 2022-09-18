@@ -9,9 +9,10 @@ import cn from 'classnames'
 
 // Hooks
 import { useDispatch, useSelector } from 'react-redux'
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 
 const languages = ['it', 'en']
 
@@ -21,6 +22,7 @@ const LangSwitch = () => {
     app: state.app,
     menu: state.menu
   }))
+  const [isReady, setIsReady] = useState(false)
   const { i18n } = useTranslation()
   const location = useLocation()
 
@@ -39,10 +41,18 @@ const LangSwitch = () => {
     dispatch.pointer.setType('default')
   }, [dispatch.pointer])
 
+  useEffect(() => {
+    if (app.ready) {
+      setTimeout(() => {
+        setIsReady(true)
+      }, 3500)
+    }
+  }, [app.ready])
+
   const isHome = location.pathname === '/'
 
   const classes = cn(style.root, {
-    [style.hidden]: !app.ready || menu.open,
+    [style.hidden]: !isReady || menu.open,
     [style.dark]: !isHome
   })
 

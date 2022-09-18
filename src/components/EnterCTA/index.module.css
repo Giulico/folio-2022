@@ -2,13 +2,14 @@
   --ring-size: 150px;
 
   position: absolute;
-  top: calc(100% - var(--ring-size));
+  top: calc(100% - calc(var(--ring-size) * 1.5));
   left: 50%;
   transform: translate3d(-50%, 0, 0);
   transition: opacity 0.7s ease 0s, visibility 0s 0s;
   will-change: opacity, visibility;
 
   @media(--md-l) {
+    top: calc(100% - var(--ring-size ));
     left: var(--text-margin-left);
     transform: translate3d(0, 0, 0);
 

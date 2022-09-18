@@ -19,6 +19,8 @@ type Props = {
 
 gsap.registerPlugin(ScrambleTextPlugin)
 
+const chars = '▲△◀∅∏▒▢◁≈▶▣▭'
+
 function GSAPScrumbleText({ content, paused }: Props) {
   const rootEl = useRef<HTMLDivElement>(null)
   const p1El = useRef<HTMLDivElement>(null)
@@ -39,6 +41,7 @@ function GSAPScrumbleText({ content, paused }: Props) {
         delay,
         scrambleText: {
           text: l[0],
+          chars,
           newClass: style.completed,
           tweenLength: false
         },
@@ -52,6 +55,7 @@ function GSAPScrumbleText({ content, paused }: Props) {
           duration: 1.5,
           scrambleText: {
             text: l[1],
+            chars,
             newClass: style.completed,
             tweenLength: false
           },

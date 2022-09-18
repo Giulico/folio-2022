@@ -25,10 +25,12 @@ function ImageTrigger({ children, name, sizes = [3, 2] }: Props) {
   }, [dispatch.images, name, sizes[0], sizes[1]])
 
   const showImage = useCallback(() => {
+    dispatch.pointer.setType('image')
     dispatch.images.showImage(name)
   }, [dispatch.images, name])
 
   const hideImage = useCallback(() => {
+    dispatch.pointer.setType('default')
     dispatch.images.hideImage(name)
   }, [dispatch.images, name])
 

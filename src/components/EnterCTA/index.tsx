@@ -17,6 +17,8 @@ import { useDispatch, useSelector } from 'react-redux'
 
 gsap.registerPlugin(ScrambleTextPlugin)
 
+const chars = '▲△◀∅∏▒▢◁≈▶▣▭'
+
 const EnterCTA = () => {
   const { t } = useTranslation()
 
@@ -59,7 +61,10 @@ const EnterCTA = () => {
       const rings = buttonRef.current?.querySelectorAll(`.${style.ring}`)
       if (rings) {
         gsap.to(labelRef.current, {
-          scrambleText: t('enter'),
+          scrambleText: {
+            text: t('enter'),
+            chars,
+          },
           duration: 2
         })
         if (rings) {

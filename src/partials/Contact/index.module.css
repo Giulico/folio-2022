@@ -4,7 +4,8 @@
   position: relative;
   z-index: 1;
   height: 50vh;
-  padding-top: calc(15vh + var(--fs-display-1) + var(--spc-10));
-  margin-top: calc(var(--app-height) / 2);
+  padding-top: 50vh;
+
+  /* margin-top: calc(var(--app-height) / 2); */
   color: var(--color-white);
 }

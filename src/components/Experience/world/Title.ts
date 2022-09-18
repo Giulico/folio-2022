@@ -351,10 +351,19 @@ export default class Title {
 
     const { screenWidth } = this.getScreenSizes()
 
-    const leftPosition =
-      this.sizes.width >= breakpoints.mdL
-        ? screenWidth * 0.3 // 30%
-        : (screenWidth * 116) / this.sizes.width // 96px (spacing.css --text-margin-left)
+    let px // spacing.css --text-margin-left
+
+    if (this.sizes.width >= breakpoints.xl) {
+      px = 450 // xl
+    } else if (this.sizes.width >= breakpoints.lg) {
+      px = 320 // lg
+    } else if (this.sizes.width >= breakpoints.mdL) {
+      px = 280 // md-l
+    } else {
+      px = 116 // mobile
+    }
+
+    const leftPosition = (screenWidth * px) / this.sizes.width
 
     // Since 0 is in the middle of the screen, subtract half width
     this.mesh.position.x = leftPosition - screenWidth / 2

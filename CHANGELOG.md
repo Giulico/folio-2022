@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/Giulico/folio-2022/compare/v1.0.0...v1.0.1) (2022-09-18)
+
+
+### Bug Fixes
+
+* Handle text animation on change lang ([67f7814](https://github.com/Giulico/folio-2022/commit/67f781479da1c8eb350bf14531efe40db69d0f92))
+
 # 1.0.0 (2022-09-18)
 
 

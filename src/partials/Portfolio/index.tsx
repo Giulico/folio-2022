@@ -30,7 +30,7 @@ function Portfolio() {
       </Container>
       <Container grid key={intro[2]}>
         <Row start={3} end={1}>
-          <ContentBlock subtext>
+          <ContentBlock>
             <div>{intro[2]}</div>
             <div>{intro[3]}</div>
           </ContentBlock>

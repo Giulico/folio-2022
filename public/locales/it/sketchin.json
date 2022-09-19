@@ -1,0 +1,15 @@
+{
+  "title": "Sketchin",
+  "image": "/projects/aq/hero.jpg",
+  "live": "https://www.sketchin.com",
+  "role": "UX Engineer",
+  "agency": "Sketchin",
+  "completed": "08.2020",
+  "awards": ["Awwwards", "CSS Design Award", "FWA"],
+  "modules": [
+    {
+      "component": "TextIntro",
+      "text": "Sketchin è l'advanced-design studio con il quale attualmente collaboro."
+    }
+  ]
+}

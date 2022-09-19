@@ -34,7 +34,7 @@ function Media({ media }: Props) {
   const classes = cn(style.root, ts && style[ts])
 
   return (
-    <Container>
+    <Container withoutMenu>
       <div className={classes}>
         {media.map(({ src, alt }, index) => {
           const isVideo = src.endsWith('.mp4')

@@ -10,12 +10,16 @@ import Media from 'components/Media'
 // Data
 import { data } from './mock'
 
+// Hooks
+import { useTranslation } from 'react-i18next'
+
+type ModuleData = { component: string; [key: string]: string }
+
 type Modules = {
   [key: string]: (props: any) => JSX.Element
 }
 
-const modules: Modules = {
-  ProjectHero,
+const Components: Modules = {
   TextIntro,
   TextTwoColumns,
   Media
@@ -24,19 +28,25 @@ const modules: Modules = {
 const ProjectDetail = () => {
   const { project } = useParams()
 
+  const { t } = useTranslation(project)
+
   // Find the project in data
-  const slices = data.find(({ id }) => id === project)?.modules || []
+  // const slices = data.find(({ id }) => id === project)?.modules || []
+  const modules = t('modules') as ModuleData[]
 
   // Return the modules of current project
   return (
     <>
-      {slices.map(({ component, ...props }, index) => {
-        if (!modules?.[component]) {
+      <ProjectHero />
+      {modules.map(({ component, ...props }, index) => {
+        const c = component as string
+
+        if (!Components?.[c]) {
           console.warn('Module not found -> ' + component)
           return null
         }
 
-        const Component = modules[component]
+        const Component = Components[c]
         return <Component key={index} {...props} />
       })}
     </>

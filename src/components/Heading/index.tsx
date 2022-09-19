@@ -75,7 +75,6 @@ function Heading({ children, alignRight, misaligned, className }: Props) {
   const classes = cn(style.root, className, {
     [style.alignRight]: alignRight,
     [style.misaligned]: misaligned,
-    [style.isDesktop]: isDesktop,
     [style.isVisible]: isDesktop && inView,
     [style.menuOpen]: menu.open
   })

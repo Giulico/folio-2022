@@ -1,6 +1,9 @@
 {
   "loading": "Loading",
   "enter": "Enter",
+  "role": "Role",
+  "agency": "Agency",
+  "completed": "Completed",
   "intro": {
     "p1": {
       "l1": "It's all about technology",

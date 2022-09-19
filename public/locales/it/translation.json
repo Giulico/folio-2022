@@ -1,6 +1,9 @@
 {
   "loading": "Caricamento",
   "enter": "Entra",
+  "role": "Ruolo",
+  "agency": "Agenzia",
+  "completed": "Completato",
   "intro": {
     "p1": {
       "l1": "Si tratta di tecnologia",
@@ -56,5 +59,9 @@
       "Presto molta attenzione al<br />miglioramento continuo,<br />personale e di metodo.",
       "Lungo il mio percorso ho avuto l'onore veder riconosciuti da giurie internazionali alcuni dei progetti ai quali ho lavorato."
     ]
+  },
+  "contact": {
+    "intro": "Don't be shy, say hi!",
+    "social_intro": "Anche se non sono un tipo da social network mi potete contattare anche su"
   }
 }

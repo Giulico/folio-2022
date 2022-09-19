@@ -1,12 +1,17 @@
 .root {
   --right-margin: calc(var(--frame-margin) * 3);
+  --tot-margin: calc(var(--text-margin-left) + var(--right-margin));
 
-  @media (--md-p) {
-    --right-margin: calc(var(--frame-margin) * 5);
+  width: calc(100% - var(--tot-margin));
+  margin: 0 var(--right-margin) 0 var(--text-margin-left);
+
+  &.withoutMenu {
+    --right-margin: calc(var(--frame-margin) * 3);
+    --tot-margin: calc(var(--woutmenu-margin-left) + var(--right-margin));
+
+    margin: 0 var(--right-margin) 0 var(--woutmenu-margin-left);
   }
 
-  max-width: var(--lg);
-  margin: 0 var(--right-margin) 0 var(--text-margin-left);
 
   &.small {
     --small-left-margin: calc(var(--frame-margin) * 3);
@@ -20,8 +25,6 @@
 
   &.grid {
     --tot-margin: calc(var(--text-margin-left) + var(--right-margin));
-
-    width: calc(100% - var(--tot-margin));
 
     @media (--md-l) {
       display: grid;

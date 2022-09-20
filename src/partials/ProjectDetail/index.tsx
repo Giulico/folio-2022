@@ -39,14 +39,12 @@ const ProjectDetail = () => {
     <>
       <ProjectHero />
       {modules.map(({ component, ...props }, index) => {
-        const c = component as string
-
-        if (!Components?.[c]) {
+        if (!Components?.[component]) {
           console.warn('Module not found -> ' + component)
           return null
         }
 
-        const Component = Components[c]
+        const Component = Components[component]
         return <Component key={index} {...props} />
       })}
     </>

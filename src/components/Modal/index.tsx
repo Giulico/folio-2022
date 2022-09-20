@@ -77,6 +77,14 @@ const Modal = ({ children }: Props) => {
     }
   }, [location, displayLocation, closeModal, openModal])
 
+  const overHandler = useCallback(() => {
+    dispatch.pointer.setType('hover')
+  }, [dispatch.pointer])
+
+  const outHandler = useCallback(() => {
+    dispatch.pointer.setType('default')
+  }, [dispatch.pointer])
+
   const classes = cn(style.root, style[transitionStage])
   const buttonClasses = cn(style.backButton, style[transitionStage])
 
@@ -91,7 +99,12 @@ const Modal = ({ children }: Props) => {
           </div>
         </div>
       </div>
-      <button className={buttonClasses} onClick={() => rootNavigate('/')}>
+      <button
+        className={buttonClasses}
+        onClick={() => rootNavigate('/')}
+        onMouseEnter={overHandler}
+        onMouseOut={outHandler}
+      >
         <figure>
           <img src="/icons/arrow-left.svg" />
         </figure>

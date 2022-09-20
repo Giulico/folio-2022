@@ -5,7 +5,7 @@ import style from './index.module.css'
 import cn from 'classnames'
 
 // Components
-import Container from 'components/Container'
+import Container, { Row } from 'components/Container'
 
 // Hooks
 import useTransitionStage from 'hooks/useTransitionStage'
@@ -20,10 +20,12 @@ const TextIntro = ({ text }: Props) => {
   const classes = cn(style.root, ts && style[ts])
 
   return (
-    <Container small>
-      <div className={classes}>
-        <div className={style.inner}>{text}</div>
-      </div>
+    <Container grid withoutMenu>
+      <Row start={2} end={2}>
+        <div className={classes}>
+          <div className={style.inner}>{text}</div>
+        </div>
+      </Row>
     </Container>
   )
 }

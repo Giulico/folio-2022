@@ -1,6 +1,6 @@
 {
   "title": "Sketchin",
-  "image": "/projects/aq/hero.jpg",
+  "image": "/projects/sk/hero.jpeg",
   "live": "https://www.sketchin.com",
   "role": "UX Engineer",
   "agency": "Sketchin",
@@ -9,7 +9,55 @@
   "modules": [
     {
       "component": "TextIntro",
-      "text": "Sketchin is the advanced-design studio where I work"
+      "text": "Sketchin è lo studio di advanced-design per il quale lavoro. Il progetto comprende il completo re-design del sito istituzionale. Il mio ruolo in azienda era UX Engineer, ma per questo progetto ho vestito il ruolo di Full Stack Developer. Ne è uscito un JAMStack basato su React e Redux (con Nexi Js), Node JS e Prismic CMS."
+    },
+    {
+      "component": "Media",
+      "media": [
+        {
+          "src": "/projects/sk/sk-animation.mp4",
+          "alt": "Intro animation"
+        }
+      ]
+    },
+    {
+      "component": "TextTwoColumns",
+      "title": "La sfida",
+      "text": "Data la particolarità delle circostanze, abbiamo dedicato tempo allo sviluppo del sito istituzionale tra un progetto e l’altro. Abbiamo affrontato questa sfida scomponendo le UI in componenti, seguendo le logiche di Atomic Design. Abbiamo creato un backlog contenente card di diversa natura che ciascuno potesse assegnarsi non appena ci fossero le condizioni. Inoltre, abbiamo concordato fin dall’inizio convenzioni per la scrittura del codice e della documentazione."
+    },
+
+    {
+      "component": "Media",
+      "media": [
+        {
+          "src": "/projects/sk/sk-navi-1.jpg",
+          "alt": "Sketchin project filters"
+        },
+        {
+          "src": "/projects/sk/sk-navi-2.jpg",
+          "alt": "Sketchin menu navigation"
+        }
+      ]
+    },
+    {
+      "component": "TextTwoColumns",
+      "title": "Integration test",
+      "text": "Nonostante la natura informativa di questo progetto, ritengo importante dedicare del tempo alla scrittura di test automatici. Il mancato funzionamento di un form di contatto esegue un messaggio di alert su un canale Slack apposito dandoci la possibilità di intervenire istantaneamente.<br /><br /> Inoltre tutti i form (inclusa la navigazione dalla home alla pagina di contatto) vengono testati quotidianamente tramite dei CRON che eseguono delle pipeline di Gitlab che a loro volta eseguono dei test di Cypress.<br /><br /> Infine, per garantire che tutti i template vengano renderizzati correttamente e che il server restituisca HTML ricco di contenuti, sono stati scritti dei test di Cypress che vengono eseguiti a build time."
+    },
+    {
+      "component": "Media",
+      "media": [
+        {
+          "src": "/projects/sk/sk-hero.jpg",
+          "alt": "Sketchin services page"
+        }
+      ]
+    },
+    {
+      "component": "TextTwoColumns",
+      "title": "Automazioni",
+      "text": "Tramite Lambda function è stato possibile utilizzare le API di Favro (lo strumento di gestione di progetti che utilizziamo in azienda) per creare e dettagliare automaticamente le card affinché vengano utilizzate dalle rispettive unit senza spendere ulteriore effort.",
+      "ciao": "ciao"
     }
   ]
 }

@@ -5,6 +5,8 @@ import style from './index.module.css'
 import cn from 'classnames'
 
 // Hooks
+import { useCallback } from 'react'
+import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import useTransitionStage from 'hooks/useTransitionStage'
 import { useTranslation } from 'react-i18next'
@@ -12,12 +14,25 @@ import { useTranslation } from 'react-i18next'
 // COmponents
 import Container from 'components/Container'
 
+// Icons
+import { ExternalArrow } from 'components/Icons'
+
 const ProjectHero = () => {
+  const dispatch = useDispatch()
+
   const { project } = useParams()
   const ts = useTransitionStage()
 
   const { t } = useTranslation('translation')
-  const { t: pt } = useTranslation('sketchin')
+  const { t: pt } = useTranslation(project)
+
+  const overHandler = useCallback(() => {
+    dispatch.pointer.setType('hover')
+  }, [dispatch.pointer])
+
+  const outHandler = useCallback(() => {
+    dispatch.pointer.setType('default')
+  }, [dispatch.pointer])
 
   const awards = pt('awards') as string[]
 
@@ -61,8 +76,17 @@ const ProjectHero = () => {
               </div>
             </div>
             <div className={style.live}>
-              <a href={pt('live')} target="_blank">
-                Visit live <img src="/icons/arrow-right.svg" />
+              <a
+                href={pt('live')}
+                target="_blank"
+                onMouseEnter={overHandler}
+                onMouseLeave={outHandler}
+              >
+                {/* Visit live <img src="/icons/arrow-right.svg" /> */}
+                Visit live{' '}
+                <span className={style.externalArrow}>
+                  <ExternalArrow />
+                </span>
               </a>
             </div>
           </div>

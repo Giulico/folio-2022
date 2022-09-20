@@ -183,6 +183,7 @@
 
   a {
     display: flex;
+    cursor: none;
     place-items: center;
     text-decoration: none;
     transform: translate3d(-100%, 0, 0);
@@ -203,5 +204,14 @@
     width: calc(50% - var(--spc-2));
     margin-top: 0;
     margin-left: calc(50% + var(--spc-2));
+  }
+}
+
+.externalArrow {
+  display: inline-block;
+  margin-left: 4px;
+
+  path {
+    stroke: #000;
   }
 }

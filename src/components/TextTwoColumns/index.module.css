@@ -17,7 +17,8 @@
 .title {
   @mixin highlight;
 
-  font-weight: var(--fw-semibold);
+  margin: 0;
+  font-weight: var(--fw-light);
 
   @media(--md-l) {
     flex-basis: 50%;
@@ -25,5 +26,5 @@
 }
 
 .text {
-  @mixin body-1;
+  @mixin body-3;
 }

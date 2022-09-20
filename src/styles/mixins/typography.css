@@ -33,6 +33,10 @@
   }
 }
 
+@define-mixin body-3 {
+  font-size: var(--fs-body-3);
+}
+
 @define-mixin label {
   font-size: var(--fs-label);
   font-weight: var(--fw-bold);

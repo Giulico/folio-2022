@@ -216,13 +216,15 @@ export default class Portfolio {
       clickableMesh.position.set(i * 1.1, 0, 0)
 
       clickableMesh.addEventListener(ThreeMouseEventType.CLICK, (e) => {
+        console.log('clickableMesh click handler. isVisible', this.isVisible)
         if (!this.isVisible) return
         rootNavigate(e.model.view.pathname)
       })
       clickableMesh.addEventListener(ThreeMouseEventType.OVER, (e) => {
         window.store.dispatch.pointer.setType('hover')
-        console.log([...this.howls], randomIntFromInterval(1, this.howls.length))
-        this.howls[randomIntFromInterval(1, this.howls.length)].play()
+        const index = randomIntFromInterval(1, this.howls.length)
+        console.log([...this.howls], index)
+        this.howls[index].play()
       })
       clickableMesh.addEventListener(ThreeMouseEventType.OUT, () => {
         window.store.dispatch.pointer.setType('default')

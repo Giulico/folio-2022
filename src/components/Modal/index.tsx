@@ -67,9 +67,9 @@ const Modal = ({ children }: Props) => {
     // Set the type of transition
     if (location !== displayLocation) {
       if (location.pathname === '/') {
-        // closeModal()
+        closeModal()
       } else {
-        // openModal()
+        openModal()
       }
     }
 
@@ -89,6 +89,7 @@ const Modal = ({ children }: Props) => {
   const classes = cn(style.root, style[transitionStage])
   const buttonClasses = cn(style.backButton, style[transitionStage])
 
+  return null
   return (
     <>
       <div className={classes} onAnimationEnd={updateDisplayLocation}>

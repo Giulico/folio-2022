@@ -28,11 +28,11 @@ const Components: Modules = {
 const ProjectDetail = () => {
   const { project } = useParams()
 
-  const { t } = useTranslation(project)
+  // const { t } = useTranslation(project)
 
   // Find the project in data
-  // const slices = data.find(({ id }) => id === project)?.modules || []
-  const modules = t('modules') as ModuleData[]
+  const modules = data.find(({ id }) => id === project)?.modules || []
+  // const modules = t('modules') as ModuleData[]
 
   // Return the modules of current project
   return (

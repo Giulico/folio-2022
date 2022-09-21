@@ -89,15 +89,15 @@ const Modal = ({ children }: Props) => {
   const classes = cn(style.root, style[transitionStage])
   const buttonClasses = cn(style.backButton, style[transitionStage])
 
-  return null
   return (
     <>
       <div className={classes} onAnimationEnd={updateDisplayLocation}>
         <div data-scroll-lock-scrollable className={style.contentContainer}>
           <div>
-            <ModalContext.Provider value={{ displayLocation, transitionStage }}>
+            <div>THIS IS A TEST</div>
+            {/* <ModalContext.Provider value={{ displayLocation, transitionStage }}>
               {children}
-            </ModalContext.Provider>
+            </ModalContext.Provider> */}
           </div>
         </div>
       </div>

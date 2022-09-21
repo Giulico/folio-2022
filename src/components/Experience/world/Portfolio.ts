@@ -394,6 +394,7 @@ export default class Portfolio {
 
     // Disable scroll
     requestAnimationFrame(() => {
+      console.log('right before diablePageScroll')
       disablePageScroll()
     })
 

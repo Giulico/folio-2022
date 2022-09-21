@@ -217,7 +217,6 @@ export default class Portfolio {
       clickableMesh.position.set(i * 1.1, 0, 0)
 
       clickableMesh.addEventListener(ThreeMouseEventType.CLICK, (e) => {
-        console.log('clickableMesh click handler. isVisible', this.isVisible)
         if (!this.isVisible) return
         rootNavigate(e.model.view.pathname)
       })
@@ -345,7 +344,6 @@ export default class Portfolio {
   }
 
   enterAnimation() {
-    console.log('Portfolio enterAnimation')
     this.isVisible = true
     window.addEventListener('scroll', this.scrollHandler)
   }
@@ -393,7 +391,7 @@ export default class Portfolio {
     if (!item) throw new Error('Project not found')
 
     // Disable scroll
-    // disablePageScroll()
+    disablePageScroll()
 
     // move object to scene without changing it's world orientation
     // restored in closeProjectAnimation

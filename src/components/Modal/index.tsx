@@ -42,6 +42,7 @@ const Modal = ({ children }: Props) => {
   const [transitionStage, setTransitionStage] = useState<'open' | 'close'>(
     location.pathname === '/' ? 'close' : 'open'
   )
+  console.log('Modal transitionStage', transitionStage)
 
   const updateDisplayLocation = useCallback(() => {
     setDisplayLocation(location)

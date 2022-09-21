@@ -67,9 +67,9 @@ const Modal = ({ children }: Props) => {
     // Set the type of transition
     if (location !== displayLocation) {
       if (location.pathname === '/') {
-        closeModal()
+        // closeModal()
       } else {
-        openModal()
+        // openModal()
       }
     }
 
@@ -86,8 +86,8 @@ const Modal = ({ children }: Props) => {
     dispatch.pointer.setType('default')
   }, [dispatch.pointer])
 
-  const classes = cn(style.root /* , style[transitionStage] */)
-  const buttonClasses = cn(style.backButton /*, style[transitionStage] */)
+  const classes = cn(style.root, style[transitionStage])
+  const buttonClasses = cn(style.backButton, style[transitionStage])
 
   return (
     <>

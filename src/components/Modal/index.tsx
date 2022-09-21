@@ -94,10 +94,9 @@ const Modal = ({ children }: Props) => {
       <div className={classes} onAnimationEnd={updateDisplayLocation}>
         <div data-scroll-lock-scrollable className={style.contentContainer}>
           <div>
-            <div>THIS IS A TEST</div>
-            {/* <ModalContext.Provider value={{ displayLocation, transitionStage }}>
+            <ModalContext.Provider value={{ displayLocation, transitionStage }}>
               {children}
-            </ModalContext.Provider> */}
+            </ModalContext.Provider>
           </div>
         </div>
       </div>

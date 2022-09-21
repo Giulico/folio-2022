@@ -221,6 +221,7 @@ export default class Portfolio {
       })
       clickableMesh.addEventListener(ThreeMouseEventType.OVER, (e) => {
         window.store.dispatch.pointer.setType('hover')
+        console.log(this.howls, randomIntFromInterval(1, this.howls.length))
         this.howls[randomIntFromInterval(1, this.howls.length)].play()
       })
       clickableMesh.addEventListener(ThreeMouseEventType.OUT, () => {

@@ -22,7 +22,8 @@ export function ModalRoutes() {
 
   return (
     <Routes location={displayLocation}>
-      <Route path=":project" element={<ProjectDetail />} />
+      {/* <Route path=":project" element={<ProjectDetail />} /> */}
+      <Route path=":project" element={<p>test</p>} />
     </Routes>
   )
 }

@@ -221,7 +221,7 @@ export default class Portfolio {
       })
       clickableMesh.addEventListener(ThreeMouseEventType.OVER, (e) => {
         window.store.dispatch.pointer.setType('hover')
-        console.log(this.howls, randomIntFromInterval(1, this.howls.length))
+        console.log([...this.howls], randomIntFromInterval(1, this.howls.length))
         this.howls[randomIntFromInterval(1, this.howls.length)].play()
       })
       clickableMesh.addEventListener(ThreeMouseEventType.OUT, () => {
@@ -389,7 +389,9 @@ export default class Portfolio {
     if (!item) throw new Error('Project not found')
 
     // Disable scroll
-    disablePageScroll()
+    requestAnimationFrame(() => {
+      disablePageScroll()
+    })
 
     // move object to scene without changing it's world orientation
     // restored in closeProjectAnimation

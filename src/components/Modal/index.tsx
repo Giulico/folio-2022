@@ -86,8 +86,8 @@ const Modal = ({ children }: Props) => {
     dispatch.pointer.setType('default')
   }, [dispatch.pointer])
 
-  const classes = cn(style.root, style[transitionStage])
-  const buttonClasses = cn(style.backButton, style[transitionStage])
+  const classes = cn(style.root /* , style[transitionStage] */)
+  const buttonClasses = cn(style.backButton /*, style[transitionStage] */)
 
   return (
     <>

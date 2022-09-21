@@ -392,6 +392,9 @@ export default class Portfolio {
     )
     if (!item) throw new Error('Project not found')
 
+    // Disable scroll
+    // disablePageScroll()
+
     // move object to scene without changing it's world orientation
     // restored in closeProjectAnimation
     this.scene.attach(item)

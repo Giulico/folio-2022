@@ -9,6 +9,7 @@ import style from './index.module.css'
 import cn from 'classnames'
 import { createContext } from 'react'
 import { rootNavigate } from 'components/CustomRouter'
+import { disablePageScroll, enablePageScroll } from 'scroll-lock'
 
 // Hooks
 import { useLocation } from 'react-router-dom'
@@ -48,6 +49,8 @@ const Modal = ({ children }: Props) => {
   }, [location])
 
   const openModal = useCallback(() => {
+    // Disable scroll
+    disablePageScroll()
     setTransitionStage('open')
     dispatch.pointer.setType('default')
     window.experience.world.portfolio?.openProjectAnimation()

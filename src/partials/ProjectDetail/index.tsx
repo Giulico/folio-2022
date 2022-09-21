@@ -37,8 +37,8 @@ const ProjectDetail = () => {
   // Return the modules of current project
   return (
     <>
-      <ProjectHero />
-      {modules.map(({ component, ...props }, index) => {
+      {/* <ProjectHero /> */}
+      {/* {modules.map(({ component, ...props }, index) => {
         if (!Components?.[component]) {
           console.warn('Module not found -> ' + component)
           return null
@@ -46,7 +46,7 @@ const ProjectDetail = () => {
 
         const Component = Components[component]
         return <Component key={index} {...props} />
-      })}
+      })} */}
     </>
   )
 }

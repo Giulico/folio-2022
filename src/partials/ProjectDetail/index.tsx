@@ -28,17 +28,17 @@ const Components: Modules = {
 const ProjectDetail = () => {
   const { project } = useParams()
 
-  // const { t } = useTranslation(project)
+  const { t } = useTranslation(project)
 
   // Find the project in data
-  const modules = data.find(({ id }) => id === project)?.modules || []
-  // const modules = t('modules') as ModuleData[]
+  // const modules = data.find(({ id }) => id === project)?.modules || []
+  const modules = t('modules') as ModuleData[]
 
   // Return the modules of current project
   return (
     <>
       <ProjectHero />
-      {/* {modules.map(({ component, ...props }, index) => {
+      {modules.map(({ component, ...props }, index) => {
         if (!Components?.[component]) {
           console.warn('Module not found -> ' + component)
           return null
@@ -46,7 +46,7 @@ const ProjectDetail = () => {
 
         const Component = Components[component]
         return <Component key={index} {...props} />
-      })} */}
+      })}
     </>
   )
 }

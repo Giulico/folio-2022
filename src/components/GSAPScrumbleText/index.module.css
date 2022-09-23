@@ -6,7 +6,8 @@
 
 .phrase {
   color: var(--color-gray-900);
-  white-space: nowrap;
+
+  /* white-space: nowrap; */
 }
 
 .completed {

@@ -70,7 +70,7 @@
 
   @media (--md-l) {
     padding-top: 0;
-    padding-left: var(--spc-5);
+    padding-left: var(--spc-10);
   }
 
   li {
@@ -78,6 +78,11 @@
 
     a {
       @mixin body-1;
+
+      line-height: 2.5;
+      @media (--md-l) {
+        line-height: 1.7;
+      }
     }
   }
 }

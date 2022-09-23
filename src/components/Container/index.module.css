@@ -1,6 +1,9 @@
 .root {
-  --right-margin: calc(var(--frame-margin) * 3);
+  --right-margin: var(--frame-margin);
   --tot-margin: calc(var(--text-margin-left) + var(--right-margin));
+  @media (--md-l) {
+    --right-margin: calc(var(--frame-margin) * 3);
+  }
 
   width: calc(100% - var(--tot-margin));
   margin: 0 var(--right-margin) 0 var(--text-margin-left);

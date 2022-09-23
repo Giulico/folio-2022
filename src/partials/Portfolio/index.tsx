@@ -44,8 +44,10 @@ function Portfolio() {
       <Container grid key={portfolio[1]}>
         <Row start={2} end={1}>
           <ContentBlock>
-            <div>{portfolio[1]}</div>
-            <div>{portfolio[2]}</div>
+            <div>
+              <Trans i18nKey="portfolio.portfolio.1" />
+              <Trans i18nKey="portfolio.portfolio.2" />
+            </div>
           </ContentBlock>
         </Row>
       </Container>

@@ -12,11 +12,13 @@ import cn from 'classnames'
 // Hooks
 import { useEffect, useCallback, useRef } from 'react'
 import { useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 
 gsap.registerPlugin(ScrambleTextPlugin)
 // type Props = {}
 
 function Pointer() {
+  const location = useLocation()
   const pointer = useSelector((state: RootState) => state.pointer)
   const cursorRef = useRef<HTMLDivElement>(null)
 
@@ -36,6 +38,7 @@ function Pointer() {
   }, [update])
 
   const classes = cn(style.root, {
+    [style.dark]: location.pathname !== '/',
     [style[`type-${pointer.type}`]]: pointer.type
   })
 

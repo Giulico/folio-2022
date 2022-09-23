@@ -32,5 +32,9 @@
 }
 
 .projectSection {
-  padding-top: 33vh;
+  padding-top: 15vh;
+
+  @media (--md-l) {
+    padding-top: 33vh;
+  }
 }

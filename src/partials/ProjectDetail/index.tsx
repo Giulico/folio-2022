@@ -3,12 +3,12 @@ import { useParams } from 'react-router-dom'
 
 // Components
 import ProjectHero from 'components/ProjectHero'
+import ProjectCTA from 'components/ProjectCTA'
 import TextIntro from 'components/TextIntro'
 import TextTwoColumns from 'components/TextTwoColumns'
 import Media from 'components/Media'
-
-// Data
-import { data } from './mock'
+import Awards from 'components/Awards'
+import Numbers from 'components/Numbers'
 
 // Hooks
 import { useTranslation } from 'react-i18next'
@@ -20,9 +20,11 @@ type Modules = {
 }
 
 const Components: Modules = {
+  Awards,
+  Media,
+  Numbers,
   TextIntro,
-  TextTwoColumns,
-  Media
+  TextTwoColumns
 }
 
 const ProjectDetail = () => {
@@ -47,6 +49,7 @@ const ProjectDetail = () => {
         const Component = Components[component]
         return <Component key={index} {...props} />
       })}
+      <ProjectCTA />
     </>
   )
 }

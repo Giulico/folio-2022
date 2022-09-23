@@ -43,7 +43,8 @@ export default class Loader {
     if (state.app.ready && !prevState.app.ready) {
       gsap.to(this.material.uniforms.iAlpha, {
         value: 0.0,
-        duration: 1.5,
+        duration: 2.5,
+        delay: 0.5,
         onComplete: () => {
           this.geometry.dispose()
           this.material.dispose()

@@ -1,0 +1,57 @@
+{
+  "title": "Fastweb",
+  "image": "/projects/fb/hero.png",
+  "live": "",
+  "role": "UX Engineer",
+  "agency": "Sketchin",
+  "completed": "06.2020",
+  "awards": [],
+  "modules": [
+    {
+      "component": "TextIntro",
+      "text": "Per la nota Telco abbiamo progettato da zero un nuovo modello di servizio full-digital per la connettività domestica a banda larga. Come UX Engineer ho supportato le fasi di interection e visual design, garantendo coerenza nelle soluzioni proposte e parallelamente astraendo gli elementi di interfaccia in una Design Library che potesse diventare un giorno il Design System aziendale."
+    },
+    {
+      "component": "Media",
+      "media": [
+        {
+          "src": "/projects/aq/reel-aq.mp4",
+          "alt": "AQuest reel"
+        }
+      ]
+    },
+    {
+      "component": "TextTwoColumns",
+      "title": "La sfida",
+      "text": "Definita la value proposition, il progetto è stato suddiviso in diverse epiche o macro aree da progettare. Le attività di design si sono rivelate molto complesse e su più epiche contemporaneamente. Meeting e review candenzati sono stati la chiave per tenere le fila."
+    },
+
+    {
+      "component": "Media",
+      "media": [
+        {
+          "src": "/projects/aq/v1.mp4",
+          "alt": "AQuest v1"
+        },
+        {
+          "src": "/projects/aq/v2.mp4",
+          "alt": "AQuest v2"
+        }
+      ]
+    },
+    {
+      "component": "TextTwoColumns",
+      "title": "L'attenzione ai dettagli",
+      "text": "La design library ha lo scopo di creare coerenza nella comunicazione visiva tra i vari progetti e tra i vari touchpoint. Nasce dall’astrazione di un’interfaccia in componenti riutilizzabili e consiste nel catalogo ordinato e documentato di questi elementi di UI."
+    },
+    {
+      "component": "Media",
+      "media": [
+        {
+          "src": "/projects/aq/aquest-site.jpeg",
+          "alt": "AQuest site"
+        }
+      ]
+    }
+  ]
+}

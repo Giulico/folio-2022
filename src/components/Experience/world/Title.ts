@@ -283,11 +283,28 @@ export default class Title {
   enterFromTop() {
     if (!this.material) return
     const d = 2.0
+    const s = 0.1
     const ease = 'expo.out'
     this.material.uniforms.uDirection.value = 0
+    gsap.killTweensOf(this.material.uniforms.uProgress5, 'value')
+    gsap.killTweensOf(this.material.uniforms.uProgress6, 'value')
+    gsap.killTweensOf(this.material.uniforms.uProgress7, 'value')
+
     gsap.to(this.material.uniforms.uProgress5, {
       value: 1,
       duration: d,
+      ease
+    })
+    gsap.to(this.material.uniforms.uProgress6, {
+      value: 1,
+      duration: d,
+      delay: s,
+      ease
+    })
+    gsap.to(this.material.uniforms.uProgress7, {
+      value: 1,
+      duration: d,
+      delay: s * 2,
       ease
     })
   }
@@ -295,11 +312,28 @@ export default class Title {
   enterFromBottom() {
     if (!this.material) return
     const d = 2.0
+    const s = 0.1
     const ease = 'expo.out'
     this.material.uniforms.uDirection.value = 1
+
+    gsap.killTweensOf(this.material.uniforms.uProgress5, 'value')
+    gsap.killTweensOf(this.material.uniforms.uProgress6, 'value')
+    gsap.killTweensOf(this.material.uniforms.uProgress7, 'value')
     gsap.to(this.material.uniforms.uProgress5, {
       value: 1,
       duration: d,
+      ease
+    })
+    gsap.to(this.material.uniforms.uProgress6, {
+      value: 1,
+      duration: d,
+      delay: s,
+      ease
+    })
+    gsap.to(this.material.uniforms.uProgress7, {
+      value: 1,
+      duration: d,
+      delay: s * 2,
       ease
     })
   }
@@ -307,11 +341,27 @@ export default class Title {
   leaveToTop() {
     if (!this.material) return
     const d = 2.0
+    const s = 0.1
     const ease = 'expo.out'
     this.material.uniforms.uDirection.value = 0
+    gsap.killTweensOf(this.material.uniforms.uProgress5, 'value')
+    gsap.killTweensOf(this.material.uniforms.uProgress6, 'value')
+    gsap.killTweensOf(this.material.uniforms.uProgress7, 'value')
     gsap.to(this.material.uniforms.uProgress5, {
       value: 0,
       duration: d,
+      ease
+    })
+    gsap.to(this.material.uniforms.uProgress6, {
+      value: 0,
+      duration: d,
+      delay: s,
+      ease
+    })
+    gsap.to(this.material.uniforms.uProgress7, {
+      value: 0,
+      duration: d,
+      delay: s * 2,
       ease
     })
   }
@@ -319,11 +369,27 @@ export default class Title {
   leaveToBottom() {
     if (!this.material) return
     const d = 2.0
+    const s = 0.1
     const ease = 'expo.out'
     this.material.uniforms.uDirection.value = 1
+    gsap.killTweensOf(this.material.uniforms.uProgress5, 'value')
+    gsap.killTweensOf(this.material.uniforms.uProgress6, 'value')
+    gsap.killTweensOf(this.material.uniforms.uProgress7, 'value')
     gsap.to(this.material.uniforms.uProgress5, {
       value: 0,
       duration: d,
+      ease
+    })
+    gsap.to(this.material.uniforms.uProgress6, {
+      value: 0,
+      duration: d,
+      delay: s,
+      ease
+    })
+    gsap.to(this.material.uniforms.uProgress7, {
+      value: 0,
+      duration: d,
+      delay: s * 2,
       ease
     })
   }
@@ -335,11 +401,15 @@ export default class Title {
     gsap.killTweensOf(this.material.uniforms.uProgress3, 'value')
     gsap.killTweensOf(this.material.uniforms.uProgress4, 'value')
     gsap.killTweensOf(this.material.uniforms.uProgress5, 'value')
+    gsap.killTweensOf(this.material.uniforms.uProgress6, 'value')
+    gsap.killTweensOf(this.material.uniforms.uProgress7, 'value')
     this.material.uniforms.uProgress1.value = 0.0
     this.material.uniforms.uProgress2.value = 0.0
     this.material.uniforms.uProgress3.value = 0.0
     this.material.uniforms.uProgress4.value = 0.0
     this.material.uniforms.uProgress5.value = 0.0
+    this.material.uniforms.uProgress6.value = 0.0
+    this.material.uniforms.uProgress7.value = 0.0
   }
 
   positionItem() {
@@ -453,6 +523,8 @@ export default class Title {
           uProgress3: { value: 0 },
           uProgress4: { value: 0 },
           uProgress5: { value: 0 },
+          uProgress6: { value: 0 },
+          uProgress7: { value: 0 },
           uDirection: { value: 1 }
         },
         vertexShader,

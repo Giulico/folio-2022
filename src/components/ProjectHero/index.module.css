@@ -25,7 +25,8 @@
     max-width: 62%;
   }
 
-  .open & {
+  .open &,
+  .transitionOut & {
     visibility: visible;
   }
 

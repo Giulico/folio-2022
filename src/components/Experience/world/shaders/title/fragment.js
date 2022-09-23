@@ -14,6 +14,8 @@ const fragment = /* glsl */ `
   uniform float uProgress3;
   uniform float uProgress4;
   uniform float uProgress5;
+  uniform float uProgress6;
+  uniform float uProgress7;
   uniform float uDirection;
 
   float rand(float n){return fract(sin(n) * 43758.5453123);}
@@ -60,39 +62,45 @@ const fragment = /* glsl */ `
 
     vec3 pink = vec3(0.834, 0.066, 0.780);
     vec3 blue = vec3(0.282,0.616,0.933);
-    vec3 darkBlue = vec3(0.024,0.243,0.655);
+    vec3 darkBlue = vec3(0.,0.039,0.827);
     vec3 darkGray = vec3(0.118,0.118,0.118);
     vec3 white = vec3(1.0, 1.0, 1.0);
 
     // Effects
-    vec4 l1 = vec4(white, border * 1.0);
-    vec4 l2 = vec4(darkBlue, outset * 1.0);
-    vec4 l3 = vec4(darkBlue, border * 1.0);
+    vec4 l1 = vec4(white, border);
+    vec4 l2 = vec4(white, outset);
+    vec4 l3 = vec4(darkBlue, outset);
     vec4 l4 = vec4(white, border * 0.6);
-    vec4 l5 = vec4(darkBlue, outset);
-    // vec4 l3 = vec4(pink, outset);
-    // vec4 l4 = vec4(vec3(1.0), outset);
+    vec4 l5 = vec4(darkBlue, border);
+    vec4 l6 = vec4(darkBlue, outset);
+    vec4 l7 = vec4(white, outset);
 
     // Noise pattern
     float x = floor(vLayoutUv.x * 10. * 1.8);
     float y = floor(vLayoutUv.y * 10.);
     float pattern = noise(vec2(x, y));
 
-    // Progress
+    // Reveal
     float mix1 = progress(vLayoutUv.x, uProgress1, pattern, 0.7);
     float mix2 = progress(vLayoutUv.x, uProgress2, pattern, 0.7);
     float mix3 = progress(vLayoutUv.x, uProgress3, pattern, 0.7);
     float mix4 = progress(vLayoutUv.x, uProgress4, pattern, 0.7);
+
     // Menu
-    float mix5 = progress(uDirection == 0.0 ? vLayoutUv.y : uDirection - vLayoutUv.y, uProgress5, pattern, 0.7);
+    float d = uDirection == 0.0 ? vLayoutUv.y : uDirection - vLayoutUv.y;
+    float mix5 = progress(d, uProgress5, pattern, 0.7);
+    float mix6 = progress(d, uProgress6, pattern, 0.7);
+    float mix7 = progress(d, uProgress7, pattern, 0.7);
 
     vec4 layer1 = mix(vec4(0.0), l1, 1.0 - mix1);
     vec4 layer2 = mix(layer1, l2, 1.0 - mix2);
     vec4 layer3 = mix(layer2, l3, 1.0 - mix3);
     vec4 layer4 = mix(layer3, l4, 1.0 - mix4);
     vec4 layer5 = mix(layer4, l5, 1.0 - mix5);
+    vec4 layer6 = mix(layer5, l6, 1.0 - mix6);
+    vec4 layer7 = mix(layer6, l7, 1.0 - mix7);
 
-    gl_FragColor = layer5;
+    gl_FragColor = layer7;
   }
 `
 

@@ -24,14 +24,8 @@
   }
 
   &.grid {
-    --tot-margin: calc(var(--text-margin-left) + var(--right-margin));
-
     @media (--md-l) {
       display: grid;
-
-      /* max-width: calc(100% - 650px); */
-
-      /* margin: 0 200px 0 450px; */
       grid-template-columns: 1fr 1fr 1fr;
     }
 

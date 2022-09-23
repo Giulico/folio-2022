@@ -40,7 +40,7 @@ function Media({ media }: Props) {
           const isVideo = src.endsWith('.mp4')
           return (
             <div key={index} className={style.item}>
-              {isVideo ? <Video src={src} alt={alt} /> : <img src={src} alt={alt} />}
+              {isVideo ? <Video key={src} src={src} alt={alt} /> : <img src={src} alt={alt} />}
             </div>
           )
         })}

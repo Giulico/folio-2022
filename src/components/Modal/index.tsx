@@ -7,17 +7,19 @@ import style from './index.module.css'
 
 // Utils
 import cn from 'classnames'
+import { gsap } from 'gsap'
 import { createContext } from 'react'
 import { rootNavigate } from 'components/CustomRouter'
 
 // Hooks
 import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 
 type ChildrenProps = {
   displayLocation: Location
-  transitionStage: 'open' | 'close'
+  transitionStage: 'open' | 'close' | 'transitionOut'
 }
 
 type Props = {
@@ -36,13 +38,18 @@ export const ModalContext = createContext<ChildrenProps>({
 })
 
 const Modal = ({ children }: Props) => {
+  const { t } = useTranslation('translation')
+
   const location = useLocation()
+
   const dispatch = useDispatch()
+
+  const containerEl = useRef<HTMLDivElement>(null)
+
   const [displayLocation, setDisplayLocation] = useState<Location>(location)
-  const [transitionStage, setTransitionStage] = useState<'open' | 'close'>(
+  const [transitionStage, setTransitionStage] = useState<'open' | 'close' | 'transitionOut'>(
     location.pathname === '/' ? 'close' : 'open'
   )
-  console.log('Modal transitionStage', transitionStage)
 
   const updateDisplayLocation = useCallback(() => {
     setDisplayLocation(location)
@@ -59,8 +66,24 @@ const Modal = ({ children }: Props) => {
     window.experience.world.portfolio?.closeProjectAnimation()
   }, [])
 
+  const transitionModal = useCallback(() => {
+    // Closing window.currentLocation lauch
+    window.experience.world.portfolio?.closeProjectAnimation()
+    // Open window.comingLocation launch
+    window.experience.world.portfolio?.openProjectAnimation()
+
+    setTransitionStage('transitionOut')
+    gsap.delayedCall(1.3, () => {
+      if (containerEl.current) {
+        containerEl.current.scroll(0, 0)
+      }
+      updateDisplayLocation()
+      setTransitionStage('open')
+    })
+  }, [updateDisplayLocation])
+
   useEffect(() => {
-    // This is used in Portfolio.ts
+    // These are used in Portfolio.ts
     window.currentLocation = displayLocation
     window.comingLocation = location
 
@@ -68,15 +91,15 @@ const Modal = ({ children }: Props) => {
     if (location !== displayLocation) {
       if (location.pathname === '/') {
         closeModal()
+      } else if (location.pathname !== '/' && displayLocation.pathname !== '/') {
+        transitionModal()
       } else {
         openModal()
+        // Se è un progetto setta subito
+        setDisplayLocation(location)
       }
     }
-
-    if (location.pathname !== '/') {
-      setDisplayLocation(location)
-    }
-  }, [location, displayLocation, closeModal, openModal])
+  }, [location, displayLocation, closeModal, openModal, transitionModal])
 
   const overHandler = useCallback(() => {
     dispatch.pointer.setType('hover')
@@ -92,7 +115,7 @@ const Modal = ({ children }: Props) => {
   return (
     <>
       <div className={classes} onAnimationEnd={updateDisplayLocation}>
-        <div data-scroll-lock-scrollable className={style.contentContainer}>
+        <div data-scroll-lock-scrollable className={style.contentContainer} ref={containerEl}>
           <div>
             <ModalContext.Provider value={{ displayLocation, transitionStage }}>
               {children}
@@ -109,7 +132,7 @@ const Modal = ({ children }: Props) => {
         <figure>
           <img src="/icons/arrow-left.svg" />
         </figure>
-        <span>Back</span>
+        <span>{t('close')}</span>
       </button>
     </>
   )

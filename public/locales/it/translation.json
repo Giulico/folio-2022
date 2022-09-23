@@ -4,6 +4,10 @@
   "role": "Ruolo",
   "agency": "Agenzia",
   "completed": "Completato",
+  "riconoscimenti": "Riconoscimenti",
+  "close": "Chiudi",
+  "close project": "Chiudi il progetto",
+  "go to project": "Visita il case",
   "intro": {
     "p1": {
       "l1": "Si tratta di tecnologia",

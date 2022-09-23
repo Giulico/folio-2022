@@ -1,0 +1,75 @@
+{
+  "title": "Feudi di San Gregorio",
+  "image": "/projects/feudi/hero.png",
+  "live": "https://www.feudi.it/",
+  "role": "Frontend Developer",
+  "agency": "AQuest",
+  "completed": "04.2017",
+  "awards": [],
+  "modules": [
+    {
+      "component": "TextIntro",
+      "text": "Feudi di San Gregorio è la cantina che da oltre trent'anni valorizza i vitigni autoctoni della tradizione campana. Come Frontend Developer mi sono occupato della realizzazione del loro sito istituzionale, con React, Redux e REST API."
+    },
+    {
+      "component": "Media",
+      "media": [
+        {
+          "src": "/projects/feudi/feudi-1.jpeg",
+          "alt": "Feudi di San Gregorio - Capitolo 1"
+        }
+      ]
+    },
+    {
+      "component": "TextTwoColumns",
+      "title": "La sfida",
+      "text": "Ricordo questo progetto perché è stato una sfida contro il tempo. Si è cercato di valorizzare al massimo i tratti creativi del brand, ed ogni sezione del sito aveva un layout completamente diverso e quasi tutti abbastanza complessi. La sezione “I nostri vini” ad esempio è navigabile con il movimento del mouse. È stata sicuramente una sfida riuscire a realizzare il progetto nei tempi ed è uno dei miei progetti preferiti.",
+      "numbers": [
+        {
+          "value": 8,
+          "label": "Settimane di sviluppo"
+        },
+        {
+          "value": 5,
+          "label": "Persone nel team"
+        },
+        {
+          "value": 6,
+          "label": "Lingue"
+        }
+      ]
+    },
+    {
+      "component": "Media",
+      "media": [
+        {
+          "src": "/projects/feudi/reel-1.mp4",
+          "alt": "Feudi Navigation"
+        },
+        {
+          "src": "/projects/feudi/reel-2.mp4",
+          "alt": "Feudi Scroll"
+        }
+      ]
+    },
+    {
+      "component": "TextTwoColumns",
+      "title": "Stack",
+      "text": "",
+      "technologies": ["React", "Redux", "PostCSS", "Webpack"]
+    },
+    {
+      "component": "Media",
+      "media": [
+        {
+          "src": "/projects/feudi/feudi-2.jpeg",
+          "alt": "Feudi"
+        }
+      ]
+    },
+    {
+      "component": "Awards",
+      "awards": ["Awwwards", "CSS Design Award", "DDD", "Digital Design Awards"]
+    }
+  ]
+}

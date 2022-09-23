@@ -35,6 +35,7 @@ const ProjectHero = () => {
   }, [dispatch.pointer])
 
   const awards = pt('awards') as string[]
+  const liveURL = pt('live')
 
   const classes = cn(style.root, ts && style[ts])
 
@@ -76,18 +77,20 @@ const ProjectHero = () => {
               </div>
             </div>
             <div className={style.live}>
-              <a
-                href={pt('live')}
-                target="_blank"
-                onMouseEnter={overHandler}
-                onMouseLeave={outHandler}
-              >
-                {/* Visit live <img src="/icons/arrow-right.svg" /> */}
-                Visit live{' '}
-                <span className={style.externalArrow}>
-                  <ExternalArrow />
-                </span>
-              </a>
+              {liveURL && (
+                <a
+                  href={liveURL}
+                  target="_blank"
+                  onMouseEnter={overHandler}
+                  onMouseLeave={outHandler}
+                >
+                  {/* Visit live <img src="/icons/arrow-right.svg" /> */}
+                  Visit live{' '}
+                  <span className={style.externalArrow}>
+                    <ExternalArrow />
+                  </span>
+                </a>
+              )}
             </div>
           </div>
         </div>

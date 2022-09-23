@@ -78,7 +78,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["quad-indices", "npm:2.0.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:18.2.0"],\
-            ["react-hook-inview", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:4.5.0"],\
             ["react-i18next", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:11.18.6"],\
             ["react-intersection-observer", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:9.4.0"],\
             ["react-redux", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:8.0.2"],\
@@ -5213,7 +5212,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["quad-indices", "npm:2.0.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:18.2.0"],\
-            ["react-hook-inview", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:4.5.0"],\
             ["react-i18next", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:11.18.6"],\
             ["react-intersection-observer", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:9.4.0"],\
             ["react-redux", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:8.0.2"],\
@@ -9410,32 +9408,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "packagePeers": [\
             "@types/react",\
-            "react"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["react-hook-inview", [\
-        ["npm:4.5.0", {\
-          "packageLocation": "./.yarn/cache/react-hook-inview-npm-4.5.0-e902bcc239-7c258de16e.zip/node_modules/react-hook-inview/",\
-          "packageDependencies": [\
-            ["react-hook-inview", "npm:4.5.0"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:4.5.0", {\
-          "packageLocation": "./.yarn/__virtual__/react-hook-inview-virtual-361c7436ec/0/cache/react-hook-inview-npm-4.5.0-e902bcc239-7c258de16e.zip/node_modules/react-hook-inview/",\
-          "packageDependencies": [\
-            ["react-hook-inview", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:4.5.0"],\
-            ["@types/react", "npm:18.0.20"],\
-            ["@types/react-dom", "npm:18.0.6"],\
-            ["react", "npm:18.2.0"],\
-            ["react-dom", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:18.2.0"]\
-          ],\
-          "packagePeers": [\
-            "@types/react-dom",\
-            "@types/react",\
-            "react-dom",\
             "react"\
           ],\
           "linkType": "HARD"\

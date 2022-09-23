@@ -159,7 +159,6 @@ export default class Portfolio {
     const prevSection = prevState.section.current
 
     // Section
-    console.log(currentSection, prevSection)
     if (currentSection !== prevSection && currentSection === 'portfolio') {
       this.enterAnimation()
     }
@@ -236,7 +235,6 @@ export default class Portfolio {
     }
 
     this.setScale()
-    this.setBoundaries()
 
     this.camera.add(this.group)
 
@@ -346,6 +344,7 @@ export default class Portfolio {
 
   enterAnimation() {
     this.isVisible = true
+    this.setBoundaries()
     window.addEventListener('scroll', this.scrollHandler)
   }
 

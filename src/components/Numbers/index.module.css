@@ -1,0 +1,37 @@
+.root {
+  margin-bottom: var(--module-margin-bottom);
+}
+
+.wrapper {
+  overflow: hidden;
+}
+
+.number {
+  @mixin display-2;
+
+  display: inline-block;
+}
+
+.label {
+  margin: 0;
+}
+
+
+.item {
+  .number,
+  .label {
+    transform: translate3d(0, 100%, 0);
+  }
+
+  @for $i from 1 to 3 {
+    &:nth-child($i) {
+      .visible & {
+        .number,
+        .label {
+          transform: translate3d(0, 0, 0);
+          transition: transform 1.3s var(--expo-ease-in-out) calc($i * 0.1s);
+        }
+      }
+    }
+  }
+}

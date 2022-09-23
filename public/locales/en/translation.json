@@ -4,6 +4,10 @@
   "role": "Role",
   "agency": "Agency",
   "completed": "Completed",
+  "riconoscimenti": "Awards",
+  "close": "Close",
+  "close project": "Close this project",
+  "go to project": "Go to",
   "intro": {
     "p1": {
       "l1": "It's all about technology",

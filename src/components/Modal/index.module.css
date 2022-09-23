@@ -6,6 +6,7 @@
   width: 100%;
   height: 100%;
   backdrop-filter: blur(0);
+  cursor: none;
   pointer-events: none;
 
   &::after,
@@ -26,7 +27,8 @@
     top: 100%;
   }
 
-  &.open {
+  &.open,
+  &.transitionOut {
     overflow: auto;
 
     &::after,
@@ -44,7 +46,8 @@
   }
 }
 
-.open {
+.open,
+.transitionOut {
   animation: 1s open forwards;
   pointer-events: auto;
 }
@@ -68,7 +71,8 @@
   transform: translateY(-50%);
   visibility: hidden;
 
-  &.open {
+  &.open,
+  &.transitionOut {
     transition: visibility 0s 1s;
     visibility: visible;
   }
@@ -109,7 +113,8 @@
   transition: visibility 0s 0.3s;
   visibility: hidden;
 
-  .open & {
+  .open &,
+  .transitionOut & {
     transition: visibility 0s 1s;
     visibility: visible;
   }

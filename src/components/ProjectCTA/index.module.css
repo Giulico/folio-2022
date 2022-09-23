@@ -1,0 +1,50 @@
+.root {
+  margin: 30vh 0;
+  opacity:0;
+  transform: translate3d(0, 50px, 0);
+  transition: all 0.3s ease;
+
+  &.open {
+    opacity: 1;
+    transform: translate(0, 0, 0);
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+
+  > * {
+    flex: 1;
+  }
+}
+
+.cta {
+  @mixin body-1;
+
+  padding: var(--spc-4) 0;
+  border: 0;
+  margin: 0;
+  background-color: transparent;
+  cursor: none;
+  place-items: center;
+  text-align: center;
+}
+
+.nextInner {
+  position: relative;
+  display: inline-block;
+}
+
+.loader {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  opacity: 0.5;
+  transform: translate(-50%, -50%);
+
+  circle {
+    transition: stroke-dashoffset 3s linear;
+  }
+}

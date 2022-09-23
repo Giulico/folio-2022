@@ -1,0 +1,40 @@
+.root {
+  margin-bottom: var(--module-margin-bottom);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+
+  &.open {
+    opacity: 1;
+  }
+}
+
+.container {
+  display: flex;
+  flex-flow: column wrap;
+  place-content: flex-start;
+
+  @media (--md-p) {
+    flex-direction: row;
+  }
+}
+
+.title {
+  @mixin highlight;
+
+  margin: 0;
+  font-weight: var(--fw-light);
+}
+
+.figure {
+  padding: 0;
+  margin: var(--spc-4) 0;
+
+  @media (--md-l) {
+    width: calc(50% - var(--spc-8));
+    margin: 0 var(--spc-4) var(--spc-15);
+  }
+
+  img {
+    height: 40px;
+  }
+}

@@ -23,7 +23,8 @@
     {
       "component": "TextTwoColumns",
       "title": "La sfida",
-      "text": "Data la particolarità delle circostanze, abbiamo dedicato tempo allo sviluppo del sito istituzionale tra un progetto e l’altro. Abbiamo affrontato questa sfida scomponendo le UI in componenti, seguendo le logiche di Atomic Design. Abbiamo creato un backlog contenente card di diversa natura che ciascuno potesse assegnarsi non appena ci fossero le condizioni. Inoltre, abbiamo concordato fin dall’inizio convenzioni per la scrittura del codice e della documentazione."
+      "text": "Data la particolarità delle circostanze, abbiamo dedicato tempo allo sviluppo del sito istituzionale tra un progetto e l’altro. Abbiamo affrontato questa sfida scomponendo le UI in componenti, seguendo le logiche di Atomic Design. Abbiamo creato un backlog contenente card di diversa natura che ciascuno potesse assegnarsi non appena ci fossero le condizioni. Inoltre, abbiamo concordato fin dall’inizio convenzioni per la scrittura del codice e della documentazione.",
+      "technologies": ["React", "Redux", "Next", "Lambda", "postcss"]
     },
 
     {
@@ -42,7 +43,20 @@
     {
       "component": "TextTwoColumns",
       "title": "Integration test",
-      "text": "Nonostante la natura informativa di questo progetto, ritengo importante dedicare del tempo alla scrittura di test automatici. Il mancato funzionamento di un form di contatto esegue un messaggio di alert su un canale Slack apposito dandoci la possibilità di intervenire istantaneamente.<br /><br /> Inoltre tutti i form (inclusa la navigazione dalla home alla pagina di contatto) vengono testati quotidianamente tramite dei CRON che eseguono delle pipeline di Gitlab che a loro volta eseguono dei test di Cypress.<br /><br /> Infine, per garantire che tutti i template vengano renderizzati correttamente e che il server restituisca HTML ricco di contenuti, sono stati scritti dei test di Cypress che vengono eseguiti a build time."
+      "text": "Ho dedicato parte del tempo alla scrittura di test automatici che prevenissero disservizi. Il mancato funzionamento di un form di contatto esegue un messaggio di alert su un canale Slack apposito dandoci la possibilità di intervenire istantaneamente.<br /><br /> Inoltre tutti i form (inclusa la navigazione dalla home alla pagina di contatto) vengono testati quotidianamente tramite dei CRON che eseguono delle pipeline di Gitlab che a loro volta eseguono dei test di Cypress.<br /><br /> Infine, per garantire che tutti i template vengano renderizzati correttamente e che il server restituisca HTML ricco di contenuti, sono stati scritti dei test di Cypress che vengono eseguiti a build time."
+    },
+    {
+      "component": "Media",
+      "media": [
+        {
+          "src": "/projects/sk/sketchin-form-1.jpeg",
+          "alt": "Sketchin project filters"
+        },
+        {
+          "src": "/projects/sk/sketchin-form-2.jpeg",
+          "alt": "Sketchin menu navigation"
+        }
+      ]
     },
     {
       "component": "Media",
@@ -57,6 +71,52 @@
       "component": "TextTwoColumns",
       "title": "Automazioni",
       "text": "Tramite Lambda function è stato possibile utilizzare le API di Favro (lo strumento di gestione di progetti che utilizziamo in azienda) per creare e dettagliare automaticamente le card affinché vengano utilizzate dalle rispettive unit senza spendere ulteriore effort."
+    },
+    {
+      "component": "Media",
+      "media": [
+        {
+          "src": "/projects/sk/sk-animation-2.mp4",
+          "alt": "Intro animation"
+        }
+      ]
+    },
+    {
+      "component": "TextTwoColumns",
+      "title": "Un frontend modulare",
+      "text": "Il sito usa la Slice Machine di Prismic. I template sono costruiti tramite slice, ossia modelli di dati associati a dei componenti di React. L'editor può comporre le pagine con il numero di slice di cui necessita e nel ordine che preferisce. Il frontend legge i modelli e restituisce i componenti React corretti. Questo permette di avere infinite pagine diverse l'una dall'altra, lasciando massima libertà di comunicazione agli editor.",
+      "numbers": [
+        {
+          "value": "50+",
+          "label": "Sliced disponibili"
+        },
+        {
+          "value": "6",
+          "label": "Mesi di sviluppo"
+        },
+        {
+          "value": "10+",
+          "label": "Persone coinvolte"
+        }
+      ]
+    },
+    {
+      "component": "Media",
+      "media": [
+        {
+          "src": "/projects/sk/sk-cards.jpg",
+          "alt": "Sketchin projects page"
+        }
+      ]
+    },
+    {
+      "component": "Media",
+      "media": [
+        {
+          "src": "/projects/sk/sk-hero-2.jpg",
+          "alt": "Sketchin projects page"
+        }
+      ]
     }
   ]
 }

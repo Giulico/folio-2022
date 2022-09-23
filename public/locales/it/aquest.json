@@ -5,7 +5,7 @@
   "role": "Frontend Developer",
   "agency": "AQuest",
   "completed": "06.2018",
-  "awards": ["Awwwards", "CSS Design Award", "FWA"],
+  "awards": ["Awwwards", "CSS Design Award", "FWA", "Digital Design Awards"],
   "modules": [
     {
       "component": "TextIntro",
@@ -23,9 +23,22 @@
     {
       "component": "TextTwoColumns",
       "title": "La sfida",
-      "text": "Nel 2017, quando abbiamo deciso di rifare il sito, non c’erano forti competenze di WebGL in AQuest. Abbiamo deciso di sfruttare quell’occasione per fare R&D e contemporaneamente creare qualcosa di forte impatto visivo, che fosse paragonabile ad esperienze WebGL di competitor specializzati da anni in questa tecnologia."
+      "text": "Nel 2017, quando abbiamo deciso di rifare il sito, non c’erano forti competenze di WebGL in AQuest. Abbiamo deciso di sfruttare quell’occasione per fare R&D e contemporaneamente creare qualcosa di forte impatto visivo, che fosse paragonabile ad esperienze WebGL di competitor specializzati da anni in questa tecnologia.",
+      "numbers": [
+        {
+          "value": 4,
+          "label": "Riconoscimenti"
+        },
+        {
+          "value": 12,
+          "label": "Mesi di lavoro"
+        },
+        {
+          "value": "7+",
+          "label": "Persone coinvolte"
+        }
+      ]
     },
-
     {
       "component": "Media",
       "media": [
@@ -48,15 +61,38 @@
       "component": "Media",
       "media": [
         {
-          "src": "/projects/aq/aquest-site.jpeg",
-          "alt": "AQuest site"
+          "src": "/projects/aq/ropes.mp4",
+          "alt": "AQuest v1"
+        }
+      ]
+    },
+    {
+      "component": "Media",
+      "media": [
+        {
+          "src": "/projects/aq/pong404.mp4",
+          "alt": "AQuest v2"
         }
       ]
     },
     {
       "component": "TextTwoColumns",
       "title": "Non solo creatività",
-      "text": "Questo progetto non ha significato solo creatività dal punto di vista visual, ma è stata anche l’occasione per sperimentare nuovi strumenti per il development. L’intera codebase è infatti scritta in Flow, che in quegli anni si proponeva di rendere typed javascript e in particolare React (essendo Flow stesso sviluppato da Facebook)."
+      "text": "Questo progetto non ha significato solo creatività dal punto di vista visual, ma è stata anche l’occasione per sperimentare nuovi strumenti per il development. L’intera codebase è infatti scritta in Flow, che in quegli anni si proponeva di rendere typed javascript e in particolare React (essendo Flow stesso sviluppato da Facebook).",
+      "technologies": ["React", "Rx", "Flow", "Pixi", "GLSL", "Webpack"]
+    },
+    {
+      "component": "Media",
+      "media": [
+        {
+          "src": "/projects/aq/aquest-site.jpeg",
+          "alt": "AQuest site"
+        }
+      ]
+    },
+    {
+      "component": "Awards",
+      "awards": ["FWA", "Awwwards", "CSS Design Award", "DDD"]
     }
   ]
 }

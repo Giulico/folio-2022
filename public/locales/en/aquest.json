@@ -12,6 +12,10 @@
       "text": "AQuest è una Creative Production & Technology Company, in grado di realizzare esperienze web e multimediale ad alto impatto emotivo. Ho lavorato in AQuest dal 2015 al 2018 come Front End Developer. Questo progetto riguarda il completo re-design del sito istituzionale."
     },
     {
+      "component": "Awards",
+      "awards": ["Awwwards", "CSS Design Award", "DDD"]
+    },
+    {
       "component": "Media",
       "media": [
         {

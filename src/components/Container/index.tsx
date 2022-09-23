@@ -19,6 +19,7 @@ type Props = {
 type RowProps = {
   start?: number
   end?: number
+  className?: string
   children: ReactElement | ReactElement[]
 }
 
@@ -42,10 +43,10 @@ const Container = ({
 
 export default Container
 
-export function Row({ start = 1, end = 1, children }: RowProps) {
+export function Row({ start = 1, end = 1, className, children }: RowProps) {
   return (
     <div
-      className={cn(style.cell, {
+      className={cn(style.cell, className, {
         [style[`cell-start-${start}`]]: start,
         [style[`cell-end-${end}`]]: end
       })}

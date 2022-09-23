@@ -92,15 +92,13 @@ export default class CameraOnPath {
         y: this.vertices[index].y,
         z: this.vertices[index].z,
         duration: 3.5,
-        delay: 0.3,
-        ease: 'power4.out'
+        ease: 'power2.inOut'
       })
 
       gsap.to(this.lookAt.current, {
         y: this.lookAt.body.y,
         duration: 3.5,
-        delay: 0.3,
-        ease: 'power4.out'
+        ease: 'power2.inOut'
       })
     }
 

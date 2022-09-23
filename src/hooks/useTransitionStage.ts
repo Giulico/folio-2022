@@ -5,7 +5,7 @@ import { ModalContext } from 'components/Modal'
 import { useContext, useState, useEffect } from 'react'
 
 function useTransitionStage() {
-  const [ts, setTs] = useState<'open' | 'close'>()
+  const [ts, setTs] = useState<'open' | 'close' | 'transitionOut'>()
   const { transitionStage } = useContext(ModalContext)
 
   useEffect(() => {

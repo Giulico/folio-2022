@@ -9,7 +9,7 @@
   "modules": [
     {
       "component": "TextIntro",
-      "text": "Sketchin è lo studio di advanced-design per il quale lavoro. Il progetto comprende il completo re-design del sito istituzionale. Il mio ruolo in azienda era UX Engineer, ma per questo progetto ho vestito il ruolo di Full Stack Developer. Ne è uscito un JAMStack basato su React e Redux (con Nexi Js), Node JS e Prismic CMS."
+      "text": "Sketchin è uno studio di advanced design specializzato in ricerca e trasformazione digitale. Il progetto consiste nel completo re-design del sito istituzionale. Mi sono occupato dello svilupp full stack del sito, delle automatizzazioni e degli integration test."
     },
     {
       "component": "Media",
@@ -23,8 +23,8 @@
     {
       "component": "TextTwoColumns",
       "title": "La sfida",
-      "text": "Data la particolarità delle circostanze, abbiamo dedicato tempo allo sviluppo del sito istituzionale tra un progetto e l’altro. Abbiamo affrontato questa sfida scomponendo le UI in componenti, seguendo le logiche di Atomic Design. Abbiamo creato un backlog contenente card di diversa natura che ciascuno potesse assegnarsi non appena ci fossero le condizioni. Inoltre, abbiamo concordato fin dall’inizio convenzioni per la scrittura del codice e della documentazione.",
-      "technologies": ["React", "Redux", "Next", "Lambda", "postcss"]
+      "text": "Data la particolarità delle circostanze, io e altri due UX Engineers, abbiamo dedicato tempo allo sviluppo del sito istituzionale tra un progetto e l’altro. Abbiamo affrontato questa sfida astraendo le UI, seguendo le logiche di Atomic Design. Abbiamo creato un backlog contenente card di diversa natura che ciascuno potesse assegnarsi appena ci fossero le condizioni.<br /><br /> Abbiamo concordato fin dall’inizio convenzioni per la scrittura del codice e della documentazione.",
+      "technologies": ["React", "Redux", "Next", "postcss", "Lambda"]
     },
 
     {
@@ -43,7 +43,7 @@
     {
       "component": "TextTwoColumns",
       "title": "Integration test",
-      "text": "Ho dedicato parte del tempo alla scrittura di test automatici che prevenissero disservizi. Il mancato funzionamento di un form di contatto esegue un messaggio di alert su un canale Slack apposito dandoci la possibilità di intervenire istantaneamente.<br /><br /> Inoltre tutti i form (inclusa la navigazione dalla home alla pagina di contatto) vengono testati quotidianamente tramite dei CRON che eseguono delle pipeline di Gitlab che a loro volta eseguono dei test di Cypress.<br /><br /> Infine, per garantire che tutti i template vengano renderizzati correttamente e che il server restituisca HTML ricco di contenuti, sono stati scritti dei test di Cypress che vengono eseguiti a build time."
+      "text": "Parte del tempo è stato dedicato alla scrittura di test automatici che prevenissero i più comuni disservizi. Il mancato funzionamento di un form di contatto invia automaticamente un alert in un canale Slack, dandoci la possibilità di intervenire tempestivamente.<br /><br /> Tutti i form (inclusa la navigazione dalla home alla pagina di contatto) vengono testati quotidianamente tramite dei CRON che eseguono delle pipeline di Gitlab.<br /><br />Per garantire che tutte le pagine vengano generate correttamente restituendo HTML ricco di contenuti, sono stati scritti dei test di Cypress che vengono eseguiti direttamente nel branch di deploy prima che venga pubblicato."
     },
     {
       "component": "Media",
@@ -70,7 +70,7 @@
     {
       "component": "TextTwoColumns",
       "title": "Automazioni",
-      "text": "Tramite Lambda function è stato possibile utilizzare le API di Favro (lo strumento di gestione di progetti che utilizziamo in azienda) per creare e dettagliare automaticamente le card affinché vengano utilizzate dalle rispettive unit senza spendere ulteriore effort."
+      "text": "Tramite Lambda function è stato possibile utilizzare le API di Favro (lo strumento di gestione di progetti utilizzato in Sketchin) per creare e dettagliare automaticamente le card affinché possano essere utilizzate dalle rispettive unit senza spendere effort in data entry."
     },
     {
       "component": "Media",
@@ -84,7 +84,7 @@
     {
       "component": "TextTwoColumns",
       "title": "Un frontend modulare",
-      "text": "Il sito usa la Slice Machine di Prismic. I template sono costruiti tramite slice, ossia modelli di dati associati a dei componenti di React. L'editor può comporre le pagine con il numero di slice di cui necessita e nel ordine che preferisce. Il frontend legge i modelli e restituisce i componenti React corretti. Questo permette di avere infinite pagine diverse l'una dall'altra, lasciando massima libertà di comunicazione agli editor.",
+      "text": "Per rispondere all'esigenza di poter creare contenuti editoriali sempre diversi, abbiamo usato la Slice Machine di Prismic CMS. Questa funzionalità consente di associare infiniti modelli di dati a rispettivi componenti di React.<br />L'editor può comporre le pagine con il numero di slice (modelli) di cui necessità e nel ordine che preferisce. Il frontend legge i modelli e restituisce i componenti React corretti.",
       "numbers": [
         {
           "value": "50+",
@@ -96,7 +96,7 @@
         },
         {
           "value": "10+",
-          "label": "Persone coinvolte"
+          "label": "Persone di Sketchin coinvolte"
         }
       ]
     },

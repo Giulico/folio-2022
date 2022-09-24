@@ -9,7 +9,7 @@
   "modules": [
     {
       "component": "TextIntro",
-      "text": "Per la nota Telco abbiamo progettato un nuovo modello di servizio full-digital per la connettività domestica a banda larga. Come UX Engineer ho supportato le fasi di interection e visual design, garantendo coerenza nelle soluzioni proposte e parallelamente astraendo gli elementi di interfaccia in una Design Library che potesse diventare un giorno il Design System aziendale."
+      "text": "Per la nota Telco abbiamo progettato un nuovo modello di servizio full-digital per la connettività domestica a banda larga. Come UX Engineer ho supportato le fasi di Interection e Visual design, garantendo coerenza nelle soluzioni proposte e parallelamente astraendo gli elementi di interfaccia in una Design Library che potesse diventare un giorno il Design System aziendale."
     },
     {
       "component": "Media",
@@ -23,7 +23,7 @@
     {
       "component": "TextTwoColumns",
       "title": "La sfida",
-      "text": "Definita la value proposition, il progetto è stato suddiviso in diverse epiche o macro aree da progettare. Le attività di design si sono rivelate molto complesse e su più epiche contemporaneamente. Meeting e review candenzati sono stati la chiave per tenere le fila.",
+      "text": "Definita la value proposition, il progetto è stato suddiviso in diverse epiche da progettare.<br />Le attività di design si sono rivelate molto complesse e su più epiche contemporaneamente.<br />Review candenzate e co-design hanno rappresentato la chiave per tenere le fila.",
       "numbers": [
         {
           "value": 32,
@@ -56,7 +56,7 @@
     {
       "component": "TextTwoColumns",
       "title": "Modularità e componibilità delle interfacce",
-      "text": "La design library ha lo scopo di creare coerenza nella comunicazione visiva tra i vari progetti e tra i vari touchpoint. Nasce dall’astrazione di un’interfaccia in componenti riutilizzabili e consiste nel catalogo ordinato e documentato di questi elementi di UI."
+      "text": "La Design Library ha lo scopo di creare coerenza nella comunicazione visiva tra i vari progetti e touchpoint. Consiste in un catalogo strutturato di elementi di interfaccia componibili tra loro.<br /><br />Data un'interfaccia esistente è possibile analizzarla e astrarla nei primi elementi. Questi possono essere utilizzati per realizzare altri template, oppure nuovi elementi possono essere aggiunti alla Design Library.<br /><br />Per questo progetto abbiamo seguito il metodo di Atomic Design di Brad Frost."
     },
     {
       "component": "Media",

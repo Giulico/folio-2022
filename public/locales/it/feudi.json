@@ -9,7 +9,7 @@
   "modules": [
     {
       "component": "TextIntro",
-      "text": "Feudi di San Gregorio è la cantina che da oltre trent'anni valorizza i vitigni autoctoni della tradizione campana. Come Frontend Developer mi sono occupato della realizzazione del loro sito istituzionale, con React, Redux e REST API."
+      "text": "Feudi di San Gregorio è la cantina che da oltre trent'anni valorizza i vitigni autoctoni della tradizione campana. Come Frontend Developer mi sono occupato della realizzazione del loro sito istituzionale, con React, Redux, RX e REST API."
     },
     {
       "component": "Media",
@@ -23,7 +23,7 @@
     {
       "component": "TextTwoColumns",
       "title": "La sfida",
-      "text": "Ricordo questo progetto perché è stato una sfida contro il tempo. Si è cercato di valorizzare al massimo i tratti creativi del brand, ed ogni sezione del sito aveva un layout completamente diverso e quasi tutti abbastanza complessi. La sezione “I nostri vini” ad esempio è navigabile con il movimento del mouse. È stata sicuramente una sfida riuscire a realizzare il progetto nei tempi ed è uno dei miei progetti preferiti.",
+      "text": "Ricordo questo progetto perché è stato una sfida contro il tempo. Si è cercato di valorizzare al massimo i tratti creativi e artistici del brand. Ogni sezione del sito ha un'impostazione di layout notevolmente diversa. La sezione “I nostri vini” ad esempio è navigabile con il movimento del mouse.<br /><br />È stata una sfida realizzare il progetto nei tempi, e forse proprio per questo è uno dei miei progetti preferiti.",
       "numbers": [
         {
           "value": 8,
@@ -54,9 +54,9 @@
     },
     {
       "component": "TextTwoColumns",
-      "title": "Stack",
+      "title": "Stack frontend",
       "text": "",
-      "technologies": ["React", "Redux", "PostCSS", "Webpack"]
+      "technologies": ["React", "Redux", "Rx", "Sass", "Webpack"]
     },
     {
       "component": "Media",
@@ -69,7 +69,7 @@
     },
     {
       "component": "Awards",
-      "awards": ["Awwwards", "CSS Design Award", "DDD", "Digital Design Awards"]
+      "awards": ["Awwwards", "CSS Design Award", "Digital Design Awards"]
     }
   ]
 }

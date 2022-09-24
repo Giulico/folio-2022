@@ -9,7 +9,7 @@
   "modules": [
     {
       "component": "TextIntro",
-      "text": "AQuest è una Creative Production & Technology Company, in grado di realizzare esperienze web e multimediale ad alto impatto emotivo. Ho lavorato in AQuest dal 2015 al 2018 come Front End Developer. Questo progetto riguarda il completo re-design del sito istituzionale."
+      "text": "AQuest è una Creative Production & Technology Company, in grado di realizzare esperienze web e multimediali ad alto impatto. Sono stato Frontend Developer in AQuest dal 2015 al 2018. Questo progetto riguarda il completo re-design del sito istituzionale."
     },
     {
       "component": "Media",
@@ -23,7 +23,7 @@
     {
       "component": "TextTwoColumns",
       "title": "La sfida",
-      "text": "Nel 2017, quando abbiamo deciso di rifare il sito, non c’erano forti competenze di WebGL in AQuest. Abbiamo deciso di sfruttare quell’occasione per fare R&D e contemporaneamente creare qualcosa di forte impatto visivo, che fosse paragonabile ad esperienze WebGL di competitor specializzati da anni in questa tecnologia.",
+      "text": "Nel 2017, quando abbiamo deciso di rifare il sito, in AQuest non c’erano verticalità in WebGL. Abbiamo deciso di sfruttare quell’occasione per fare formazione e contemporaneamente creare qualcosa di forte impatto visivo, che fosse all'altezza di esperienze WebGL tipiche dei competitor specializzati da anni in questa tecnologia, pur mantenendo tutte le caratteristiche SEO di un sito corporate.",
       "numbers": [
         {
           "value": 4,
@@ -55,7 +55,7 @@
     {
       "component": "TextTwoColumns",
       "title": "L'attenzione ai dettagli",
-      "text": "Abbiamo voluto prestare la stessa attenzione al dettaglio in tutte le pagine del sito, a prescindere da quanto sarebbero state visitate.<br /><br /> Ecco che nei case, per rappresentare gli audio realizzati per un esperienza, troviamo dei componenti custom che simulano delle corde, o che la pagina 404 contiene un videogame."
+      "text": "Tutte le pagine del sito dovevano avere la stessa attenzione al dettaglio, a prescindere da quanto sarebbero state visitate.<br /><br /> Ecco che nei case, ad esempio, per ascoltare gli audio che caratterizzano un'esperienza, abbiamo realizzato dei componenti che simulano delle corde. La pagina 404 contiene il gioco Pong e navigando le pagine i testi si inclinano in funzione della velocità dello scroll."
     },
     {
       "component": "Media",
@@ -78,7 +78,7 @@
     {
       "component": "TextTwoColumns",
       "title": "Non solo creatività",
-      "text": "Questo progetto non ha significato solo creatività dal punto di vista visual, ma è stata anche l’occasione per sperimentare nuovi strumenti per il development. L’intera codebase è infatti scritta in Flow, che in quegli anni si proponeva di rendere typed javascript e in particolare React (essendo Flow stesso sviluppato da Facebook).",
+      "text": "Questo progetto non ha significato solo creatività dal punto di vista visual, ma è stata anche l’occasione per sperimentare nuovi strumenti di sviluppo.<br /><br />L’intera codebase del frontend è infatti scritta in Flow, che nel 2017 si proponeva di rendere javascript e in particolare React (essendo Flow stesso sviluppato da Facebook) un linguaggio tipato.<br /><br />Per gestire eventi asincroni (request di dati, animazioni, effetti audio, transizioni, ecc) abbiamo abbiamo abbracciato il paradigma reactive facendo massiccio uso di RX.js",
       "technologies": ["React", "Rx", "Flow", "Pixi", "GLSL", "Webpack"]
     },
     {

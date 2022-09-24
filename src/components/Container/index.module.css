@@ -9,7 +9,6 @@
   margin: 0 var(--right-margin) 0 var(--text-margin-left);
 
   &.withoutMenu {
-    --right-margin: calc(var(--frame-margin) * 3);
     --tot-margin: calc(var(--woutmenu-margin-left) + var(--right-margin));
 
     margin: 0 var(--right-margin) 0 var(--woutmenu-margin-left);

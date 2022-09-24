@@ -15,11 +15,11 @@ type Props = {
 }
 
 const images: { [keys: string]: string } = {
-  awwwards: '/public/images/awwwards.jpg',
-  'css design award': '/public/images/css-design-awards.jpg',
-  'digital design awards': '/public/images/ddd.jpg',
-  'if design awards': '/public/images/if.jpg',
-  fwa: '/public/images/fwa.jpg'
+  awwwards: '/images/awwwards.jpg',
+  'css design award': '/images/css-design-awards.jpg',
+  'digital design awards': '/images/ddd.jpg',
+  'if design awards': '/images/if.jpg',
+  fwa: '/images/fwa.jpg'
 }
 
 function Award({ awards }: Props) {

@@ -24,19 +24,19 @@ type Props = {
 }
 
 const techs: { [keys: string]: string } = {
-  flow: '/public/images/flow.jpg',
-  glsl: '/public/images/glsl.jpg',
-  lambda: '/public/images/lambda.jpg',
-  next: '/public/images/next.jpg',
-  pixi: '/public/images/pixi.jpg',
-  postcss: '/public/images/postcss.jpg',
-  sass: '/public/images/sass.jpg',
-  react: '/public/images/react.jpg',
-  redux: '/public/images/redux.jpg',
-  rx: '/public/images/rx.jpg',
-  three: '/public/images/three.jpg',
-  vite: '/public/images/vite.jpg',
-  webpack: '/public/images/webpack.jpg'
+  flow: '/images/flow.jpg',
+  glsl: '/images/glsl.jpg',
+  lambda: '/images/lambda.jpg',
+  next: '/images/next.jpg',
+  pixi: '/images/pixi.jpg',
+  postcss: '/images/postcss.jpg',
+  sass: '/images/sass.jpg',
+  react: '/images/react.jpg',
+  redux: '/images/redux.jpg',
+  rx: '/images/rx.jpg',
+  three: '/images/three.jpg',
+  vite: '/images/vite.jpg',
+  webpack: '/images/webpack.jpg'
 }
 
 const TextTwoColumns = ({ title, text, numbers, technologies }: Props) => {

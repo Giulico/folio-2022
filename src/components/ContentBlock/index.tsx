@@ -13,7 +13,7 @@ import { gsap } from 'gsap'
 import SplitText from 'gsap/SplitText'
 
 // Hooks
-import { useRef, useCallback, useEffect } from 'react'
+import { useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { useMediaQuery } from 'react-responsive'
 import { useInView } from 'react-intersection-observer'
@@ -22,61 +22,26 @@ type Props = {
   children: ReactElement | ReactElement[]
   className?: string
   reveal?: boolean
-  subtext?: boolean
 }
 
 gsap.registerPlugin(SplitText)
 
-function ContentBlock({ children, reveal = true, subtext, className }: Props) {
+function ContentBlock({ children, reveal = true, className }: Props) {
   const frontRef = useRef<HTMLDivElement>(null)
-  const splitText = useRef<SplitText | null>(null)
 
-  const { scroll, menu, sizes } = useSelector((state: RootState) => ({
-    scroll: state.scroll,
-    menu: state.menu,
-    sizes: state.sizes
+  const { menu } = useSelector((state: RootState) => ({
+    menu: state.menu
   }))
 
   const { ref, inView } = useInView()
 
   const isDesktop = useMediaQuery({ minWidth: breakpoints.lg })
 
-  const splitLines = useCallback(() => {
-    // debugger
-    // Restore splitted text
-    if (splitText.current && typeof splitText.current.revert === 'function') {
-      splitText.current.revert()
-    }
-    // New split text
-    const elements = frontRef.current?.querySelectorAll(
-      `.${style.front} > div, .${style.base} > div`
-    )
-    if (elements) {
-      // if (elements[0]?.innerText?.startsWith('Nei primi anni 2000')) debugger
-      requestAnimationFrame(() => {
-        splitText.current = new SplitText(elements, {
-          type: 'lines',
-          linesClass: `${style.line}`
-        })
-        splitText.current.lines.forEach((line, index) => {
-          line.classList.add(style[`line-${index + 1}`])
-        })
-      })
-    }
-  }, [])
-
-  useEffect(() => {
-    if (scroll && isDesktop && reveal) {
-      splitLines()
-    }
-  }, [scroll, isDesktop, splitLines, reveal, sizes.width])
-
   const classes = cn(style.root, {
     [style.isDesktop]: isDesktop,
     [style.isVisible]: isDesktop && inView,
     [style.menuOpen]: menu.open,
-    [style.reveal]: reveal,
-    [style.subtext]: subtext
+    [style.reveal]: reveal
   })
 
   const frontClasses = cn(style.front, className)

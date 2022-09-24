@@ -28,43 +28,22 @@
     top: 0;
     left: 0;
     display: block;
+    overflow: hidden;
     width: 100%;
+    clip-path: circle(0% at 0 0);
     opacity: 1;
+    will-change: clip-path;
   }
 
   .base {
     position: relative;
     opacity: 0.3;
   }
-
-  &.subtext {
-    .front,
-    .base {
-      @media (--md-l) {
-        width: calc(100% - var(--spc-6));
-        padding-left: var(--spc-6);
-      }
-    }
-  }
-
-  .line {
-    overflow: hidden;
-    clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
-    transform: translateZ(0);
-
-    /* white-space: nowrap; */
-    will-change: clip-path
-  }
 }
 
 .reveal.isVisible.isDesktop {
-  @for $i from 1 to 20 {
-    .line {
-      clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-
-      &.line-$i {
-        transition: clip-path 1.7s var(--expo-ease-out) calc($i * 0.1s);
-      }
-    }
+  .front {
+    clip-path: circle(140% at 0 0);
+    transition: clip-path 3s var(--power3-ease-in-out) 0s;
   }
 }

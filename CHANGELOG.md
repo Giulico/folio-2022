@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/Giulico/folio-2022/compare/v1.0.2...v1.0.3) (2022-09-24)
+
+
+### Bug Fixes
+
+* Removed /public folder from url ([9cb50fc](https://github.com/Giulico/folio-2022/commit/9cb50fc67717c6e58c9cac7ca46ec1b0f9de440b))
+
 ## [1.0.2](https://github.com/Giulico/folio-2022/compare/v1.0.1...v1.0.2) (2022-09-23)
 
 

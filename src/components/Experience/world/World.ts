@@ -135,6 +135,7 @@ export default class World {
     this.man?.resize?.()
     this.cameraOnPath?.resize?.()
     this.portfolio?.resize?.()
+    this.clouds?.resize?.()
 
     for (const title of this.titles) {
       title?.resize?.()

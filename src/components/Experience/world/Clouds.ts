@@ -27,6 +27,7 @@ export default class Clouds {
   material!: THREE.ShaderMaterial
   mesh!: THREE.Mesh
   camera: THREE.PerspectiveCamera
+  depth: number
 
   constructor() {
     this.experience = new Experience()
@@ -34,6 +35,7 @@ export default class Clouds {
     this.time = this.experience.time
     this.camera = this.experience.world.cameraOnPath.camera
     this.sizes = this.experience.sizes
+    this.depth = -10
 
     this.debug = this.experience.debug
 
@@ -50,10 +52,12 @@ export default class Clouds {
   }
 
   createGeometry() {
-    this.geometry = new THREE.PlaneGeometry(20, 10)
+    this.geometry = new THREE.PlaneGeometry(1, 1)
   }
 
   createMaterial() {
+    const { screenWidth, screenHeight } = this.getScreenSizes()
+
     this.material = new THREE.ShaderMaterial({
       // color: this.debugObject.color,
       fragmentShader,
@@ -70,7 +74,9 @@ export default class Clouds {
       }
     })
     this.mesh = new THREE.Mesh(this.geometry, this.material)
-    this.mesh.position.z = -10
+    this.mesh.position.z = this.depth
+
+    this.mesh.scale.set(Math.ceil(screenWidth), Math.ceil(screenHeight), 1)
     // this.mesh.layers.enable(1)
 
     this.camera.add(this.mesh)
@@ -80,6 +86,20 @@ export default class Clouds {
     //     // this.material.color = this.debugObject.color
     //   })
     // }
+  }
+
+  getScreenSizes(): { screenWidth: number; screenHeight: number } {
+    // Find out the width of a rendered portion of the scene
+    // https://stackoverflow.com/a/13351534/2150128
+    const vFOV = THREE.MathUtils.degToRad(this.camera.fov) // convert vertical fov to radians
+    const screenHeight = 2 * Math.tan(vFOV / 2) * Math.abs(this.depth) // visible height
+    const screenWidth = screenHeight * this.camera.aspect // visible width
+    return { screenWidth, screenHeight }
+  }
+
+  resize() {
+    const { screenWidth, screenHeight } = this.getScreenSizes()
+    this.mesh.scale.set(screenWidth, screenHeight, 1)
   }
 
   update() {

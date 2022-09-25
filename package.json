@@ -1,7 +1,7 @@
 {
   "name": "folio-2022",
   "private": true,
-  "version": "1.0.6",
+  "version": "1.0.7",
   "repository": "git@github.com:Giulico/folio-2022.git",
   "packageManager": "yarn@3.2.3",
   "scripts": {

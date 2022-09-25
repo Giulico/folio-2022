@@ -1,3 +1,10 @@
+## [1.0.7](https://github.com/Giulico/folio-2022/compare/v1.0.6...v1.0.7) (2022-09-25)
+
+
+### Bug Fixes
+
+* Update pointer when leave the active item ([5297483](https://github.com/Giulico/folio-2022/commit/52974836c2cba72b6a2205144079ecf31418c6cc))
+
 ## [1.0.6](https://github.com/Giulico/folio-2022/compare/v1.0.5...v1.0.6) (2022-09-25)
 
 

@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/Giulico/folio-2022/compare/v1.0.4...v1.0.5) (2022-09-25)
+
+
+### Bug Fixes
+
+* Resize handler for Clouds class ([c7b3b29](https://github.com/Giulico/folio-2022/commit/c7b3b29618a4dd4f5a3eff8a9fbd6226b6653b16))
+
 ## [1.0.4](https://github.com/Giulico/folio-2022/compare/v1.0.3...v1.0.4) (2022-09-25)
 
 

@@ -11,10 +11,10 @@
   "intro": {
     "p1": {
       "l1": "It's all about technology",
-      "l2": "and design method"
+      "l2": "and design process"
     },
     "p2": {
-      "l1": "The research and the innovation",
+      "l1": "Research and innovation",
       "l2": "are the driver of memorable experiences"
     },
     "p3": {
@@ -31,37 +31,41 @@
   "portfolio": {
     "intro": [
       "I craft",
-      "digital interactive<br />experiences.",
-      "EN Dall'architettura delle informazioni, che determina la narrazione, alla scrupolosa ricerca degli elementi di UI, fino alla cura maniacale delle interazioni.",
-      "EN Ma è l'ottimizzazione del codice a darmi le maggiori soddisfazioni."
+      "interactive digital<br />experiences.",
+      "From information architecture, to researching UI elements, to maniacally curating interactions",
+      "Plus, my first love, program optimization."
     ],
     "portfolio": [
       "Projects",
-      "EN Ho lavorato per clienti come: Nexi, Sky, Fastweb, AMDL Circle, IBL, Generali, Corner.",
-      "EN Ecco alcuni progetti che ho contribuito a portare in porto, con un approfondimento sulle sfide che ho affrontato."
+      "I have collaborated with companies such as: <strong>Nexi</strong>, <strong>Sky</strong>, <strong>Fastweb</strong>, <strong>IBL</strong>, <strong>Generali</strong>, <strong>Corner</strong>, <strong>AMDL Circle</strong>.<br /><br />",
+      "Here are some of my most relevant projects."
     ]
   },
   "about": {
     "intro": [
-      "EN Nato a <ImageVenice>Venezia</ImageVenice> nel settembre dell'86, oggi vivo a Como e lavoro per <ImageSketchin>Sketchin</ImageSketchin>, uno studio di advanced-design, come Creative Technologist.",
+      "I was born in <ImageVenice>Venice</ImageVenice> in september '86, today I live in Como and work at <ImageSketchin>Sketchin</ImageSketchin>, an advanced-design studio, as Creative Technologist.",
       "<pre>Twenty/ys</pre>ago the first<br />version of<br /> TheyCallMeGiulio",
-      "EN La terza versione, nel 2004 fu la prima ad avere il dominio di primo livello <ImageTCMGTK>theycallmegiulio.tk</ImageTCMGTK>",
-      "EN Da allora progetto e realizzo esperienze virtuali. Ho studiato diversi linguaggi di programmazione e database per coprire l'intero stack.",
-      "EN Oggi penso in Javsacript."
+      "The third version, in 2004, was the first to have the top-level domain <ImageTCMGTK>theycallmegiulio.tk</ImageTCMGTK>",
+      "Since then I have been designing and implementing virtual experiences. I have studied different programming languages and databases to cover the whole stack.",
+      "Today I think in javascript."
     ],
     "clan_title": ["Numbers", "One"],
     "clan": [
-      "EN Nei primi anni 2000, la mia principale passione era <ImageBW>Starcraft Brood War</ImageBW>. Con il 56k mi connettevo alla piattaforma multiplayer e sfidavo gli altri giocatori.",
-      "A volte capitava che un gruppo di player formasse un Clan. Un team nel quale riconoscersi e creare community. Tra i vari clan di cui ho fatto parte, ricordo i <ImageNO1>Numbers One</ImageNO1>, perchè fui cofondatore.",
-      "EN Nel 2004 realizzai il primo <ImageNO2>n1clan.net</ImageNO2>, e nel 2006 un <ImageNO3>portale Web 2.0</ImageNO3>, con logiche di Login, News, Interviews, Upload e sharing dei replay di gioco. Visual con Adobe Photoshop, frontend con HTML, CSS e Javascript. Backend con PHP Codeigniter e MySql.",
-      "Sembra uno stack tecnologico moderno."
+      "It is the name of a clan of players of which I was the co-founder. A community whose main interest was a passion for <ImageBW>Starcraft: Brood War</ImageBW>.",
+      "At that time (it was the early 2000s) I began to combine fun for this game and passion for my work, practicing building the first <ImageNO2>Numbers One</ImageNO2> website.",
+      "A year later I built a <ImageNO3>web 2.0 portal</ImageNO3> with features such as logins, news, interviews, uploads and sharing of game replays. Visual design with Photoshop, frontend with HTML, CSS and Javascript. Custom backend with PHP Codeigniter and MySql. It still looks like a modern stack.",
+      "Today, as then, I enrich my work with constant training, updating, sharing and curiosity."
     ],
-    "method_title": "Method<br /><pre>&</pre>awards",
+    "method_title": "Method<br /><pre>&</pre>Acknowledgements",
     "method": [
-      "EN L'efficacia e l'usabilità di un progetto dipende dalle sinergie che si formano tra designer e developer. In un team non si prescinde dagli altri. Per creare un prodotto di successo il team è essenziale.",
-      "EN Prediligo metodologie Lean<br />e Agili, che decentralizzano<br />i processi decisionali.",
-      "EN Presto molta attenzione al<br />miglioramento continuo,<br />personale e di metodo.",
-      "EN Lungo il mio percorso ho avuto l'onore veder riconosciuti da giurie internazionali alcuni dei progetti ai quali ho lavorato."
+      "Creating a successful product is not just about having beautiful aesthetics and impressive animations.<br />The effectiveness and usability of a project depends on the synergies formed between designer and developer.",
+      "I emphasize Lean and Agile<br />methodologies",
+      "I promote continuous, attitudinal<br />and methodical improvement<br />for myself and others",
+      "If international recognition comes on top of that, it is a greater satisfaction."
     ]
+  },
+  "contact": {
+    "intro": "You can get in touch with me by writing to",
+    "social_intro": "You can find me a little less on social, but if you want you can also contact me on"
   }
 }

@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/Giulico/folio-2022/compare/v1.0.3...v1.0.4) (2022-09-25)
+
+
+### Performance Improvements
+
+* Image optimization ([eff10b6](https://github.com/Giulico/folio-2022/commit/eff10b61e6867d50e5609822fffcd4152a2e399b))
+
 ## [1.0.3](https://github.com/Giulico/folio-2022/compare/v1.0.2...v1.0.3) (2022-09-24)
 
 

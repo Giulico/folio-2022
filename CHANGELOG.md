@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/Giulico/folio-2022/compare/v1.0.5...v1.0.6) (2022-09-25)
+
+
+### Bug Fixes
+
+* Fixed blending mode issue with Safari ([a022265](https://github.com/Giulico/folio-2022/commit/a022265675e220210e9e180bc51909f979bacf13))
+
 ## [1.0.5](https://github.com/Giulico/folio-2022/compare/v1.0.4...v1.0.5) (2022-09-25)
 
 

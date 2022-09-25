@@ -2,21 +2,21 @@
   "title": "Sketchin",
   "image": "/projects/sk/hero.jpeg",
   "live": "https://www.sketchin.com",
-  "role": "UX Engineer",
+  "role": "Full-stack developer",
   "agency": "Sketchin",
   "completed": "08.2020",
   "awards": [],
   "modules": [
     {
       "component": "TextIntro",
-      "text": "Sketchin è uno studio di advanced design specializzato in ricerca e trasformazione digitale. Il progetto consiste nel completo re-design del sito istituzionale. Mi sono occupato dello sviluppo full-stack del sito, delle automatizzazioni e degli integration test."
+      "text": "Sketchin è uno studio di advanced-design specializzato in ricerca e trasformazione digitale. Il progetto consiste nel completo re-design del sito istituzionale. Mi sono occupato dello sviluppo full-stack del sito, delle automatizzazioni e degli integration test."
     },
     {
       "component": "Media",
       "media": [
         {
           "src": "/projects/sk/sk-animation.mp4",
-          "alt": "Intro animation"
+          "alt": "Sketchin intro animation"
         }
       ]
     },
@@ -88,7 +88,7 @@
       "numbers": [
         {
           "value": "50+",
-          "label": "Sliced disponibili"
+          "label": "Slice disponibili"
         },
         {
           "value": "6",

@@ -1,19 +1,15 @@
 {
   "title": "AQuest",
   "image": "/projects/aq/hero.jpg",
-  "live": "https://www.aquest.it",
+  "live": "https://www.aquest.com",
   "role": "Frontend Developer",
   "agency": "AQuest",
   "completed": "06.2018",
-  "awards": ["Awwwards", "CSS Design Award", "FWA"],
+  "awards": ["Awwwards", "CSS Design Award", "FWA", "Digital Design Awards"],
   "modules": [
     {
       "component": "TextIntro",
-      "text": "AQuest è una Creative Production & Technology Company, in grado di realizzare esperienze web e multimediale ad alto impatto emotivo. Ho lavorato in AQuest dal 2015 al 2018 come Front End Developer. Questo progetto riguarda il completo re-design del sito istituzionale."
-    },
-    {
-      "component": "Awards",
-      "awards": ["Awwwards", "CSS Design Award", "DDD"]
+      "text": "AQuest is a Creative Production & Technology Company, capable of delivering high-impact web and multimedia experiences. I was a Frontend Developer at AQuest from 2015 to 2018. This project involves the complete re-design of the institutional website."
     },
     {
       "component": "Media",
@@ -26,10 +22,23 @@
     },
     {
       "component": "TextTwoColumns",
-      "title": "La sfida",
-      "text": "Nel 2017, quando abbiamo deciso di rifare il sito, non c’erano forti competenze di WebGL in AQuest. Abbiamo deciso di sfruttare quell’occasione per fare R&D e contemporaneamente creare qualcosa di forte impatto visivo, che fosse paragonabile ad esperienze WebGL di competitor specializzati da anni in questa tecnologia."
+      "title": "The challenge",
+      "text": "In 2017, when we decided to redo the site, there were no verticals in WebGL at AQuest. We decided to take advantage of that opportunity to do training while simultaneously creating something with a strong visual impact that matched WebGL experiences typical of competitors who had been specializing in this technology for years, while maintaining all the SEO features of a corporate site.",
+      "numbers": [
+        {
+          "value": 4,
+          "label": "Awards"
+        },
+        {
+          "value": 12,
+          "label": "Months of work"
+        },
+        {
+          "value": "7+",
+          "label": "People in the team"
+        }
+      ]
     },
-
     {
       "component": "Media",
       "media": [
@@ -45,8 +54,32 @@
     },
     {
       "component": "TextTwoColumns",
-      "title": "L'attenzione ai dettagli",
-      "text": "Abbiamo voluto prestare la stessa attenzione al dettaglio in tutte le pagine del sito, a prescindere da quanto sarebbero state visitate.<br /><br /> Ecco che nei case, per rappresentare gli audio realizzati per un esperienza, troviamo dei componenti custom che simulano delle corde, o che la pagina 404 contiene un videogame."
+      "title": "The attention to detail",
+      "text": "All pages of the site had to have the same attention to detail, no matter how much they would be visited.<br /><br />Here in the cases, for example, to listen to the audio that characterizes an experience, we made components that simulate strings. Page 404 contains the game Pong, and as you navigate the pages, the texts tilt according to the speed of your scroll."
+    },
+    {
+      "component": "Media",
+      "media": [
+        {
+          "src": "/projects/aq/ropes.mp4",
+          "alt": "AQuest v1"
+        }
+      ]
+    },
+    {
+      "component": "Media",
+      "media": [
+        {
+          "src": "/projects/aq/pong404.mp4",
+          "alt": "AQuest v2"
+        }
+      ]
+    },
+    {
+      "component": "TextTwoColumns",
+      "title": "Not only creativity",
+      "text": "This project not only meant creativity from a visual point of view, but it was also an opportunity to experiment with new development tools.<br /><br />The entire frontend codebase is in fact written in Flow, which in 2017 aimed to make javascript and in particular React (Flow itself being developed by Facebook) a typed language.<br /><br />To handle asynchronous events (data requests, animations, audio effects, transitions, etc.) we embraced the reactive paradigm making heavy use of RX.js",
+      "technologies": ["React", "Rx", "Flow", "Pixi", "GLSL", "Webpack"]
     },
     {
       "component": "Media",
@@ -58,9 +91,8 @@
       ]
     },
     {
-      "component": "TextTwoColumns",
-      "title": "Non solo creatività",
-      "text": "Questo progetto non ha significato solo creatività dal punto di vista visual, ma è stata anche l’occasione per sperimentare nuovi strumenti per il development. L’intera codebase è infatti scritta in Flow, che in quegli anni si proponeva di rendere typed javascript e in particolare React (essendo Flow stesso sviluppato da Facebook)."
+      "component": "Awards",
+      "awards": ["FWA", "Awwwards", "CSS Design Award", "Digital Design Awards"]
     }
   ]
 }

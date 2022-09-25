@@ -4,6 +4,7 @@
   flex-direction: column;
   margin-top: var(--frame-margin);
   margin-bottom: var(--module-margin-bottom);
+  background-color: var(--color-white);
 
   @media (--md-l) {
     flex-direction: row;
@@ -158,6 +159,7 @@
   font-weight: var(--fw-light);
   transform: translate3d(0, 100%, 0);
   transition: transform 1s 0s;
+  will-change: transform;
 
   .open & {
     transform: translate3d(0, 0, 0);

@@ -23,7 +23,7 @@
     {
       "component": "TextTwoColumns",
       "title": "La sfida",
-      "text": "Nel 2015 React.js era uno strumento nuovo che per primo offriva la possibilità di fare rendering delle pagine sul server e restituire HTML ricco di contenuti. Nel team Frontend c'era molta curiosità e desiderio di vederlo in azione.<br /><br />La sfida fu far conciliare la formazione in un nuovo strumento (in particolare sulle parti di animazione del DOM) con il tempo a disposizione.",
+      "text": "Nel 2015 React.js era uno strumento nuovo che per primo offriva la possibilità di fare rendering delle pagine sul server e restituire HTML ricco di contenuti. Nel team Frontend c'era molta curiosità e desiderio di vederlo in azione.<br /><br />La sfida fu conciliare il tempo della formazione (in particolare sulla gestione degli eventi asincroni) con quello del budget di progetto.",
       "technologies": ["React", "Redux", "sass", "Webpack"]
     },
     {

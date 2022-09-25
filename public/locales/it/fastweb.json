@@ -9,7 +9,7 @@
   "modules": [
     {
       "component": "TextIntro",
-      "text": "Per la nota Telco abbiamo progettato un nuovo modello di servizio full-digital per la connettività domestica a banda larga. Come UX Engineer ho supportato le fasi di Interection e Visual design, garantendo coerenza nelle soluzioni proposte e parallelamente astraendo gli elementi di interfaccia in una Design Library che potesse diventare un giorno il Design System aziendale."
+      "text": "Per la nota Telco abbiamo progettato un nuovo modello di servizio full-digital per la connettività domestica a banda larga. Come UX Engineer ho supportato le fasi di Interaction e Visual design, garantendo coerenza nelle soluzioni proposte e parallelamente astraendo gli elementi di interfaccia in una Design Library che potesse diventare, un giorno, il Design System aziendale."
     },
     {
       "component": "Media",

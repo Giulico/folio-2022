@@ -33,17 +33,17 @@
       "Creo",
       "esperienze digitali<br />interattive.",
       "Dall'architettura delle informazioni, alla ricerca degli elementi di UI, fino alla cura maniacale delle interazioni.",
-      "Ma è l'ottimizzazione del codice a darmi le maggiori soddisfazioni."
+      "E poi, il mio primo amore, l'ottimizzazione del codice."
     ],
     "portfolio": [
       "Progetti",
       "Ho collaborato con aziende come: <strong>Nexi</strong>, <strong>Sky</strong>, <strong>Fastweb</strong>, <strong>IBL</strong>, <strong>Generali</strong>, <strong>Corner</strong>, <strong>AMDL Circle</strong>.<br /><br />",
-      "Ecco alcuni progetti che ho contribuito a condurre in porto, con un approfondimento sulle sfide che ho affrontato."
+      "Ecco alcuni dei miei progetti più rilevanti."
     ]
   },
   "about": {
     "intro": [
-      "Nato a <ImageVenice>Venezia</ImageVenice> nel settembre dell'86, oggi vivo a Como e lavoro per <ImageSketchin>Sketchin</ImageSketchin>, uno studio di advanced-design, come Creative Technologist.",
+      "Sono nato a <ImageVenice>Venezia</ImageVenice> nel settembre dell'86, oggi vivo a Como e lavoro per <ImageSketchin>Sketchin</ImageSketchin>, uno studio di advanced-design, come Creative Technologist.",
       "<pre>Venti</pre> anni fa la prima<br />versione di<br /> TheyCallMeGiulio",
       "La terza versione, nel 2004 fu la prima ad avere il dominio di primo livello <ImageTCMGTK>theycallmegiulio.tk</ImageTCMGTK>",
       "Da allora progetto e realizzo esperienze virtuali. Ho studiato diversi linguaggi di programmazione e database per coprire l'intero stack.",
@@ -51,21 +51,21 @@
     ],
     "clan_title": ["Numbers", "One"],
     "clan": [
-      "Nei primi anni 2000, la mia principale passione era <ImageBW>Starcraft Brood War</ImageBW>. Con il 56k mi connettevo alla piattaforma multiplayer e sfidavo gli altri giocatori.",
-      "A volte capitava che un gruppo di player formasse un Clan. Un team nel quale riconoscersi e creare community. Tra i vari clan di cui ho fatto parte, ricordo i <ImageNO1>Numbers One</ImageNO1>, perchè fui cofondatore.",
-      "Nel 2004 realizzai il primo <ImageNO2>n1clan.net</ImageNO2>, e nel 2006 un <ImageNO3>portale Web 2.0</ImageNO3>, con logiche di Login, News, Interviews, Upload e sharing dei replay di gioco. Visual con Adobe Photoshop, frontend con HTML, CSS e Javascript. Backend con PHP Codeigniter e MySql.",
-      "Sembra uno stack tecnologico moderno."
+      "È il nome di un clan di players di cui fui cofondatore. Una community il cui interesse principale era la passione per <ImageBW>Starcraft Brood War</ImageBW>.",
+      "In quel periodo (erano i primi anni 2000) iniziai a coniugare il divertimento per questo gioco e la passione per il mio lavoro, esercitandomi nel costruire il primo <ImageNO2>n1clan.net</ImageNO2>.",
+      "Un anno dopo realizzai un <ImageNO3>portale Web 2.0</ImageNO3> con logiche di login, news, interviste, upload e sharing dei replay di gioco. Visual con Photoshop, frontend con HTML, CSS e Javascript. Backend custom con PHO Codeigniter e MySql. Sembra ancora uno stack moderno.",
+      "Oggi, come allora, arricchisco il mio lavoro con costante formazione, aggiornamento, condivisione e curiosità."
     ],
     "method_title": "Metodo<br /><pre>e</pre>riconoscimenti",
     "method": [
-      "L'efficacia e l'usabilità di un progetto dipende dalle sinergie che si formano tra designer e developer. In un team non si prescinde dagli altri. Per creare un prodotto di successo il team è essenziale.",
-      "Prediligo metodologie Lean<br />e Agili.",
-      "Presto molta attenzione al<br />miglioramento continuo,<br />attitudinale e di metodo.",
-      "Lungo il mio percorso ho visto riconosciuti da giurie internazionali alcuni dei progetti ai quali ho lavorato."
+      "Creare un prodotto di successo non vuol dire solo avere una bella estetica e animazioni d’effetto.<br />L'efficacia e l'usabilità di un progetto dipendono dalle sinergie che si formano tra designer e developer.",
+      "Prediligo metodologie Lean<br />e Agile.",
+      "Promuovo per me e per gli altri<br />il miglioramento continuo,<br />attitudinale e di metodo.",
+      "Se oltre a questo arrivano dei riconoscimenti internazionali è una soddisfazione maggiore."
     ]
   },
   "contact": {
-    "intro": "Don't be shy, say hi!",
-    "social_intro": "Anche se non sono un tipo da social network mi potete contattare anche su"
+    "intro": "È possibile entrare in contatto con me scrivendo a",
+    "social_intro": "Mi trovate un po’ meno sui social, ma se volete potete contattarmi anche su"
   }
 }

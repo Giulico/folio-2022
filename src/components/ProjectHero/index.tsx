@@ -66,7 +66,7 @@ const ProjectHero = () => {
                 <p>{pt('completed')}</p>
               </div>
               <div className={style.detailBlock}>
-                {awards && (
+                {awards.length > 0 && (
                   <>
                     <h3>Awards</h3>
                     {awards.map((a) => (

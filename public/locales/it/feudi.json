@@ -5,7 +5,7 @@
   "role": "Frontend Developer",
   "agency": "AQuest",
   "completed": "04.2017",
-  "awards": [],
+  "awards": ["Awwwards", "CSS Design Award", "Digital Design Awards"],
   "modules": [
     {
       "component": "TextIntro",

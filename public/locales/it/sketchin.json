@@ -5,11 +5,11 @@
   "role": "UX Engineer",
   "agency": "Sketchin",
   "completed": "08.2020",
-  "awards": ["Awwwards", "CSS Design Award", "FWA"],
+  "awards": [],
   "modules": [
     {
       "component": "TextIntro",
-      "text": "Sketchin è uno studio di advanced design specializzato in ricerca e trasformazione digitale. Il progetto consiste nel completo re-design del sito istituzionale. Mi sono occupato dello svilupp full stack del sito, delle automatizzazioni e degli integration test."
+      "text": "Sketchin è uno studio di advanced design specializzato in ricerca e trasformazione digitale. Il progetto consiste nel completo re-design del sito istituzionale. Mi sono occupato dello sviluppo full-stack del sito, delle automatizzazioni e degli integration test."
     },
     {
       "component": "Media",
@@ -23,7 +23,7 @@
     {
       "component": "TextTwoColumns",
       "title": "La sfida",
-      "text": "Data la particolarità delle circostanze, io e altri due UX Engineers, abbiamo dedicato tempo allo sviluppo del sito istituzionale tra un progetto e l’altro. Abbiamo affrontato questa sfida astraendo le UI, seguendo le logiche di Atomic Design. Abbiamo creato un backlog contenente card di diversa natura che ciascuno potesse assegnarsi appena ci fossero le condizioni.<br /><br /> Abbiamo concordato fin dall’inizio convenzioni per la scrittura del codice e della documentazione.",
+      "text": "Data la particolarità delle circostanze, io e altri due UX Engineers, abbiamo dedicato tempo e attenzione allo sviluppo del sito istituzionale tra un progetto e l’altro. Abbiamo affrontato questa sfida astraendo le UI, seguendo le logiche di Atomic Design. Abbiamo creato un backlog contenente card di diversa natura che ciascuno potesse assegnarsi appena ci fossero le condizioni.<br /><br /> Abbiamo concordato fin dall’inizio convenzioni per la scrittura del codice e della documentazione.",
       "technologies": ["React", "Redux", "Next", "postcss", "Lambda"]
     },
 
@@ -84,7 +84,7 @@
     {
       "component": "TextTwoColumns",
       "title": "Un frontend modulare",
-      "text": "Per rispondere all'esigenza di poter creare contenuti editoriali sempre diversi, abbiamo usato la Slice Machine di Prismic CMS. Questa funzionalità consente di associare infiniti modelli di dati a rispettivi componenti di React.<br />L'editor può comporre le pagine con il numero di slice (modelli) di cui necessità e nel ordine che preferisce. Il frontend legge i modelli e restituisce i componenti React corretti.",
+      "text": "Per rispondere all'esigenza di poter creare contenuti editoriali sempre diversi, abbiamo usato la Slice Machine di Prismic CMS. Questa funzionalità consente di associare infiniti modelli di dati a rispettivi componenti di React.<br />L'editor può comporre le pagine con il numero di slice (modelli) di cui necessita e nell'ordine che preferisce. Il frontend legge i modelli e restituisce i componenti React corretti.",
       "numbers": [
         {
           "value": "50+",

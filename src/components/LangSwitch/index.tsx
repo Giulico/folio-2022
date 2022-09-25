@@ -70,7 +70,7 @@ const LangSwitch = () => {
             className={classes}
             onClick={changeLanguage(lang)}
             onMouseEnter={isActive ? undefined : overHandler}
-            onMouseLeave={isActive ? undefined : outHandler}
+            onMouseLeave={outHandler}
           >
             <span className={style.label}>
               <span>{lang}</span>

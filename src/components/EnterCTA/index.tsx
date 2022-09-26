@@ -63,7 +63,7 @@ const EnterCTA = () => {
         gsap.to(labelRef.current, {
           scrambleText: {
             text: t('enter'),
-            chars,
+            chars
           },
           duration: 2
         })

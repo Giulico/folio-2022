@@ -67,13 +67,13 @@ const fragment = /* glsl */ `
     vec3 white = vec3(1.0, 1.0, 1.0);
 
     // Effects
-    vec4 l1 = vec4(white, border);
-    vec4 l2 = vec4(white, outset);
-    vec4 l3 = vec4(darkBlue, outset);
-    vec4 l4 = vec4(white, border * 0.6);
-    vec4 l5 = vec4(darkBlue, border);
-    vec4 l6 = vec4(darkBlue, outset);
-    vec4 l7 = vec4(white, outset);
+    vec4 l1 = vec4(white, border * uOpacity);
+    vec4 l2 = vec4(white, outset * uOpacity);
+    vec4 l3 = vec4(darkBlue, outset * uOpacity);
+    vec4 l4 = vec4(white, border * 0.6 * uOpacity);
+    vec4 l5 = vec4(darkBlue, border * uOpacity);
+    vec4 l6 = vec4(darkBlue, outset * uOpacity);
+    vec4 l7 = vec4(white, outset * uOpacity);
 
     // Noise pattern
     float x = floor(vLayoutUv.x * 10. * 1.8);

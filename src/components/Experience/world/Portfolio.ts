@@ -42,6 +42,12 @@ type DebugObject = {
   iColorInner: THREE.Color
 }
 
+type ItemSnapshot = {
+  position: THREE.Vector3
+  rotation: THREE.Euler
+  iFactor: number
+}
+
 type Project = {
   name: string
   url: string
@@ -60,6 +66,8 @@ export default class Portfolio {
   group!: THREE.Group
   groupPosition!: THREE.Vector3
   items!: THREE.Mesh[]
+  captions!: THREE.Mesh[]
+  snapshots: ItemSnapshot[]
   debugObject: DebugObject
   material!: StateMaterialSet
   camera: THREE.PerspectiveCamera
@@ -79,6 +87,7 @@ export default class Portfolio {
     this.xPosition = 0
     this.scrollOffset = 0
     this.visibleItemIndex = -1
+    this.snapshots = []
 
     this.experience = new Experience()
     this.resources = this.experience.resources
@@ -165,6 +174,18 @@ export default class Portfolio {
 
     if (currentSection !== prevSection && prevSection === 'portfolio') {
       this.leaveAnimation()
+    }
+
+    // Menu
+    const menuOpen = state.menu.open
+    const prevMenuOpen = prevState.menu.open
+    if (menuOpen && !prevMenuOpen) {
+      // Open Menu
+      this.openMenuAnimation()
+    }
+    if (!menuOpen && prevMenuOpen) {
+      // Close Menu
+      this.closeMenuAnimation()
     }
   }
 
@@ -275,6 +296,8 @@ export default class Portfolio {
   setCaptions() {
     const promises = [this.loadFontAtlas(png), this.loadFont(fnt)]
 
+    this.captions = []
+
     return Promise.all(promises).then(([atlas, fnt]) => {
       const font = (fnt as { data: any }).data
 
@@ -302,6 +325,8 @@ export default class Portfolio {
             // Strokes
             ...uniforms.strokes,
 
+            uOpacity: { value: 1.0 },
+
             uStrokeOutsetWidth: { value: 0.1 },
             uStrokeInsetWidth: { value: 0.0 },
             uProgress1: { value: 1 },
@@ -318,6 +343,8 @@ export default class Portfolio {
 
         const mesh = new THREE.Mesh(geometry, material)
         mesh.rotation.x = Math.PI
+
+        this.captions[i] = mesh
 
         this.group.add(mesh)
       }
@@ -377,6 +404,61 @@ export default class Portfolio {
       delay,
       ease
     })
+  }
+
+  openMenuAnimation() {
+    // Save snapshots
+    for (let i = 0; i < this.items.length; i++) {
+      const item = this.items[i]
+      const caption = this.captions[i]
+
+      const itemMaterial = item.material as THREE.ShaderMaterial
+      const captionMaterial = caption.material as THREE.ShaderMaterial
+
+      this.snapshots.push({
+        position: item.position,
+        rotation: item.rotation,
+        iFactor: itemMaterial.uniforms.iFactor.value > 2 ? 3.2 : 2
+      })
+      gsap.killTweensOf(itemMaterial.uniforms.iFactor, 'value')
+      gsap.killTweensOf(captionMaterial.uniforms.uOpacity, 'value')
+      // Animation
+      gsap.to(itemMaterial.uniforms.iFactor, {
+        value: 2,
+        duration: 1.5,
+        ease: 'power3.out'
+      })
+      gsap.to(captionMaterial.uniforms.uOpacity, {
+        value: 0,
+        duration: 1.5,
+        ease: 'power3.out'
+      })
+    }
+  }
+
+  closeMenuAnimation() {
+    for (let i = 0; i < this.items.length; i++) {
+      const item = this.items[i]
+      const caption = this.captions[i]
+
+      const itemMaterial = item.material as THREE.ShaderMaterial
+      const captionMaterial = caption.material as THREE.ShaderMaterial
+
+      // Animation
+      gsap.killTweensOf(itemMaterial.uniforms.iFactor, 'value')
+      gsap.killTweensOf(captionMaterial.uniforms.uOpacity, 'value')
+      gsap.to(itemMaterial.uniforms.iFactor, {
+        value: this.snapshots[i].iFactor,
+        duration: 1.5,
+        ease: 'power3.inOut'
+      })
+      gsap.to(captionMaterial.uniforms.uOpacity, {
+        value: 1,
+        duration: 1.5,
+        ease: 'power3.inOut'
+      })
+    }
+    this.snapshots = []
   }
 
   restoreItems() {
@@ -536,6 +618,7 @@ export default class Portfolio {
 
   update() {
     if (!this.isVisible) return
+
     const scrollY = window.scrollY
     this.scrollOffset = lerp(this.scrollOffset, scrollY, 0.1)
     const offset = (scrollY - this.scrollOffset) * 0.0002

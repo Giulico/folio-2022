@@ -1,3 +1,11 @@
+## [1.0.8](https://github.com/Giulico/folio-2022/compare/v1.0.7...v1.0.8) (2022-09-26)
+
+
+### Bug Fixes
+
+* Hide social links when the menu is open ([ed58b8a](https://github.com/Giulico/folio-2022/commit/ed58b8ae26c5ad271919a42fcdd13858dd05b9e3))
+* Hide the projects when menù is open ([d9f8f2f](https://github.com/Giulico/folio-2022/commit/d9f8f2fca7032862f5b65695053b400598da5807))
+
 ## [1.0.7](https://github.com/Giulico/folio-2022/compare/v1.0.6...v1.0.7) (2022-09-25)
 
 

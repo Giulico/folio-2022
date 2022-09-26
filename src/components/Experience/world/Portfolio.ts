@@ -139,7 +139,7 @@ export default class Portfolio {
     }
 
     this.debugObject = {
-      offsetX: 1.5,
+      offsetX: 1.9,
       offsetY: -0.039,
       offsetZ: -1,
       iColorOuter: new THREE.Color(0x426ff5),
@@ -213,13 +213,14 @@ export default class Portfolio {
       clickableMesh.receiveShadow = false
       clickableMesh.name = name
       clickableMesh.pathname = url
-      clickableMesh.position.set(i * 1.1, 0, 0)
+      clickableMesh.position.set(i * 1.1, 0, -0.5)
+      clickableMesh.rotation.set(Math.PI / 4, Math.PI / -8, 0)
 
       clickableMesh.addEventListener(ThreeMouseEventType.CLICK, (e) => {
         if (!this.isVisible) return
         rootNavigate(e.model.view.pathname)
       })
-      clickableMesh.addEventListener(ThreeMouseEventType.OVER, (e) => {
+      clickableMesh.addEventListener(ThreeMouseEventType.OVER, () => {
         window.store.dispatch.pointer.setType('hover')
         const index = randomIntFromInterval(1, this.howls.length - 1)
         if (this.howls[index]) {
@@ -350,11 +351,31 @@ export default class Portfolio {
 
   revealItem(index: number) {
     if (!this.items[index]) return
+    console.log('Reveal item', index)
+
+    const duration = 3
+    const delay = 0.3
+    const ease = 'power3.out'
+
+    gsap.to(this.items[index].position, {
+      z: 0,
+      duration,
+      delay,
+      ease
+    })
+    gsap.to(this.items[index].rotation, {
+      x: 0,
+      y: 0,
+      duration,
+      delay,
+      ease
+    })
     // @ts-ignore
     gsap.to(this.items[index].material.uniforms.iFactor, {
       value: 3.2,
-      duration: 3,
-      ease: 'power3.out'
+      duration,
+      delay,
+      ease
     })
   }
 
@@ -466,11 +487,13 @@ export default class Portfolio {
       const item = this.items[i]
       if (this.sizes.width >= breakpoints.mdL) {
         item.scale.set(1, 1, 1)
-        item.position.set(i * 1.1, 0, 0)
+        // item.position.set(i * 1.1, 0, 0)
+        item.position.x = i * 1.1
       } else {
         const item = this.items[i]
         item.scale.set(0.4, 0.4, 0.4)
-        item.position.set(i * 0.5, 0, 0)
+        // item.position.set(i * 0.5, 0, 0)
+        item.position.x = i * 0.5
       }
     }
   }

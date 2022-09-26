@@ -64,6 +64,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: var(--spc-4) 0;
   border: 0;
   margin-left: var(--frame-margin);
   background-color: transparent;

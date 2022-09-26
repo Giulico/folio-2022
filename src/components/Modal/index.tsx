@@ -127,7 +127,7 @@ const Modal = ({ children }: Props) => {
         className={buttonClasses}
         onClick={() => rootNavigate('/')}
         onMouseEnter={overHandler}
-        onMouseOut={outHandler}
+        onMouseLeave={outHandler}
       >
         <figure>
           <img src="/icons/arrow-left.svg" />

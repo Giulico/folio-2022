@@ -54,6 +54,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["classnames", "npm:2.3.2"],\
             ["commitizen", "npm:4.2.5"],\
             ["cz-customizable", "npm:7.0.0"],\
+            ["detect-it", "npm:4.0.1"],\
             ["eslint", "npm:8.23.1"],\
             ["eslint-config-prettier", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:8.5.0"],\
             ["eslint-plugin-prettier", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:4.2.1"],\
@@ -4241,6 +4242,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["detect-it", [\
+        ["npm:4.0.1", {\
+          "packageLocation": "./.yarn/cache/detect-it-npm-4.0.1-dbef41923b-013981eae8.zip/node_modules/detect-it/",\
+          "packageDependencies": [\
+            ["detect-it", "npm:4.0.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["dezalgo", [\
         ["npm:1.0.4", {\
           "packageLocation": "./.yarn/cache/dezalgo-npm-1.0.4-ae3b673c98-895389c6ae.zip/node_modules/dezalgo/",\
@@ -5188,6 +5198,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["classnames", "npm:2.3.2"],\
             ["commitizen", "npm:4.2.5"],\
             ["cz-customizable", "npm:7.0.0"],\
+            ["detect-it", "npm:4.0.1"],\
             ["eslint", "npm:8.23.1"],\
             ["eslint-config-prettier", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:8.5.0"],\
             ["eslint-plugin-prettier", "virtual:f921ac54c0c54632e8a7bde420aa8c62160b68c122575608558fc064464b6009e611f086dbe75f2af4a246ab557f43005f1b55d93016955106eca683f0640001#npm:4.2.1"],\

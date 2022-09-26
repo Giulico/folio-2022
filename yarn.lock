@@ -3136,6 +3136,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"detect-it@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "detect-it@npm:4.0.1"
+  checksum: 013981eae87c0265169e11e09efcc1c78fb2fc3e956b0001eb8d741ce03784a3e8e6d60e1445105f510c52be2ccffbd1c31c1bc094d01ad77f11df9830822a9c
+  languageName: node
+  linkType: hard
+
 "dezalgo@npm:^1.0.0":
   version: 1.0.4
   resolution: "dezalgo@npm:1.0.4"
@@ -3969,6 +3976,7 @@ __metadata:
     classnames: ^2.3.2
     commitizen: ^4.2.5
     cz-customizable: ^7.0.0
+    detect-it: ^4.0.1
     eslint: ^8.23.1
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.2.1

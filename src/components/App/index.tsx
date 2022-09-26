@@ -4,13 +4,12 @@ import type { RootState } from 'store'
 // Utils
 import { cursorPosition } from 'utils/events'
 import { disablePageScroll, enablePageScroll } from 'scroll-lock'
-import breakpoints from 'utils/breakpoints'
+import { primaryInput } from 'detect-it'
 
 // Hooks
 import { useDispatch, useSelector } from 'react-redux'
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useMemo } from 'react'
 import { useDebounce } from 'hooks/useDebounce'
-import { useMediaQuery } from 'react-responsive'
 
 // Components
 import Pointer from 'components/Pointer'
@@ -34,7 +33,6 @@ window.cursorNormalized = {
 function App() {
   const dispatch = useDispatch()
 
-  const isDesktop = useMediaQuery({ minWidth: breakpoints.lg })
   const prevSizes = useRef({ height: 0, width: 0 })
   const appHeightTesterRef = useRef<HTMLDivElement>(null)
 
@@ -42,6 +40,11 @@ function App() {
     scroll: state.scroll,
     sizes: state.sizes
   }))
+
+  const deviceHasPointer = useMemo(() => {
+    return primaryInput === 'mouse'
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sizes.width])
 
   const updateAppHeight = useDebounce(
     () => {
@@ -126,7 +129,7 @@ function App() {
       <About />
       <Contact />
 
-      {isDesktop && <Pointer />}
+      {deviceHasPointer && <Pointer />}
     </>
   )
 }

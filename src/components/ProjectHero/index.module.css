@@ -2,12 +2,13 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  margin-top: var(--frame-margin);
+  margin-top: calc(var(--frame-margin) * 4);
   margin-bottom: var(--module-margin-bottom);
   background-color: var(--color-white);
 
   @media (--md-l) {
     flex-direction: row;
+    margin-top: var(--frame-margin);
   }
 }
 
@@ -15,7 +16,7 @@
   position: relative;
   z-index: var(--z-above);
   width: 100%;
-  height: 70vh;
+  height: 40vh;
   flex: 1 1 auto;
   margin: 0;
   transition: visibility 0s var(--expo-ease-out) 1s;
@@ -24,6 +25,7 @@
   @media (--md-l) {
     width: 62%;
     max-width: 62%;
+    height: 70vh;
   }
 
   .open &,

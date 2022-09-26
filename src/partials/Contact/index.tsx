@@ -71,38 +71,42 @@ function Contact() {
           </ContentBlock>
         </Row>
         <Row start={2} end={1}>
-          <ul className={style.list}>
-            <li>
-              <a
-                href="https://www.linkedin.com/in/giuliocollesei/"
-                onMouseEnter={overHandler}
-                onMouseLeave={outHandler}
-                target="_blank"
-              >
-                Linkedin <ExternalArrow />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://twitter.com/giuliocollesei"
-                onMouseEnter={overHandler}
-                onMouseLeave={outHandler}
-                target="_blank"
-              >
-                Twitter <ExternalArrow />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://github.com/Giulico"
-                onMouseEnter={overHandler}
-                onMouseLeave={outHandler}
-                target="_blank"
-              >
-                Github <ExternalArrow />
-              </a>
-            </li>
-          </ul>
+          <ContentBlock>
+            <div>
+              <ul className={style.list}>
+                <li>
+                  <a
+                    href="https://www.linkedin.com/in/giuliocollesei/"
+                    onMouseEnter={overHandler}
+                    onMouseLeave={outHandler}
+                    target="_blank"
+                  >
+                    Linkedin <ExternalArrow />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://twitter.com/giuliocollesei"
+                    onMouseEnter={overHandler}
+                    onMouseLeave={outHandler}
+                    target="_blank"
+                  >
+                    Twitter <ExternalArrow />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://github.com/Giulico"
+                    onMouseEnter={overHandler}
+                    onMouseLeave={outHandler}
+                    target="_blank"
+                  >
+                    Github <ExternalArrow />
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </ContentBlock>
         </Row>
       </Container>
     </Section>

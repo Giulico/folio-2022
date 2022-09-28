@@ -1,3 +1,10 @@
+## [1.0.10](https://github.com/Giulico/folio-2022/compare/v1.0.9...v1.0.10) (2022-09-28)
+
+
+### Performance Improvements
+
+* Improved title position on closing menu ([0872faa](https://github.com/Giulico/folio-2022/commit/0872faa2e2967617e8fa23166cb4f0c3ecb76b00))
+
 ## [1.0.9](https://github.com/Giulico/folio-2022/compare/v1.0.8...v1.0.9) (2022-09-28)
 
 

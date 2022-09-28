@@ -28,6 +28,7 @@ export default class CameraOnPath {
   bodyHeight?: number
   menuOpen: boolean
   snapshot: {
+    sectionId: Sections
     lookAt: THREE.Vector3
     position: THREE.Vector3
   }
@@ -43,6 +44,7 @@ export default class CameraOnPath {
 
     this.menuOpen = false
     this.snapshot = {
+      sectionId: 'hero',
       lookAt: new THREE.Vector3(),
       position: new THREE.Vector3()
     }
@@ -92,13 +94,13 @@ export default class CameraOnPath {
         y: this.vertices[index].y,
         z: this.vertices[index].z,
         duration: 3.5,
-        ease: 'power2.inOut'
+        ease: 'power3.inOut'
       })
 
       gsap.to(this.lookAt.current, {
         y: this.lookAt.body.y,
         duration: 3.5,
-        ease: 'power2.inOut'
+        ease: 'power3.inOut'
       })
     }
 
@@ -109,8 +111,12 @@ export default class CameraOnPath {
 
     // Menu
     if (state.menu.open !== prevState.menu.open) {
+      gsap.killTweensOf(this.camera.position, 'x,y,z')
+      gsap.killTweensOf(this.lookAt.current, 'x,y,z')
+
       if (state.menu.open) {
         this.snapshot = {
+          sectionId: state.section.current,
           position: this.camera.position.clone(),
           lookAt: this.lookAt.current.clone()
         }
@@ -131,50 +137,80 @@ export default class CameraOnPath {
           ease: 'power4.out'
         })
       } else {
+        // Menu is closing
+        // Use snapshot if the section is the same
+        // if user navigate through a new section move to that section point
+        let position: THREE.Vector3
+        let lookAt: THREE.Vector3
+
+        const newSectionId = state.section.sections[state.menu.index].id
+
+        if (newSectionId === this.snapshot.sectionId) {
+          position = this.snapshot.position
+          lookAt = this.snapshot.lookAt
+        } else {
+          const newScroll = state.section.boundaries[state.menu.index].start
+          const relativeScroll = 1 - newScroll / (this.bodyHeight || 0)
+          this.percentage = betweenRange(relativeScroll, 0, 1)
+          position = this.curvePath.getPointAt(this.percentage)
+
+          if (newSectionId === 'about') {
+            lookAt = this.lookAt.about
+          } else if (newSectionId === 'portfolio') {
+            lookAt = this.lookAt.portfolio
+          } else {
+            lookAt = this.lookAt.body
+          }
+        }
+
         gsap.to(this.camera.position, {
-          x: this.snapshot.position.x,
-          y: this.snapshot.position.y,
-          z: this.snapshot.position.z,
-          duration: 1.5,
-          ease: 'power4.out',
+          x: position.x,
+          y: position.y,
+          z: position.z,
+          duration: 3,
+          ease: 'power3.out',
           onComplete: () => {
             this.menuOpen = false
           }
         })
         gsap.to(this.lookAt.current, {
-          x: this.snapshot.lookAt.x,
-          y: this.snapshot.lookAt.y,
-          z: this.snapshot.lookAt.z,
+          x: lookAt.x,
+          y: lookAt.y,
+          z: lookAt.z,
           duration: 3,
-          ease: 'power4.out'
+          ease: 'power3.out'
         })
       }
     }
 
     // Section
     if (state.section.current !== prevState.section.current) {
+      gsap.killTweensOf(this.lookAt.current, 'y,z')
+      const duration = 1
+      const ease = 'power2.inOut'
+
       switch (state.section.current) {
         case 'about':
           gsap.to(this.lookAt.current, {
             y: this.lookAt.about.y,
             z: this.lookAt.about.z,
-            duration: 2,
-            ease: 'power2.inOut'
+            duration,
+            ease
           })
           break
         case 'portfolio':
           gsap.to(this.lookAt.current, {
             y: this.lookAt.portfolio.y,
-            duration: 2,
-            ease: 'power2.inOut'
+            duration,
+            ease
           })
           break
         default:
           gsap.to(this.lookAt.current, {
             y: this.lookAt.body.y,
             z: this.lookAt.body.z,
-            duration: 2,
-            ease: 'power2.inOut'
+            duration,
+            ease
           })
           break
       }
@@ -244,7 +280,7 @@ export default class CameraOnPath {
         this.camera.position.y !== y ||
         this.camera.position.z !== z
       ) {
-        gsap.to(this.camera.position, { x, y, z, duration: 0.2 })
+        gsap.to(this.camera.position, { x, y, z, duration: 1 })
       }
     }
 

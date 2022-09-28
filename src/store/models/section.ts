@@ -9,8 +9,14 @@ type Boundary = {
 
 export const section = createModel<RootModel>()({
   state: {
-    current: 'hero',
-    boundaries: [] as Boundary[]
+    current: 'hero' as Sections,
+    boundaries: [] as Boundary[],
+    sections: [
+      { name: 'TCMG', id: 'hero' },
+      { name: 'Works', id: 'portfolio' },
+      { name: 'About', id: 'about' },
+      { name: 'Contact', id: 'contact' }
+    ]
   },
   reducers: {
     update(state, payload) {

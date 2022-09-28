@@ -372,13 +372,18 @@ export default class Portfolio {
 
   enterAnimation() {
     this.isVisible = true
+    for (let i = 0; i < this.items.length; i++) {
+      this.items[i].visible = this.isVisible
+      this.captions[i].visible = this.isVisible
+    }
+
     this.setBoundaries()
+    this.scrollHandler()
     window.addEventListener('scroll', this.scrollHandler)
   }
 
   revealItem(index: number) {
     if (!this.items[index]) return
-    console.log('Reveal item', index)
 
     const duration = 3
     const delay = 0.3
@@ -437,6 +442,21 @@ export default class Portfolio {
   }
 
   closeMenuAnimation() {
+    // Position group based on the next section
+    const portfolioSectionIndex = 1
+    const newSectionIndex = window.store.getState().menu.index
+
+    if (newSectionIndex !== portfolioSectionIndex) {
+      // Set this.isVisible false and stop animation in loop
+      this.leaveAnimation()
+      requestAnimationFrame(() => {
+        this.scrollHandler()
+        gsap.killTweensOf(this.group.position, 'x')
+        this.group.position.x = this.xPosition
+      })
+    }
+
+    // Restore uniforms
     for (let i = 0; i < this.items.length; i++) {
       const item = this.items[i]
       const caption = this.captions[i]
@@ -458,6 +478,8 @@ export default class Portfolio {
         ease: 'power3.inOut'
       })
     }
+
+    // Restore snapshot
     this.snapshots = []
   }
 
@@ -479,6 +501,10 @@ export default class Portfolio {
 
   leaveAnimation() {
     this.isVisible = false
+    for (let i = 0; i < this.items.length; i++) {
+      this.items[i].visible = this.isVisible
+      this.captions[i].visible = this.isVisible
+    }
     this.restoreItems()
     window.removeEventListener('scroll', this.scrollHandler)
   }
@@ -640,7 +666,7 @@ export default class Portfolio {
 
     gsap.to(this.group.position, {
       x: this.xPosition,
-      duration: 2
+      duration: 1
     })
   }
 

@@ -161,6 +161,7 @@ export default class Man {
       const nextAnimation = this.animation.actions[currentSection]?.enter.a
       const prevAnimation = this.animation.actions.current
 
+      // console.log('Trigger new action due to section.current changed to', currentSection)
       if (prevAnimation?.isRunning()) {
         this.action('fade', nextAnimation, prevAnimation)
       } else {
@@ -176,7 +177,13 @@ export default class Man {
         this.animationBeforeMenuOpen = currentAnimation as AnimationAction
         this.action('fade', menuAnimation, currentAnimation)
       } else {
-        this.action('fade', this.animationBeforeMenuOpen, menuAnimation)
+        const state = window.store.getState()
+        const sections = state.section.sections
+        const nextSectionIndex = state.menu.index
+        const nextSectionId = sections[nextSectionIndex].id as Sections
+
+        // console.log(`Trova l'animazione di ${nextSectionId} e esegui lei`)
+        this.action('fade', this.animation.actions[nextSectionId]?.enter.a, menuAnimation)
       }
     }
   }
@@ -272,7 +279,9 @@ export default class Man {
 
     // Handle intro animation
     if (finishedName === 'intro') {
-      this.action('play', heroAnimation)
+      setTimeout(() => {
+        this.action('play', heroAnimation)
+      }, 300)
     } else if (finishedType === 'enter' && loopAnimation) {
       // Handle loop animations
       this.action('play', loopAnimation)

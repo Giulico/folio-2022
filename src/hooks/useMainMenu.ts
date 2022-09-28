@@ -76,28 +76,29 @@ function useMainMenu() {
       // Enable scroll
       enablePageScroll()
 
+      // Scroll the page
+      const selectedItem = section.boundaries[menu.index]
+      const selectedSection = selectedItem.name
+      if (selectedSection !== prevSection) {
+        window.scrollTo(0, selectedItem.start)
+        // gsap.to(window, {
+        //   scrollTo: selectedItem.start,
+        //   duration: 1.5,
+        //   ease: 'power3.out',
+        //   onStart: () => {
+        //     setIsScrolling(true)
+        //   },
+        //   onComplete: () => {
+        //     setIsScrolling(false)
+        //   }
+        // })
+      }
+
       // Restore menu items
       const titles = window.experience.world.titles
       for (let i = 0; i < titles.length; i++) {
         const title = titles[i]
         title.menuClose()
-      }
-
-      // Scroll the page
-      const selectedItem = section.boundaries[menu.index]
-      const selectedSection = selectedItem.name
-      if (selectedSection !== prevSection) {
-        gsap.to(window, {
-          scrollTo: selectedItem.start,
-          duration: 1.5,
-          ease: 'power3.out',
-          onStart: () => {
-            setIsScrolling(true)
-          },
-          onComplete: () => {
-            setIsScrolling(false)
-          }
-        })
       }
 
       // Reset menu index

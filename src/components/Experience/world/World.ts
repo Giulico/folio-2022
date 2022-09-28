@@ -121,12 +121,9 @@ export default class World {
 
       // Titles
       if (showTitles) {
-        this.titles = [
-          new Title({ itemIndex: 0, text: 'TCMG' }),
-          new Title({ itemIndex: 1, text: 'Works' }),
-          new Title({ itemIndex: 2, text: 'About' }),
-          new Title({ itemIndex: 3, text: 'Contact' })
-        ]
+        this.titles = state.section.sections.map(({ name }, index) => {
+          return new Title({ itemIndex: index, text: name })
+        })
       }
     })
   }

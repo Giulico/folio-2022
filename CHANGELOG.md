@@ -1,3 +1,15 @@
+## [1.0.9](https://github.com/Giulico/folio-2022/compare/v1.0.8...v1.0.9) (2022-09-28)
+
+
+### Bug Fixes
+
+* Clear timeout if pathname changed ([5571e5c](https://github.com/Giulico/folio-2022/commit/5571e5c00807063b4e9c08a3027174c903711d67))
+
+
+### Performance Improvements
+
+* Better performance during menu navigation ([39ba8ca](https://github.com/Giulico/folio-2022/commit/39ba8ca5a26394242868280fb3fadeae61262ba9))
+
 ## [1.0.8](https://github.com/Giulico/folio-2022/compare/v1.0.7...v1.0.8) (2022-09-26)
 
 

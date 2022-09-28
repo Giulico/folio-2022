@@ -14,7 +14,7 @@ import Container from 'components/Container'
 // Hooks
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 import { useRef, useMemo, useCallback, useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import useTransitionStage from 'hooks/useTransitionStage'
@@ -28,6 +28,7 @@ const ProjectCTA = () => {
   const dispatch = useDispatch()
   const ts = useTransitionStage()
 
+  const location = useLocation()
   const { project } = useParams()
   const projects = useSelector((state: RootState) => state.projects)
 
@@ -62,6 +63,13 @@ const ProjectCTA = () => {
       timeout.current = null
     }
   }, [inView, nextProject.url])
+
+  useEffect(() => {
+    if (location.pathname === '/' && timeout.current) {
+      clearTimeout(timeout.current)
+      timeout.current = null
+    }
+  }, [location.pathname])
 
   const classes = cn(style.root, ts && style[ts])
 

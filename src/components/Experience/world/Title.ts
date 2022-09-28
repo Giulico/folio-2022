@@ -58,6 +58,7 @@ export default class Title {
   yOffset!: number
   _pageYPosition: number
   isVisible: boolean
+  isMenuOpen: boolean
   depth: number
 
   constructor(options: Settings) {
@@ -69,6 +70,7 @@ export default class Title {
     this.camera = this.experience.world.cameraOnPath.camera
 
     this.isVisible = false
+    this.isMenuOpen = false
 
     this.depth = -4.5
     this._pageYPosition = Infinity
@@ -174,6 +176,8 @@ export default class Title {
     const textHeight = (geometry.layout?.height || 0) * this.scale
     const halfTextHeight = textHeight / 2
 
+    this.isMenuOpen = true
+
     gsap.to(this.mesh.scale, {
       x: this.scale / 1.5,
       y: this.scale / 1.5,
@@ -236,7 +240,10 @@ export default class Title {
     gsap.to(this.mesh.position, {
       y,
       duration: 1,
-      ease: 'expo.inOut'
+      ease: 'expo.inOut',
+      onComplete: () => {
+        this.isMenuOpen = false
+      }
     })
   }
 
@@ -413,7 +420,7 @@ export default class Title {
   }
 
   positionItem() {
-    if (!this.mesh) return
+    if (!this.mesh || this.isMenuOpen) return
 
     const { y, position } = this.getPositionInfo()
 

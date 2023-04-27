@@ -25,7 +25,7 @@ module.exports = {
         'src/styles/config/depth.css',
         'src/styles/config/easing.css',
         'src/styles/config/spacing.css',
-        'src/styles/config/typography.css',
+        'src/styles/config/typography.css'
       ]
     })
   ]

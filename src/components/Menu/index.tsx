@@ -42,7 +42,7 @@ function Menu() {
         <span className={style.line}>v4.0</span>
       </p>
       <p className={style.desc}>
-        <span className={style.line}>2003 — 2022</span>
+        <span className={style.line}>2003 — 2023</span>
       </p>
       <hr className={separatorClasses} />
       <MenuTrigger />

@@ -64,7 +64,11 @@ export default function Hero() {
         <div className={style.middle}>
           <span className={style.line} />
           <div className={scrambleClasses}>
-            <GSAPScrumbleText content={scrambleTexts} paused={!app.ready} key={scrambleTexts[0][0]} />
+            <GSAPScrumbleText
+              content={scrambleTexts}
+              paused={!app.ready}
+              key={scrambleTexts[0][0]}
+            />
           </div>
         </div>
 

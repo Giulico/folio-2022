@@ -1,7 +1,7 @@
 {
   "name": "folio-2022",
   "private": true,
-  "version": "1.0.11",
+  "version": "1.0.12",
   "repository": "git@github.com:Giulico/folio-2022.git",
   "scripts": {
     "preinstall": "npx only-allow pnpm",

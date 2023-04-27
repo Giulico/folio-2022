@@ -1,3 +1,10 @@
+## [1.0.12](https://github.com/Giulico/folio-2022/compare/v1.0.11...v1.0.12) (2023-04-27)
+
+
+### Bug Fixes
+
+* typescript fix ([7cd0639](https://github.com/Giulico/folio-2022/commit/7cd06398e8291841fb2460960ba6ddc29a55541f))
+
 ## [1.0.11](https://github.com/Giulico/folio-2022/compare/v1.0.10...v1.0.11) (2023-04-27)
 
 

@@ -1,3 +1,11 @@
+## [1.0.11](https://github.com/Giulico/folio-2022/compare/v1.0.10...v1.0.11) (2023-04-27)
+
+
+### Bug Fixes
+
+* fix peer dependencies ([c601e67](https://github.com/Giulico/folio-2022/commit/c601e67e3caa17fcabba90f9f64a03d3c81720fb))
+* remove .yarn folder and changed yarn with pnpm ([352770b](https://github.com/Giulico/folio-2022/commit/352770b084229f86b17f3f42497f01b068035912))
+
 ## [1.0.10](https://github.com/Giulico/folio-2022/compare/v1.0.9...v1.0.10) (2022-09-28)
 
 

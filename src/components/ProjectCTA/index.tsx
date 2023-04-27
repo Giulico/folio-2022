@@ -53,7 +53,7 @@ const ProjectCTA = () => {
 
   useEffect(() => {
     if (inView && !timeout.current) {
-      timeout.current = setTimeout(() => {
+      timeout.current = window.setTimeout(() => {
         rootNavigate(nextProject.url)
         timeout.current = null
       }, 3000)

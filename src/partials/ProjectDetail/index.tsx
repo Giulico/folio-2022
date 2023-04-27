@@ -34,7 +34,7 @@ const ProjectDetail = () => {
 
   // Find the project in data
   // const modules = data.find(({ id }) => id === project)?.modules || []
-  const modules = t('modules') as ModuleData[]
+  const modules = t('modules') as unknown as ModuleData[]
 
   // Return the modules of current project
   return (

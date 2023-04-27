@@ -34,7 +34,8 @@ const ProjectHero = () => {
     dispatch.pointer.setType('default')
   }, [dispatch.pointer])
 
-  const awards = pt('awards') as string[]
+  console.log(pt('awards'))
+  const awards = pt('awards') as unknown as string[]
   const liveURL = pt('live')
 
   const classes = cn(style.root, ts && style[ts])
@@ -43,7 +44,7 @@ const ProjectHero = () => {
     <Container withoutMenu>
       <div className={classes}>
         <figure className={style.figure}>
-          <img src={pt('image')} alt={project} />
+          {pt('image') && <img src={pt('image') as string} alt={project} />}
         </figure>
         <div className={style.info}>
           <div className={style.titleContainer}>

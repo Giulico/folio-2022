@@ -198,8 +198,8 @@ export default class Renderer {
       const bloomPass: BloomPassExtended = new BloomPass(
         this.debugObject.strength, // strength
         25, // kernel size
-        4, // sigma ?
-        256 // blur render target resolution
+        4 // sigma ?
+        // 256 // blur render target resolution
       )
       this.composer.addPass(bloomPass)
 

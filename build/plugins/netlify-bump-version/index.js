@@ -3,7 +3,7 @@ function netlifyUpdateVersion() {
     async onPreBuild(props) {
       const { utils, packageJson } = props
 
-      await utils.run.command('yarn semantic-release')
+      await utils.run.command('pnpm semantic-release')
 
       utils.status.show({
         title: 'Bump Version plugin (netlify-bump-version)',

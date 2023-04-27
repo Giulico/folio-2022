@@ -10,7 +10,7 @@
 
 [build]
   base = "."
-  command = "yarn build"
+  command = "pnpm build"
   publish = "dist"
   # functions = "./functions"
 

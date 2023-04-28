@@ -1,3 +1,10 @@
+## [1.0.13](https://github.com/Giulico/folio-2022/compare/v1.0.12...v1.0.13) (2023-04-28)
+
+
+### Bug Fixes
+
+* add title again ([eca37b5](https://github.com/Giulico/folio-2022/commit/eca37b5e32a4f9493c91ef0e49e0b483b9dcda91))
+
 ## [1.0.12](https://github.com/Giulico/folio-2022/compare/v1.0.11...v1.0.12) (2023-04-27)
 
 

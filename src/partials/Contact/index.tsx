@@ -57,8 +57,8 @@ function Contact() {
             <Heading className={emailClasses}>
               <div>
                 <div className={style.emailContainer}>
-                  <a className={style.email} href="mailto:giuliocollesei@gmail.com">
-                    giuliocollesei@gmail.com
+                  <a className={style.email} href="mailto:work@giulio.me">
+                    work@giulio.me
                   </a>
                 </div>
               </div>
@@ -76,17 +76,7 @@ function Contact() {
               <ul className={style.list}>
                 <li>
                   <a
-                    href="https://www.linkedin.com/in/giuliocollesei/"
-                    onMouseEnter={overHandler}
-                    onMouseLeave={outHandler}
-                    target="_blank"
-                  >
-                    Linkedin <ExternalArrow />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://twitter.com/giuliocollesei"
+                    href="https://twitter.com/this_is_giulio"
                     onMouseEnter={overHandler}
                     onMouseLeave={outHandler}
                     target="_blank"
